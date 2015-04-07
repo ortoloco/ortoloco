@@ -5,12 +5,12 @@ DATABASES = {
     'default': {
 
         # To use with MySql
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'mysql_db_name',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mysql_db_name',
 
         # To use with sqlite3
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite', # Or path to database file if using sqlite3.
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': 'db.sqlite', # Or path to database file if using sqlite3.
 
         # To use with oracle
         # 'ENGINE': 'django.db.backends.oracle',
