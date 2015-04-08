@@ -8,7 +8,7 @@ class StaticContent(models.Model):
     """
     All the static contents for the normal webpage
     """
-    help_text = 'Waehle eines der folgenden Werte: <ul><li>"my.ortoloco" - Ankuendigungen auf my.ortoloco</li><li>"Willkommen" - ortolco - Homepage oben rechts</li><li>"HomeUnterMenu" - ortoloco-Homepage unten unterm Menu'
+    help_text = 'Waehle eines der folgenden Werte: <ul><li>"meine.gartenkooperative.i" - Ankuendigungen auf meine.gartenkooperative.li</li><li>"Willkommen" - ortolco - Homepage oben rechts</li><li>"HomeUnterMenu" - ortoloco-Homepage unten unterm Menu'
     name = models.CharField("Name", max_length=100, help_text=help_text)
     content = tinymce_models.HTMLField("Html-Inhalt", max_length=10000, default="")
 
@@ -39,7 +39,7 @@ class Media(models.Model):
 
 class Download(models.Model):
     """
-    All the downloads available on ortoloco.ch
+    All the downloads available on gartenkooperative.li
     """
     mediafile = models.FileField("Datei", upload_to='downloads')
     name = models.CharField("Titel", max_length=200)
@@ -55,7 +55,7 @@ class Download(models.Model):
 
 class Link(models.Model):
     """
-    All the links that are mentioned on ortoloco.ch
+    All the links that are mentioned on gartenkooperative.li
     """
     titel = models.CharField("Titel", max_length=200, default="Beispieltitel")
     link = models.CharField("Link", max_length=200, default="http://example.ch")
@@ -71,7 +71,7 @@ class Link(models.Model):
 
 class Document(models.Model):
     """
-    All the documents that are available on ortoloco.ch
+    All the documents that are available on gartenkooperative.li
     """
     title = models.CharField("Titel", max_length=200, default="Beispieltitel")
     document = models.FileField("Dokument", upload_to='documents')

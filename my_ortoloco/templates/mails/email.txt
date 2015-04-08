@@ -1,4 +1,4 @@
 {% block content %}{% endblock %}
 
 ============
-weitere Infos: http://ortoloco.ch
+weitere Infos: http://www.gartenkooperative.li

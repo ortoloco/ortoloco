@@ -3,13 +3,24 @@
 {% block content %}
     {% block message %} {% endblock %}
     {% if no_abo %}
-        <div class="alert alert-warning">Du hast kein Abo</div>
         <br/><br/>
+        <div class="alert alert-warning">Du hast kein Abo</div>
     {% endif %}
 
     {% autoescape off %}
         {{ announcement }}
     {% endautoescape %}
+    <br/>
+    <h2>Neues aus der Gartenkooperative</h2>
+    <br />
+    <br />
+<p>Hier geht es bald weiter.</p>
+    <br />
+<p>Die OpenSource Software von Ortoloco wird auf unsere Zwecke umgeschrieben. Nach und nach stellen wir neue Features live.</p>
+    <br />
+<p>Bis dahin .... aufmerksam bleiben.</p>
+
+<!--
     <h3>Aktuelle Arbeitseinsätze</h3>
     <table class="jobs">
         {% for job in jobs %}
@@ -31,5 +42,6 @@
             </tr>
         {% endfor %}
     </table>
+-->
 
 {% endblock %}

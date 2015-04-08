@@ -468,7 +468,7 @@ def my_einsaetze_all(request):
 
 def my_signup(request):
     """
-    Become a member of ortoloco
+    Become a member of Gartenkooperative
     """
     success = False
     agberror = False
@@ -645,8 +645,8 @@ def my_createabo(request):
                 request.user.save()
 
                 #user did it all => send confirmation mail
-                send_welcome_mail(loco.email, password, request.META["HTTP_HOST"])
-                send_welcome_mail("lea@ortoloco.ch", "<geheim>", request.META["HTTP_HOST"])
+                send_welcome_mail(loco.email, password, request.META["HTTP_HOST"], loco)
+                send_welcome_mail("kontakt@gartenkooperative.li", "<geheim>", request.META["HTTP_HOST"], loco)
 
                 return redirect("/my/willkommen")
 
@@ -776,10 +776,14 @@ def my_new_password(request):
             loco.user.set_password(pw)
             loco.user.save()
             send_mail_password_reset(loco.email, pw, request.META["HTTP_HOST"])
+        else:
+            print "New Password request: No user found by this email: " + request.POST.get('username')
 
     renderdict = {
-        'sent': sent
+        'sent': sent,
+        'serverurl': "http://"+request.META["HTTP_HOST"]
     }
+
     return render(request, 'my_newpassword.html', renderdict)
 
 @staff_member_required
@@ -1011,7 +1015,7 @@ def my_depotlisten(request):
 def logout_view(request):
     auth.logout(request)
     # Redirect to a success page.
-    return HttpResponseRedirect("/aktuelles")
+    return HttpResponseRedirect("/")
 
 
 def alldepots_list(request, name):

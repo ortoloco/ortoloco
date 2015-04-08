@@ -1,8 +1,8 @@
 {% extends "mails/email.txt" %}
 {% block content %}
-Wir freuen uns, dich bei ortoloco begrüssen zu dürfen.
+Wir freuen uns, dich bei der Gartenkooperative begrüssen zu dürfen.
 
-Unter my.ortoloco.ch kannst du dich ab sofort für Jobs anmelden und vieles mehr.
+Unter meine.gartenkooperative.li kannst du dich ab sofort für Jobs anmelden und vieles mehr.
 
 Email: {{ username }}
 Passwort: {{ password }}
@@ -10,8 +10,8 @@ Bitte setze dir hier gleich ein neues Passwort:
 {{serverurl}}/my/passwort
 
 Weitere Infos wirst du bald erhalten. Bei Fragen oder Unklarheiten einfach melden:
-info@ortoloco.ch
+kontakt@gartenkooperative.li
 
 Herzlich grüsst,
-die ortoloco-Betriebsgruppe
+die Gartenkooperativen-Betriebsgruppe
 {% endblock %}

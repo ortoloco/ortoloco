@@ -40,7 +40,7 @@ def home(request):
 
 def about(request):
     """
-    About ortoloco of "static" page
+    About Gartenkooperative of "static" page
     """
 
     renderdict = getBaseDict(request)
@@ -56,7 +56,7 @@ def about(request):
 
 def portrait(request):
     """
-    About ortoloco of "static" page
+    About Gartenkooperative of "static" page
     """
     renderdict = getBaseDict(request)
     renderdict.update({
@@ -71,7 +71,7 @@ def portrait(request):
 
 def background(request):
     """
-    About ortoloco of "static" page
+    About Gartenkooperative of "static" page
     """
     renderdict = getBaseDict(request)
     renderdict.update({
@@ -86,7 +86,7 @@ def background(request):
 
 def abo(request):
     """
-    About ortoloco of "static" page
+    About Gartenkooperative of "static" page
     """
     renderdict = getBaseDict(request)
     renderdict.update({
@@ -101,7 +101,7 @@ def abo(request):
 
 def faq(request):
     """
-    FAQ ortoloco of "static" page
+    FAQ Gartenkooperative of "static" page
     """
     renderdict = getBaseDict(request)
     renderdict.update({
@@ -116,7 +116,7 @@ def faq(request):
 
 def join(request):
     """
-    About ortoloco of "static" page
+    About Gartenkooperative of "static" page
     """
     renderdict = getBaseDict(request)
     renderdict.update({
@@ -130,7 +130,7 @@ def join(request):
 
 def media(request):
     """
-    About ortoloco of "static" page
+    About Gartenkooperative of "static" page
     """
     medias_list = []
     first = True
@@ -176,7 +176,7 @@ def links(request):
 
 def documents(request):
     """
-    Documents of Ortoloco
+    Documents of Gartenkooperative
     """
     documents_list = Document.objects.all().reverse()
 
