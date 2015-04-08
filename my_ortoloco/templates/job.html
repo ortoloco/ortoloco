@@ -49,9 +49,12 @@
                 <ul>
                     {% for participant, comments in participants_summary %}
                         <li>
+                          <p>{{ participant }}</p>
+<!--
                             <a class="job-participant" loco-id="{{ participant }}" href="#">
                                 {{ participant }}
                             </a>
+-->
                             <br>
                             {% for comment in comments %}
                                 <span class="loco-job-comments">Hinweis: {{ comment }}</span>
