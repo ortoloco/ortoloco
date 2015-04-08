@@ -11,7 +11,8 @@ import os
 import site
 
 BASE_PATH = os.path.abspath(os.path.dirname(__file__))
-ENV_PATH = os.path.abspath(os.path.join(BASE_PATH, '../python-env/ortoloco.ch/'))
+#ENV_PATH = os.path.abspath(os.path.join(BASE_PATH, '../python-env/ortoloco.ch/'))
+ENV_PATH = os.path.abspath(os.path.join(BASE_PATH, './venv/'))
 activate_this = os.path.abspath(os.path.join(ENV_PATH, 'bin/activate_this.py'))
 execfile(activate_this, dict(__file__=activate_this))
 #site.addsitedir(join(ENV_PATH, 'lib/python2.7/site-packages'))
