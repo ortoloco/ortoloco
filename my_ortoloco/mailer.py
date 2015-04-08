@@ -76,7 +76,6 @@ def send_welcome_mail(email, password, server, loco):
         'serverurl': "http://" + server,
         'first_name': loco.first_name,
         'last_name':  loco.last_name,
-        'abo_soze': loco.abo.size
     })
 
     text_content = plaintext.render(d)

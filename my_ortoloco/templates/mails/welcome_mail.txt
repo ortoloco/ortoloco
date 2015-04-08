@@ -1,6 +1,6 @@
 {% extends "mails/email.txt" %}
 {% block content %}
-Wir freuen uns, dich bei der Gartenkooperative begrüssen zu dürfen.
+Wir freuen uns, dich, {{ first_name }} {{ last_name }}, bei der Gartenkooperative begrüssen zu dürfen.
 
 Unter meine.gartenkooperative.li kannst du dich ab sofort für Jobs anmelden und vieles mehr.
 
