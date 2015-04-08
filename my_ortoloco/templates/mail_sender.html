@@ -4,9 +4,9 @@
     {% if recipients %}
         <h3>Mail an {{ recipient_type }} verschicken</h3>
         {% if filter_value %}
-            <h5 class="recipients-info-detail" id="filter-info">Der Filter, um diese {{ recipients_count }} E-Mail-Adressen auszuwählen, war: "{{ filter_value }}"</h5>
+          <h5 class="recipients-info-detail" id="filter-info">Der Filter, um diese {{ recipients_count }} E-Mail-Adressen auszuwählen, war: "{{ filter_value }}"</h5>
         {% else %}
-            <h5 class="recipients-info-detail" id="filter-info">Diese {{ recipients_count }} E-Mail-Adressen entsprechen alle {{ recipient_type }}.</h5>
+          <h5 class="recipients-info-detail" id="filter-info">Diese {{ recipients_count }} E-Mail-Adressen entsprechen alle {{ recipient_type }}.</h5>
         {% endif %}
         {% if recipient_type_detail %}
             <h5 class="recipients-info-detail" id="recipient-type-detail">{{ recipient_type_detail }}</h5>
@@ -36,23 +36,25 @@
             <div class="form-group">
                 <label for="sender-email" class="col-sm-2 control-label">Absender</label>
                 <div class="col-sm-10" id="sender-email">
-                    info@ortoloco.ch
+                  kontakt@gartenkooperative.li
                 </div>
             </div>
             {% if depot_admin|length > 0 %}
-                <div class="form-group">
-                    <label for="sender-email" class="col-sm-2 control-label">Empfänger</label>
+            <div class="form-group">
+              <label for="sender-email" class="col-sm-2 control-label">Empfänger</label>
                     <input type="hidden" id="depotOnly" name="depotOnly" value="on">
                     <input type="hidden" id="depotIds" name="depotIds" value="{% for depot in depot_admin %}{{ depot.id }},{% endfor %}"/>
                     <div class="col-sm-10">
-                        Wähle mind. eine der folgenden Gruppen:
-                        {% for depot in depot_admin %}
-                            <div class="checkbox">
-                                <label class="high-label">
-                                    <input type="checkbox" id="{{ depot.id }}" name="{{ depot.id }}"> {{ depot.name }}
-                                </label>
-                            </div>
-                        {% endfor %}
+                      Als Depot Verantwortlicher kannst du an deine Depot AbonnementInnen eine Email schicken.<br/>
+		      Wähle mind. eine der folgenden Gruppen.<br>
+		      Empfänger sind <strong>alle</strong> Depot AbonnementInnen:
+                      {% for depot in depot_admin %}
+                      <div class="checkbox">
+                        <label class="high-label">
+                          <input type="checkbox" id="{{ depot.id }}" name="{{ depot.id }}"> {{ depot.name }}
+                        </label>
+                      </div>
+                      {% endfor %}
                     </div>
                 </div>
             {% else %}

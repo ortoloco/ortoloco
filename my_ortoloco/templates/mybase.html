@@ -30,12 +30,12 @@
       <br />      <br />
       <h1>Dein Gartenkooperative Konto</h1>
       <div class="row">
-      <!-- 
-	   no image.
-	   <div class="row ortoloco"> 
-	-->
-        {% block allcontent %}
-        <div class="col-md-3">
+	<!-- 
+	     no image.
+	     <div class="row ortoloco"> 
+	       -->
+	{% block allcontent %}
+	<div class="col-md-3">
           <ul class="nav nav-pills nav-stacked main-menu">
             <li class="{{ menu.abonnement }}">
               Angemeldet als: <br />
@@ -57,26 +57,27 @@
             <li class="{{ menu.contact }}">
               <a href="/my/kontakt">Kontakt</a>
             </li>
-<!--
-            {% if depot_admin|length > 0 %}
-            <li>
-              <hr>
-              <a href="/my/mails_depot">Mails verschicken</a>
-            </li>
+	    <!--
+		{% if depot_admin|length > 0 %}
+		<li>
+		  <hr>
+		  <a href="/my/mails_depot">Mails verschicken</a>
+		</li>
             <li class="inline">
               Filtern <a href="/my/filters_depot">Locos</a> | <a href="/my/abos_depot">Abos</a>
             </li>
             {% endif %}
--->
+	    -->
             {% if staff_user %}
+	    <hr>
+	    <p>Admin Benützer</p>
             <li class="{{ menu.abonnement }}">
               <a target="_new" href="/admin">Administrator</a>
             </li>
-<!--
             <li>
-              <hr>
               <a href="/my/mails">Mails verschicken</a>
             </li>
+<!--
             <li>
               <a href="/my/depotlisten">Depotlisten drucken</a>
             </li>
