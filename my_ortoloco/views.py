@@ -707,10 +707,13 @@ def my_contact(request):
     if request.method == "POST":
         # send mail to bg
         send_contact_form(request.POST.get("subject"), request.POST.get("message"), loco, request.POST.get("copy"))
+        # set announce and redirect to home
+        renderdict = { 'sent': "1+" }
+        return render(request, 'mail_sender_result.html', renderdict)
 
     renderdict = get_menu_dict(request)
     renderdict.update({
-        'usernameAndEmail': loco.first_name + " " + loco.last_name + "<" + loco.email + ">"
+        'usernameAndEmail': loco.first_name + " " + loco.last_name + " <" + loco.email + ">"
     })
     return render(request, "my_contact.html", renderdict)
 
