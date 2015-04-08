@@ -2,9 +2,8 @@
 import os
 import dj_database_url
 
-TEMPLATE_DEBUG = DEBUG
-
 # DEBUG we set in credentials.py file
+# TEMPLATE_DEBUG we set in credentials.py file
 
 SERVER_EMAIL="server@gartenkooperative.li"
 
