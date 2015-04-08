@@ -5,12 +5,8 @@ import dj_database_url
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-WHITELIST_EMAILS = ["oliver.ganz@gmail.com", "omg@doodle.com", "orto@xiala.net", "oliver.ganz+.*@gmail.com"]
 
-ADMINS = (
-    ('Oli', 'oliver.ganz@gmail.com'),
-)
-SERVER_EMAIL="server@ortoloco.ch"
+SERVER_EMAIL="server@gartenkooperative.li"
 
 
 # let the users login with their emails
@@ -19,7 +15,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend'
 )
 
-MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
@@ -35,7 +30,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch']
+ALLOWED_HOSTS = ['.ativ.at', '.gartenkooperative.li']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -165,9 +160,9 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'my_ortoloco',
-    'static_ortoloco',
-    'photologue',
-    'south',
+   'static_ortoloco',
+   'photologue',
+   'south',
     'django_cron',
     'django.contrib.auth',
     'django.contrib.contenttypes',
