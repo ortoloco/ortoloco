@@ -16,14 +16,17 @@ def getBaseDict(request):
     }
 
 
+
 def home(request):
     """
     Homepage of "static" page
     """
     
-    if request.user.is_authenticated():
-        return redirect("/my/home")
-        
+    # Just have one static page ... redirect if logged on.
+    #    if request.user.is_authenticated():
+    #        return redirect("/my/home")
+    #    print "hello world"
+
     submenu = ""
     if StaticContent.objects.all().filter(name='HomeUnterMenu').__len__() > 0:
         submenu = StaticContent.objects.all().filter(name='HomeUnterMenu')[0].content

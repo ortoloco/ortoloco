@@ -12,8 +12,9 @@ django_cron.autodiscover()
 
 urlpatterns = patterns('',
                        # We go straigth to the dynamic part
-                       # url(r'^$', RedirectView.as_view(pattern_name='my_ortoloco.views.my_home')),
-                       url('^$', 'static_ortoloco.views.home'),
+                       url(r'^$', RedirectView.as_view(pattern_name='my_ortoloco.views.my_home')),
+                       # url('^$', 'my_ortoloco.views.my_home'),
+                       # url('^$', 'static_ortoloco.views.home'),
                        ## url('^aktuelles$', 'static_ortoloco.views.home'),
                        ## url('^idee$', 'static_ortoloco.views.about'),
                        ## url('^portrait$', 'static_ortoloco.views.portrait'),
