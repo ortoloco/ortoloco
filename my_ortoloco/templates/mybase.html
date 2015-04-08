@@ -57,17 +57,16 @@
             <li class="{{ menu.contact }}">
               <a href="/my/kontakt">Kontakt</a>
             </li>
-	    <!--
-		{% if depot_admin|length > 0 %}
-		<li>
-		  <hr>
-		  <a href="/my/mails_depot">Mails verschicken</a>
-		</li>
+	    {% if depot_admin|length > 0 %}
+	    <hr>
+	    <p>Depot Admin</p>
+	    <li>
+	      <a href="/my/mails_depot">Mails verschicken</a>
+	    </li>
             <li class="inline">
               Filtern <a href="/my/filters_depot">Locos</a> | <a href="/my/abos_depot">Abos</a>
             </li>
             {% endif %}
-	    -->
             {% if staff_user %}
 	    <hr>
 	    <p>Admin Benützer</p>
