@@ -16,16 +16,18 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # 'django.db.backends.postgresql_psycopg2', #'django.db.backends.sqlite3', # Add , 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'ortoloco', # 'db.sqlite',                      # Or path to database file if using sqlite3.
-        'USER': 'ortoloco', # The following settings are not used with sqlite3:
-        'PASSWORD': 'ortoloco',
-        'HOST': 'localhost', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '', # Set to empty string for default.
-    }
-}
+# i put database into credentials
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql', # 'django.db.backends.postgresql_psycopg2', #'django.db.backends.sqlite3', # Add , 'mysql', 'sqlite3' or 'oracle'.
+#        'NAME': 'NAME', # 'db.sqlite',                      # Or path to database file if using sqlite3.
+#        'USER': 'USER', # The following settings are not used with sqlite3:
+#        'PASSWORD': 'PASSWORT',
+#        'HOST': 'localhost', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+#        'PORT': '', # Set to empty string for default.
+#    }
+# }
+
 #DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -72,6 +74,7 @@ MEDIA_URL = '/medias/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'venv/lib/python2.7/site-packages/django/contrib/admin/static/')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -80,6 +83,7 @@ STATIC_URL = '/static/'
 # Additional locations of static files
 STATICFILES_DIRS = (
 #"/static/",
+#"/var/www/site/meine.gartenkooperative.li/gartenkooperative/venv/lib/python2.7/site-packages/django/contrib/admin/static/",
 # Put strings here, like "/home/html/static" or "C:/www/django/static".
 # Always use forward slashes, even on Windows.
 # Don't forget to use absolute paths, not relative paths.
@@ -91,7 +95,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 #tinyMCE
