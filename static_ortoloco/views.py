@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.forms import ModelForm
 
 from static_ortoloco.models import *
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 
@@ -19,6 +20,10 @@ def home(request):
     """
     Homepage of "static" page
     """
+    
+    if request.user.is_authenticated():
+        return redirect("/my/home")
+        
     submenu = ""
     if StaticContent.objects.all().filter(name='HomeUnterMenu').__len__() > 0:
         submenu = StaticContent.objects.all().filter(name='HomeUnterMenu')[0].content
