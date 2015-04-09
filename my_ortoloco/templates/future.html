@@ -14,11 +14,13 @@
             <th>Aktuell</th>
             <th>Zukunft</th>
         </tr>
+<!--
         <tr>
             <td>Haus Abos</td>
             <td>{{ house_abos }}</td>
             <td>{{ house_abos_future }}</td>
         </tr>
+-->
         <tr>
             <td>Grosse Abos</td>
             <td>{{ big_abos }}</td>
@@ -38,12 +40,18 @@
         </tr>
         {% endfor %}
     </table>
-    <br/><br/>
-    ACHTUNG! Dies darf nur am 1.1. und am 1.7. des Jahres gedrückt werden!
-    <a href="/my/wechsel/zusatzabos" class="btn btn-success" >Switch to future extra abos</a><br/><br/>
+    <hr>
+    <strong>Gartenkooperative: Noch keine genauen Daten/Zeiten festgelegt für Abos Änderungen!</strong><br/>
+    <h3>Abos wechseln</h3>
+    ACHTUNG! Dies darf nur im Dezember oder bis 7.1. gedrückt/ausgeführt werden!<br/>
     {% if abo_change_enabled %}
       <a href="/my/wechsel/abos" class="btn btn-success">Switch to future abos</a>
     {% endif %}
+    <h3>Zusats Abos wechseln</h3>
+    ACHTUNG! Dies darf nur am 1.1. und am 1.7. des Jahres gedrückt werden!<br/>
+    <a href="/my/wechsel/zusatzabos" class="btn btn-success" >Switch to future extra abos</a><br/><br/>
+    <hr>
+
 {% endblock %}
 
 {% block scripts %}

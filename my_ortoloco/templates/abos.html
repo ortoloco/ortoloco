@@ -22,6 +22,8 @@
             <tr>
                 <th>Hauptloco</th>
                 <th>Weitere Locos</th>
+		<th>Abo</th>
+		<th>Zusatz-Abos</th>
                 <th>Depot</th>
                 <th>Bohnen</th>
                 <th>Bohnen Kernbereich</th>
@@ -34,6 +36,8 @@
                 <tr>
                     <td>{{ abo.abo.primary_loco.first_name }} {{ abo.abo.primary_loco.last_name }}</td>
                     <td>{{ abo.abo.bezieher }}</td>
+                    <td>{{ abo.abo.size_name }}</td>
+                    <td>{{ abo.abo.extras_name }}</td>
                     <td>{{ abo.abo.depot.name }}</td>
                     <td>{{ abo.boehnlis }} <img alt="Status Erbse" src="/static/img/{{ abo.icon }}"/> {{ abo.text }}</td>
                     <td>{{ abo.boehnlis_kernbereich }}</td>

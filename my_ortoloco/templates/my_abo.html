@@ -40,7 +40,6 @@
   <dt>&nbsp;</dt>
   <dd>&nbsp;</dd>
 -->
-<!--
   <dt>Abo geteilt mit</dt>
   <dd>
     {% if mitabonnenten|length > 0 %}
@@ -63,7 +62,6 @@
   </dd>
   <dt>&nbsp;</dt>
   <dd>&nbsp;</dd>
--->  
   <dt>Depot</dt>
   <dd>
     {{ loco.abo.depot.name }} > <a href="/my/depot/{{ loco.abo.depot.id }}">Weitere Infos zum Depot</a>
@@ -71,7 +69,7 @@
   
   <dt>&nbsp;</dt>
   <dd>&nbsp;</dd>
-<!--
+
   <dt>Zusatzabos</dt>
   <dd>
     {% if zusatzabos|length == 0 %}
@@ -84,7 +82,6 @@
     </ul>
     {% endif %}
   </dd>
-
   {% if zusatzabos_changed %}
   <dt>&nbsp;</dt>
   <dd>&nbsp;</dd>
@@ -106,14 +103,12 @@
   {% if loco.abo.size != loco.abo.future_size %}
   <dt>&nbsp;</dt>
   <dd>&nbsp;</dd>
-
   <dt>Neue Abogrösse</dt>
   <dd>
     (Die Änderung tritt am {{ next_extra_abo_date |date:"d.m.Y" }} in Kraft)<br>
     {{ loco.abo.future_size_name }}
   </dd>
   {% endif %}
--->
   <dt>&nbsp;</dt>
   <dd>&nbsp;</dd>
   <dt>&nbsp;</dt>

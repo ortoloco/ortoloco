@@ -27,9 +27,11 @@ Welchen Teil deines Abos möchtest du ändern?<br/><br/>
   </div>
 </div>
 <br/>
-<!--
+
 <div class="row">
   <div class="col-md-4">
+    Nächstmögliches Datum:
+    Ein Depot kann jederzeit geändert werden.
   </div>
   <div class="col-md-4">
     Nächstmögliches Datum:
@@ -40,7 +42,6 @@ Welchen Teil deines Abos möchtest du ändern?<br/><br/>
     {{ next_extra_abo_date |date:"d.m.Y" }}
   </div>
 </div>
--->
 <br/>
 <div class="row">
   <div class="col-md-4">
@@ -49,14 +50,10 @@ Welchen Teil deines Abos möchtest du ändern?<br/><br/>
   </div>
   <div class="col-md-4">
     <h5>Zukünftige Grösse:</h5>
-<!--
     {{ loco.abo.future_size_name }}
--->
   </div>
   <div class="col-md-4">
     <h5>Zukünftige Zusatz-Abos:</h5>
-<!--  
-
     {% if not loco.abo.extra_abos_changed %}
       {% if loco.abo.extra_abos.all|length == 0 %}
         Keine Zusatz-Abos
@@ -74,7 +71,6 @@ Welchen Teil deines Abos möchtest du ändern?<br/><br/>
         {% endfor %}
       {% endif %}
     {% endif %}
-	  -->
   </div>
 </div>
 <br/>
@@ -83,17 +79,11 @@ Welchen Teil deines Abos möchtest du ändern?<br/><br/>
     <a href="/my/abo/{{ loco.abo.id }}/aendern/depot" class="btn btn-success">Depot ändern</a>
   </div>
   <div class="col-md-4">
-    <p>Zur Zeit kann die Abo Grösse nicht hier geändert werden. Kontaktiere die Betriebsgruppe.</p>
-    <!--
     <a {% if change_size %}href="/my/abo/{{ loco.abo.id }}/aendern/groesse"{% endif %} class="btn btn-success" {% if not change_size %}disabled="disabled"{% endif %}>Grösse ändern</a><br/>
     {% if not change_size %}* nur Januar-Oktober möglich{% endif %}
-    -->
   </div>
   <div class="col-md-4">
-    <p>Zur Zeit gibt es noch keine Zusatzabos.</p>
-<!--
     <a href="/my/abo/{{ loco.abo.id }}/aendern/extra" class="btn btn-success">Zusatz-Abos ändern</a>
--->
   </div>
 </div>
 {% endblock %}
