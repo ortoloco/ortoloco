@@ -65,7 +65,9 @@
 <body>
 
 <div id="header_content">
-    Gedruckt am {{ datum |date:"d.m.Y" }}
+  <p>"Gartenkooperative Region Liechtenstein-Werdenberg" :: http://www.gartenkooperative.li</p>
+    Depolisten Gedruckt am {{ datum |date:"d.m.Y" }}<br />
+    
 </div>
 
 {% for i in "xx" %}
@@ -75,15 +77,18 @@
             <td style="width:200px"></td>
             <th colspan="2" class="top-border left-border right-border">ABO</th>
             <th class="top-border right-border"></th>
+<!--
             <th colspan="2" class="top-border right-border">EIER</th>
             <th colspan="3" class="top-border right-border">KÄSE <span style="font-size:9px; font-weight: normal;">(1x Anfang Monat)</span></th>
             <th colspan="2" class="top-border right-border">OBST</th>
+-->
         </tr>
         <tr>
             <td></td>
             <td class="small left-border bottom-border">klein</td>
             <td class="small bottom-border right-border">gross</td>
             <td class="small bottom-border right-border">Einheiten</td>
+<!--
             <td class="small bottom-border">4er</td>
             <td class="small bottom-border right-border">6er</td>
             <td class="small bottom-border">ganz</td>
@@ -91,20 +96,24 @@
             <td class="small bottom-border right-border">viertel</td>
             <td class="small bottom-border">gross</td>
             <td class="small bottom-border right-border">klein</td>
+-->
         </tr>
         <tr>
-            <td>Dienstag</td>
-            <td style="text-align:right">{{ overview.Dienstag.small_abo }}</td>
-            <td style="text-align:right">{{ overview.Dienstag.big_abo }}</td>
-            <td style="text-align:right">{{ overview.Dienstag.entities }}</td>
-            <td style="text-align:right">{{ overview.Dienstag.egg4 }}</td>
-            <td style="text-align:right">{{ overview.Dienstag.egg6 }}</td>
-            <td style="text-align:right">{{ overview.Dienstag.cheesefull }}</td>
-            <td style="text-align:right">{{ overview.Dienstag.cheesehalf }}</td>
-            <td style="text-align:right">{{ overview.Dienstag.cheesequarter }}</td>
-            <td style="text-align:right">{{ overview.Dienstag.bigobst }}</td>
-            <td style="text-align:right">{{ overview.Dienstag.smallobst }}</td>
+          <td>Mittwoch</td>
+          <td style="text-align:right">{{ overview.Mittwoch.small_abo }}</td>
+          <td style="text-align:right">{{ overview.Mittwoch.big_abo }}</td>
+          <td style="text-align:right">{{ overview.Mittwoch.entities }}</td>
+<!--	  
+          <td style="text-align:right">{{ overview.Mittwoch.egg4 }}</td>
+          <td style="text-align:right">{{ overview.Mittwoch.egg6 }}</td>
+          <td style="text-align:right">{{ overview.Mittwoch.cheesefull }}</td>
+          <td style="text-align:right">{{ overview.Mittwoch.cheesehalf }}</td>
+          <td style="text-align:right">{{ overview.Mittwoch.cheesequarter }}</td>
+          <td style="text-align:right">{{ overview.Mittwoch.bigobst }}</td>
+          <td style="text-align:right">{{ overview.Mittwoch.smallobst }}</td>
+-->
         </tr>
+<!--
         <tr>
             <td>Donnerstag</td>
             <td style="text-align:right">{{ overview.Donnerstag.small_abo }}</td>
@@ -118,6 +127,8 @@
             <td style="text-align:right">{{ overview.Donnerstag.bigobst }}</td>
             <td style="text-align:right">{{ overview.Donnerstag.smallobst }}</td>
         </tr>
+-->
+<!--
         <tr>
             <td><b>Di + Do</b></td>
             <td style="text-align:right"><b>{{ overview.all.small_abo }}</b></td>
@@ -131,89 +142,105 @@
             <td style="text-align:right"><b>{{ overview.all.bigobst }}</b></td>
             <td style="text-align:right"><b>{{ overview.all.smallobst }}</b></td>
         </tr>
+-->
     </table>
     <div class="page-break"></div>
 </div>
 {% endfor %}
 {% for depot in depots %}
-    <h2 style="font-size: 18px;">{{ depot.wochentag }} - {{ depot.name }}</h2>
-    <h3 style="font-size: 16px;">{{ depot.addr_street }}, {{ depot.addr_zipcode }} {{ depot.addr_location }}</h3>
+<h2 style="font-size: 18px;">{{ depot.wochentag }} :: {{ depot.name }}</h2>
+<h3 style="font-size: 16px;">Adresse: {{ depot.addr_street }}, {{ depot.addr_zipcode }} {{ depot.addr_location }}</h3>
 
-    <table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
-        <tr>
-            <td></td>
-            <td></td>
-            <th colspan="2" class="top-border left-border right-border">ABO</th>
-            <th colspan="2" class="top-border right-border">EIER</th>
-            <th colspan="3" class="top-border right-border">KÄSE<br/><span style="font-size:11px">1x Anfang Monat!</span></th>
-            <th colspan="2" class="top-border right-border">OBST</th>
-            <th colspan="2" class="top-border right-border"></th>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td class="small left-border bottom-border">klein</td>
-            <td class="small bottom-border right-border">gross</td>
-            <td class="small bottom-border">4er</td>
-            <td class="small bottom-border right-border">6er</td>
-            <td class="small bottom-border">ganz</td>
-            <td class="small bottom-border">halb</td>
-            <td class="small bottom-border right-border">viertel</td>
-            <td class="small bottom-border">gross</td>
-            <td class="small bottom-border right-border">klein</td>
-            <td></td>
-            <td class="small bottom-border right-border"></td>
-        </tr>
-        <tr>
-            <td style="width:180px;"></td>
-            <td style="width:180px; text-align:right;">TOTAL</td>
-            <td style="width:40px; text-align:right;">{{ depot.small_abos }}</td>
-            <td style="width:40px; text-align:right;">{{ depot.big_abos }}</td>
-            <td style="width:40px; text-align:right;">{{ depot.vier_eier }}</td>
-            <td style="width:40px; text-align:right;">{{ depot.sechs_eier }}</td>
-            <td style="width:40px; text-align:right;">{{ depot.kaese_ganz }}</td>
-            <td style="width:40px; text-align:right;">{{ depot.kaese_halb }}</td>
-            <td style="width:40px; text-align:right;">{{ depot.kaese_viertel }}</td>
-            <td style="width:40px; text-align:right;">{{ depot.big_obst }}</td>
-            <td style="width:40px; text-align:right;">{{ depot.small_obst }}</td>
-            <td style="width:60px;"></td>
-            <td style="width:60px;"></td>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <th>Abo mit</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th style="text-align: right;">abgeholt</th>
-            <th style="text-align: right;">Tasche retour</th>
-        </tr>
-        {% for abo in depot.active_abos.all %}
-            <tr>
-                <td style="text-align:right" class="top-border left-border">{{ abo.primary_loco.get_name }}</td>
-                <td style="text-align:right" class="top-border left-border">{{ abo.andere_bezieher }}</td>
-                <td style="text-align:right" class="top-border left-border">{% if abo.small_abos %}{{ abo.small_abos }} {% endif %}</td>
-                <td style="text-align:right" class="top-border left-border">{% if abo.big_abos %}{{ abo.big_abos }} {% endif %}</td>
-                <td style="text-align:right" class="top-border left-border">{% if abo.vier_eier %}1{% endif %}</td>
-                <td style="text-align:right" class="top-border left-border">{% if abo.sechs_eier %}1{% endif %}</td>
-                <td style="text-align:right" class="top-border left-border">{% if abo.ganze_kaese %}1{% endif %}</td>
-                <td style="text-align:right" class="top-border left-border">{% if abo.halbe_kaese %}1{% endif %}</td>
-                <td style="text-align:right" class="top-border left-border">{% if abo.viertel_kaese %}1{% endif %}</td>
-                <td style="text-align:right" class="top-border left-border">{% if abo.gross_obst %}1{% endif %}</td>
-                <td style="text-align:right" class="top-border left-border">{% if abo.klein_obst %}1{% endif %}</td>
-                <td class="top-border left-border"></td>
-                <td class="top-border left-border right-border"></td>
-            </tr>
-        {% endfor %}
-    </table>
-    Depotbetreuung: {{ depot.contact.first_name }} {{ depot.contact.last_name }}, {{ depot.contact.get_phone }}, {{ depot.contact.email }}
-    <div class="page-break"></div>
+<table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
+  <tr>
+    <td></td>
+    <td></td>
+    <th colspan="2" class="top-border left-border right-border">ABO</th>
+<!--
+    <th colspan="2" class="top-border right-border">EIER</th>
+    <th colspan="3" class="top-border right-border">KÄSE<br/><span style="font-size:11px">1x Anfang Monat!</span></th>
+    <th colspan="2" class="top-border right-border">OBST</th>
+    <th colspan="2" class="top-border right-border"></th>
+-->
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td class="small left-border bottom-border">klein</td>
+    <td class="small bottom-border right-border">gross</td>
+<!--
+    <td class="small bottom-border">4er</td>
+    <td class="small bottom-border right-border">6er</td>
+    <td class="small bottom-border">ganz</td>
+    <td class="small bottom-border">halb</td>
+    <td class="small bottom-border right-border">viertel</td>
+    <td class="small bottom-border">gross</td>
+    <td class="small bottom-border right-border">klein</td>
+    <td></td>
+    <td class="small bottom-border right-border"></td>
+-->
+  </tr>
+  <tr>
+    <td style="width:180px;"></td>
+    <td style="width:180px; text-align:right;">TOTAL</td>
+    <td style="width:40px; text-align:right;">{{ depot.small_abos }}</td>
+    <td style="width:40px; text-align:right;">{{ depot.big_abos }}</td>
+<!--
+    <td style="width:40px; text-align:right;">{{ depot.vier_eier }}</td>
+    <td style="width:40px; text-align:right;">{{ depot.sechs_eier }}</td>
+    <td style="width:40px; text-align:right;">{{ depot.kaese_ganz }}</td>
+    <td style="width:40px; text-align:right;">{{ depot.kaese_halb }}</td>
+    <td style="width:40px; text-align:right;">{{ depot.kaese_viertel }}</td>
+    <td style="width:40px; text-align:right;">{{ depot.big_obst }}</td>
+    <td style="width:40px; text-align:right;">{{ depot.small_obst }}</td>
+    <td style="width:60px;"></td>
+    <td style="width:60px;"></td>
+-->
+  </tr>
+  <tr>
+    <th>Name</th>
+    <th>Abo mit</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th style="text-align: right;">abgeholt</th>
+    <th style="text-align: right;">Tasche retour</th>
+  </tr>
+  {% for abo in depot.active_abos.all %}
+  <tr>
+    <td style="text-align:right" class="top-border left-border">{{ abo.primary_loco.get_name }}</td>
+    <td style="text-align:right" class="top-border left-border">{{ abo.andere_bezieher }}</td>
+    <td style="text-align:right" class="top-border left-border">{% if abo.small_abos %}{{ abo.small_abos }} {% endif %}</td>
+    <td style="text-align:right" class="top-border left-border">{% if abo.big_abos %}{{ abo.big_abos }} {% endif %}</td>
+    <td style="text-align:right" class="top-border left-border"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+<!--
+    <td style="text-align:right" class="top-border left-border">{% if abo.vier_eier %}1{% endif %}</td>
+    <td style="text-align:right" class="top-border left-border">{% if abo.sechs_eier %}1{% endif %}</td>
+    <td style="text-align:right" class="top-border left-border">{% if abo.ganze_kaese %}1{% endif %}</td>
+    <td style="text-align:right" class="top-border left-border">{% if abo.halbe_kaese %}1{% endif %}</td>
+    <td style="text-align:right" class="top-border left-border">{% if abo.viertel_kaese %}1{% endif %}</td>
+    <td style="text-align:right" class="top-border left-border">{% if abo.gross_obst %}1{% endif %}</td>
+    <td style="text-align:right" class="top-border left-border">{% if abo.klein_obst %}1{% endif %}</td>
+-->
+    <td class="top-border left-border"></td>
+    <td class="top-border left-border right-border"></td>
+  </tr>
+  {% endfor %}
+</table>
+Depotbetreuung: {{ depot.contact.first_name }} {{ depot.contact.last_name }}, {{ depot.contact.get_phone }}, {{ depot.contact.email }}
+<div class="page-break"></div>
 {% endfor %}
 </body>
 </html>

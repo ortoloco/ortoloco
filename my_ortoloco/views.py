@@ -1031,7 +1031,7 @@ def alldepots_list(request, name):
         depots = [get_object_or_404(Depot, code__iexact=name)]
 
     overview = {
-        'Dienstag': {
+        'Mittwoch': {
             'small_abo': 0,
             'big_abo': 0,
             'entities': 0,
