@@ -1167,7 +1167,8 @@ def my_future(request):
         'house_abos_future': house_abos_future,
         'small_abos_future': small_abos_future,
         'extras': extra_abos.itervalues(),
-        'abo_change_enabled': month is 12 or (month is 1 and day <= 6)
+        # 'abo_change_enabled': month is 12 or (month is 1 and day <= 6)
+        'abo_change_enabled': True
     })
     return render(request, 'future.html', renderdict)
 

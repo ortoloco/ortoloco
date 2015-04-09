@@ -50,9 +50,7 @@ Welchen Teil deines Abos möchtest du ändern?<br/><br/>
   </div>
   <div class="col-md-4">
     <h5>Zukünftige Grösse:</h5>
-<!--
     {{ loco.abo.future_size_name }}
--->
   </div>
   <div class="col-md-4">
     <h5>Zukünftige Zusatz-Abos:</h5>
@@ -81,11 +79,8 @@ Welchen Teil deines Abos möchtest du ändern?<br/><br/>
     <a href="/my/abo/{{ loco.abo.id }}/aendern/depot" class="btn btn-success">Depot ändern</a>
   </div>
   <div class="col-md-4">
-    <p>Zur Zeit kann die Abo Grösse nicht hier geändert werden. Kontaktiere die Betriebsgruppe <a href="mailto:kontakt@gartenkooperative.li">kontakt@gartenkooperative.li</a>.</p>
-    <!--
     <a {% if change_size %}href="/my/abo/{{ loco.abo.id }}/aendern/groesse"{% endif %} class="btn btn-success" {% if not change_size %}disabled="disabled"{% endif %}>Grösse ändern</a><br/>
     {% if not change_size %}* nur Januar-Oktober möglich{% endif %}
-    -->
   </div>
   <div class="col-md-4">
     <a href="/my/abo/{{ loco.abo.id }}/aendern/extra" class="btn btn-success">Zusatz-Abos ändern</a>
