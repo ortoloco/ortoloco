@@ -32,7 +32,7 @@
             <tbody>
             {% for loco in locos %}
                 <tr>
-                    <td>{{ loco.first_name }} {{ loco.last_name }}</td>
+                    <td><a target="_new" href="/impersonate/{{ loco.user.id }}">{{ loco.first_name }} {{ loco.last_name }}</a></td>
                     <td>{{ loco.boehnlis }}</td>
                     <td>{{ loco.boehnlis_kernbereich }}</td>
                     <td>
