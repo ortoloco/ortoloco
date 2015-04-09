@@ -166,6 +166,10 @@ class Abo(models.Model):
         return datetime.date(day=1, month=1, year=datetime.date.today().year + 1)
 
     @staticmethod
+    def get_extras_name(extras):
+        return ", ".join(unicode(extra.name) for extra in extras)
+
+    @staticmethod
     def get_size_name(size=0):
         if size == 1:
             return "Kleines Abo"
@@ -179,6 +183,9 @@ class Abo(models.Model):
             return "2 Grosse Abos"
         else:
             return "Kein Abo"
+
+    def extras_name(self):
+        return Abo.get_extras_name(extras=self.extra_abos.all())
 
     def size_name(self):
         return Abo.get_size_name(size=self.size)

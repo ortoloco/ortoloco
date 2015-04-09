@@ -413,7 +413,8 @@ def my_extra_change(request, abo_id):
     renderdict.update({
         'saved': saved,
         'loco': request.user.loco,
-        "extras": abos
+        "extras": abos,
+        "abo_id": abo_id,
     })
     return render(request, "my_extra_change.html", renderdict)
 
