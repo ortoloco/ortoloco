@@ -18,7 +18,7 @@ class Send_Job_Reminders(Job):
                 if bohne.loco is not None:
                     participants.append(str(bohne.loco))
                     emails.append(bohne.loco.email)
-            send_job_reminder(emails, job, ", ".join(participants), "http://my.ortoloco.ch")
+            send_job_reminder(emails, job, ", ".join(participants), "http://meine.gartenkooperative.li")
             job.reminder_sent = True
             job.save()
             print("reminder sent for job " + str(job.id))

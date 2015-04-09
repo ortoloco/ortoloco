@@ -2,7 +2,7 @@
 {% block content %}
 Nicht vergessen:
 
-Am {{ job.time |date:"d.m.Y H:i" }}-{{ job.end_time|date:"H:i" }} findet dein ortoloco-Arbeitseinsatz "{{ job.typ.displayed_name }}" statt.
+Am {{ job.time |date:"d.m.Y H:i" }}-{{ job.end_time|date:"H:i" }} findet dein Gartenkooperativen-Arbeitseinsatz "{{ job.typ.displayed_name }}" statt.
 
 Details:
 
@@ -14,5 +14,5 @@ Ort:             {{ job.typ.location }}
 Wir freuen uns, dich zu sehen und zählen auf dich!
 
 Herzlich grüsst,
-dein ortoloco-Team
+dein Gartenkooperativen-Team
 {% endblock %}
