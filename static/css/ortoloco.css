@@ -100,8 +100,8 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     left: 0;
     top: 20px;
     right: 0;
-    background-image: url(/static/img/erbse_x.png);
-    height: 20px;
+    background-image: url(/static/img/rube_x.png);
+    height: 40px;
     opacity: 1.0;
 }
 
@@ -109,9 +109,9 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     position: absolute;
     left: 0px;
     top: 36px;
-    background-image: url(/static/img/erbse_y.png);
+    background-image: url(/static/img/rube_y.png);
     bottom: 0px;
-    width: 20px;
+    width: 40px;
     opacity: 1.0;
 }
 
@@ -119,9 +119,9 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     position: absolute;
     right: -5px;
     top: 36px;
-    background-image: url(/static/img/erbse_y.png);
+    background-image: url(/static/img/rube_y.png);
     bottom: 0px;
-    width: 20px;
+    width: 40px;
     opacity: 1.0;
 }
 
@@ -159,7 +159,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .nav-pills a:hover {
-    background: url(/static/img/erbse_y.png) no-repeat left -88px;
+    background: url(/static/img/rube_y.png) no-repeat left -88px;
     text-decoration: underline !important;
 }
 
@@ -225,7 +225,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 .link .desc, .document .desc {
     padding-top: 5px;
     padding-left: 35px;
-    background: url(/static/img/erbse_y.png) no-repeat left -88px;
+    background: url(/static/img/rube_y.png) no-repeat left -88px;
 }
 
 /* contact */
