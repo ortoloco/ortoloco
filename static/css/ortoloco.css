@@ -159,7 +159,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .nav-pills a:hover {
-    background: url(/static/img/rube_y.png) no-repeat left -88px;
+    background: url(/static/img/tomate_rgb.png) no-repeat left -88px;
     text-decoration: underline !important;
 }
 
