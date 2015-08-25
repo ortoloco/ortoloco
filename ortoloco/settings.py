@@ -162,10 +162,10 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    # 'my_ortoloco',
-    # 'static_ortoloco',
-    # 'photologue',
-    # 'south',
+    'my_ortoloco',
+    'static_ortoloco',
+    'photologue',
+    'south',
     'django_cron',
     'django.contrib.auth',
     'django.contrib.contenttypes',
