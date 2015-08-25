@@ -98,7 +98,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 .container .erbsetop {
     position: absolute;
     left: 0;
-    top: 20px;
+    top: 23px;
     right: 0;
     background-image: url(/static/img/rube_x.png);
     height: 71px;
