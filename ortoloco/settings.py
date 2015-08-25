@@ -9,7 +9,7 @@ TEMPLATE_DEBUG = DEBUG
 WHITELIST_EMAILS = ["oliver.ganz@gmail.com", "orto@xiala.net", "oliver.ganz+.*@gmail.com"]
 
 ADMINS = (
-    ('Oli', 'oliver.ganz@gmail.com'),
+    ('Manue', 'mklarmann@gmail.com'),
 )
 SERVER_EMAIL="server@ortoloco.ch"
 
