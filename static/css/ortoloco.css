@@ -8,7 +8,7 @@
 }
 
 a {
-    color: #4c9434;
+    color: #e57f32;
 }
 
 ul {
@@ -83,15 +83,15 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .ortoloco.home .lastNews h3 {
-    color: #4c9434;
+    color: #e57f32;
 }
 
 .ortoloco.home .ortoloco_gemuese {
-    background: url(/static/img/ortoloco_home_small.gif) right bottom no-repeat;
+    background: url(/static/img/logo_mehalsgmues_small.gif) right bottom no-repeat;
     position: absolute;
     bottom: -5px;
     right: 70px;
-    width: 623px;
+    width: 600px;
     height: 600px;
 }
 
@@ -127,7 +127,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 
 /* menu */
 .nav-pills > li.active > a {
-    color: #4c9434;
+    color: #e57f32;
     background-color: transparent;
 }
 
