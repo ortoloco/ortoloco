@@ -16,7 +16,7 @@ ul {
 }
 
 a:hover, a:focus {
-    color: #315f21;
+    color: #eb903f;
 }
 
 html, body {
@@ -53,12 +53,12 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     background: url(/static/img/logo.png) 0 0px;
     display: inline-block;
     width: 220px;
-    height: 51px;
+    height: 65px;
     margin-bottom: 25px;
 }
 
 .logo:hover {
-    background-position: 0 51px;
+    background-position: 0 65px;
 }
 
 .container {
@@ -136,7 +136,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .nav-pills > li.active > a:hover, .nav-pills > .active > a:focus {
-    color: #315f21;
+    color: #eb903f;
     background-color: transparent;
 }
 
@@ -159,7 +159,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .nav-pills a:hover {
-    background: url(/static/img/tomate_rgb.png) no-repeat left -88px;
+    background: url(/static/img/tomate_rgb.png) no-repeat left;
     text-decoration: underline !important;
 }
 
