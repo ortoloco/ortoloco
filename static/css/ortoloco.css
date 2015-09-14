@@ -113,7 +113,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 
 .container .erbseright {
     position: absolute;
-    right: 2px;
+    right: -20px;
     top: 40px;
     background-image: url(/static/img/tomate_y.png);
     bottom: 0px;
