@@ -98,10 +98,10 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 .container .erbsetop {
     position: absolute;
     left: 0;
-    top: 23px;
+    top: 20px;
     right: 0;
-    background-image: url(/static/img/rube_x.png);
-    height: 71px;
+    background-image: url(/static/img/tomate_x.png);
+    height: 20px;
     opacity: 1.0;
 }
 
@@ -109,9 +109,9 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     position: absolute;
     left: 0px;
     top: 36px;
-    background-image: url(/static/img/rube_y.png);
+    background-image: url(/static/img/tomate_y.png);
     bottom: 0px;
-    width: 40px;
+    width: 20px;
     opacity: 1.0;
 }
 
@@ -119,9 +119,9 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     position: absolute;
     right: -5px;
     top: 36px;
-    background-image: url(/static/img/rube_y.png);
+    background-image: url(/static/img/tomate_y.png);
     bottom: 0px;
-    width: 40px;
+    width: 20px;
     opacity: 1.0;
 }
 
@@ -159,7 +159,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .nav-pills a:hover {
-    background: url(/static/img/tomate_rgb.png) no-repeat left;
+    background: url(/static/img/rube_rgb.png) no-repeat left;
     text-decoration: underline !important;
 }
 
@@ -225,7 +225,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 .link .desc, .document .desc {
     padding-top: 5px;
     padding-left: 35px;
-    background: url(/static/img/rube_y.png) no-repeat left -88px;
+    background: url(/static/img/tomate_y.png) no-repeat left -88px;
 }
 
 /* contact */
