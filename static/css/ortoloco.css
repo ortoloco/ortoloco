@@ -93,9 +93,9 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 */
 .container .erbsetop {
     position: absolute;
-    left: 0;
+    left: 0px;
     top: 20px;
-    right: 0;
+    right: 0px;
     background-image: url(/static/img/tomate_x.png);
     height: 20px;
     opacity: 1.0;
@@ -113,7 +113,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 
 .container .erbseright {
     position: absolute;
-    right: 0px;
+    right: 2px;
     top: 40px;
     background-image: url(/static/img/tomate_y.png);
     bottom: 0px;
