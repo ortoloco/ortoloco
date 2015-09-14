@@ -50,11 +50,11 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .logo {
-    background: url(/static/img/logo_mehalsgmues_rgb.png) 0 0px;
+    background: url(/static/img/logo_mehalsgmues_rgb.png) no-repeat center center;
     display: inline-block;
     width: 240px;
     height: 220px;
-    margin-bottom: 25px;
+/*    margin-bottom: 25px;*/
 }
 
 .container {
