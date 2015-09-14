@@ -50,10 +50,10 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .logo {
-    background: url(/static/img/logo.png) 0 0px;
+    background: url(/static/img/logo_mehalsgmues_rgb.png) 0 0px;
     display: inline-block;
-    width: 220px;
-    height: 65px;
+    width: 240px;
+    height: 220px;
     margin-bottom: 25px;
 }
 
@@ -108,7 +108,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 .container .erbseleft {
     position: absolute;
     left: 0px;
-    top: 36px;
+    top: 40px;
     background-image: url(/static/img/tomate_y.png);
     bottom: 0px;
     width: 20px;
@@ -118,7 +118,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 .container .erbseright {
     position: absolute;
     right: -5px;
-    top: 36px;
+    top: 40px;
     background-image: url(/static/img/tomate_y.png);
     bottom: 0px;
     width: 20px;

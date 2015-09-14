@@ -20,45 +20,31 @@
             <div class="col-md-4">
                 <a href="/aktuelles"><span class="logo"></span></a>
                 <ul class="nav nav-pills nav-stacked main-menu">
-                    <li class="{{ menu.about }}">
+                    <li class="{{ menu.idea }}">
                         <a href="/idee">Das ist Meh als Gmües</a>
-                        {% if menu.about == 'active' %}
-                            <ul class="nav nav-pills nav-stacked">
-                                <li class="{{ menu.aboutChild }}"><a href="/idee">&raquo; Die Idee <span
-                                        class="activeItem">&lt;</span></a></li>
-                                <li class="{{ menu.portrait }}"><a href="/portrait">&raquo; Das Portrait <span
-                                        class="activeItem">&lt;</span></a></li>
-                                <li class="{{ menu.background }}"><a href="/hintergrund">&raquo; Der Hintergrund
-                                    <span class="activeItem">&lt;</span></a></li>
-                                <li class="{{ menu.abo }}"><a href="/abo">&raquo; Das Gemüse-Abo <span
-                                        class="activeItem">&lt;</span></a></li>
-                            {#	<li class="{{ menu.faq }}"><a href="/faq">&raquo; Häufige Fragen <span#}
-                            {# 			class="activeItem">&lt;</span></a></li>#}
-                            </ul>
-                        {% endif %}
                     </li>
                     <li class="{{ menu.join }}">
-                        <a href="/mitmachen">GenossenschafterIn werden <span class="activeItem">&lt;</span></a>
+                        <a href="/mitmachen">Mitmachen <span class="activeItem">&lt;</span></a>
                     </li>
+					<li class="{{ menu.agenda }}">
+                        <a href="/agenda">Agenda <span class="activeItem">&lt;</span></a>
+                    </li>					
+					<li class="{{ menu.about }}">
+                        <a href="/idee">Über uns</a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="{{ menu.organization }}"><a href="/organisation">&raquo; Organisation <span class="activeItem">&lt;</span></a></li>
+                                <li class="{{ menu.operatingmirror }}"><a href="/betriebsspiegel">&raquo; Betriebsspiegel <span class="activeItem">&lt;</span></a></li>
+                                <li class="{{ menu.philosophy }}"><a href="/philosophie">&raquo; Die Philosophie <span class="activeItem">&lt;</span></a></li>
+                            </ul>
+                    </li>
+                    <li class="{{ menu.documents }}">
+				          <a href="/dokumente">Dokumente <span class="activeItem">&lt;</span></a>
+					</li>
                     <li class="{{ menu.contact }}">
                         <a href="/kontakt">Kontakt <span class="activeItem">&lt;</span></a>
                     </li>
 					
   				  	<li><br/><br/></li>
-
-                 {#   <li class="{{ menu.media }}">#}
-                 {#           <a href="/medien">Medienecho <span class="activeItem">&lt;</span></a>#}
-                 {#   </li>#}
-                 {#   <li class="{{ menu.links }}">#}
-                 {#           <a href="/links">Links <span class="activeItem">&lt;</span></a>#}
-                 {#   </li>#}
-                 {#   <li class="{{ menu.documents }}"> #}
-				 {#          <a href="/dokumente">Dokumente <span class="activeItem">&lt;</span></a>#}
-                 {#   </li>#}
-	             {# <li class="{{ menu.gallery }}">#}
-	             {#           <a href="/galerie">Bilder <span class="activeItem">&lt;</span></a>#}
-	             {#   </li>#}
- 
                 </ul>
                 {% block submenu %}
                 {% endblock %}
