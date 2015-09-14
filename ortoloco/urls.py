@@ -26,7 +26,11 @@ urlpatterns = patterns('',
     url('^links$', 'static_ortoloco.views.links'),
     url('^dokumente$', 'static_ortoloco.views.documents'),
     url('^kontakt$', 'static_ortoloco.views.contact'),
-
+    url('^betriebsspiegel$', 'static_ortoloco.views.operatingmirror'),	
+    url('^organisation$', 'static_ortoloco.views.organization'),	
+    url('^philosophie$', 'static_ortoloco.views.philosophy'),	
+    url('^agenda$', 'static_ortoloco.views.agenda'),	
+	
     #url('^myortoloco/', 'my_ortoloco.views.myortoloco_home'),
     url('^my/home$', 'my_ortoloco.views.my_home'),
     url('^my/passwort$', 'my_ortoloco.views.my_change_password'),

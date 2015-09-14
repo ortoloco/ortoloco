@@ -57,10 +57,6 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     margin-bottom: 25px;
 }
 
-.logo:hover {
-    background-position: 0 65px;
-}
-
 .container {
     min-height: 100%;
     position: relative;
@@ -117,7 +113,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 
 .container .erbseright {
     position: absolute;
-    right: -5px;
+    right: 0px;
     top: 40px;
     background-image: url(/static/img/tomate_y.png);
     bottom: 0px;
