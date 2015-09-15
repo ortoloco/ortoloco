@@ -54,7 +54,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     display: inline-block;
     width: 220px;
     height: 240px;
-	margin-bottom: 25px;
+	/*"margin-bottom: 25px;*/
 }
 /*
 .logo:hover {
@@ -85,7 +85,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 .ortoloco.home .lastNews h3 {
     color: #e57f32;
 }
-/*
+
 .ortoloco.home .ortoloco_gemuese {
     background: url(/static/img/logo_mehalsgmues_small.gif) right bottom no-repeat;
     position: absolute;
@@ -94,7 +94,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     width: 600px;
     height: 600px;
 }
-*/
+
 .container .erbsetop {
     position: absolute;
     left: 0px;
