@@ -47,7 +47,7 @@ def about(request):
     renderdict.update({
         'menu': {
             'about': 'active',
-            'aboutChild': 'active'
+"""            'aboutChild': 'active'"""
         }
     })
 
@@ -61,7 +61,7 @@ def organization(request):
     renderdict = getBaseDict(request)
     renderdict.update({
         'menu': {
-            'about': 'active',
+"""            'about': 'active',"""
             'organization': 'active'
         }
     })
@@ -113,7 +113,7 @@ def agenda(request):
 	
 def join(request):
     """
-    About ortoloco of "static" page
+    Join ortoloco of "static" page
     """
     renderdict = getBaseDict(request)
     renderdict.update({
@@ -127,7 +127,7 @@ def join(request):
 
 def media(request):
     """
-    About ortoloco of "static" page
+    Media ortoloco of "static" page
     """
     medias_list = []
     first = True
