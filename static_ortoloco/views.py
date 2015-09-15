@@ -47,7 +47,7 @@ def about(request):
     renderdict.update({
         'menu': {
             'about': 'active',
-"""            'aboutChild': 'active'"""
+            'aboutChild': 'active'
         }
     })
 
@@ -61,7 +61,7 @@ def organization(request):
     renderdict = getBaseDict(request)
     renderdict.update({
         'menu': {
-"""            'about': 'active',"""
+            'about': 'active',
             'organization': 'active'
         }
     })
