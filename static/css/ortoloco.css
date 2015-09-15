@@ -52,8 +52,8 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 .logo {
     background: url(/static/img/logo_mehalsgmues_rgb.png) no-repeat center center;
     display: inline-block;
-    width: 240px;
-    height: 220px;
+    width: 220px;
+    height: 240px;
 /*    margin-bottom: 25px;*/
 }
 
@@ -62,12 +62,12 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     position: relative;
     padding: 0px 40px 0 40px;
 }
-
+/*
 .ortoloco {
     margin-top: 80px;
     background: url(/static/img/ortoloco_full.gif) bottom no-repeat;
     padding-bottom: 400px;
-}
+}*/
 
 .ortoloco.home {
     background: none;
@@ -118,6 +118,16 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     background-image: url(/static/img/tomate_y.png);
     bottom: 0px;
     width: 20px;
+    opacity: 1.0;
+}
+
+.container .erbsebottom {
+    position: absolute;
+    left: 0px;
+    bottom: 20px;
+    right: 0px;
+    background-image: url(/static/img/tomate_x.png);
+    height: 20px;
     opacity: 1.0;
 }
 
