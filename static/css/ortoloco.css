@@ -56,7 +56,11 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     height: 240px;
 	margin-bottom: 25px;
 }
-
+/*
+.logo:hover {
+    background-position: 0 51px;
+}
+*/
 .container {
     min-height: 100%;
     position: relative;
