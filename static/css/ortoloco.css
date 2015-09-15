@@ -120,7 +120,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     width: 20px;
     opacity: 1.0;
 }
-
+/*
 .container .erbsebottom {
     position: absolute;
     left: 0px;
@@ -129,7 +129,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     background-image: url(/static/img/tomate_x.png);
     height: 20px;
     opacity: 1.0;
-}
+}*/
 
 /* menu */
 .nav-pills > li.active > a {
