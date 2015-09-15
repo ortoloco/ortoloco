@@ -54,66 +54,6 @@ def about(request):
     return render(request, "about.html", renderdict)
 
 
-def portrait(request):
-    """
-    About ortoloco of "static" page
-    """
-    renderdict = getBaseDict(request)
-    renderdict.update({
-        'menu': {
-            'about': 'active',
-            'portrait': 'active'
-        }
-    })
-
-    return render(request, "portrait.html", renderdict)
-
-
-def background(request):
-    """
-    About ortoloco of "static" page
-    """
-    renderdict = getBaseDict(request)
-    renderdict.update({
-        'menu': {
-            'about': 'active',
-            'background': 'active'
-        }
-    })
-
-    return render(request, "background.html", renderdict)
-
-
-def abo(request):
-    """
-    About ortoloco of "static" page
-    """
-    renderdict = getBaseDict(request)
-    renderdict.update({
-        'menu': {
-            'about': 'active',
-            'abo': 'active'
-        }
-    })
-
-    return render(request, "abo.html", renderdict)
-
-
-def faq(request):
-    """
-    FAQ ortoloco of "static" page
-    """
-    renderdict = getBaseDict(request)
-    renderdict.update({
-        'menu': {
-            'about': 'active',
-            'faq': 'active'
-        }
-    })
-
-    return render(request, "faq.html", renderdict)
-
-
 def organization(request):
     """
     Organization ortoloco of "static" page
@@ -165,7 +105,6 @@ def agenda(request):
     renderdict = getBaseDict(request)
     renderdict.update({
         'menu': {
-            'about': 'active',
             'agenda': 'active'
         }
     })
