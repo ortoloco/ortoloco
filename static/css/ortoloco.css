@@ -50,11 +50,11 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .logo {
-    background: url(/static/img/logo_mehalsgmues_rgb.png) 0 0px;
+    background: url(/static/img/logo_mehalsgmues_rgb.png) center center;
     display: inline-block;
     width: 220px;
     height: 240px;
-	/*"margin-bottom: 25px;*/
+	margin-bottom: 0px;
 }
 /*
 .logo:hover {
@@ -79,7 +79,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .ortoloco.home .lastNews {
-    margin-bottom: 585px;
+    margin-bottom: 0px;
 }
 
 .ortoloco.home .lastNews h3 {
