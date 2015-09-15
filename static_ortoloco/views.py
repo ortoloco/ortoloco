@@ -186,6 +186,19 @@ def agenda(request):
     })
 
     return render(request, "agenda.html", renderdict)			
+
+def gardennews(request):
+    """
+    Garden news ortoloco of "static" page
+    """
+    renderdict = getBaseDict(request)
+    renderdict.update({
+        'menu': {
+            'gardennews': 'active'
+        }
+    })
+
+    return render(request, "gardennews.html", renderdict)		
 	
 def join(request):
     """
