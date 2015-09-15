@@ -158,6 +158,20 @@ def philosophy(request):
     return render(request, "philosophy.html", renderdict)		
 
 	
+def agenda(request):
+    """
+    Agenda ortoloco of "static" page
+    """
+    renderdict = getBaseDict(request)
+    renderdict.update({
+        'menu': {
+            'about': 'active',
+            'agenda': 'active'
+        }
+    })
+
+    return render(request, "agenda.html", renderdict)			
+	
 def join(request):
     """
     About ortoloco of "static" page
