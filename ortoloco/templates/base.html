@@ -14,6 +14,7 @@
     <div class="erbsetop hidden-xs"></div>
     <div class="erbseleft hidden-xs"></div>
     <div class="erbseright hidden-xs"></div>
+	<!--<div class="erbsebottom"></div>-->
     <div class="ortoloco {% if menu.home == 'active' %} home {% endif %}">
         <div class="row">
             <div class="col-md-4">
@@ -41,7 +42,7 @@
                     <li class="{{ menu.contact }}"><a href="/kontakt">Kontakt <span class="activeItem">&lt;</span></a>
                     </li>
 					
-  				  	<li><br/><br/></li>
+  				  	<!-- <li><br/><br/></li> -->
                 </ul>
                 {% block submenu %}
                 {% endblock %}
@@ -52,7 +53,9 @@
             </div>
         </div>
         <!-- <a href="/my/home" class="myortoloco_link"></a> -->
-		</div>
+		
+        <div class="ortoloco_gemuese"></div>
+	</div>
 </div>
 
 <script type="text/javascript" src="/static/external/jquery-1.11.2/jquery-1.11.2.min.js"></script>
