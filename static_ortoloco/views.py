@@ -114,6 +114,50 @@ def faq(request):
     return render(request, "faq.html", renderdict)
 
 
+def organization(request):
+    """
+    Organization ortoloco of "static" page
+    """
+    renderdict = getBaseDict(request)
+    renderdict.update({
+        'menu': {
+            'about': 'active',
+            'organization': 'active'
+        }
+    })
+
+    return render(request, "organization.html", renderdict)	
+	
+	
+def operatingmirror(request):
+    """
+    Operatingmirror ortoloco of "static" page
+    """
+    renderdict = getBaseDict(request)
+    renderdict.update({
+        'menu': {
+            'about': 'active',
+            'operatingmirror': 'active'
+        }
+    })
+
+    return render(request, "operatingmirror.html", renderdict)		
+
+def philosophy(request):
+    """
+    Philosophy ortoloco of "static" page
+    """
+    renderdict = getBaseDict(request)
+    renderdict.update({
+        'menu': {
+            'about': 'active',
+            'philosophy': 'active'
+        }
+    })
+
+    return render(request, "philosophy.html", renderdict)		
+
+	
 def join(request):
     """
     About ortoloco of "static" page
