@@ -26,11 +26,11 @@ MANAGERS = ADMINS
 DATABASES = {'default': dj_database_url.config(default='postgres://nhwoxfurjjuasx:Lz-PnvD3v_vWDM-ZtZmqOr0Kqr@ec2-54-83-58-191.compute-1.amazonaws.com:5432/dtmcgv4jhtaqd')}
 
 
-EMAIL_HOST = os.environ.get('ORTOLOCO_EMAIL_HOST', 'v031278.kasserver.com')
-EMAIL_HOST_USER = os.environ.get('ORTOLOCO_EMAIL_USER', 'm0358bfa')
-EMAIL_HOST_PASSWORD = os.environ.get('ORTOLOCO_EMAIL_PASSWORD', 'MAG4321mag')
-EMAIL_PORT = os.environ.get('ORTOLOCO_EMAIL_PORT', 587)
-EMAIL_USE_TLS = os.environ.get('ORTOLOCO_EMAIL_TLS', True)
+EMAIL_HOST = os.environ.get('v031278.kasserver.com')
+EMAIL_HOST_USER = os.environ.get('m0358bfa')
+EMAIL_HOST_PASSWORD = os.environ.get('MAG4321mag')
+EMAIL_PORT = os.environ.get(587)
+EMAIL_USE_TLS = os.environ.get(True)
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
