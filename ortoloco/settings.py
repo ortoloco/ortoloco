@@ -6,10 +6,11 @@ DEBUG = os.environ.get("ORTOLOCO_DEBUG", True)
 
 TEMPLATE_DEBUG = DEBUG
 
-WHITELIST_EMAILS = ["mklarmann@gmail.com"]
+WHITELIST_EMAILS = ["mklarmann@gmail.com","andy86@gmx.net"]
 
 ADMINS = (
-    ('Manuel', 'mklarmann@gmail.com'),
+    ('Manuel', 'mklarmann@gmail.com')
+	('Andre', 'andy86@gmx.net'),
 )
 SERVER_EMAIL="server@mehalsgmues.ch"
 
