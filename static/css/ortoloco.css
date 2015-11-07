@@ -1,9 +1,10 @@
 /* general overrides of bootstrap */
+
 @font-face {
     font-family: 'Oxygen';
-    src: url('/static/fonts/Oxygen-Regular.ttf') format('truetype');	
-    font-weight: normal;
-    font-style: normal;
+    src: url('/static/fonts/Oxygen-Regular.ttf') format('truetype');font-weight: normal; font-style: normal;
+    src: url('/static/fonts/Oxygen-Light.ttf') format('truetype');font-weight: lighter; font-style: normal;
+    src: url('/static/fonts/Oxygen-Bold.ttf') format('truetype');font-weight: bold; font-style: normal;
 }
 
 a {
