@@ -25,7 +25,7 @@ html, body {
     font-size: 16px;
     background-color: #fffff7;
 	background-image:  url(/static/img/mag_back.jpg);
-	background-repeat: no-repeat;
+	background-repeat: round;
     height: 100%;
 }
 
@@ -53,10 +53,10 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .logo {
-    background: url(/static/img/logo_mehalsgmues_rgb.png) center center;
+    background: url(/static/img/mehalsgmues_logo.png) center center;
     display: inline-block;
-    width: 220px;
-    height: 240px;
+    width: 280px;
+    height: 310px;
 }
 
 .logo:hover {
@@ -138,7 +138,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .nav-pills > li.active > a:hover, .nav-pills > .active > a:focus {
-    color: #eb903f;
+    color: #753D18;
     background-color: transparent;
 }
 
