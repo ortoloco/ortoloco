@@ -20,7 +20,7 @@ a:hover, a:focus {
 }
 
 html, body {
-    font-family: "Courier New", monospace;
+    font-family: "Oxygen", monospace;
     font-size: 16px;
     background-color: #fffff7;
 	background-image:  url(/static/img/mag_back.jpg);
