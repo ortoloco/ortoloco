@@ -12,11 +12,6 @@
 </head>
 <body>
 <div class="container">
-    <div class="erbsetop"></div>
-    <div class="erbseleft"></div>
-    <div class="erbseright"></div>
-    <div class="erbsebottom"></div>
-
     {% if user.is_impersonate %}
         <div class="row impersonate">
             <div class="col-md-12">
@@ -91,7 +86,7 @@
                     </li>
                 </ul>
                 <hr>
-                <div class="bohnen">
+<!--                <div class="bohnen">
                     {% block bohnen %}
                         <h5>Dein Böhnli-Konto</h5>
                         {% for i in bohnenrange %}
@@ -105,7 +100,7 @@
                         {% endfor %}
                     {% endblock %}
                 </div>
-                <hr>
+  -->              <hr>
                 <div class="jobs">
                     {% block next_jobs %}
                         <h5>Nächste Einsätze</h5>
