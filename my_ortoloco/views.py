@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login
 from django.core.management import call_command
-import xlsxwriter
+# import xlsxwriter
 
 from my_ortoloco.models import *
 from my_ortoloco.forms import *
