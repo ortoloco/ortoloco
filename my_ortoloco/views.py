@@ -710,8 +710,7 @@ def my_contact(request):
 
     renderdict = get_menu_dict(request)
     renderdict.update({
-        'usernameAndEmail': loco.first_name + " " + loco.last_name + "<" + loco.email + ">",
-        'is_sent': is_sent
+        'usernameAndEmail': loco.first_name + " " + loco.last_name + "<" + loco.email + ">"
     })
     return render(request, "my_contact.html", renderdict)
 

@@ -27,8 +27,6 @@ class Depot(models.Model):
     addr_zipcode = models.CharField("PLZ", max_length=10)
     addr_location = models.CharField("Ort", max_length=50)
 
-    description = models.TextField("Beschreibung", max_length=1000, default="")
-
     def __unicode__(self):
         return u"%s %s" % (self.id, self.name)
 
@@ -43,77 +41,50 @@ class Depot(models.Model):
         return day
 
     def small_abos(self):
-        return self.small_abos(self, self.active_abos())
-
-    def small_abos(self, abos):
-        return len(abos.filter(Q(size=1) | Q(size=3)))
+        return len(self.active_abos().filter(Q(size=1) | Q(size=3)))
 
     def big_abos(self):
-        return self.big_abos(self, self.active_abos())
-
-    def big_abos(self, abos):
         return len(self.active_abos().filter(Q(size=2) | Q(size=3) | Q(size=4))) + len(self.active_abos().filter(size=4))
 
     def vier_eier(self):
-        return self.vier_eier(self, self.active_abos())
-
-    def vier_eier(self, abos):
         eier = 0
-        for abo in abos.all():
+        for abo in self.active_abos().all():
             eier += len(abo.extra_abos.all().filter(description="Eier 4er Pack"))
         return eier
 
     def sechs_eier(self):
-        return self.active_abos()
-
-    def sechs_eier(self, abos):
         eier = 0
-        for abo in abos.all():
+        for abo in self.active_abos().all():
             eier += len(abo.extra_abos.all().filter(description="Eier 6er Pack"))
         return eier
 
     def kaese_ganz(self):
-        return self.kaese_ganz(self, self.active_abos())
-
-    def kaese_ganz(self, abos):
         kaese = 0
-        for abo in abos.all():
+        for abo in self.active_abos().all():
             kaese += len(abo.extra_abos.all().filter(description="Käse ganz"))
         return kaese
 
     def kaese_halb(self):
-        return self.kaese_halb(self, self.active_abos())
-
-    def kaese_halb(self, abos):
         kaese = 0
-        for abo in abos.all():
+        for abo in self.active_abos().all():
             kaese += len(abo.extra_abos.all().filter(description="Käse halb"))
         return kaese
 
     def kaese_viertel(self):
-        return self.kaese_viertel(self, self.active_abos())
-
-    def kaese_viertel(self, abos):
         kaese = 0
-        for abo in abos.all():
+        for abo in self.active_abos().all():
             kaese += len(abo.extra_abos.all().filter(description="Käse viertel"))
         return kaese
 
     def big_obst(self):
-        return self.big_obst(self, self.active_abos())
-
-    def big_obst(self, abos):
         obst = 0
-        for abo in abos.all():
+        for abo in self.active_abos().all():
             obst += len(abo.extra_abos.all().filter(description="Obst gr. (2kg)"))
         return obst
 
     def small_obst(self):
-        return self.small_abos(self, self.active_abos())
-
-    def small_obst(self, abos):
         obst = 0
-        for abo in abos.all():
+        for abo in self.active_abos().all():
             obst += len(abo.extra_abos.all().filter(description="Obst kl. (1kg)"))
         return obst
 
@@ -173,13 +144,13 @@ class Abo(models.Model):
         return unicode(loco) if loco is not None else ""
 
     def small_abos(self):
-        return self.size % 1
+        return self.size % 2
 
     def big_abos(self):
-        return int((self.size % 2) / 1)
+        return int((self.size % 10) / 2)
 
     def house_abos(self):
-        return int(self.size / 3)
+        return int(self.size / 10)
 
     @staticmethod
     def next_extra_change_date():
@@ -266,7 +237,6 @@ class Loco(models.Model):
                             on_delete=models.SET_NULL)
 
     confirmed = models.BooleanField("bestätigt", default=True)
-    reachable_by_email = models.BooleanField("reachable_by_email", default=False)
 
     def __unicode__(self):
         return self.get_name()
@@ -329,7 +299,6 @@ class Taetigkeitsbereich(models.Model):
     class Meta:
         verbose_name = 'Tätigkeitsbereich'
         verbose_name_plural = 'Tätigkeitsbereiche'
-        permissions = (('is_area_admin', 'Benutzer ist TätigkeitsbereichskoordinatorIn'),)
 
 
 class JobType(models.Model):
@@ -362,7 +331,6 @@ class Job(models.Model):
     time = models.DateTimeField()
     pinned = models.BooleanField(default=False)
     reminder_sent = models.BooleanField("Reminder verschickt", default=False)
-    canceled = models.BooleanField("abgesagt", default=False)
 
     def __unicode__(self):
         return u'Job #%s' % (self.id)
@@ -381,16 +349,11 @@ class Job(models.Model):
     def end_time(self):
         return self.time + datetime.timedelta(hours=self.typ.duration)
 
-    def start_time(self):
-        return self.time
-
     def besetzte_plaetze(self):
         return self.boehnli_set.count()
 
     def get_status_bohne(self):
         boehnlis = Boehnli.objects.filter(job_id=self.id)
-	if self.slots < 1:
-             return helpers.get_status_bean(100)
         return helpers.get_status_bean(boehnlis.count() * 100 / self.slots)
 
     def is_in_kernbereich(self):
@@ -429,3 +392,4 @@ model_audit.fk(Anteilschein.loco)
 
 signals.post_save.connect(Loco.create, sender=Loco)
 signals.post_delete.connect(Loco.post_delete, sender=Loco)
+
