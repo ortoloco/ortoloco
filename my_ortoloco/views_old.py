@@ -14,7 +14,6 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login
 from django.core.management import call_command
-import xlsxwriter
 
 from my_ortoloco.models import *
 from my_ortoloco.forms import *
@@ -52,10 +51,11 @@ def get_menu_dict(request):
     else:
         bohnenrange = None
         userbohnen = []
+        userbohnen_kernbereich = []
         next_jobs = set()
 
-    depot_admin = Depot.objects.filter(contact=request.user.loco)
-    area_admin = Taetigkeitsbereich.objects.filter(coordinator=request.user.loco)
+    depot_admin = Depot.objects.filter(contact=request.user)
+
     return {
         'user': request.user,
         'bohnenrange': bohnenrange,
@@ -64,7 +64,6 @@ def get_menu_dict(request):
         'next_jobs': next_jobs,
         'staff_user': request.user.is_staff,
         'depot_admin': depot_admin,
-        'area_admin': area_admin,
         'politoloco': request.user.has_perm('static_ortoloco.can_send_newsletter')
     }
 
@@ -118,35 +117,24 @@ def my_job(request, job_id):
             current_count = loco_info.get("count", 0)
             current_msg = loco_info.get("msg", [])
             loco_info["count"] = current_count + 1
-            loco_info["email"] = boehnli.loco.email
             #current_msg.append("boehnli.comment")
             loco_info["msg"] = current_msg
-            if boehnli.loco.reachable_by_email==True or request.user.is_staff or job.typ.bereich.coordinator==loco:
-                loco_info["url"] = "/my/kontakt/loco/" + str(boehnli.loco.id) + "/" +str(job_id) + "/"
-                loco_info["reachable"] = True;
-            else:
-                loco_info["url"] = ""
-                loco_info["reachable"] = False;
     print participants_new_dict
 
     participants_summary = []
-    emails = []
     for loco_name, loco_dict in participants_new_dict.iteritems():
         # print loco_name, loco_dict
         count = loco_dict.get("count")
         msg = loco_dict.get("msg")
-        url = loco_dict.get("url")
-        reachable = loco_dict.get("reachable")
-        emails.append(loco_dict.get("email"))
         # msg = ", ".join(loco_dict.get("msg"))
         if count == 1:
-            participants_summary.append((loco_name, None, url, reachable))
+            participants_summary.append((loco_name, None))
         elif count == 2:
-            participants_summary.append((loco_name + ' (mit einer weiteren Person)', msg, url, reachable))
+            participants_summary.append((loco_name + ' (mit einer weiteren Person)', msg))
         else:
             participants_summary.append((loco_name
                                                     + ' (mit ' + str(count - 1)
-                                                    + ' weiteren Personen)', msg, url, reachable))
+                                                    + ' weiteren Personen)', msg))
 
     # for boehnli in boehnlis:
     #     if boehnli.loco is not None:
@@ -176,9 +164,7 @@ def my_job(request, job_id):
         'slotrange': slotrange,
         'allowed_additional_participants': allowed_additional_participants,
         'job_fully_booked': len(allowed_additional_participants) == 0,
-        'job_is_in_past': job.end_time() < datetime.datetime.now(),
-        'job_is_running': job.start_time() < datetime.datetime.now(),
-        'job_canceled': job.canceled
+        'job_is_in_past': job.end_time() < datetime.datetime.now()
     })
     return render(request, "job.html", renderdict)
 
@@ -333,7 +319,7 @@ def my_abo_change(request, abo_id):
     renderdict = get_menu_dict(request)
     renderdict.update({
         'loco': request.user.loco,
-        'change_size': month <= 10,
+        'change_size': month <= 12,
         'next_extra_abo_date': Abo.next_extra_change_date(),
         'next_size_date': Abo.next_size_change_date()
     })
@@ -624,21 +610,24 @@ def my_createabo(request):
         selectedabo = request.POST.get("abo")
 
         scheine += loco_scheine
-        min_anzahl_scheine = {"none": 1, "small": 1, "big": 2, "house": 3}.get(request.POST.get("abo"))
-        if scheine < min_anzahl_scheine:
+        if (scheine < 2 and request.POST.get("abo") == "big") or (scheine < 3 and request.POST.get("abo") == "house") or (scheine < 1 and request.POST.get("abo") == "small" ) or (scheine == 0):
             scheineerror = True
         else:
             depot = Depot.objects.all().filter(id=request.POST.get("depot"))[0]
-            size = {"none": 0, "small": 1, "big": 2, "house": 3}.get(request.POST.get("abo"))
-
-            if size > 0:
-                if loco.abo is None:
-                    loco.abo = Abo.objects.create(size=size, primary_loco=loco, depot=depot)
-                else:
-                    loco.abo.size = size
-                    loco.abo.future_size = size
-                    loco.abo.depot = depot
-                loco.abo.save()
+            size = 1
+            if request.POST.get("abo") == "house":
+                size = 3
+            elif request.POST.get("abo") == "big":
+                size = 2
+            else:
+                size = 1
+            if loco.abo is None:
+                loco.abo = Abo.objects.create(size=size, primary_loco=loco, depot=depot)
+            else:
+                loco.abo.size = size
+                loco.abo.future_size = size
+                loco.abo.depot = depot
+            loco.abo.save()
             loco.save()
 
             if loco.anteilschein_set.count() < int(request.POST.get("scheine")):
@@ -657,7 +646,7 @@ def my_createabo(request):
 
                 #user did it all => send confirmation mail
                 send_welcome_mail(loco.email, password, request.META["HTTP_HOST"])
-                send_welcome_mail("server@mehalsgmues.ch", "MAG4321mag", request.META["HTTP_HOST"])
+                send_welcome_mail("lea@ortoloco.ch", "<geheim>", request.META["HTTP_HOST"])
 
                 return redirect("/my/willkommen")
 
@@ -714,12 +703,10 @@ def my_contact(request):
     Kontaktformular
     """
     loco = request.user.loco
-    is_sent = False
 
     if request.method == "POST":
         # send mail to bg
         send_contact_form(request.POST.get("subject"), request.POST.get("message"), loco, request.POST.get("copy"))
-        is_sent = True
 
     renderdict = get_menu_dict(request)
     renderdict.update({
@@ -727,30 +714,6 @@ def my_contact(request):
         'is_sent': is_sent
     })
     return render(request, "my_contact.html", renderdict)
-
-@login_required
-def my_contact_loco(request, loco_id, job_id):
-    """
-    Kontaktformular Locos
-    """
-    loco = request.user.loco
-    contact_loco = get_object_or_404(Loco, id=int(loco_id))#Loco.objects.all().filter(id = loco_id)
-    is_sent = False
-
-    if request.method == "POST":
-        # send mail to loco
-        send_contact_loco_form(request.POST.get("subject"), request.POST.get("message"), loco, contact_loco, request.POST.get("copy"))
-        is_sent = True
-
-    renderdict = get_menu_dict(request)
-    renderdict.update({
-        'usernameAndEmail': loco.first_name + " " + loco.last_name + "<" + loco.email + ">",
-        'loco_id': loco_id,
-        'loco_name': contact_loco.first_name + " " + contact_loco.last_name,
-        'is_sent': is_sent,
-        'job_id': job_id
-    })
-    return render(request, "my_contact_loco.html", renderdict)
 
 
 @login_required
@@ -769,8 +732,8 @@ def my_profile(request):
             loco.addr_location = locoform.cleaned_data['addr_location']
             loco.phone = locoform.cleaned_data['phone']
             loco.mobile_phone = locoform.cleaned_data['mobile_phone']
-            loco.reachable_by_email = locoform.cleaned_data['reachable_by_email']
             loco.save()
+
             success = True
     else:
         locoform = ProfileLocoForm(instance=loco)
@@ -828,19 +791,24 @@ def send_email(request):
 def send_email_depot(request):
     return send_email_intern(request)
 
-@permission_required('my_ortoloco.is_area_admin')
-def send_email_area(request):
-    return send_email_intern(request)
-
 def send_email_intern(request):
     sent = 0
     if request.method != 'POST':
         raise Http404
     emails = set()
     sender = request.POST.get("sender")
+    if sender not in ["info", "ernte", "abpacken", "verteilen"]:
+        return my_mails_intern(request, error_message="Bitte wähle eine Absender Adresse aus.")
     if request.POST.get("allabo") == "on":
         for loco in Loco.objects.exclude(abo=None).filter(abo__active=True):
             emails.add(loco.email)
+    if request.POST.get("depotOnly") == "on":
+        for d in request.POST.get("depotOnly"):
+            if d == "o":
+                x = request.POST.get(d)
+                for loco in Depot.get(request.POST.get(d)).locos.all:
+                    emails.add(loco.email)
+                    xxx
     if request.POST.get("allanteilsschein") == "on":
         for loco in Loco.objects.all():
             if loco.anteilschein_set.count() > 0:
@@ -853,7 +821,7 @@ def send_email_intern(request):
         for recipient in recipients:
             emails.add(recipient)
     if request.POST.get("allsingleemail"):
-        emails |= set(request.POST.get("singleemail").split(' '))
+        emails.add(request.POST.get("singleemail"))
 
     index = 1
     attachements = []
@@ -870,20 +838,54 @@ def send_email_intern(request):
     })
     return render(request, 'mail_sender_result.html', renderdict)
 
+def get_locos_for_depots(depots):
+    abos = Abo.objects.filter(depot = depots)
+    res = []
+    for a in abos:
+        locos = Loco.objects.filter(abo = a)
+        for loco in locos:
+            res.append(loco)
+    return res
+
+def send_email_to_depot(request):
+    sent = 0
+    if request.method != 'POST':
+        raise Http404
+    emails = set()
+    depotIds = request.POST.get("depotIds")
+    depotIdsAr = depotIds.split(",")
+    for d in depotIdsAr:
+        depotInput = request.POST.get(d)
+        if depotInput == "on":
+            locos = get_locos_for_depots(d);
+            for loco in locos:
+                emails.add(loco.email)
+    
+    index = 1
+    attachements = []
+    while request.FILES.get("image-" + str(index)) is not None:
+        attachements.append(request.FILES.get("image-" + str(index)))
+        index += 1
+
+    if len(emails) > 0:
+        send_filtered_mail(request.POST.get("subject"), request.POST.get("message"), request.POST.get("textMessage"), emails, request.META["HTTP_HOST"], attachements)
+        sent = len(emails)
+    renderdict = get_menu_dict(request)
+    renderdict.update({
+        'sent': sent
+    })
+    return render(request, 'mail_sender_result.html', renderdict)
+
 
 @staff_member_required
-def my_mails(request, enhanced=None):
-    return my_mails_intern(request, enhanced)
+def my_mails(request):
+    return my_mails_intern(request)
 
 @permission_required('my_ortoloco.is_depot_admin')
 def my_mails_depot(request):
-    return my_mails_intern(request, "depot")
+    return my_mails_intern(request)
 
-@permission_required('my_ortoloco.is_area_admin')
-def my_mails_area(request):
-    return my_mails_intern(request, "area")
-
-def my_mails_intern(request, enhanced, error_message=None):
+def my_mails_intern(request, error_message=None):
     renderdict = get_menu_dict(request)
     renderdict.update({
         'recipient_type': request.POST.get("recipient_type"),
@@ -893,8 +895,6 @@ def my_mails_intern(request, enhanced, error_message=None):
         'filter_value': request.POST.get("filter_value"),
         'mail_subject': request.POST.get("subject"),
         'mail_message': request.POST.get("message"),
-        'enhanced': enhanced,
-        'email': request.user.loco.email,
         'error_message': error_message
     })
     return render(request, 'mail_sender.html', renderdict)
@@ -936,11 +936,10 @@ def my_filters(request):
     return render(request, 'filters.html', renderdict)
 
 
-
 @permission_required('my_ortoloco.is_depot_admin')
-def my_filters_depot(request, depot_id):
-    depot = get_object_or_404(Depot, id=int(depot_id))
-    locos = get_locos_for_depot(depot)
+def my_filters_depot(request):
+    depots = Depot.objects.filter(contact=request.user)
+    locos = get_locos_for_depots(depots)
     boehnlis = current_year_boehnlis_per_loco()
     boehnlis_kernbereich = current_year_kernbereich_boehnlis_per_loco()
     for loco in locos:
@@ -949,34 +948,7 @@ def my_filters_depot(request, depot_id):
 
     renderdict = get_menu_dict(request)
     renderdict.update({
-        'locos': locos,
-        'enhanced': "depot"
-    })
-    return render(request, 'filters.html', renderdict)
-
-def get_locos_for_depot(depot):
-    abos = Abo.objects.filter(depot = depot)
-    res = []
-    for a in abos:
-        locos = Loco.objects.filter(abo = a)
-        for loco in locos:
-            res.append(loco)
-    return res
-
-@permission_required('my_ortoloco.is_area_admin')
-def my_filters_area(request, area_id):
-    area = get_object_or_404(Taetigkeitsbereich, id=int(area_id))
-    locos = area.locos.all()
-    boehnlis = current_year_boehnlis_per_loco()
-    boehnlis_kernbereich = current_year_kernbereich_boehnlis_per_loco()
-    for loco in locos:
-        loco.boehnlis = boehnlis[loco]
-        loco.boehnlis_kernbereich = boehnlis_kernbereich[loco]
-
-    renderdict = get_menu_dict(request)
-    renderdict.update({
-        'locos': locos,
-        'enhanced': "area"
+        'locos': locos
     })
     return render(request, 'filters.html', renderdict)
 
@@ -995,10 +967,10 @@ def my_abos(request):
 
         abos.append({
             'abo': abo,
-            'text': get_status_bean_text(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0),
+            'text': get_status_bean_text(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0),
             'boehnlis': boehnlis,
             'boehnlis_kernbereich': boehnlis_kernbereich,
-            'icon': helpers.get_status_bean(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0)
+            'icon': helpers.get_status_bean(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0)
         })
 
     renderdict = get_menu_dict(request)
@@ -1010,12 +982,12 @@ def my_abos(request):
 
 
 @permission_required('my_ortoloco.is_depot_admin')
-def my_abos_depot(request, depot_id):
+def my_abos_depot(request):
     boehnli_map = current_year_boehnlis_per_loco()
     boehnlis_kernbereich_map = current_year_kernbereich_boehnlis_per_loco()
     abos = []
-    depot = get_object_or_404(Depot, id=int(depot_id))
-    for abo in Abo.objects.filter(depot = depot):
+    depots = Depot.objects.filter(contact=request.user)
+    for abo in Abo.objects.filter(depot = depots):
         boehnlis = 0
         boehnlis_kernbereich = 0
         for loco in abo.bezieher_locos():
@@ -1024,10 +996,10 @@ def my_abos_depot(request, depot_id):
 
         abos.append({
             'abo': abo,
-            'text': get_status_bean_text(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0),
+            'text': get_status_bean_text(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0),
             'boehnlis': boehnlis,
             'boehnlis_kernbereich': boehnlis_kernbereich,
-            'icon': helpers.get_status_bean(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0)
+            'icon': helpers.get_status_bean(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0)
         })
 
     renderdict = get_menu_dict(request)
@@ -1168,12 +1140,12 @@ def my_future(request):
         }
 
     for abo in Abo.objects.all():
-        small_abos += abo.size % 2
-        big_abos += int(abo.size % 10 / 2)
-        house_abos += int(abo.size / 10)
-        small_abos_future += abo.future_size % 2
-        big_abos_future += int(abo.future_size % 10 / 2)
-        house_abos_future += int(abo.future_size / 10)
+        small_abos += abo.size % 1
+        big_abos += int(abo.size % 3 / 1)
+        house_abos += int(abo.size / 3)
+        small_abos_future += abo.future_size % 1
+        big_abos_future += int(abo.future_size % 3 / 1)
+        house_abos_future += int(abo.future_size / 3)
 
         if abo.extra_abos_changed:
             for users_abo in abo.future_extra_abos.all():
@@ -1239,56 +1211,6 @@ def my_switch_abos(request):
 
 
 @staff_member_required
-def my_excel_export(request):
-    response = HttpResponse(content_type='application/vnd.ms-excel')
-    response['Content-Disposition'] = 'attachment; filename=Report.xlsx'
-    output = StringIO()
-    workbook = xlsxwriter.Workbook(output)
-    worksheet_s = workbook.add_worksheet("Locos")
-    
-    worksheet_s.write_string(0, 0, unicode("Name", "utf-8"))
-    worksheet_s.write_string(0, 1, unicode("Boehnlis", "utf-8"))
-    worksheet_s.write_string(0, 2, unicode("Boehnlis Kernbereich", "utf-8"))
-    worksheet_s.write_string(0, 3, unicode("Taetigkeitsbereiche", "utf-8"))
-    worksheet_s.write_string(0, 4, unicode("Depot", "utf-8"))
-    worksheet_s.write_string(0, 5, unicode("Email", "utf-8"))
-    worksheet_s.write_string(0, 6, unicode("Telefon", "utf-8"))
-    worksheet_s.write_string(0, 7, unicode("Mobile", "utf-8"))
-    
-    locos = Loco.objects.all()
-    boehnlis = current_year_boehnlis_per_loco()
-    boehnlis_kernbereich = current_year_kernbereich_boehnlis_per_loco()
-    row = 1
-    for loco in locos:
-        loco.boehnlis = boehnlis[loco]
-        loco.boehnlis_kernbereich = boehnlis_kernbereich[loco]
-        loco.bereiche = ""
-        for bereich in loco.areas.all():
-            loco.bereiche = loco.bereiche + bereich.name +" "
-        if loco.bereiche == "":
-            loco.bereiche = unicode("-Kein Tätigkeitsbereich-", "utf-8")
-        
-        loco.depot_name = unicode("Kein Depot definiert", "utf-8")
-        if loco.abo is not None:
-            loco.depot_name=loco.abo.depot.name
-        looco_full_name = loco.first_name + " " + loco.last_name
-        worksheet_s.write_string(row, 0, looco_full_name)
-        worksheet_s.write(row, 1, loco.boehnlis)
-        worksheet_s.write(row, 2, loco.boehnlis_kernbereich)
-        worksheet_s.write_string(row, 3, loco.bereiche)
-        worksheet_s.write_string(row, 4, loco.depot_name)
-        worksheet_s.write_string(row, 5, loco.email)
-        worksheet_s.write_string(row, 6, loco.phone)
-        if loco.mobile_phone is not None: 
-            worksheet_s.write_string(row, 7, loco.mobile_phone)
-        row = row + 1
-
-    workbook.close()
-    xlsx_data = output.getvalue()
-    response.write(xlsx_data)
-    return response
-
-@staff_member_required
 def my_startmigration(request):
     f = StringIO()
     with Swapstd(f):
@@ -1348,6 +1270,7 @@ def test_filters_post(request):
     data = Filter.format_data(locos, lambda loco: "%s! (email: %s)" % (loco, loco.email))
     res.extend(data)
     return HttpResponse("<br>".join(res))
+
 
 
 

@@ -2,24 +2,12 @@
 
 {% block content %}
     <h3>{{ job.typ.name }}</h3>
-    
-    {% if job_canceled %}
-        <div class="alert alert-danger">Der Job wurde abgesagt! Entschuldige die Umstände. Aber es gibt immer <a href="/my/einsaetze" style="text-decoration: underline">viel zu tun</a>...</div>
-    {% elif job_fully_booked %}
-        <div class="alert alert-success">Der Job ist ausgebucht, danke! Aber es gibt immer <a href="/my/einsaetze" style="text-decoration: underline">viel zu tun</a>...</div>
-    {% elif job_is_in_past %}
-        <div class="alert alert-success">Der Job hat schon angefangen! Aber es gibt immer <a href="/my/einsaetze" style="text-decoration: underline">viel zu tun</a>...</div>
-    {% elif job_is_running %}
-        <div class="alert alert-success">Der Job ist schon vorbei! Aber es gibt immer <a href="/my/einsaetze" style="text-decoration: underline">viel zu tun</a>...</div>
-    {% endif %}
     <div class="row">
         <div class="col-md-3">Zeitpunkt:</div>
         <div class="col-md-5">
             {{ job.time |date:"l, d.m.Y, H:i" }} - {{ job.end_time|date:"H:i" }} <br>
             {% if job_is_in_past %}
-            (vor {{ job.end_time|timesince }})
-            {% elif job_is_running %}
-            (seit {{ job.time|timesince }})
+            (vor {{ job.time|timesince }})
             {% else %}
             (in {{ job.time|timeuntil }})
             {% endif %}
@@ -52,30 +40,18 @@
         <div class="col-md-5">{{ job.typ.description }}</div>
     </div>
     <br/>
-    {% if admin %}
-        <form id="email-sender" action="/my/mails" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="recipient_type" id="recipient_type" value="Locos"/>
-        <input type="hidden" name="recipients" id="recipients" value="{{emails}}"/>
-        <input type="hidden" name="recipients_count" id="recipients_count" value="{{number_of_participants}}"/>
-        <button type="submit" class="btn btn-success" id="send-email">Allen eine Email senden</button>
-    </form>
-    {% endif %}
     <div class="row">
         <div class="col-md-3">Dabei sind:</div>
         <div class="col-md-5">
-            {% if number_of_participants == 0 and not job_fully_booked %}
+            {% if number_of_participants == 0 %}
                 Noch niemand :-(
             {% else %}
                 <ul>
-                    {% for participant, comments, url, reachable in participants_summary %}
+                    {% for participant, comments in participants_summary %}
                         <li>
                             <a class="job-participant" loco-id="{{ participant }}" href="#">
                                 {{ participant }}
                             </a>
-							{% if reachable %}
-								&nbsp;<a href="{{url}}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
-							{% endif %}
                             <br>
                             {% for comment in comments %}
                                 <span class="loco-job-comments">Hinweis: {{ comment }}</span>
@@ -89,7 +65,11 @@
         </div>
     </div>
     <br/>
-    {% if can_subscribe %}
+    {% if job_fully_booked %}
+        <div class="alert alert-success">Der Job ist ausgebucht, danke! Aber es gibt immer <a href="/my/einsaetze" style="text-decoration: underline">viel zu tun</a>...</div>
+    {% elif job_is_in_past %}
+        <div class="alert alert-success">Der Job ist schon vorbei! Aber es gibt immer <a href="/my/einsaetze" style="text-decoration: underline">viel zu tun</a>...</div>
+    {% else %}
         <div class="row">
             <div class="col-md-3">Ich trage mich ein:</div>
             <div class="col-md-5">
