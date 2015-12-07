@@ -33,15 +33,15 @@
     </div>
     <br/>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h5>Momentanes Depot:</h5>
             {{ loco.abo.depot.name }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h5>Zukünftige Grösse:</h5>
             {{ loco.abo.future_size_name }}
         </div>
-        <div class="col-md-4">
+ <!--       <div class="col-md-4">
             <h5>Zukünftige Zusatz-Abos:</h5>
             {% if not loco.abo.extra_abos_changed %}
                 {% if loco.abo.extra_abos.all|length == 0 %}
@@ -61,6 +61,7 @@
                 {% endif %}
             {% endif %}
         </div>
+-->
     </div>
     <br/>
     <div class="row">
