@@ -59,9 +59,10 @@
                             <hr>
                             <a href="/my/mails">Mails verschicken</a>
                         </li>
-                        <li>
+<!--                        <li>
                             <a href="/my/depotlisten">Depotlisten drucken</a>
-                        </li>
+                        </li> 
+-->
                         <li class="inline">
                             Filtern <a href="/my/filters">Locos</a> | <a href="/my/abos">Abos</a>
                         </li>
@@ -70,12 +71,13 @@
                         </li>
                     {% endif %}
                     {% if politoloco %}
-                        <li>
+<!--                        <li>
                             {% if not staff_user %}
                                 <hr>
                             {% endif %}
                             <a href="/my/politoloco">politoloco versenden</a>
                         </li>
+-->
                     {% endif %}
                     <li class="{{ menu.personalInfo }}">
                         <hr>
