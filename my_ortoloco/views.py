@@ -319,7 +319,7 @@ def my_abo_change(request, abo_id):
     renderdict = get_menu_dict(request)
     renderdict.update({
         'loco': request.user.loco,
-        'change_size': month <= 10,
+        'change_size': month <= 12,
         'next_extra_abo_date': Abo.next_extra_change_date(),
         'next_size_date': Abo.next_size_change_date()
     })
@@ -610,13 +610,13 @@ def my_createabo(request):
         selectedabo = request.POST.get("abo")
 
         scheine += loco_scheine
-        if (scheine < 4 and request.POST.get("abo") == "big") or (scheine < 20 and request.POST.get("abo") == "house") or (scheine < 2 and request.POST.get("abo") == "small" ) or (scheine == 0):
+        if (scheine < 2 and request.POST.get("abo") == "big") or (scheine < 3 and request.POST.get("abo") == "house") or (scheine < 1 and request.POST.get("abo") == "small" ) or (scheine == 0):
             scheineerror = True
         else:
             depot = Depot.objects.all().filter(id=request.POST.get("depot"))[0]
             size = 1
             if request.POST.get("abo") == "house":
-                size = 10
+                size = 3
             elif request.POST.get("abo") == "big":
                 size = 2
             else:
@@ -966,10 +966,10 @@ def my_abos(request):
 
         abos.append({
             'abo': abo,
-            'text': get_status_bean_text(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0),
+            'text': get_status_bean_text(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0),
             'boehnlis': boehnlis,
             'boehnlis_kernbereich': boehnlis_kernbereich,
-            'icon': helpers.get_status_bean(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0)
+            'icon': helpers.get_status_bean(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0)
         })
 
     renderdict = get_menu_dict(request)
@@ -995,10 +995,10 @@ def my_abos_depot(request):
 
         abos.append({
             'abo': abo,
-            'text': get_status_bean_text(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0),
+            'text': get_status_bean_text(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0),
             'boehnlis': boehnlis,
             'boehnlis_kernbereich': boehnlis_kernbereich,
-            'icon': helpers.get_status_bean(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0)
+            'icon': helpers.get_status_bean(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0)
         })
 
     renderdict = get_menu_dict(request)
@@ -1139,12 +1139,12 @@ def my_future(request):
         }
 
     for abo in Abo.objects.all():
-        small_abos += abo.size % 2
-        big_abos += int(abo.size % 10 / 2)
-        house_abos += int(abo.size / 10)
-        small_abos_future += abo.future_size % 2
-        big_abos_future += int(abo.future_size % 10 / 2)
-        house_abos_future += int(abo.future_size / 10)
+        small_abos += abo.size % 1
+        big_abos += int(abo.size % 3 / 1)
+        house_abos += int(abo.size / 3)
+        small_abos_future += abo.future_size % 1
+        big_abos_future += int(abo.future_size % 3 / 1)
+        house_abos_future += int(abo.future_size / 3)
 
         if abo.extra_abos_changed:
             for users_abo in abo.future_extra_abos.all():
