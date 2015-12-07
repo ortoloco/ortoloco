@@ -45,30 +45,15 @@
                     <li class="{{ menu.ortoloco }}">
                         <a href="/aktuelles">mehalsgmues.ch</a>
                     </li>
-                    {% if depot_admin|length > 0 or area_admin|length > 0 %}
+                    {% if depot_admin|length > 0 %}
                         <li>
                             <hr>
+                            <a href="/my/mails_depot">Mails verschicken</a>
                         </li>
-                    {% endif %}
-                    {% for depot in depot_admin %}
                         <li class="inline">
-                            <a href="/my/filters/depot/{{ depot.id }}">Locos</a> | <a
-                                href="/my/abos/depot/{{ depot.id }}">Abos</a> im Depot {{ depot.name }}
+                            Filtern <a href="/my/filters_depot">Locos</a> | <a href="/my/abos_depot">Abos</a>
                         </li>
-                    {% endfor %}
-                    {% for area in area_admin %}
-                        <li>
-                            <a href="/my/filters/area/{{ area.id }}">Locos in {{ area.name }}</a>
-                        </li>
-                    {% endfor %}
-                    {% if depot_admin|length > 0 or area_admin|length > 0 %}
-                        {% if not staff_user %}
-                            <li>
-                                <hr>
-                            </li>
-                        {% endif %}
                     {% endif %}
-
                     {% if staff_user %}
                         <li>
                             <hr>
@@ -78,9 +63,6 @@
                             <a href="/my/depotlisten">Depotlisten drucken</a>
                         </li> 
 -->
-                        <li>
-                            <a href="/my/email/export">Emails exportieren (Excel)</a>
-                        </li>
                         <li class="inline">
                             Filtern <a href="/my/filters">Locos</a> | <a href="/my/abos">Abos</a>
                         </li>
@@ -88,9 +70,8 @@
                             <a href="/my/zukunft">Zukunftsblick</a>
                         </li>
                     {% endif %}
-
-<!--                    {% if politoloco %}
-                        <li>
+                    {% if politoloco %}
+<!--                        <li>
                             {% if not staff_user %}
                                 <hr>
                             {% endif %}
@@ -98,7 +79,7 @@
                         </li>
 -->
                     {% endif %}
-                   <li class="{{ menu.personalInfo }}">
+                    <li class="{{ menu.personalInfo }}">
                         <hr>
                         <a href="/my/profil">Personalien</a>
                     </li>
@@ -107,7 +88,7 @@
                     </li>
                 </ul>
                 <hr>
-                <div class="bohnen">
+               <div class="bohnen">
                     {% block bohnen %}
                         <h5>Dein Böhnli-Konto</h5>
                         {% for i in bohnenrange %}
@@ -121,7 +102,7 @@
                         {% endfor %}
                     {% endblock %}
                 </div>
-                <hr>
+              <hr>
                 <div class="jobs">
                     {% block next_jobs %}
                         <h5>Nächste Einsätze</h5>
