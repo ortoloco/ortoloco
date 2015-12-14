@@ -8,7 +8,7 @@ class StaticContent(models.Model):
     """
     All the static contents for the normal webpage
     """
-    help_text = 'Waehle eines der folgenden Werte: <ul><li>"my.ortoloco" - Ankuendigungen auf my.ortoloco</li><li>"Willkommen" - ortolco - Homepage oben rechts</li><li>"HomeUnterMenu" - ortoloco-Homepage unten unterm Menu'
+    help_text = 'Waehle eines der folgenden Werte: <ul><li>"Mein.meh als gmües" - Ankuendigungen auf my.ortoloco</li><li>"Willkommen" - meh als gmües - Homepage oben rechts</li><li>"HomeUnterMenu" - meh als gmües-Homepage unten unterm Menu'
     name = models.CharField("Name", max_length=100, help_text=help_text)
     content = tinymce_models.HTMLField("Html-Inhalt", max_length=10000, default="")
 
