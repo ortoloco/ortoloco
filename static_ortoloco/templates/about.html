@@ -1,10 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h3>Organisation</h3>
-    Die Genossenschaft <font color="#709f4a">meh als gmües</font> bewirtschaftet 1,6 Hektaren Ackerland und produziert unter Anleitung einer Gemüsefachkraft zusammen mit ihren Genossenschafterinnen und Genossenschafter faires und biologisches Gemüse. Das Gemüse wird wöchentlich aufs Hunziker Areal gebracht und kann in Form eines Gemüseabos bezogen werden.
-    <br/><br/>
-    Die Mitglieder helfen auf dem Feld mit und/oder engagieren sich in Projektgruppen zu unterschiedlichen Bereichen wie Infrastruktur, Verteiltransport sowie Kräuter und Blumen. Es ist jederzeit möglich eine neue Projektgruppe zu gründen oder sich in einer bestehenden Projektgruppe zu engagieren. Zudem können die Genossenschafterinnen und Genossenschafter Einfluss auf den Anbauplan nehmen und mitbestimmen wie viel von welcher Gemüsesorte angebaut werden soll. Neben dem Einsatz auf dem Feld und in den Arbeitsgruppen gibt es genug Raum für weitere Aktivitäten wie Feste, Veranstaltungen oder gemütliches Beisammensein. 
-    <br/><br/>
-    <font color="#709f4a">Meh als gmües</font> wird von einer ehrenamtlichen Betriebsgruppe geführt. Diese plant den Betrieb sowie organisiert die Einsätze der Genossenschaftsmitglieder. Unterstützt wird die Betriebsgruppe durch eine externe, ebenfalls ehrenamtlich tätige Buchhalterin. Die Betriebsgruppe besteht aus acht Mitgliedern, die an der jährlichen Generalversammlung gewählt oder bestätigt werden.	
+	<h3><font color="#709f4a"><strong>meh als gmües</strong></font></h3>
+	<div class="lastNews">
+		<div class="row">
+            <div class="col-md-11">
+                {% autoescape off %}
+                {{ welcomeText }} 
+				<font color="#709f4a"><strong>meh als gmües</strong></font> ist eine neu gegründete und sich im Aufbau befindende Gemüsegenossenschaft, die das Hunziker Areal in Zürich Nord mit frischen, saisonalen und ökologisch produzierten Gemüse versorgen will. Unser Ziel ist, ab Januar 2016 zusammen mit unserer Gemüsefachkraft Biogemüse anzubauen und es wöchentlich vom Feld direkt aufs Hunziker Areal zu liefern.</br>
+				</br>
+				Die Mitgliedschaft bei <font color="#709f4a"><strong>meh als gmües</strong></font> berechtigt zum Bezug eines Gemüseabos zu einem fixen Jahrespreis. Alle Genossenschafterinnen und Genossenschafter mit einem Abo helfen während mindestens fünf Halbtagen pro Jahr auf dem Feld, beim Abpacken, beim Verteilen des Gemüses oder bei sonstigen Aktivitäten mit und ermöglichen so den Anbau und die wöchentliche Gemüseversorgung.</br>
+				</br>
+				<font color="#709f4a"><strong>meh als gmües</strong></font> steht für faires und ökologisches Gemüse aus der Nachbarschaft, für Sortenvielfalt auf dem Teller und für ein alternatives Wirtschaftssystem abseits von Kostendruck und Gewinnmaximierung.</br>
+				</br>
+				<font color="#709f4a"><strong>meh als gmües</strong></font> richtet sich in erster Linie an die Genossenschaftsmitglieder von mehr als wohnen auf dem Hunziker Areal – nichtsdestotrotz sind bei uns alle herzlich willkommen, die bereit sind, mitzuarbeiten und ihr Gemüse einmal pro Woche im Depot auf dem Hunziker Areal oder in der Gärtnerei abzuholen.
+
+                {% endautoescape %}
+            </div>
+        </div>
+	</div>
 {% endblock %}
+<!--
+{% block submenu %}
+    <br/><br/><br/><br/><br/>
+	<div id="news">
+		{% autoescape off %}
+			{{ submenu }}
+		{% endautoescape %}
+    </div>
+{% endblock %}
+-->
