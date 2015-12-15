@@ -15,6 +15,19 @@
             {% csrf_token %}
             <div class="form-group">
                 <label class="col-md-4 control-label">Abogrösse</label>
+                <div class="col-md-8 controls">
+                    <label class="radio" for="none">
+                        <input type="radio" name="abo" value="none" id="none"/>
+                        <strong>Kein Abo</strong>
+
+                        <br/>Du kannst auch ohne Gemüseabo 
+						<br/><font color="#709f4a"><strong>meh als gmües</strong></font>-GenossenschafterIn sein. 
+                    </label>
+                </div>
+            </div>			
+			
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
 
                 <div class="col-md-8 controls">
                     <label class="radio" for="small">
@@ -52,19 +65,6 @@
                     </label>
                 </div>
             </div> 
-            <div class="form-group">
-                <label class="col-md-4 control-label"></label>
-
-                <div class="col-md-8 controls">
-                    <label class="radio" for="none">
-                        <input type="radio" name="abo" value="none" id="none"/>
-                        <strong>Kein Abo</strong>
-
-                        <br/>Du kannst auch ohne Gemüseabo 
-						<br/><font color="#709f4a"><strong>meh als gmües</strong></font>-GenossenschafterIn sein. 
-                    </label>
-                </div>
-            </div>
             <div class="form-group">
                 <label class="col-md-4 control-label" for="depot">Depot</label>
 
