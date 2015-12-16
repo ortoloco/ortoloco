@@ -43,7 +43,7 @@ def get_menu_dict(request):
                 userbohnen.append(bohne)
 
         # amount of beans shown => round up if needed never down
-        bohnenrange = range(0, max(userbohnen.__len__(), int(math.ceil(loco.abo.size * 10 / loco.abo.locos.count()))))
+        bohnenrange = range(0, max(userbohnen.__len__(), int(math.ceil(loco.abo.size * 6 / loco.abo.locos.count()))))
 
         for bohne in Boehnli.objects.all().filter(loco=loco).order_by("job__time"):
             if bohne.job.time > datetime.datetime.now():
