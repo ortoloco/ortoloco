@@ -55,13 +55,13 @@ def send_mail_multi(email_multi_message):
 
 def send_new_loco_in_taetigkeitsbereich_to_bg(area, loco):
     send_mail('Neues Mitglied im Taetigkeitsbereich ' + area.name,
-              'Soeben hat sich ' + loco.first_name + " " + loco.last_name + ' in den Taetigkeitsbereich ' + area.name + ' eingetragen', 'info@ortoloco.ch', [area.coordinator.email])
+              'Soeben hat sich ' + loco.first_name + " " + loco.last_name + ' in den Taetigkeitsbereich ' + area.name + ' eingetragen', 'info@mehalsgmues.ch', [area.coordinator.email])
 
 
 def send_contact_form(subject, message, loco, copy_to_loco):
-    send_mail('Anfrage per my.ortoloco: ' + subject, message, loco.email, ['info@ortoloco.ch'])
+    send_mail('Anfrage per Mein.meh als gmues: ' + subject, message, loco.email, ['info@mehalsgmues.ch'])
     if copy_to_loco:
-        send_mail('Anfrage per my.ortoloco: ' + subject, message, loco.email, [loco.email])
+        send_mail('Anfrage per Mein.meh als gmues: ' + subject, message, loco.email, [loco.email])
 
 
 def send_welcome_mail(email, password, server):
@@ -70,7 +70,7 @@ def send_welcome_mail(email, password, server):
 
     # reset password so we can send it to him
     d = Context({
-        'subject': 'Willkommen bei ortoloco',
+        'subject': 'Willkommen bei Mein.meh als gmues',
         'username': email,
         'password': password,
         'serverurl': "http://" + server
@@ -79,7 +79,7 @@ def send_welcome_mail(email, password, server):
     text_content = plaintext.render(d)
     html_content = htmly.render(d)
 
-    msg = EmailMultiAlternatives('Willkommen bei ortoloco', text_content, 'info@ortoloco.ch', [email])
+    msg = EmailMultiAlternatives('Willkommen bei Mein.meh als gmues', text_content, 'info@mehalsgmues.ch', [email])
     msg.attach_alternative(html_content, "text/html")
     send_mail_multi(msg)
 
@@ -90,7 +90,7 @@ def send_been_added_to_abo(email, password, name, anteilsscheine, hash, server):
 
     # reset password so we can send it to him
     d = Context({
-        'subject': 'Willkommen bei ortoloco',
+        'subject': 'Willkommen bei Mein.meh als gmues',
         'username': email,
         'name': name,
         'password': password,
@@ -102,7 +102,7 @@ def send_been_added_to_abo(email, password, name, anteilsscheine, hash, server):
     text_content = plaintext.render(d)
     html_content = htmly.render(d)
 
-    msg = EmailMultiAlternatives('Willkommen bei ortoloco', text_content, 'info@ortoloco.ch', [email])
+    msg = EmailMultiAlternatives('Willkommen bei Mein.meh als gmues', text_content, 'info@mehalsgmues.ch', [email])
     msg.attach_alternative(html_content, "text/html")
     send_mail_multi(msg)
 
@@ -125,7 +125,7 @@ def send_filtered_mail(subject, message, text_message, emails, server, attachmen
     text_content = plaintext.render(textd)
     html_content = htmly.render(htmld)
 
-    msg = EmailMultiAlternatives(subject, text_content, sender+'@ortoloco.ch', emails)
+    msg = EmailMultiAlternatives(subject, text_content, sender+'@mehalsgmues.ch', emails)
     msg.attach_alternative(html_content, "text/html")
     for attachment in attachments:
         msg.attach(attachment.name, attachment.read())
@@ -150,7 +150,7 @@ def send_politoloco_mail(subject, message, text_message, emails, server, attachm
     text_content = plaintext.render(textd)
     html_content = htmly.render(htmld)
 
-    msg = EmailMultiAlternatives(subject, text_content, 'info@ortoloco.ch', emails)
+    msg = EmailMultiAlternatives(subject, text_content, 'info@mehalsgmues.ch', emails)
     msg.attach_alternative(html_content, "text/html")
     for attachment in attachments:
         msg.attach(attachment.name, attachment.read())
@@ -160,7 +160,7 @@ def send_politoloco_mail(subject, message, text_message, emails, server, attachm
 def send_mail_password_reset(email, password, server):
     plaintext = get_template('mails/password_reset_mail.txt')
     htmly = get_template('mails/password_reset_mail.html')
-    subject = 'Dein neues ortoloco Passwort'
+    subject = 'Dein neues meh als gmues Passwort'
 
     htmld = Context({
         'subject': subject,
@@ -178,7 +178,7 @@ def send_mail_password_reset(email, password, server):
     text_content = plaintext.render(textd)
     html_content = htmly.render(htmld)
 
-    msg = EmailMultiAlternatives(subject, text_content, 'info@ortoloco.ch', [email])
+    msg = EmailMultiAlternatives(subject, text_content, 'info@mehalsgmues.ch', [email])
     msg.attach_alternative(html_content, "text/html")
     send_mail_multi(msg)
 
@@ -196,6 +196,6 @@ def send_job_reminder(emails, job, participants, server):
     text_content = plaintext.render(d)
     html_content = htmly.render(d)
 
-    msg = EmailMultiAlternatives("ortoloco - Job-Erinnerung", text_content, 'info@ortoloco.ch', emails)
+    msg = EmailMultiAlternatives("meh als gmues - Job-Erinnerung", text_content, 'info@mehalsgmues.ch', emails)
     msg.attach_alternative(html_content, "text/html")
     send_mail_multi(msg)

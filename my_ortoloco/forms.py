@@ -5,8 +5,8 @@ from my_ortoloco.models import Loco, User
 
 
 class PasswordForm(Form):
-    password = CharField(label='Passwort', min_length=4, widget=PasswordInput())
-    passwordRepeat = CharField(label='Passwort (wiederholen)', min_length=4, widget=PasswordInput())
+    password = CharField(label='Passwort', min_length=6, widget=PasswordInput())
+    passwordRepeat = CharField(label='Passwort (wiederholen)', min_length=6, widget=PasswordInput())
 
     def clean_passwordRepeat(self):
         if self.data['password'] != self.data['passwordRepeat']:

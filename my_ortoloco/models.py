@@ -156,14 +156,14 @@ class Abo(models.Model):
     def next_extra_change_date():
         month = int(time.strftime("%m"))
         if month >= 7:
-            next_extra = datetime.date(day=1, month=1, year=datetime.date.today().year + 1)
+            next_extra = datetime.date(day=1, month=7, year=datetime.date.today().year + 1)
         else:
             next_extra = datetime.date(day=1, month=7, year=datetime.date.today().year)
         return next_extra
 
     @staticmethod
     def next_size_change_date():
-        return datetime.date(day=1, month=1, year=datetime.date.today().year + 1)
+        return datetime.date(day=1, month=7, year=datetime.date.today().year + 1)
 
     @staticmethod
     def get_size_name(size=0):
@@ -226,12 +226,12 @@ class Loco(models.Model):
     email = models.EmailField(unique=True)
 
     addr_street = models.CharField("Strasse", max_length=100)
-    addr_zipcode = models.CharField("PLZ", max_length=10)
+    addr_zipcode = models.CharField("PLZ", max_length=4)
     addr_location = models.CharField("Ort", max_length=50)
     birthday = models.DateField("Geburtsdatum", null=True, blank=True)
     boehnlis = models.PositiveSmallIntegerField("Boehnlis", default=0)
-    phone = models.CharField("Telefonnr", max_length=50)
-    mobile_phone = models.CharField("Mobile", max_length=50, null=True, blank=True)
+    phone = models.CharField("Telefonnr", max_length=15)
+    mobile_phone = models.CharField("Mobile", max_length=15, null=True, blank=True)
 
     abo = models.ForeignKey(Abo, related_name="locos", null=True, blank=True,
                             on_delete=models.SET_NULL)
