@@ -12,7 +12,7 @@ ADMINS = (
     ('Manuel', 'mklarmann@gmail.com'),
 	('Andre', 'andy86@gmx.net'),
 )
-SERVER_EMAIL="server@mehalsgmues.ch"
+SERVER_EMAIL="mehalsgmues@gmail.com"
 
 
 # let the users login with their emails
@@ -25,6 +25,7 @@ MANAGERS = ADMINS
 
 
 DATABASES = {'default': dj_database_url.config(default='postgres://nhwoxfurjjuasx:Lz-PnvD3v_vWDM-ZtZmqOr0Kqr@ec2-54-83-58-191.compute-1.amazonaws.com:5432/dtmcgv4jhtaqd')}
+
 
 # DATABASES = {
 #     'default': {
