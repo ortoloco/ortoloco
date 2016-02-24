@@ -43,7 +43,7 @@ DATABASES = {'default': dj_database_url.config(default='postgres://nhwoxfurjjuas
 EMAIL_HOST = os.environ.get('ORTOLOCO_EMAIL_HOST', 'v031278.kasserver.com')
 EMAIL_HOST_USER = os.environ.get('ORTOLOCO_EMAIL_USER', 'm0358bfa')
 EMAIL_HOST_PASSWORD = os.environ.get('ORTOLOCO_EMAIL_PASSWORD', 'MAG4321mag')
-EMAIL_PORT = os.environ.get('ORTOLOCO_EMAIL_PORT', 525)
+EMAIL_PORT = os.environ.get('ORTOLOCO_EMAIL_PORT', 587)
 EMAIL_USE_TLS = os.environ.get('ORTOLOCO_EMAIL_TLS', False)
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
