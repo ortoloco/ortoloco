@@ -30,16 +30,10 @@ AUTHENTICATION_BACKENDS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': os.environ.get('ORTOLOCO_DATABASE_ENGINE'), # 'django.db.backends.postgresql_psycopg2', #'django.db.backends.sqlite3', # Add , 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.environ.get('ORTOLOCO_DATABASE_NAME'), #''ortoloco', # 'db.sqlite',                      # Or path to database file if using sqlite3.
-        'USER': os.environ.get('ORTOLOCO_DATABASE_USER'), #''ortoloco', # The following settings are not used with sqlite3:
-        'PASSWORD': os.environ.get('ORTOLOCO_DATABASE_PASSWORD'), #''ortoloco',
-        'HOST': os.environ.get('ORTOLOCO_DATABASE_HOST'), #'localhost', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': os.environ.get('ORTOLOCO_DATABASE_PORT', False), #''', # Set to empty string for default.
-    }
-}
+DATABASES = {}
+DATABASES['default'] =  dj_database_url.config(default='DATABASE_URL')
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
 
 EMAIL_HOST = os.environ.get('ORTOLOCO_EMAIL_HOST')
 EMAIL_HOST_USER = os.environ.get('ORTOLOCO_EMAIL_USER')
@@ -49,7 +43,7 @@ EMAIL_USE_TLS = os.environ.get('ORTOLOCO_EMAIL_TLS', True)
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch']
+ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', '.mehalsgmues.ch']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
