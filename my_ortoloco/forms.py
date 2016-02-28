@@ -5,8 +5,8 @@ from my_ortoloco.models import Loco, User
 
 
 class PasswordForm(Form):
-    password = CharField(label='Passwort', min_length=4, widget=PasswordInput())
-    passwordRepeat = CharField(label='Passwort (wiederholen)', min_length=4, widget=PasswordInput())
+    password = CharField(label='Passwort', min_length=6, widget=PasswordInput())
+    passwordRepeat = CharField(label='Passwort (wiederholen)', min_length=6, widget=PasswordInput())
 
     def clean_passwordRepeat(self):
         if self.data['password'] != self.data['passwordRepeat']:
@@ -21,10 +21,10 @@ class ProfileLocoForm(ModelForm):
                   'addr_street', 'addr_zipcode', 'addr_location',
                   'birthday', 'phone', 'mobile_phone','reachable_by_email']
         widgets = {
-            'first_name': TextInput(attrs={'placeholder': 'Berta', 'class': 'form-control'}),
+            'first_name': TextInput(attrs={'placeholder': 'Max', 'class': 'form-control'}),
             'last_name': TextInput(attrs={'placeholder': 'Muster', 'class': 'form-control'}),
-            'addr_street': TextInput(attrs={'placeholder': 'Zürcherstrasse 123', 'class': 'form-control'}),
-            'addr_zipcode': TextInput(attrs={'placeholder': '8000', 'class': 'form-control'}),
+            'addr_street': TextInput(attrs={'placeholder': 'Trumhaus 123', 'class': 'form-control'}),
+            'addr_zipcode': TextInput(attrs={'placeholder': '8050', 'class': 'form-control'}),
             'addr_location': TextInput(attrs={'placeholder': 'Zürich', 'class': 'form-control'}),
             'birthday': TextInput(attrs={'placeholder': '01.12.1956', 'class': 'form-control'}),
             'phone': TextInput(attrs={'placeholder': '044 123 45 67', 'class': 'form-control'}),
@@ -51,10 +51,10 @@ class RegisterLocoForm(ModelForm):
                   'addr_street', 'addr_zipcode', 'addr_location',
                   'birthday', 'phone', 'mobile_phone']
         widgets = {
-            'first_name': TextInput(attrs={'placeholder': 'Berta', 'class': 'form-control'}),
+            'first_name': TextInput(attrs={'placeholder': 'Max', 'class': 'form-control'}),
             'last_name': TextInput(attrs={'placeholder': 'Muster', 'class': 'form-control'}),
-            'addr_street': TextInput(attrs={'placeholder': 'Zürcherstrasse 123', 'class': 'form-control'}),
-            'addr_zipcode': TextInput(attrs={'placeholder': '8000', 'class': 'col-xs-2'}),
+            'addr_street': TextInput(attrs={'placeholder': 'Turmhaus 123', 'class': 'form-control'}),
+            'addr_zipcode': TextInput(attrs={'placeholder': '8050', 'class': 'col-xs-2'}),
             'addr_location': TextInput(attrs={'placeholder': 'Zürich', 'class': 'form-control'}),
             'birthday': TextInput(attrs={'placeholder': '01.12.1956', 'class': 'form-control'}),
             'phone': TextInput(attrs={'placeholder': '044 123 45 67', 'class': 'form-control'}),

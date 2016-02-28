@@ -6,7 +6,7 @@ DEBUG = os.environ.get("ORTOLOCO_DEBUG", False)
 
 TEMPLATE_DEBUG = DEBUG
 
-WHITELIST_EMAILS = []
+WHITELIST_EMAILS = ["mklarmann@gmail.com"]
 
 def whitelist_email_from_env(var_env_name):
     email = os.environ.get(var_env_name)
@@ -19,8 +19,9 @@ whitelist_email_from_env("ORTOLOCO_EMAIL_WHITELISTED_2")
 
 ADMINS = (
     ('Manuel', 'mklarmann@gmail.com'),
+    ('Andre', 'andy86@gmx.net'),
 )
-SERVER_EMAIL="server@ortoloco.ch"
+SERVER_EMAIL="mehalsgmues@gmail.com"
 
 # let the users login with their emails
 AUTHENTICATION_BACKENDS = (
@@ -30,20 +31,38 @@ AUTHENTICATION_BACKENDS = (
 
 MANAGERS = ADMINS
 
+
 DATABASES = {}
 DATABASES['default'] =  dj_database_url.config(default='DATABASE_URL')
 DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 
-EMAIL_HOST = os.environ.get('ORTOLOCO_EMAIL_HOST')
-EMAIL_HOST_USER = os.environ.get('ORTOLOCO_EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('ORTOLOCO_EMAIL_PASSWORD')
+DATABASES = {'default': dj_database_url.config(default='postgres://nhwoxfurjjuasx:Lz-PnvD3v_vWDM-ZtZmqOr0Kqr@ec2-54-83-58-191.compute-1.amazonaws.com:5432/dtmcgv4jhtaqd')}
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': os.environ.get('ORTOLOCO_DATABASE_ENGINE', 'django.db.backends.postgresql_psycopg2'), # 'django.db.backends.postgresql_psycopg2', #'django.db.backends.sqlite3', # Add , 'mysql', 'sqlite3' or 'oracle'.
+#         'NAME': os.environ.get('ORTOLOCO_DATABASE_NAME','dtmcgv4jhtaqd'), #''ortoloco', # 'db.sqlite',                      # Or path to database file if using sqlite3.
+#         'USER': os.environ.get('ORTOLOCO_DATABASE_USER','nhwoxfurjjuasx'), #''ortoloco', # The following settings are not used with sqlite3:
+#         'PASSWORD': os.environ.get('ORTOLOCO_DATABASE_PASSWORD','Lz-PnvD3v_vWDM-ZtZmqOr0Kqr'), #''ortoloco',
+#         'HOST': os.environ.get('ORTOLOCO_DATABASE_HOST','ec2-54-83-58-191.compute-1.amazonaws.com'), #'localhost', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+#         'PORT': os.environ.get('ORTOLOCO_DATABASE_PORT', '5432'), #''', # Set to empty string for default.
+#         'SSLMODE': os.environ.get('ORTOLOCO_DATABASE_SSLMODE', 'require'), #''', # Set to empty string for default.
+#     }
+# }
+
+
+EMAIL_HOST = os.environ.get('ORTOLOCO_EMAIL_HOST', 'v031278.kasserver.com')
+EMAIL_HOST_USER = os.environ.get('ORTOLOCO_EMAIL_USER', 'm0358bfa')
+EMAIL_HOST_PASSWORD = os.environ.get('ORTOLOCO_EMAIL_PASSWORD', 'MAG4321mag')
 EMAIL_PORT = os.environ.get('ORTOLOCO_EMAIL_PORT', 587)
-EMAIL_USE_TLS = os.environ.get('ORTOLOCO_EMAIL_TLS', True)
+EMAIL_USE_TLS = os.environ.get('ORTOLOCO_EMAIL_TLS', False)
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', '.mehalsgmues.ch','0.0.0.0:5000','.herokuapp.com']
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -224,6 +243,7 @@ LOGGING = {
         }
     }
 }
+
 
 PHOTOLOGUE_GALLERY_SAMPLE_SIZE = 3
 

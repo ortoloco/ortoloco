@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>ortoloco.ch - Die regionale Gartenkooperative</title>
+    <title>mehalsgmues.ch - Die Gartenkooperative vom Hunzikerareal</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <link rel="shortcut icon" href="/static/img/favicon.ico">
@@ -14,54 +14,35 @@
 </head>
 <body>
 <div class="container">
-    <div class="erbsetop hidden-xs"></div>
-    <div class="erbseleft hidden-xs"></div>
-    <div class="erbseright hidden-xs"></div>
-    <!--<div class="erbsebottom"></div>-->
     <div class="ortoloco {% if menu.home == 'active' %} home {% endif %}">
         <div class="row">
             <div class="col-md-4">
                 <a href="/aktuelles"><span class="logo"></span></a>
                 <ul class="nav nav-pills nav-stacked main-menu">
-                    <li class="{{ menu.about }}">
-                        <a href="/idee">Das ist ortoloco</a>
-                        {% if menu.about == 'active' %}
-                            <ul class="nav nav-pills nav-stacked">
-                                <li class="{{ menu.aboutChild }}"><a href="/idee">&raquo; Die Idee <span
-                                        class="activeItem">&lt;</span></a></li>
-                                <li class="{{ menu.portrait }}"><a href="/portrait">&raquo; Das Portrait <span
-                                        class="activeItem">&lt;</span></a></li>
-                                <li class="{{ menu.background }}"><a href="/hintergrund">&raquo; Der Hintergrund
-                                    <span class="activeItem">&lt;</span></a></li>
-                                <li class="{{ menu.abo }}"><a href="/abo">&raquo; Das Gemüse-Abo <span
-                                        class="activeItem">&lt;</span></a></li>
-                                {#                                <li class="{{ menu.faq }}"><a href="/faq">&raquo; Häufige Fragen <span#}
-                                {#                                        class="activeItem">&lt;</span></a></li>#}
-                            </ul>
-                        {% endif %}
+                    <li class="{{ menu.idea }}">
+                        <a href="/idee">Das ist <font color="#709f4a"><strong>meh als Gmües</strong></font></a>
                     </li>
                     <li class="{{ menu.join }}">
-                        <a href="/my/anmelden">GenossenschafterIn werden <span class="activeItem">&lt;</span></a>
-                    </li>
-                    <li class="{{ menu.contact }}">
-                        <a href="/kontakt">Kontakt <span class="activeItem">&lt;</span></a>
-                    </li>
 
-  				  	<li><br/><br/></li>
-
-                    <li class="{{ menu.media }}">
-                            <a href="/medien">Medienecho <span class="activeItem">&lt;</span></a>
+                        <a href="/mitmachen">Mitmachen <span class="activeItem">&lt;</span></a>
                     </li>
-                    <li class="{{ menu.links }}">
-                            <a href="/links">Links <span class="activeItem">&lt;</span></a>
+					<!-- <li class="{{ menu.gardennews }}">
+                        <a href="/gartennews">Garten News <span class="activeItem">&lt;</span></a>
+                    </li> -->
+					<li class="{{ menu.agenda }}">
+                        <a href="/agenda">Agenda <span class="activeItem">&lt;</span></a>
                     </li>
-                    <li class="{{ menu.documents }}">
-                            <a href="/dokumente">Dokumente <span class="activeItem">&lt;</span></a>
+					<li class="{{ menu.about }}">
+                        <a href="/idee">Über uns</a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="{{ menu.organization }}"><a href="/organisation">&raquo; Organisation <span class="activeItem">&lt;</span></a></li>
+                        <!--    <li class="{{ menu.operatingmirror }}"><a href="/betriebsspiegel">&raquo; Betriebsspiegel <span class="activeItem">&lt;</span></a></li> -->
+						<!--    <li class="{{ menu.philosophy }}"><a href="/philosophie">&raquo; Die Philosophie <span class="activeItem">&lt;</span></a></li> -->
+                            </ul>
                     </li>
-	                <li class="{{ menu.gallery }}">
-	                        <a href="/galerie">Bilder <span class="activeItem">&lt;</span></a>
-	                </li>
-
+					<li class="{{ menu.documents }}"><a href="/dokumente">Dokumente<span class="activeItem">&lt;</span></a></li>
+					<li class="{{ menu.intern }}"><a href="/my/home">Interner Bereich<span class="activeItem">&lt;</span></a></li>
+                    <li class="{{ menu.contact }}"><a href="/kontakt">Kontakt<span class="activeItem">&lt;</span></a></li>
                 </ul>
                 {% block submenu %}
                 {% endblock %}
@@ -69,12 +50,19 @@
             <div class="col-md-8">
                 {% block content %}
                 {% endblock %}
-            </div>
-        </div>
-        <a href="/my/home" class="myortoloco_link"></a>
 
-        <div class="ortoloco_gemuese"></div>
-    </div>
+            </div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-8">
+			<font color="#709f4a"><strong>meh als gem&uuml;es</strong></font> - Die Gem&uuml;segenossenschaft f&uuml;rs Hunziker Areal
+			</div>
+        </div>
+        <!-- <a href="/my/home" class="myortoloco_link"></a> -->
+
+	</div>
 </div>
 
 {% block scripts %}

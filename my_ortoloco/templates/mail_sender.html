@@ -3,15 +3,20 @@
 {% block content %}
     <h3>Mails verschicken</h3>
     <br/>
-    <form action="/my/mails/send{% if enhanced != None %}/{{ enhanced }}{% endif %}" method="POST" class="form-horizontal" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="sender-email" class="col-sm-2 control-label">Absender</label>
-            <div class="col-sm-10" id="sender-email">
-                <select name="sender" class="form-control">
-                    <option value="info@ortoloco.ch">info@ortoloco.ch</option>
-                    <option value="{{ email }}">{{ email }}</option>
-                </select>
+        {% if recipients %}
+            <form action="/my/mails/send{% if depot_admin|length > 0 %}_depot{% endif %}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="sender-email" class="col-sm-2 control-label">Absender</label>
+                <div class="col-sm-10" id="sender-email">
+                    <select name="sender">
+                        <option value="none">--Bitte wählen--</option>
+                        <option value="info">info@mehalsgmues.ch</option>
+                        <option value="ernte">ernte@mehalsgmues.ch</option>
+                        <option value="abpacken">abpacken@mehalsgmues.ch</option>
+                        <option value="verteilen">verteilen@mehalsgmues.ch</option>
+                    </select>
+                </div>
             </div>
         </div>
         {% if recipients_count > 0 %}
@@ -23,13 +28,25 @@
             </div>
         {% else %}
             <div class="form-group">
-                <label for="sender-email--" class="col-sm-2 control-label">Empfänger</label>
-                <div class="col-sm-10">
-                    Wähle mind. eine der folgenden Gruppen:
-                    <div class="checkbox">
-                        <label class="high-label" for="allabo">
-                            <input type="checkbox" id="allabo" name="allabo"> Alle Abonnenten (inkl. MitabonnentInnen)
-                        </label>
+                <label for="sender-email" class="col-sm-2 control-label">Absender</label>
+                <div class="col-sm-10" id="sender-email">
+                    info@mehalsgmues.ch
+                </div>
+            </div>
+            {% if depot_admin|length > 0 %}
+                <div class="form-group">
+                    <label for="sender-email" class="col-sm-2 control-label">Empfänger</label>
+                    <input type="hidden" id="depotOnly" name="depotOnly" value="on">
+                    <input type="hidden" id="depotIds" name="depotIds" value="{% for depot in depot_admin %}{{ depot.id }},{% endfor %}"/>
+                    <div class="col-sm-10">
+                        Wähle mind. eine der folgenden Gruppen:
+                        {% for depot in depot_admin %}
+                            <div class="checkbox">
+                                <label class="high-label">
+                                    <input type="checkbox" id="{{ depot.id }}" name="{{ depot.id }}"> {{ depot.name }}
+                                </label>
+                            </div>
+                        {% endfor %}
                     </div>
                     <div class="checkbox">
                         <label class="high-label" for="allanteilsschein">

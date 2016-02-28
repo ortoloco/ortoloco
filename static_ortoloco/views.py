@@ -114,6 +114,92 @@ def faq(request):
     return render(request, "faq.html", renderdict)
 
 
+def about(request):
+    """
+    About ortoloco of "static" page
+    """
+
+    renderdict = getBaseDict(request)
+    renderdict.update({
+        'menu': {
+            'about': 'active',
+            'aboutChild': 'active'
+        }
+    })
+
+    return render(request, "about.html", renderdict)
+
+
+def organization(request):
+    """
+    Organization ortoloco of "static" page
+    """
+    renderdict = getBaseDict(request)
+    renderdict.update({
+        'menu': {
+            'about': 'active',
+            'organization': 'active'
+        }
+    })
+
+    return render(request, "organization.html", renderdict)	
+	
+	
+def operatingmirror(request):
+    """
+    Operatingmirror ortoloco of "static" page
+    """
+    renderdict = getBaseDict(request)
+    renderdict.update({
+        'menu': {
+            'about': 'active',
+            'operatingmirror': 'active'
+        }
+    })
+
+    return render(request, "operatingmirror.html", renderdict)		
+
+def philosophy(request):
+    """
+    Philosophy ortoloco of "static" page
+    """
+    renderdict = getBaseDict(request)
+    renderdict.update({
+        'menu': {
+            'about': 'active',
+            'philosophy': 'active'
+        }
+    })
+
+    return render(request, "philosophy.html", renderdict)		
+
+	
+def agenda(request):
+    """
+    Agenda ortoloco of "static" page
+    """
+    renderdict = getBaseDict(request)
+    renderdict.update({
+        'menu': {
+            'agenda': 'active'
+        }
+    })
+
+    return render(request, "agenda.html", renderdict)			
+
+def gardennews(request):
+    """
+    Garden news ortoloco of "static" page
+    """
+    renderdict = getBaseDict(request)
+    renderdict.update({
+        'menu': {
+            'gardennews': 'active'
+        }
+    })
+
+    return render(request, "gardennews.html", renderdict)		
+	
 def join(request):
     """
     About ortoloco of "static" page

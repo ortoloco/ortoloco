@@ -8,21 +8,37 @@
 
         <h5>Infos:</h5>
 
-        Um Mitglied der Genossenschaft ortoloco zu werden, musst du mindestens einen Anteilschein (CHF 250) erwerben.
+        Um Mitglied der Genossenschaft <font color="#709f4a"><strong>meh als gmües</strong></font> zu werden, musst du mindestens einen Anteilschein erwerben.
         <br/><br/>
 
         <form action="" method="post" class="form-horizontal createabo">
             {% csrf_token %}
             <div class="form-group">
                 <label class="col-md-4 control-label">Abogrösse</label>
+                <div class="col-md-8 controls">
+                    <label class="radio" for="none">
+                        <input type="radio" name="abo" value="none" id="none"/>
+                        <strong>Kein Abo</strong>
+
+
+                        <br/>Du kannst auch ohne Gemüseabo
+						<br/><font color="#709f4a"><strong>meh als gmües</strong></font>-GenossenschafterIn sein.
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
 
                 <div class="col-md-8 controls">
                     <label class="radio" for="small">
                         <input type="radio" name="abo" value="small" id="small" {% if selected_abo == "small" %}checked="checked"{% endif %}/>
-                        <strong>Kleines Abo</strong>
+                        <strong>1-Abo</strong>
 
-                        <br/>
-                        Das kleine Abo ist für 2-3 Personen geeignet und benötigt mindestens zwei Anteilscheine.
+
+                        <br/>Das Abo ist für 1 Personen geeignet
+						<br/>und benötigt mindestens 1-Anteilschein.
+
                     </label>
                 </div>
             </div>
@@ -32,10 +48,10 @@
                 <div class="col-md-8 controls">
                     <label class="radio" for="big">
                         <input type="radio" name="abo" value="big" id="big" {% if selected_abo == "big" %}checked="checked"{% endif %}/>
-                        <strong>Grosses Abo</strong>
+                        <strong>2-Abos</strong>
 
-                        <br/>
-                        Das grosse Abo empfiehlt sich für WG's oder Familien (ca. 4-6 Personen) und benötigt vier Anteilscheine.
+                        <br/>Das Abo ist für 2 Personen geeignet
+						<br/>und benötigt mindestens 2-Anteilscheine.
                     </label>
                 </div>
             </div>
@@ -45,23 +61,10 @@
                 <div class="col-md-8 controls">
                     <label class="radio" for="house">
                         <input type="radio" name="abo" value="house" id="house" {% if selected_abo == "house" %}checked="checked"{% endif %}/>
-                        <strong>Haus-Abo</strong>
+                        <strong>3-Abos</strong>
 
-                        <br/>
-                        Das Haus-Abo ist für ca. 10 Haushalte gedacht. Es müssen mindestens 20 Anteilscheine gezeichnet werden.
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label"></label>
-
-                <div class="col-md-8 controls">
-                    <label class="radio" for="none">
-                        <input type="radio" name="abo" value="none" id="none"/>
-                        <strong>Kein Abo</strong>
-
-                        <br/>
-                        Du kannst auch ohne Gemüseabo ortoloco-GenossenschafterIn sein. Bleibe auf dem Laufenden und mach mit, wenn du Lust hast.
+                        <br/>Das Abo ist für 3 Personen geeignet
+						<br/>und benötigt mindestens 3-Anteilscheine.
                     </label>
                 </div>
             </div>

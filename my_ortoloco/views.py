@@ -44,7 +44,7 @@ def get_menu_dict(request):
                 userbohnen.append(bohne)
 
         # amount of beans shown => round up if needed never down
-        bohnenrange = range(0, max(userbohnen.__len__(), int(math.ceil(loco.abo.size * 10 / loco.abo.locos.count()))))
+        bohnenrange = range(0, max(userbohnen.__len__(), int(math.ceil(loco.abo.size * 6 / loco.abo.locos.count()))))
 
         for bohne in Boehnli.objects.all().filter(loco=loco).order_by("job__time"):
             if bohne.job.time > datetime.datetime.now():
@@ -170,7 +170,7 @@ def my_job(request, job_id):
     job_is_running = job.start_time() < datetime.datetime.now()
     job_canceled = job.canceled
     can_subscribe = not(job_fully_booked or job_is_in_past or job_is_running or job_canceled)
-    
+
     renderdict = get_menu_dict(request)
     jobendtime = job.end_time()
     renderdict.update({
@@ -341,7 +341,7 @@ def my_abo_change(request, abo_id):
     renderdict = get_menu_dict(request)
     renderdict.update({
         'loco': request.user.loco,
-        'change_size': month <= 10,
+        'change_size': month <= 12,
         'next_extra_abo_date': Abo.next_extra_change_date(),
         'next_size_date': Abo.next_size_change_date()
     })
@@ -640,21 +640,24 @@ def my_createabo(request):
         selectedabo = request.POST.get("abo")
 
         scheine += loco_scheine
-        min_anzahl_scheine = {"none": 1, "small": 2, "big": 4, "house": 20}.get(request.POST.get("abo"))
-        if scheine < min_anzahl_scheine:
+        if (scheine < 2 and request.POST.get("abo") == "big") or (scheine < 3 and request.POST.get("abo") == "house") or (scheine < 1 and request.POST.get("abo") == "small" ) or (scheine == 0):
             scheineerror = True
         else:
             depot = Depot.objects.all().filter(id=request.POST.get("depot"))[0]
-            size = {"none": 0, "small": 1, "big": 2, "house": 10}.get(request.POST.get("abo"))
-
-            if size > 0:
-                if loco.abo is None:
-                    loco.abo = Abo.objects.create(size=size, primary_loco=loco, depot=depot)
-                else:
-                    loco.abo.size = size
-                    loco.abo.future_size = size
-                    loco.abo.depot = depot
-                loco.abo.save()
+            size = 1
+            if request.POST.get("abo") == "house":
+                size = 3
+            elif request.POST.get("abo") == "big":
+                size = 2
+            else:
+                size = 1
+            if loco.abo is None:
+                loco.abo = Abo.objects.create(size=size, primary_loco=loco, depot=depot)
+            else:
+                loco.abo.size = size
+                loco.abo.future_size = size
+                loco.abo.depot = depot
+            loco.abo.save()
             loco.save()
 
             if loco.anteilschein_set.count() < int(request.POST.get("scheine")):
@@ -1011,10 +1014,10 @@ def my_abos(request):
 
         abos.append({
             'abo': abo,
-            'text': get_status_bean_text(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0),
+            'text': get_status_bean_text(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0),
             'boehnlis': boehnlis,
             'boehnlis_kernbereich': boehnlis_kernbereich,
-            'icon': helpers.get_status_bean(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0)
+            'icon': helpers.get_status_bean(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0)
         })
 
     renderdict = get_menu_dict(request)
@@ -1040,10 +1043,10 @@ def my_abos_depot(request, depot_id):
 
         abos.append({
             'abo': abo,
-            'text': get_status_bean_text(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0),
+            'text': get_status_bean_text(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0),
             'boehnlis': boehnlis,
             'boehnlis_kernbereich': boehnlis_kernbereich,
-            'icon': helpers.get_status_bean(100 / (abo.size * 10) * boehnlis if abo.size > 0 else 0)
+            'icon': helpers.get_status_bean(100 / (abo.size * 5) * boehnlis if abo.size > 0 else 0)
         })
 
     renderdict = get_menu_dict(request)
@@ -1185,12 +1188,12 @@ def my_future(request):
         }
 
     for abo in Abo.objects.all():
-        small_abos += abo.size % 2
-        big_abos += int(abo.size % 10 / 2)
-        house_abos += int(abo.size / 10)
-        small_abos_future += abo.future_size % 2
-        big_abos_future += int(abo.future_size % 10 / 2)
-        house_abos_future += int(abo.future_size / 10)
+        small_abos += abo.size % 1
+        big_abos += int(abo.size % 3 / 1)
+        house_abos += int(abo.size / 3)
+        small_abos_future += abo.future_size % 1
+        big_abos_future += int(abo.future_size % 3 / 1)
+        house_abos_future += int(abo.future_size / 3)
 
         if abo.extra_abos_changed:
             for users_abo in abo.future_extra_abos.all():
@@ -1262,7 +1265,7 @@ def my_excel_export(request):
     output = StringIO()
     workbook = xlsxwriter.Workbook(output)
     worksheet_s = workbook.add_worksheet("Locos")
-    
+
     worksheet_s.write_string(0, 0, unicode("Name", "utf-8"))
     worksheet_s.write_string(0, 1, unicode("Boehnlis", "utf-8"))
     worksheet_s.write_string(0, 2, unicode("Boehnlis Kernbereich", "utf-8"))
@@ -1271,7 +1274,7 @@ def my_excel_export(request):
     worksheet_s.write_string(0, 5, unicode("Email", "utf-8"))
     worksheet_s.write_string(0, 6, unicode("Telefon", "utf-8"))
     worksheet_s.write_string(0, 7, unicode("Mobile", "utf-8"))
-    
+
     locos = Loco.objects.all()
     boehnlis = current_year_boehnlis_per_loco()
     boehnlis_kernbereich = current_year_kernbereich_boehnlis_per_loco()
@@ -1284,7 +1287,7 @@ def my_excel_export(request):
             loco.bereiche = loco.bereiche + bereich.name +" "
         if loco.bereiche == "":
             loco.bereiche = unicode("-Kein Tätigkeitsbereich-", "utf-8")
-        
+
         loco.depot_name = unicode("Kein Depot definiert", "utf-8")
         if loco.abo is not None:
             loco.depot_name=loco.abo.depot.name
@@ -1296,7 +1299,7 @@ def my_excel_export(request):
         worksheet_s.write_string(row, 4, loco.depot_name)
         worksheet_s.write_string(row, 5, loco.email)
         worksheet_s.write_string(row, 6, loco.phone)
-        if loco.mobile_phone is not None: 
+        if loco.mobile_phone is not None:
             worksheet_s.write_string(row, 7, loco.mobile_phone)
         row = row + 1
 
@@ -1365,8 +1368,3 @@ def test_filters_post(request):
     data = Filter.format_data(locos, lambda loco: "%s! (email: %s)" % (loco, loco.email))
     res.extend(data)
     return HttpResponse("<br>".join(res))
-
-
-
-
-

@@ -8,54 +8,37 @@
     {% if failure == 1 %}
         <div class="alert alert-danger">{{ message }}</div>
     {% endif %}
-	<div>Das ortoloco-Gemüsefeld befindet sich am Stadtrand von Dietikon im Zürcher Limmattal</div>
+	<div>Das <font color="#709f4a"><strong>meh als gmües</strong></font>-Feld befindet sich am Stadtrand von Affoltern gleich am Chatzenbach.</div>
+	<br/>
+    <br/>
 	<div id="map-canvas"></div>
-    <br/>
-    <br/>
-    Hier gehts zu den möglichen <a href="/static/others/Veloroute.pdf">Velorouten</a>
-    <br/><br/>
+	<br/>
 	<div class="addresses row">
 		<div class="col-md-6">
-			<strong>Adresse ortoloco-Gemüsefeld</strong><br/>
-            ortoloco - Die regionale Gartenkooperative<br/>
-            Spreitenbacherstrasse 35<br/>
-            8953 Dietikon<br/>
-            info@ortoloco.ch
+			<strong>Adresse Administration</strong><br/>
+			<font color="#709f4a"><strong>meh als gmües</strong></font> - c/o Verein MIR<br/>
+			Dialogweg 6<br/>
+			8050 Zürich<br/>
+			info@mehalsgmues.ch<br />
 		</div>
 		<div class="col-md-6">
-			<strong>Adresse Administration</strong><br/>
-			ortoloco - c/o albizke<br/>
-			Albisriederstr. 203b<br/>
-			8047 Zürich<br/>
-			info@ortoloco.ch<br />
+			<strong>Adresse Feld</strong><br/>
+            <font color="#709f4a"><strong>meh als gmües</strong></font><br/>
+            Reckenholzstr. 150<br/>
+            8046 Zürich <br/>
+            info@mehalsgmues.ch<br/>
+		</div>
 			<br />
-			<small>(Wegbeschreibung - 3ter Hauseingang (nach ca. 50m) rechts, dann 1. Stock rechts - <a href="https://www.google.com/maps/place/47°22%2740.9%22N+8°29%2746.7%22E/@47.378032,8.496302,165m/data=!3m2!1e3!4b1!4m2!3m1!1s0x0:0x0">Googlemaps</a>)</small>
+	</div>
+	<div class="addresses row">
+		<div class="col-md-12">
+		Fragen zur Mitgliedschaft oder zum Gemüseabo? </br>
+		kontaktiere Matthias Probst unter <a href="&#109;&#097;&#105;&#108;&#116;&#111;&#058;&#105;&#110;&#102;&#111;&#064;&#109;&#101;&#104;&#097;&#108;&#115;&#103;&#109;&#117;&#101;&#115;&#046;&#099;&#104?subject=Frage zu meh als gmues">&#105;&#110;&#102;&#111;&#064;&#109;&#101;&#104;&#097;&#108;&#115;&#103;&#109;&#117;&#101;&#115;&#046;&#099;&#104;</a></br>
+		Fragen zur Buchhaltung?</br>
+		kontaktiere Astrid Dobler oder Alexandra Takhtarova unter <a href="&#109;&#097;&#105;&#108;&#116;&#111;&#058;&#098;&#117;&#099;&#104;&#104;&#097;&#108;&#116;&#117;&#110;&#103;&#064;&#109;&#101;&#104;&#097;&#108;&#115;&#103;&#109;&#117;&#101;&#115;&#046;&#099;&#104;?subject=Frage zu Buchhaltung">&#098;&#117;&#099;&#104;&#104;&#097;&#108;&#116;&#117;&#110;&#103;&#064;&#109;&#101;&#104;&#097;&#108;&#115;&#103;&#109;&#117;&#101;&#115;&#046;&#099;&#104;</a></br>
+
 		</div>
 	</div>
-	<h3>Newsletter abonnieren</h3>
-	<form class="form" action="{{ request.path }}" method="POST">
-        {% csrf_token %}
-        <div class="checkbox">
-            <label>
-              <input type="checkbox" name="polit" value="subscribe">
-              Ich möchte den unregelmässig erscheinenden Polit-Newsletter zu aktuellen Themen und Veranstaltungen der Alternativ-Kultur abonnieren.
-            </label>
-        </div>
-		<div class="email form-inline">
-            <div class="form-group">
-                <label for="email">Meine Email-Adresse:</label>
-                <input id="email" class="form-control" name="email" type="text" placeholder="hans@muster.ch">
-            </div>
-        </div>
-        <br/>
-		<div class="form-actions">
-		  <button type="submit" class="btn btn-success">Abonnieren</button>
-		</div>
-        <br/>
-        <br/>
-        Oder zwitschere mit uns auf Twitter: <a href="https://twitter.com/PolitolocoZueri">@PolitolocoZueri</a>
-        <br/>
-	</form>
 {% endblock %}
 
 {% block scripts %}

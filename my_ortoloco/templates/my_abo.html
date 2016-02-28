@@ -2,28 +2,32 @@
 
 {% block content %}
     <h3>Abo Übersicht</h3>
-    {% if not loco.abo %}
-        <div class="alert alert-warning">Du hast noch kein Abo<br/>Du möchtest eines? Melde dich hier an: <a href="/my/aboerstellen">Abo erstellen</a></div>
+	{% if scheine_unpaid > 0 %}
+	            <div class="alert alert-warning">Das beziehen eines Abos ist erst mögich wenn du Anteilsschein erworben hast <br/>Du Hast Probleme beim Erwerb vom Anteilsschein eines? Melde dich hier: <a href="/my/kontakt">Kontakt</a></div>
     {% else %}
-        <dl class="dl-horizontal">
-            <dt>Abogrösse</dt>
-            <dd>
+        {% if not loco.abo %}
+            <div class="alert alert-warning">Du hast noch kein Abo<br/>Du möchtest eines? Melde dich hier an: <a href="/my/aboerstellen">Abo erstellen</a></div>
+        {% else %}
+            <dl class="dl-horizontal">
+                <dt>Abogrösse</dt>
+                <dd>
                 {{ loco.abo.size_name }}
+                <br> Hinweis: Die Abogrösse wird noch nicht korrekt angezeigt
             </dd>
-            <dt>&nbsp;</dt>
-            <dd>&nbsp;</dd>
-            <dt>Status</dt>
-            <dd>
+                <dt>&nbsp;</dt>
+                <dd>&nbsp;</dd>
+                <dt>Status</dt>
+                <dd>
                 {% if loco.abo.active %}
                     Dein Abo ist aktiv, du erhälst wöchentlich dein Gemüse.
                 {% else %}
                     <span class="text-error">Auf der Warteliste</span> - du erhälst leider im Moment noch kein Gemüse.
                 {% endif %}
             </dd>
-            <dt>&nbsp;</dt>
-            <dd>&nbsp;</dd>
-            <dt>Anteilscheine</dt>
-            <dd>
+                <dt>&nbsp;</dt>
+                <dd>&nbsp;</dd>
+                <dt>Anteilscheine</dt>
+                <dd>
                 {{ scheine }} {% if scheine_unpaid > 0 %}(davon {{ scheine_unpaid }} noch nicht bezahlt){% endif %}<br/><br/>
                 Anteilscheine von MitabonnentInnen:
                 <ul>
@@ -36,10 +40,10 @@
                     {% endfor %}
                 </ul>
             </dd>
-            <dt>&nbsp;</dt>
-            <dd>&nbsp;</dd>
-            <dt>Abo geteilt mit</dt>
-            <dd>
+                <dt>&nbsp;</dt>
+                <dd>&nbsp;</dd>
+                <dt>Abo geteilt mit</dt>
+                <dd>
                 {% if mitabonnenten|length > 0 %}
                     {% if mitabonnenten|length > 1 %}
                         <ul>
@@ -58,17 +62,17 @@
                 {% endif %}
                 <a href="/my/abonnent/{{ loco.abo.id }}?return=/my/abo">Hier MitabonnentInnen eintragen</a>
             </dd>
-            <dt>&nbsp;</dt>
-            <dd>&nbsp;</dd>
-            <dt>Depot</dt>
-            <dd>
-                {{ loco.abo.depot.name }} > <a href="/my/depot/{{ loco.abo.depot.id }}">Weitere Infos zum Depot</a>
-            </dd>
-
                 <dt>&nbsp;</dt>
                 <dd>&nbsp;</dd>
-                <dt>Zusatzabos</dt>
+                <dt>Depot</dt>
                 <dd>
+                {{ loco.abo.depot.name }} > <a href="/my/depot/{{ loco.abo.depot.id }}">Weitere Infos zum Depot</a>
+            </dd>
+    
+                    <dt>&nbsp;</dt>
+                    <dd>&nbsp;</dd>
+                    <dt>Zusatzabos</dt>
+                    <dd>
                     {% if zusatzabos|length == 0 %}
                         Keine Zusatzabos
                     {% else %}
@@ -79,11 +83,11 @@
                         </ul>
                     {% endif %}
                 </dd>
-            {% if zusatzabos_changed %}
-                <dt>&nbsp;</dt>
-                <dd>&nbsp;</dd>
-                <dt>Neue Zusatzabos</dt>
-                <dd>
+                {% if zusatzabos_changed %}
+                    <dt>&nbsp;</dt>
+                    <dd>&nbsp;</dd>
+                    <dt>Neue Zusatzabos</dt>
+                    <dd>
                     (Die Änderungen treten am {{ next_extra_abo_date |date:"d.m.Y" }} in Kraft)
                     {% if not future_zusatzabos %}
                         <br>Keine Zusatzabos
@@ -95,21 +99,21 @@
                         </ul>
                     {% endif %}
                 </dd>
-            {% endif %}
-
-            {% if loco.abo.size != loco.abo.future_size %}
-                <dt>&nbsp;</dt>
-                <dd>&nbsp;</dd>
-                <dt>Neue Abogrösse</dt>
-                <dd>
+                {% endif %}
+    
+                {% if loco.abo.size != loco.abo.future_size %}
+                    <dt>&nbsp;</dt>
+                    <dd>&nbsp;</dd>
+                    <dt>Neue Abogrösse</dt>
+                    <dd>
                     (Die Änderung tritt am {{ next_extra_abo_date |date:"d.m.Y" }} in Kraft)<br>
                     {{ loco.abo.future_size_name }}
                 </dd>
-            {% endif %}
-            <dt>&nbsp;</dt>
-            <dd>&nbsp;</dd>
-            <dt>&nbsp;</dt>
-            <dd>
+              {% endif %}
+              <dt>&nbsp;</dt>
+                <dd>&nbsp;</dd>
+                <dt>&nbsp;</dt>
+                <dd>
                 <div class="form-actions">
                     <a href="{% if primary %}/my/abo/{{ loco.abo.id }}/aendern{% endif %}" class="btn btn-success {% if not primary %}disabled{% endif %}" >Abo ändern</a>
                     {% if not primary %}
@@ -117,6 +121,7 @@
                     {% endif %}
                 </div>
             </dd>
-        </dl>
+          </dl>
+        {% endif %}
     {% endif %}
 {% endblock %}

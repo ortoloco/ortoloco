@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>my.ortoloco</title>
+    <title>Mein.meh als gmües</title>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="/static/img/favicon.ico"/>
 
@@ -12,11 +12,6 @@
 </head>
 <body>
 <div class="container">
-    <div class="erbsetop"></div>
-    <div class="erbseleft"></div>
-    <div class="erbseright"></div>
-    <div class="erbsebottom"></div>
-
     {% if user.is_impersonate %}
         <div class="row impersonate">
             <div class="col-md-12">
@@ -49,7 +44,7 @@
                         <a href="/my/kontakt">Kontakt</a>
                     </li>
                     <li class="{{ menu.ortoloco }}">
-                        <a href="/aktuelles">ortoloco.ch</a>
+                        <a href="/aktuelles">mehalsgmues.ch</a>
                     </li>
                     {% if depot_admin|length > 0 or area_admin|length > 0 %}
                         <li>
@@ -80,12 +75,10 @@
                             <hr>
                             <a href="/my/mails">Mails verschicken</a>
                         </li>
-                        <li>
+<!--                        <li>
                             <a href="/my/depotlisten">Depotlisten drucken</a>
                         </li>
-                        <li>
-                            <a href="/my/email/export">Emails exportieren (Excel)</a>
-                        </li>
+-->
                         <li class="inline">
                             Filtern <a href="/my/filters">Locos</a> | <a href="/my/abos">Abos</a>
                         </li>
@@ -94,12 +87,13 @@
                         </li>
                     {% endif %}
                     {% if politoloco %}
-                        <li>
+<!--                        <li>
                             {% if not staff_user %}
                                 <hr>
                             {% endif %}
                             <a href="/my/politoloco">politoloco versenden</a>
                         </li>
+-->
                     {% endif %}
                     <li class="{{ menu.personalInfo }}">
                         <hr>
@@ -110,7 +104,7 @@
                     </li>
                 </ul>
                 <hr>
-                <div class="bohnen">
+               <div class="bohnen">
                     {% block bohnen %}
                         <h5>Dein Böhnli-Konto</h5>
                         {% for i in bohnenrange %}
@@ -126,7 +120,7 @@
                         {% endfor %}
                     {% endblock %}
                 </div>
-                <hr>
+              <hr>
                 <div class="jobs">
                     {% block next_jobs %}
                         <h5>Nächste Einsätze</h5>
