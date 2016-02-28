@@ -2,7 +2,7 @@
 import os
 import dj_database_url
 
-DEBUG = os.environ.get("ORTOLOCO_DEBUG", "True") == "True"
+DEBUG = os.environ.get("ORTOLOCO_DEBUG", False)
 
 TEMPLATE_DEBUG = DEBUG
 
