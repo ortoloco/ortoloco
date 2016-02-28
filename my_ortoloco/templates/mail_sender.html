@@ -3,6 +3,7 @@
 {% block content %}
     <h3>Mails verschicken</h3>
     <br/>
+        {% if recipients %}
             <form action="/my/mails/send{% if depot_admin|length > 0 %}_depot{% endif %}" method="POST" class="form-horizontal" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
@@ -17,13 +18,14 @@
                     </select>
                 </div>
             </div>
-        {% if recipients_count > 0 %}
-            <div class="form-group">
-                <label for="recipients" class="col-sm-2 control-label">Empfänger <a id="edit-recipients-action" href="#">bearbeiten</a></label>
-                <div class="col-sm-10 form-control-static">
-                    <textarea name="recipients" id="recipients" rows="{% if recipients_count < 12 %}{{ recipients_count }}{% else %}12{% endif %}" disabled="disabled">{{ recipients }}</textarea>
+            {% if recipients_count > 0 %}
+                <div class="form-group">
+                    <label for="recipients" class="col-sm-2 control-label">Empfänger <a id="edit-recipients-action" href="#">bearbeiten</a></label>
+                    <div class="col-sm-10 form-control-static">
+                        <textarea name="recipients" id="recipients" rows="{% if recipients_count < 12 %}{{ recipients_count }}{% else %}12{% endif %}" disabled="disabled">{{ recipients }}</textarea>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         {% else %}
             <div class="form-group">
                 <label for="sender-email" class="col-sm-2 control-label">Absender</label>
@@ -31,6 +33,7 @@
                     info@mehalsgmues.ch
                 </div>
             </div>
+        {% endif %}
             {% if depot_admin|length > 0 %}
                 <div class="form-group">
                     <label for="sender-email" class="col-sm-2 control-label">Empfänger</label>
@@ -46,7 +49,6 @@
                             </div>
                         {% endfor %}
                     </div>
-                {% endif %}
                     <div class="checkbox">
                         <label class="high-label" for="allanteilsschein">
                             <input type="checkbox" id="allanteilsschein" name="allanteilsschein"> Alle Genossenschafter
