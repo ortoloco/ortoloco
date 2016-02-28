@@ -3,7 +3,6 @@
 {% block content %}
     <h3>Mails verschicken</h3>
     <br/>
-        {% if recipients %}
             <form action="/my/mails/send{% if depot_admin|length > 0 %}_depot{% endif %}" method="POST" class="form-horizontal" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
@@ -18,7 +17,6 @@
                     </select>
                 </div>
             </div>
-        </div>
         {% if recipients_count > 0 %}
             <div class="form-group">
                 <label for="recipients" class="col-sm-2 control-label">Empfänger <a id="edit-recipients-action" href="#">bearbeiten</a></label>
@@ -48,6 +46,7 @@
                             </div>
                         {% endfor %}
                     </div>
+                {% endif %}
                     <div class="checkbox">
                         <label class="high-label" for="allanteilsschein">
                             <input type="checkbox" id="allanteilsschein" name="allanteilsschein"> Alle Genossenschafter
@@ -101,6 +100,7 @@
             </div>
         </div>
     </form>
+
 {% endblock %}
 
 {% block scripts %}
