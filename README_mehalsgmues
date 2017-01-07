@@ -1,0 +1,5 @@
+# use these commands to sync your local dev
+
+SOURCE_APP=mehalsgmues-prod
+TARGET_APP=mehalsgmues
+heroku pg:backups restore $(heroku pg:backups public-url --app $SOURCE_APP) DATABASE_URL --app $TARGET_APP

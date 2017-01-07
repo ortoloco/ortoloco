@@ -40,8 +40,12 @@ def get_menu_dict(request):
         userbohnen = []
 
         for bohne in allebohnen:
-            if bohne.job.time.year == date.today().year and bohne.job.time < datetime.datetime.now():
-                userbohnen.append(bohne)
+            if date.today().month < 4:
+                if ((bohne.job.time.year == date.today().year-1 and bohne.job.time.month > 3) or (bohne.job.time.year == date.today().year and bohne.job.time.month < 4)) and bohne.job.time < datetime.datetime.now():
+                    userbohnen.append(bohne)
+            else:
+                if (bohne.job.time.year == date.today().year and bohne.job.time.month > 3) and bohne.job.time < datetime.datetime.now():
+                    userbohnen.append(bohne)
 
         # amount of beans shown => round up if needed never down
         bohnenrange = range(0, max(userbohnen.__len__(), int(math.ceil(loco.abo.size * 6 / loco.abo.locos.count()))))
@@ -920,7 +924,18 @@ def my_mails_intern(request, enhanced, error_message=None):
 
 def current_year_boehlis():
     now = datetime.date.today()
-    return Boehnli.objects.filter(job__time__year=now.year, job__time__lt=now)
+    allebohnen = Boehnli.objects.filter(job__time__lt=now)
+    yearbohnen = []
+
+    for bohne in allebohnen:
+        if date.today().month < 4:
+            if ((bohne.job.time.year == date.today().year-1 and bohne.job.time.month > 3) or (bohne.job.time.year == date.today().year and bohne.job.time.month < 4)):
+                yearbohnen.append(bohne)
+        else:
+            if (bohne.job.time.year == date.today().year and bohne.job.time.month > 3):
+                yearbohnen.append(bohne)
+
+    return yearbohnen
 
 
 def current_year_boehnlis_per_loco():
