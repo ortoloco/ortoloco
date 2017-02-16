@@ -23,4 +23,4 @@ ics==0.3.1
 django-toolbelt==0.0.1
 MySQL-python==1.2.5
 psycopg2==2.5.1
--r my_ortoloco/personalisation/personal_requirements.txt
+git+http://github.com/ortoloco/juntagrico.git
