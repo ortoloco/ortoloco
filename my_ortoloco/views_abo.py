@@ -168,17 +168,17 @@ def my_extra_change(request, abo_id):
         saved = True
 
     abos = []
-    for abo in ExtraAboType.objects.all():
+    for abotype in ExtraAboType.objects.all():
         if request.user.loco.abo.future_extra_abos.filter(type__id=abo.id).count()>0:
             abos.append({
-                'id': abo.type.id,
-                'name': abo.type.name,
+                'id': abotype.id,
+                'name': abotype.name,
                 'selected': True
             })
         else:
             abos.append({
-                'id': abo.type.id,
-                'name': abo.type.name
+                'id': abotype.id,
+                'name': abotype.name
             })
     renderdict = get_menu_dict(request)
     renderdict.update({
