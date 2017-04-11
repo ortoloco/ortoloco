@@ -288,7 +288,7 @@ def my_add_loco(request, abo_id):
                 send_anteilschein_created_mail(anteilschein, request.META["HTTP_HOST"])
             send_been_added_to_abo(loco.email, pw, request.user.loco.get_name(), scheine, hashlib.sha1(locoform.cleaned_data['email'] + str(abo_id)).hexdigest(), request.META["HTTP_HOST"])
 
-            loco.save()
+            member.save()
             if request.GET.get("return"):
                 return redirect(request.GET.get("return"))
             return redirect('/my/aboerstellen')
