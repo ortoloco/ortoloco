@@ -169,7 +169,7 @@ def my_extra_change(request, abo_id):
 
     abos = []
     for abotype in ExtraAboType.objects.all():
-        if request.user.loco.abo.future_extra_abos.filter(type__id=abo.id).count()>0:
+        if request.user.loco.abo.future_extra_abos.filter(type__id=abotype.id).count()>0:
             abos.append({
                 'id': abotype.id,
                 'name': abotype.name,
