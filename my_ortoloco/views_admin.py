@@ -64,6 +64,16 @@ def send_email_intern(request):
     if request.POST.get("all") == "on":
         for loco in Loco.objects.exclude(block_emails=True):
             emails.add(loco.email)
+    if request.POST.get("tuesday") == "on":
+        for depot in Depot.objects.filter(weekday=2):
+            for abo in depot.active_abos():
+                for loco in abo.bezieher_locos().exclude(block_emails=True):
+                    emails.add(loco.email)
+    if request.POST.get("thursday") == "on":
+        for depot in Depot.objects.filter(weekday=4):
+            for abo in depot.active_abos():
+                for loco in abo.bezieher_locos().exclude(block_emails=True):
+                    emails.add(loco.email)
     if request.POST.get("recipients"):
         recipients = re.split(r"\s*,?\s*", request.POST.get("recipients"))
         for recipient in recipients:

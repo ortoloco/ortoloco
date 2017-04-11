@@ -169,7 +169,7 @@ def my_extra_change(request, abo_id):
 
     abos = []
     for abotype in ExtraAboType.objects.all():
-        if request.user.loco.abo.future_extra_abos.filter(type__id=abo.id).count()>0:
+        if request.user.loco.abo.future_extra_abos.filter(type__id=abotype.id).count()>0:
             abos.append({
                 'id': abotype.id,
                 'name': abotype.name,
@@ -283,12 +283,12 @@ def my_add_loco(request, abo_id):
             member.user.save()
 
             for num in range(0, scheine):
-                anteilschein = Anteilschein(loco=loco, paid_date=None)
+                anteilschein = Anteilschein(loco=member, paid_date=None)
                 anteilschein.save()
                 send_anteilschein_created_mail(anteilschein, request.META["HTTP_HOST"])
             send_been_added_to_abo(member.email, pw, request.user.loco.get_name(), scheine, hashlib.sha1(locoform.cleaned_data['email'] + str(abo_id)).hexdigest(), request.META["HTTP_HOST"])
 
-            loco.save()
+            member.save()
             if request.GET.get("return"):
                 return redirect(request.GET.get("return"))
             return redirect('/my/aboerstellen')
