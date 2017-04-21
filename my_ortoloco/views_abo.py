@@ -132,9 +132,7 @@ def my_extra_change(request, abo_id):
             existing = request.user.loco.abo.extra_abos.filter(type__id=extra_abo.id)
             if request.POST.get("abo" + str(extra_abo.id)) == str(extra_abo.id):
 		if existing.count()==0:
-                    future_extra_abo = ExtraAbo.create()
-                    future_extra_abo.abo = request.user.loco.abo
-                    future_extra_abo.type = extra_abo
+                    future_extra_abo = ExtraAbo.objects.create(main_abo=request.user.loco.abo,type=extra_abo)
                     future_extra_abo.active = False
                     future_extra_abo.save()
                 else:
@@ -150,9 +148,7 @@ def my_extra_change(request, abo_id):
                              has_active=True
                         index+=1
                     if not has_active:
-                        future_extra_abo = ExtraAbo.create()
-                        future_extra_abo.abo = request.user.loco.abo
-                        future_extra_abo.type = extra_abo
+                        future_extra_abo = ExtraAbo.create(main_abo=request.user.loco.abo,type=extra_abo)
                         future_extra_abo.active = False
                         future_extra_abo.save()
 
