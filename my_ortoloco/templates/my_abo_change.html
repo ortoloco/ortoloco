@@ -50,7 +50,7 @@
         </div>
         <div class="col-md-4">
             <h5>Zukünftige Zusatz-Abos:</h5>
-            {% if not loco.abo.extra_abos_changed %}
+            {% if not zusatzabos_changed %}
                 {% if loco.abo.extra_abos.all|length == 0 %}
                     Keine Zusatz-Abos
                 {% else %}
