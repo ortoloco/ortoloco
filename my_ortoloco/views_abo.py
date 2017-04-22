@@ -133,8 +133,7 @@ def my_extra_change(request, abo_id):
     saved = False
     if request.method == "POST":
         for extra_abo in ExtraAboType.objects.all():
-            existing = request.user.loco.abo.extra_abos.filter(type__id=extra_abo.id)
-            print existing
+            existing = request.user.loco.abo.extra_abo_set.filter(type__id=extra_abo.id)
             if request.POST.get("abo" + str(extra_abo.id)) == str(extra_abo.id):
                 if existing.count()==0:
                     future_extra_abo = ExtraAbo.objects.create(main_abo=request.user.loco.abo,type=extra_abo)
