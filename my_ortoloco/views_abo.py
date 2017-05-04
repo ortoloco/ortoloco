@@ -146,7 +146,7 @@ def my_extra_change(request, abo_id):
                         existing_extra_abo = exisitng[index]
                         if existing_extra_abo.active == True:
                              has_active=True
-                        elif existing_extra_abo.canceled==True and future_extra_abo.active==True:
+                        elif existing_extra_abo.canceled==True and existing_extra_abo.active==True:
                              existing_extra_abo.canceled=False;
                              existing_extra_abo.save();
                              has_active=True
