@@ -74,7 +74,7 @@
                     {% else %}
                         <ul>
                             {% for zusatzabo in zusatzabos %}
-                                <li>{{ zusatzabo.name }}</li>
+                                <li>{{ zusatzabo.type.name }}</li>
                             {% endfor %}
                         </ul>
                     {% endif %}
@@ -90,7 +90,7 @@
                     {% else %}
                         <ul>
                             {% for zusatzabo in future_zusatzabos %}
-                                <li>{{ zusatzabo.name }}</li>
+                                <li>{{ zusatzabo.type.name }}</li>
                             {% endfor %}
                         </ul>
                     {% endif %}

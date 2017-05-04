@@ -73,13 +73,17 @@ def my_abo_change(request, abo_id):
     """
     Ein Abo ändern
     """
+    current_zusatzabos = request.user.loco.abo.extra_abos.all()
+    future_zusatzabos = request.user.loco.abo.future_extra_abos.filter(active=False)
+    zusatzabos_changed = set(current_zusatzabos) != set(future_zusatzabos)
     month = int(time.strftime("%m"))
     renderdict = get_menu_dict(request)
     renderdict.update({
         'loco': request.user.loco,
         'change_size': month <= 10,
         'next_extra_abo_date': Abo.next_extra_change_date(),
-        'next_size_date': Abo.next_size_change_date()
+        'next_size_date': Abo.next_size_change_date(),
+        'zusatzabos_changed': zusatzabos_changed
     })
     return render(request, "my_abo_change.html", renderdict)
 
@@ -129,9 +133,9 @@ def my_extra_change(request, abo_id):
     saved = False
     if request.method == "POST":
         for extra_abo in ExtraAboType.objects.all():
-            existing = request.user.loco.abo.extra_abos.filter(type__id=extra_abo.id)
+            existing = request.user.loco.abo.extra_abo_set.filter(type__id=extra_abo.id)
             if request.POST.get("abo" + str(extra_abo.id)) == str(extra_abo.id):
-		if existing.count()==0:
+                if existing.count()==0:
                     future_extra_abo = ExtraAbo.objects.create(main_abo=request.user.loco.abo,type=extra_abo)
                     future_extra_abo.active = False
                     future_extra_abo.save()
@@ -142,7 +146,7 @@ def my_extra_change(request, abo_id):
                         existing_extra_abo = exisitng[index]
                         if existing_extra_abo.active == True:
                              has_active=True
-                        elif existing_extra_abo.canceled==True and future_extra_abo.active==True:
+                        elif existing_extra_abo.canceled==True and existing_extra_abo.active==True:
                              existing_extra_abo.canceled=False;
                              existing_extra_abo.save();
                              has_active=True
@@ -155,10 +159,10 @@ def my_extra_change(request, abo_id):
             else:
                 if existing.count()>0:
                     for existing_extra_abo in existing:
-			if existing_extra_abo.canceled==False and future_extra_abo.active==True:
+                        if existing_extra_abo.canceled==False and existing_extra_abo.active==True:
                             existing_extra_abo.canceled=True;
                             existing_extra_abo.save();
-                        elif existing_extra_abo.deactivation_date is None and future_extra_abo.active==False:
+                        elif existing_extra_abo.deactivation_date is None and existing_extra_abo.active==False:
                             existing_extra_abo.delete();
         request.user.loco.abo.save()
         saved = True
