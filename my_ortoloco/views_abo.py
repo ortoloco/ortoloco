@@ -143,7 +143,7 @@ def my_extra_change(request, abo_id):
                     has_active=False
                     index=0;
                     while not has_active or index<existing.count():
-                        existing_extra_abo = exisitng[index]
+                        existing_extra_abo = existing[index]
                         if existing_extra_abo.active == True:
                              has_active=True
                         elif existing_extra_abo.canceled==True and existing_extra_abo.active==True:
