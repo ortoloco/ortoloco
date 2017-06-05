@@ -32,30 +32,6 @@
 			<small>(Wegbeschreibung - 3ter Hauseingang (nach ca. 50m) rechts, dann 1. Stock rechts - <a href="https://www.google.com/maps/place/47°22%2740.9%22N+8°29%2746.7%22E/@47.378032,8.496302,165m/data=!3m2!1e3!4b1!4m2!3m1!1s0x0:0x0">Googlemaps</a>)</small>
 		</div>
 	</div>
-	<h3>Newsletter abonnieren</h3>
-	<form class="form" action="{{ request.path }}" method="POST">
-        {% csrf_token %}
-        <div class="checkbox">
-            <label>
-              <input type="checkbox" name="polit" value="subscribe">
-              Ich möchte den unregelmässig erscheinenden Polit-Newsletter zu aktuellen Themen und Veranstaltungen der Alternativ-Kultur abonnieren.
-            </label>
-        </div>
-		<div class="email form-inline">
-            <div class="form-group">
-                <label for="email">Meine Email-Adresse:</label>
-                <input id="email" class="form-control" name="email" type="text" placeholder="hans@muster.ch">
-            </div>
-        </div>
-        <br/>
-		<div class="form-actions">
-		  <button type="submit" class="btn btn-success">Abonnieren</button>
-		</div>
-        <br/>
-        <br/>
-        Oder zwitschere mit uns auf Twitter: <a href="https://twitter.com/PolitolocoZueri">@PolitolocoZueri</a>
-        <br/>
-	</form>
 {% endblock %}
 
 {% block scripts %}

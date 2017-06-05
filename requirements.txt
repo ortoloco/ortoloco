@@ -22,6 +22,5 @@ django-imagekit==3.3
 ics==0.3.1
 git+http://github.com/ortoloco/django-photologue.git
 django-toolbelt==0.0.1
-MySQL-python==1.2.5
 psycopg2==2.5.1
 git+http://github.com/ortoloco/juntagrico.git
