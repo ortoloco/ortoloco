@@ -14,7 +14,7 @@ def whitelist_email_from_env(var_env_name):
 whitelist_email_from_env("ORTOLOCO_EMAIL_USER")
 
 if DEBUG is True:
-    for key in os.environ.keys():
+    for key in list(os.environ.keys()):
         if key.startswith("ORTOLOCO_EMAIL_WHITELISTED"):
             whitelist_email_from_env(key)
 

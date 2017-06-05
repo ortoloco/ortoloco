@@ -14,7 +14,7 @@ class StaticContent(models.Model):
 
 
     def __unicode__(self):
-        return u"%s" % (self.name)
+        return "%s" % (self.name)
 
     class Meta:
         verbose_name = "Statischer Inhalt"
@@ -31,7 +31,7 @@ class Media(models.Model):
 
 
     def __unicode__(self):
-        return u"%s" % (self.name)
+        return "%s" % (self.name)
 
     class Meta:
         verbose_name = "Media"
@@ -47,7 +47,7 @@ class Download(models.Model):
 
 
     def __unicode__(self):
-        return u"%s" % (self.name)
+        return "%s" % (self.name)
 
     class Meta:
         verbose_name = "Download"
@@ -64,7 +64,7 @@ class Link(models.Model):
     sort_order = models.FloatField("Nummer zum Sortieren", default=1.0)
 
     def __unicode__(self):
-        return u"%s" % (self.titel)
+        return "%s" % (self.titel)
 
     class Meta:
         verbose_name = "Link"
@@ -81,7 +81,7 @@ class Document(models.Model):
     sort_order = models.FloatField("Nummer zum Sortieren", default=1.0)
 
     def __unicode__(self):
-        return u"%s" % (self.title)
+        return "%s" % (self.title)
 
     class Meta:
         verbose_name = "Dokument"
@@ -92,7 +92,7 @@ class Politoloco(models.Model):
     email = models.EmailField("E-Mail Adresse")
 
     def __unicode__(self):
-        return u'Politoloco %s' % self.email
+        return 'Politoloco %s' % self.email
 
     class Meta:
         permissions = (('can_send_newsletter', 'Kann politoloco-Newsletter verschicken'),)
