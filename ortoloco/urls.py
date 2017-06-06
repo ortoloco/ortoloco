@@ -7,6 +7,7 @@ admin.autodiscover()
 from django.contrib.auth.views import login, logout
 from django.views.generic import RedirectView
 from static_ortoloco import views as static_ortoloco
+import juntagrico
 
 import django
 
@@ -27,7 +28,7 @@ urlpatterns = [
     url('^dokumente$', static_ortoloco.documents),
     url('^kontakt$', static_ortoloco.contact),
     
-
+    url(r'^', include('juntagrico.urls')),
         
     url(r'^impersonate/', include('impersonate.urls')),
 
