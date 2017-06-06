@@ -13,3 +13,4 @@ django-imagekit==3.3
 git+http://github.com/ortoloco/django-photologue.git
 django-toolbelt==0.0.1
 git+http://github.com/ortoloco/juntagrico.git
+psycopg2==2.7.1
