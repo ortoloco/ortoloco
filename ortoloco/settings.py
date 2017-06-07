@@ -113,7 +113,7 @@ SERVER_EMAIL="server@ortoloco.ch"
     Auth Settings
 """
 AUTHENTICATION_BACKENDS = (
-    'my_ortoloco.helpers.AuthenticateWithEmail',
+    'juntagrico.util.auth.AuthenticateWithEmail',
     'django.contrib.auth.backends.ModelBackend'
 )
 

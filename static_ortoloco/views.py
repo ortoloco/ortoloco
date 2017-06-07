@@ -35,7 +35,7 @@ def home(request):
         }
     })
 
-    return render(request, "home.html", renderdict)
+    return render(request, "start.html", renderdict)
 
 
 def about(request):
