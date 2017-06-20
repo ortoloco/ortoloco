@@ -490,7 +490,7 @@ def my_excel_export_extras(request):
     u'main_abo.primary_loco.addr_zipcode',
     u'main_abo.primary_loco.addr_location',
     ]
-    return generate_excell(fields, Anteilschein)
+    return generate_excell(fields, ExtraAbo)
 
 @permission_required('my_ortoloco.is_operations_group')
 def my_export(request):
