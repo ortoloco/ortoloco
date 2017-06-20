@@ -474,6 +474,23 @@ def my_excel_export_shares(request):
     u'loco.email',
     ]
     return generate_excell(fields, Anteilschein)
+    
+@permission_required('my_ortoloco.is_operations_group')
+def my_excel_export_extras(request):
+    fields = [
+    u'active',
+    u'canceled',
+    u'activation_date',
+    u'deactivation_date',
+    u'type.name',
+    u'main_abo.primary_loco.first_name',
+    u'main_abo.primary_loco.last_name',
+    u'main_abo.primary_loco.email',
+    u'main_abo.primary_loco.addr_street',
+    u'main_abo.primary_loco.addr_zipcode',
+    u'main_abo.primary_loco.addr_location',
+    ]
+    return generate_excell(fields, Anteilschein)
 
 @permission_required('my_ortoloco.is_operations_group')
 def my_export(request):
