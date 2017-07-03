@@ -338,7 +338,7 @@ def my_future(request):
 @permission_required('my_ortoloco.is_operations_group')
 def my_switch_extras(request):
     for abo in Abo.objects.all():
-        for extra in abo.extra_abo_set:
+        for extra in abo.extra_abo_set.all():
             if extra.active == True and extra.canceled == True:
                 extra.active=False
                 extra.save()
