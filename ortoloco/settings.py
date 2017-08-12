@@ -290,20 +290,20 @@ ORGANISATION_ADDRESS = {"name":"ortoloco",
 ORGANISATION_BANK_CONNECTION = {"PC" : "85-199010-5",
             "IBAN" : "CH72 0900 0000 8519 9010 5",
             "BIC" : "POFICHBEXXX",
-            "NAME" : "Juntagrico Bank",
+            "NAME" : "Postfinance",
             "ESR" : "01-123-45"}
 INFO_EMAIL = "info@ortoloco.ch"
 SERVER_URL = "www.ortoloco.ch"
 ADMINPORTAL_NAME = "my.ortoloco"
 ADMINPORTAL_SERVER_URL = "my.ortoloco.ch"
-BUSINESS_REGULATIONS = "/static/docs/business_regulations.pdf"
-BYLAWS = "/static/docs/bylaws.pdf"
+BUSINESS_REGULATIONS = "/static/others/160910_-_Betriebsreglement_ortoloco.pdf"
+BYLAWS = "/static/others/160910_-_Statuten_ortoloco.pdf"
 STYLE_SHEET = "/static/css/ortoloco.css"
-FAQ_DOC = "/static/doc/fac.pdf"
-EXTRA_SUB_INFO = "/static/doc/extra_sub_info.pdf"
-ACTIVITY_AREA_INFO = "/static/doc/activity_area_info.pdf"
+FAQ_DOC = "/static/others/FAQ_ortoloco_juli_2017.pdf"
+EXTRA_SUB_INFO = "/static/others/Infoblatt_Zusatzabos.pdf"
+ACTIVITY_AREA_INFO = "/static/oters/Infoblatt_Taetigkeitsbereiche.pdf"
 SHARE_PRICE = "250"
-PROMOTED_JOB_TYPES = []
+PROMOTED_JOB_TYPES = ["Aktionstag"]
 PROMOTED_JOBS_AMOUNT = 2
 DEPOT_LIST_COVER_SHEETS = 'xxx'
 DEPOT_LIST_OVERVIEWS = 'xx'
@@ -313,14 +313,15 @@ BUSINESS_YEAR_START = {"day":1, "month":1}
 BUSINESS_YEAR_CANCELATION_MONTH = 10
 DEMO_USER = ''
 DEMO_PWD = ''
-CIRCLES = {'circle_full': '/static/img/circle_full.png',
-        'circle_alomst_full': '/static/img/circle_alomst_full.png',
-        'circle_half': 'static/img/circle_half.png',
-        'circle_almost_empty': '/static/img/circle_almost_empty.png',
-        'circle_empty': '/static/img/circle_empty.png',
-        'circle_full_core': '/static/img/circle_full_core.png',
-        'circle_x': '/static/img/circle_x.png',
-        'circle_y': '/static/img/circle_y.png'
+IMAGES = {'status_100': '/static/img/erbse_voll.png',
+            'status_75': '/static/img/erbse_fast_voll.png',
+            'status_50': '/static/img/erbse_halb.png',
+            'status_25': '/static/img/erbse_fast_leer.png',
+            'status_0': '/static/img/erbse_leer.png',
+            'single_full': '/static/img/erbse_voll.png',
+            'single_empty': '/static/img/erbse_leer.png',
+            'single_core': '/static/img/erbse_voll_kernbereich.png',
+            'core': '/static/img/erbse_voll_kernbereich.png'
 }
 GOOGLE_API_KEY = "GOOGLE_API_KEY"
 

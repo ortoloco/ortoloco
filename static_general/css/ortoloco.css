@@ -1,8 +1,10 @@
-.myortoloco_logo {
-    background: url(/static/img/myortoloco.png) 0 0px;
+.juntagrico_logo {
+    background: url(/static/img/myortoloco.png) 0 0px; 
+    background-repeat: no-repeat;
+    background-position: left center; 
     display: inline-block;
-    width: 300px;
-    height: 45px;
+    width: 580px;
+    height: 161px;
 }
 
 .next-jobs {
@@ -60,9 +62,14 @@
     margin-top: 0;
 }
 
-.myortoloco {
-    margin-top: 80px;
-    margin-bottom: 30px;
+.juntagrico {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.myjuntagrico {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .ortoloco h3 {
@@ -290,7 +297,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .logo {
-    background: url(/static/img/logo.png) 0 0px;
+    background: url(/static/img/ortoloco_logo.png) 0 0px;
     display: inline-block;
     width: 220px;
     height: 51px;
@@ -334,6 +341,11 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     width: 623px;
     height: 600px;
 }
+.footer {
+    margin-top: 80px;
+    background: url(/static/img/ortoloco_full.gif) bottom no-repeat;
+    padding-bottom: 400px;
+}
 
 .container .erbsetop {
     position: absolute;
@@ -363,6 +375,46 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     bottom: 0px;
     width: 20px;
     opacity: 1.0;
+}
+.container .bordertop {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    right: 0;
+    background-image: url(/static/img/erbse_x.png);
+    height: 20px;
+    opacity: 1.0;
+}
+
+.container .borderleft {
+    position: absolute;
+    left: 0px;
+    top: 36px;
+    background-image: url(/static/img/erbse_y.png);
+    bottom: 0px;
+    width: 20px;
+    opacity: 1.0;
+}
+
+.container .borderright {
+    position: absolute;
+    right: -5px;
+    top: 36px;
+    background-image: url(/static/img/erbse_y.png);
+    bottom: 0px;
+    width: 20px;
+    opacity: 1.0;
+}
+
+.container .borderbottom {
+    
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    right: 0;
+    opacity: 1.0;
+    margin-top: 80px;
+    background: url(/static/img/ortoloco_full.gif) bottom no-repeat;
 }
 
 /* menu */
