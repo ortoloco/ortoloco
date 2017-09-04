@@ -299,6 +299,7 @@ ADMINPORTAL_SERVER_URL = "my.ortoloco.ch"
 BUSINESS_REGULATIONS = "/static/others/160910_-_Betriebsreglement_ortoloco.pdf"
 BYLAWS = "/static/others/160910_-_Statuten_ortoloco.pdf"
 STYLE_SHEET = "/static/css/ortoloco.css"
+FAVICON = "/static/img/favicon.ico"
 FAQ_DOC = "/static/others/FAQ_ortoloco_juli_2017.pdf"
 EXTRA_SUB_INFO = "/static/others/Infoblatt_Zusatzabos.pdf"
 ACTIVITY_AREA_INFO = "/static/oters/Infoblatt_Taetigkeitsbereiche.pdf"
@@ -323,6 +324,6 @@ IMAGES = {'status_100': '/static/img/erbse_voll.png',
             'single_core': '/static/img/erbse_voll_kernbereich.png',
             'core': '/static/img/erbse_voll_kernbereich.png'
 }
-GOOGLE_API_KEY = "GOOGLE_API_KEY"
+GOOGLE_API_KEY = os.environ['ORTOLOCO_GOOGLE_API_KEY']
 
 
