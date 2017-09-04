@@ -1,3 +1,241 @@
+.juntagrico_logo {
+    background: url(/static/img/myortoloco.png) 0 0px; 
+    background-repeat: no-repeat;
+    background-position: left center; 
+    display: inline-block;
+    width: 580px;
+    height: 161px;
+}
+
+.next-jobs {
+    margin-top: 5px;
+}
+
+.next-jobs .time {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.jobs .date {
+    width: 150px;
+}
+
+.jobs .status {
+    padding-left: 30px;
+}
+
+.jobs .full {
+    opacity: 0.2;
+}
+
+#jobs .list {
+    width: 100%;
+}
+
+#jobs_header, #filter-locos_header {
+    margin-bottom: 20px;
+}
+
+#filter-locos a {
+    color: white;
+    text-decoration: underline;
+}
+
+#jobs_footer, #filter-locos_footer {
+    margin-top: 20px;
+}
+
+#jobs_page_prev, #jobs_page_next, #filter-locos_page_prev, #filter-locos_page_next {
+    display: none !important;
+}
+
+#jobs .table-sort {
+    font-family: Arial;
+    font-size: 12;
+}
+
+.jobstatus {
+    margin-right: -7px;
+}
+
+.ortoloco {
+    margin-top: 0;
+}
+
+.juntagrico {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.myjuntagrico {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.ortoloco h3 {
+    margin-top: 0;
+}
+
+.createabo .control-label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.createabo label {
+    font-weight: normal;
+}
+
+.createabo #depot {
+    margin-bottom: 3px;
+}
+
+#map-canvas {
+    width: 100%;
+    height: 400px;
+}
+
+#depot #map-canvas {
+    margin-left: 180px;
+    width: 400px;
+    height: 440px;
+}
+
+.politoloco {
+    height: 30px;
+    background: url('/static/img/erbse_x_politoloco.png') repeat-x;
+}
+
+.high-label {
+    line-height: 35px;
+}
+
+.high-label input[type=checkbox] {
+    margin-top: 9px;
+}
+
+.file-upload {
+    line-height: 30px;
+}
+
+.file-upload-button {
+    display: inline-block;
+    position: relative;
+}
+
+.file-upload-button > input[type=file] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+}
+
+textarea#recipients {
+    width: 100%;
+}
+
+textarea#recipients[disabled=disabled] {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+
+#edit-recipients-action {
+    font-size: smaller;
+}
+
+#edit-recipients-action::before {
+    content: "(";
+}
+
+#edit-recipients-action::after {
+    content: ")";
+}
+
+.nav li.inline a {
+    display: inline-block;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+}
+
+.nav li.inline a:hover {
+    background: none;
+}
+
+table.future {
+    width: 100%;
+    margin-top: 50px;
+}
+
+table.future th {
+    text-align: left;
+}
+
+table.future td {
+    line-height: 30px;
+}
+
+.loco-job-comments {
+    font-style: italic;
+}
+
+#filter {
+    width: 100%;
+}
+
+#filter table {
+    width: 100%;
+    font-size: 10px;
+}
+
+#filter-table .odd {
+    background-color: #ecf4e1
+}
+
+.main-menu {
+    font-size: 18px;
+}
+
+.main-menu li a {
+    line-height: 15px;
+}
+
+.main-menu .separator {
+    height: 10px;
+}
+
+.admin-menu {
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+}
+
+.admin-menu li a {
+    line-height: 10px;
+}
+
+.section-title {
+    font-size: 12px;
+    margin-top: -20px;
+}
+
+.table th {
+    position: relative;
+}
+
+.table th:before {
+    position: absolute;
+    right: 10px;
+}
+
+.table th.sorting_asc:before {
+    content: "↓";
+}
+
+.table th.sorting_desc:before {
+    content: "↑";
+}
 /* general overrides of bootstrap */
 @font-face {
     font-family: 'typenoksidi';
@@ -59,7 +297,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .logo {
-    background: url(/static/img/logo.png) 0 0px;
+    background: url(/static/img/ortoloco_logo.png) 0 0px;
     display: inline-block;
     width: 220px;
     height: 51px;
@@ -103,6 +341,11 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     width: 623px;
     height: 600px;
 }
+.footer {
+    margin-top: 80px;
+    background: url(/static/img/ortoloco_full.gif) bottom no-repeat;
+    padding-bottom: 400px;
+}
 
 .container .erbsetop {
     position: absolute;
@@ -132,6 +375,46 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
     bottom: 0px;
     width: 20px;
     opacity: 1.0;
+}
+.container .bordertop {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    right: 0;
+    background-image: url(/static/img/erbse_x.png);
+    height: 20px;
+    opacity: 1.0;
+}
+
+.container .borderleft {
+    position: absolute;
+    left: 0px;
+    top: 36px;
+    background-image: url(/static/img/erbse_y.png);
+    bottom: 0px;
+    width: 20px;
+    opacity: 1.0;
+}
+
+.container .borderright {
+    position: absolute;
+    right: -5px;
+    top: 36px;
+    background-image: url(/static/img/erbse_y.png);
+    bottom: 0px;
+    width: 20px;
+    opacity: 1.0;
+}
+
+.container .borderbottom {
+    
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    right: 0;
+    opacity: 1.0;
+    margin-top: 80px;
+    background: url(/static/img/ortoloco_full.gif) bottom no-repeat;
 }
 
 /* menu */
