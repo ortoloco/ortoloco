@@ -218,7 +218,7 @@ TINYMCE_DEFAULT_CONFIG = {
 """
     Impersonate Settings
 """
-IMPERSONATE_REDIRECT_URL = "/my/profil"
+IMPERSONATE_REDIRECT_URL = "/my/profile"
 
 """
     Logging Settings
@@ -275,8 +275,8 @@ PHOTOLOGUE_GALLERY_SAMPLE_SIZE = 3
 """
     Juntagrico Settings
 """
-MEMBER_STRING = "Loc@"
-MEMBERS_STRING = "Loc@s"
+MEMBER_STRING = "Loco"
+MEMBERS_STRING = "Locos"
 ASSIGNMENT_STRING = "Böhnli"
 ASSIGNMENTS_STRING = "Böhnlis"
 ORGANISATION_NAME = "ortoloco"
