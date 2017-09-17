@@ -6,7 +6,7 @@ import os
 """
 DEBUG = os.environ.get("ORTOLOCO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.herokuapp.com', 'ortoloco.herokuapp.com']
+ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.herokuapp.com']
 
 ROOT_URLCONF = 'ortoloco.urls'
 
