@@ -265,7 +265,7 @@ SUBDOMAIN_URLCONFS = {
     None: 'ortoloco.urls', 
     'www': 'ortoloco.urls',
     'my': 'ortoloco.myurlsredirect',
-    'ortoloco.herokuapp': 'fuckoff'
+    'ortoloco': 'fuckoff'
 }
 
 """
