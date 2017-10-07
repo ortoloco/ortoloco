@@ -558,3 +558,20 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 .jobs .core, .teams .core {
     color: #780fff;
 }
+
+td.details-control, tr.shown td.details-control {
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;    
+	color: #4c9434;
+}
+
+
+td.details-control::before {
+    content: "\e080";
+}
+
+tr.shown td.details-control::before {
+    content: "\e114";
+}
