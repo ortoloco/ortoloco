@@ -425,6 +425,12 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 /* menu */
+
+
+.main-menu-small {
+    font-size: 19px;
+}
+
 .nav-pills > li.active > a {
     color: black;
     background-color: transparent;
@@ -435,6 +441,16 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 }
 
 .nav-pills > li.active > a:hover, .nav-pills > .active > a:focus {
+    color: black;
+    background-color: transparent;
+}
+
+.nav-pills > li > a.yellow {
+    color: black;;
+    background-color: transparent;
+}
+
+.nav-pills > li > a.yellow:hover, .nav-pills > li > a:focus {
     color: black;
     background-color: transparent;
 }
