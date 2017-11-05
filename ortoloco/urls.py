@@ -7,13 +7,18 @@ admin.autodiscover()
 from django.contrib.auth.views import login, logout
 from django.views.generic import RedirectView
 from static_ortoloco import views as static_ortoloco
+from .views import Custom500View, error
 import juntagrico
 
 import django
 
 
+handler500 = Custom500View.as_view()
 
 urlpatterns = [
+	url('^500$', Custom500View.as_view()),    
+	url('^500/test$',error),
+    
 	url('^$', static_ortoloco.home),
 	url('^aktuelles$', static_ortoloco.home),
 	url('^idee$', static_ortoloco.about),
