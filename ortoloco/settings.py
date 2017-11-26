@@ -8,6 +8,8 @@ DEBUG = os.environ.get("ORTOLOCO_DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.herokuapp.com']
 
+SECURE_SSL_REDIRECT = True
+
 ROOT_URLCONF = 'ortoloco.urls'
 
 SITE_ID = 1
