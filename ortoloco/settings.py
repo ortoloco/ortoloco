@@ -8,8 +8,10 @@ DEBUG = os.environ.get("ORTOLOCO_DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.herokuapp.com']
 
+SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
 
 ROOT_URLCONF = 'ortoloco.urls'
 
@@ -53,6 +55,7 @@ TEMPLATES = [
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'subdomains.middleware.SubdomainURLRoutingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -312,8 +315,6 @@ ACTIVITY_AREA_INFO = "/static/oters/Infoblatt_Taetigkeitsbereiche.pdf"
 SHARE_PRICE = "250"
 PROMOTED_JOB_TYPES = ["Aktionstag"]
 PROMOTED_JOBS_AMOUNT = 2
-DEPOT_LIST_COVER_SHEETS = 'xxx'
-DEPOT_LIST_OVERVIEWS = 'xx'
 DEPOT_LIST_GENERATION_DAYS = [6]
 BILLING = False
 BUSINESS_YEAR_START = {"day":1, "month":1}
