@@ -289,11 +289,11 @@ ASSIGNMENTS_STRING = "Böhnlis"
 ORGANISATION_NAME = "ortoloco"
 ORGANISATION_LONG_NAME = "Genossenschaft ortoloco – Die regionale Gartenkooperative"
 ORGANISATION_ADDRESS = {"name":"ortoloco",
-            "street" : "Albisriederstr.",
-            "number" : "203b",
-            "zip" : "8047 ",
+            "street" : "Geerenweg",
+            "number" : "2",
+            "zip" : "8048",
             "city" : "Zürich",
-            "extra" : ""}
+            "extra" : "c/o co_werk 5"}
 ORGANISATION_BANK_CONNECTION = {"PC" : "85-199010-5",
             "IBAN" : "CH72 0900 0000 8519 9010 5",
             "BIC" : "POFICHBEXXX",
