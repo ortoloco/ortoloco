@@ -6,7 +6,7 @@ import os
 """
 DEBUG = os.environ.get("ORTOLOCO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.herokuapp.com']
+ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.herokuapp.com', 'ortolocodev.juntagrico.science']
 
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 3600
@@ -176,22 +176,8 @@ STATICFILES_FINDERS = (
 """
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
-DEFAULT_FILE_STORAGE = 'ortoloco.utils.MediaS3BotoStorage'
-
-try:
-    AWS_ACCESS_KEY_ID = os.environ['ORTOLOCO_AWS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['ORTOLOCO_AWS_KEY']
-    AWS_STORAGE_BUCKET_NAME = os.environ['ORTOLOCO_AWS_BUCKET_NAME']
-except KeyError:
-    raise KeyError('Need to define AWS environment variables: ' +
-                   'ORTOLOCO_AWS_KEY_ID, ORTOLOCO_AWS_KEY, and ORTOLOCO_AWS_BUCKET_NAME')
-
-# Default Django Storage API behavior - don't overwrite files with same name
-AWS_S3_FILE_OVERWRITE = False
-
 MEDIA_ROOT = 'media'
 
-MEDIA_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 
 """
     TINYMCE Settings
