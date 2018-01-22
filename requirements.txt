@@ -10,7 +10,7 @@ django-impersonate==1.1
 boto==2.48.0
 django-storages==1.5.2
 django-imagekit==3.3
-git+http://github.com/ortoloco/django-photologue.git
+django-photologue==3.8.1
 django-toolbelt==0.0.1
 git+http://github.com/ortoloco/juntagrico.git
 psycopg2==2.7.1
