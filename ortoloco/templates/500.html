@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>ortoloco.ch - Die regionale Gartenkooperative</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link rel="shortcut icon" href="/static/img/favicono.ico">
+
+    <script type="text/javascript" src="/static/external/jquery-1.11.2/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/static/external/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+
+    <link href="/static/external/bootstrap-3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="/static/css/ortoloco.css" rel="stylesheet">
+    
+</head>
+<body>
+<style>
+    body {
+        background-color: black;
+        
+        transform: rotate(180deg);
+    }
+    
+    .errortext {
+        color: white;        
+        transform: rotate(180deg);
+    }
+    
+    .bottom {
+        height: 100%;
+    }
+    
+    .errortexth3 {
+        color: white;        
+    }
+    
+    .logo {
+        background: url(/static/img/ortoloco_logo.png) 0 0px;
+        display: inline-block;
+        width: 220px;
+        height: 51px;
+        margin-bottom: 25px;
+        filter: grayscale(1) invert(100%);
+    }
+    
+    .container .erbsetop {
+        position: absolute;
+        left: 0;
+        top: 50px;
+        right: 0;
+        background-image: url(/static/img/erbse_x.png);
+        height: 20px;
+        opacity: 1.0;
+        filter: grayscale(1) invert(100%);
+    }
+
+    .container .erbseleft {
+        position: absolute;
+        left: 0px;
+        top: 36px;
+        background-image: url(/static/img/erbse_y.png);
+        bottom: 0px;
+        width: 20px;
+        opacity: 1.0;
+        filter: grayscale(1) invert(100%);
+    }
+
+    .container .erbseright {
+        position: absolute;
+        right: -5px;
+        top: 36px;
+        background-image: url(/static/img/erbse_y.png);
+        bottom: 0px;
+        width: 20px;
+        opacity: 1.0;
+        filter: grayscale(1) invert(100%);
+    }
+    
+    .ortoloco_gemuese {
+        background: url(/static/img/ortoloco_home_small.gif) right bottom no-repeat;
+        position: absolute;
+        bottom: -5px;
+        right: 70px;
+        width: 623px;
+        height: 600px;
+        filter: grayscale(1) invert(100%);
+    }
+    
+</style>
+<div class="container">
+    <div class="erbsetop hidden-xs"></div>
+    <div class="erbseleft hidden-xs"></div>
+    <div class="erbseright hidden-xs"></div>
+    <div class="ortoloco home">
+        <div class="row">
+            <div class="col-md-4">
+               <span class="logo"></span>     
+                <div class="errortext bottom col-md-12">
+                    Da scheint dich ein Fehler im System in diese Dunkle und unsichere Region des ortoloco Systems geführt zu haben. Es wurde aber bereits jemand informiert, der kommt und dich retten wird.
+                    meistens werden Fehler innerhalb von 24 Stunden behoben. Neu laden wird nicht helfen. Sollten mal alle IT-Locos unabkömmlich sein kann es länger gehen. In solche Fällen kann dir info@ortoloco.ch weiterhelfen.
+                </div>       
+                <div class="errortext bottom col-md-12">
+                    <h3 class="errortexth3">OOOOPS</h3>
+                </div> 
+            </div>
+            <div class="errortext">
+                 
+            </div>
+
+    
+            <div class="col-md-8 errortext">
+                
+            </div>
+        </div>
+
+        <div class="ortoloco_gemuese"></div>
+      </div>
+</div>
+</body>
