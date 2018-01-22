@@ -36,7 +36,8 @@ urlpatterns = [
 
     url(r'^', include('juntagrico.urls')),
         
-    url(r'^impersonate/', include('impersonate.urls')),
+    url(r'^impersonate/', include('impersonate.urls')), 
+    url(r'^photologue/', include('photologue.urls')),
 
     url(r'^accounts/login/$',  login),
 
