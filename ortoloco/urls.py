@@ -27,7 +27,7 @@ urlpatterns = [
 	url('^abo$', static_ortoloco.abo),
 	url('^faq$', static_ortoloco.faq),
 	url('^mitmachen$', static_ortoloco.join),
-	url('^galerie$', RedirectView.as_view(url='/photologue/gallery/page/1/')),
+	url('^galerie$', RedirectView.as_view(url='/photologue/gallerylist/')),
     url('^medien$', static_ortoloco.media),
     url('^links$', static_ortoloco.links),
     url('^dokumente$', static_ortoloco.documents),
@@ -50,7 +50,7 @@ urlpatterns = [
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls)),
 
     # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     #(r'^tinymce/', include('tinymce.urls')),
     #url(r'^medias/(?P<path>.*)$', django.views.static.serve, {
     #    'document_root': settings.MEDIA_ROOT,

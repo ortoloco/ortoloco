@@ -53,16 +53,15 @@ TEMPLATES = [
     },
 ]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'subdomains.middleware.SubdomainURLRoutingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'impersonate.middleware.ImpersonateMiddleware'
-)
+]
 
 INSTALLED_APPS = (
     'juntagrico',
@@ -253,13 +252,13 @@ LOGGING = {
     Subdomain Settings
 """
 # A dictionary of urlconf module paths, keyed by their subdomain.
-SUBDOMAIN_URLCONFS = {
+'''SUBDOMAIN_URLCONFS = {
     None: 'ortoloco.urls', 
     'www': 'ortoloco.urls',
     'my': 'ortoloco.myurlsredirect',
     'ortoloco': 'fuckoff'
 }
-
+'''
 """
     Photologue Settings
 """
