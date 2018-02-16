@@ -53,16 +53,16 @@ TEMPLATES = [
     },
 ]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE=[
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'subdomains.middleware.SubdomainURLRoutingMiddleware',
+    #'subdomains.middleware.SubdomainURLRoutingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'impersonate.middleware.ImpersonateMiddleware'
-)
+]
 
 INSTALLED_APPS = (
     'juntagrico',
@@ -224,7 +224,9 @@ TINYMCE_DEFAULT_CONFIG = {
 """
     Impersonate Settings
 """
-IMPERSONATE_REDIRECT_URL = "/my/profile"
+IMPERSONATE = {
+    'REDIRECT_URL': '/my/profile',
+}
 
 """
     Logging Settings
