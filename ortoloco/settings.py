@@ -286,6 +286,6 @@ IMAGES = {'status_100': '/static/img/erbse_voll.png',
             'single_core': '/static/img/erbse_voll_kernbereich.png',
             'core': '/static/img/erbse_voll_kernbereich.png'
 }
-GOOGLE_API_KEY = os.environ['JUNTAGRICO_GOOGLE_API_KEY']
+GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
 
