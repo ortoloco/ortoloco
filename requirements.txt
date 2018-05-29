@@ -4,5 +4,5 @@ django-tinymce==2.6.0
 gunicorn==19.6.0
 reportlab==3.3.0
 django-photologue==3.8.1
-git+http://github.com/ortoloco/juntagrico.git
+git+http://github.com/juntagrico/juntagrico.git
 psycopg2==2.7.1

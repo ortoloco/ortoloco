@@ -8,6 +8,8 @@ DEBUG = os.environ.get("ORTOLOCO_DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.herokuapp.com', 'ortolocodev.juntagrico.science']
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None
+
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -53,9 +55,11 @@ TEMPLATES = [
     },
 ]
 
-MIDDLEWARE = [
+
+MIDDLEWARE=[
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    #'subdomains.middleware.SubdomainURLRoutingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -209,7 +213,9 @@ TINYMCE_DEFAULT_CONFIG = {
 """
     Impersonate Settings
 """
-IMPERSONATE_REDIRECT_URL = "/my/profile"
+IMPERSONATE = {
+    'REDIRECT_URL': '/my/profile',
+}
 
 """
     Logging Settings
