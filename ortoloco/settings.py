@@ -10,9 +10,6 @@ ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.h
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = 3600
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
 ROOT_URLCONF = 'ortoloco.urls'
@@ -69,6 +66,7 @@ MIDDLEWARE=[
 
 INSTALLED_APPS = (
     'juntagrico',
+    'juntagrico_bookkeeping',
     'static_ortoloco',
     'photologue',
     'django.contrib.auth',

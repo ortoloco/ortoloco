@@ -10,6 +10,7 @@ from static_ortoloco import views as static_ortoloco
 from .views import Custom500View, error
 import juntagrico
 
+
 import django
 
 
@@ -41,7 +42,7 @@ urlpatterns = [
 
     url(r'^accounts/login/$',  login),
 
-
+    url(r'^',include('juntagrico_bookkeeping.urls')),
     
     #url('^test_filters/$', my_ortoloco.test_filters),
     #url('^test_filters_post/$', my_ortoloco.test_filters_post),
