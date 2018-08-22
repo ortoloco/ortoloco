@@ -66,7 +66,7 @@ MIDDLEWARE=[
 
 INSTALLED_APPS = (
     'juntagrico',
-    'juntagrico_bookkeeping',
+    #'juntagrico_bookkeeping',
     'static_ortoloco',
     'photologue',
     'django.contrib.auth',
@@ -130,7 +130,7 @@ AUTHENTICATION_BACKENDS = (
 """
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('JUNTAGRICO_DATABASE_ENGINE','django.db.backends.sqlite3'), 
+        'ENGINE': os.environ.get('JUNTAGRICO_DATABASE_ENGINE','django.db.backends.postgresql'), 
         'NAME': os.environ.get('JUNTAGRICO_DATABASE_NAME','{{cookiecutter.project_slug}}.db'), 
         'USER': os.environ.get('JUNTAGRICO_DATABASE_USER'), #''junatagrico', # The following settings are not used with sqlite3:
         'PASSWORD': os.environ.get('JUNTAGRICO_DATABASE_PASSWORD'), #''junatagrico',
