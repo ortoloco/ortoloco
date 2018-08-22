@@ -66,9 +66,10 @@ MIDDLEWARE=[
 
 INSTALLED_APPS = (
     'juntagrico',
-    #'juntagrico_bookkeeping',
+    'juntagrico_bookkeeping',
     'static_ortoloco',
     'photologue',
+    'sortedm2m',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
