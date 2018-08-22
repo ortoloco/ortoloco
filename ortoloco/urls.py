@@ -4,7 +4,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
-from django.contrib.auth.views import login, logout
+from django.contrib.auth.views import LoginView
 from django.views.generic import RedirectView
 from static_ortoloco import views as static_ortoloco
 from .views import Custom500View, error
@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^impersonate/', include('impersonate.urls')), 
     url(r'^photologue/', include('photologue.urls')),
 
-    url(r'^accounts/login/$',  login),
+    url(r'^accounts/login/$',  LoginView.as_view()),
 
     url(r'^',include('juntagrico_bookkeeping.urls')),
     
