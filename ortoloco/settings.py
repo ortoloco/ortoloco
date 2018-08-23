@@ -115,7 +115,7 @@ ADMINS = [
     ('Admin', os.environ.get('ORTOLOCO_ADMIN_EMAIL'))
 ]
 MANAGERS = ADMINS
-SERVER_EMAIL="server@ortoloco.ch"
+SERVER_EMAIL="noreply@ortoloco.ch"
 
 """
     Auth Settings
