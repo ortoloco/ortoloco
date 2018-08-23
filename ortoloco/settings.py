@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     'juntagrico_bookkeeping',
     'static_ortoloco',
     'photologue',
+    'sortedm2m',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -131,7 +132,7 @@ AUTHENTICATION_BACKENDS = (
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('JUNTAGRICO_DATABASE_ENGINE','django.db.backends.sqlite3'), 
-        'NAME': os.environ.get('JUNTAGRICO_DATABASE_NAME','{{cookiecutter.project_slug}}.db'), 
+        'NAME': os.environ.get('JUNTAGRICO_DATABASE_NAME','ortoloco.db'), 
         'USER': os.environ.get('JUNTAGRICO_DATABASE_USER'), #''junatagrico', # The following settings are not used with sqlite3:
         'PASSWORD': os.environ.get('JUNTAGRICO_DATABASE_PASSWORD'), #''junatagrico',
         'HOST': os.environ.get('JUNTAGRICO_DATABASE_HOST'), #'localhost', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
@@ -179,7 +180,7 @@ STATICFILES_FINDERS = (
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 MEDIA_ROOT = 'media'
-
+MEDIA_URL = '/media/'
 
 """
     TINYMCE Settings
