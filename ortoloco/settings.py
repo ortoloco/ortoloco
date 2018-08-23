@@ -112,11 +112,11 @@ EMAIL_USE_TLS = os.environ.get('JUNTAGRICO_EMAIL_TLS', 'True')=='True'
 """
     Admin Settings
 """
-ADMINS = (
-    ('Admin', os.environ.get('JUNTAGRICO_ADMIN_EMAIL')),
-)
+ADMINS = [
+    ('Admin', os.environ.get('JUNTAGRICO_ADMIN_EMAIL'))
+]
 MANAGERS = ADMINS
-SERVER_EMAIL="server@ortoloco.ch"
+SERVER_EMAIL="noreply@ortoloco.ch"
 
 """
     Auth Settings
