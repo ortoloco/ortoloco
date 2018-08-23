@@ -111,9 +111,9 @@ EMAIL_USE_TLS = os.environ.get('ORTOLOCO_EMAIL_TLS', True)
 """
     Admin Settings
 """
-ADMINS = (
-    ('Admin', os.environ.get('ORTOLOCO_ADMIN_EMAIL')),
-)
+ADMINS = [
+    ('Admin', os.environ.get('ORTOLOCO_ADMIN_EMAIL'))
+]
 MANAGERS = ADMINS
 SERVER_EMAIL="server@ortoloco.ch"
 
