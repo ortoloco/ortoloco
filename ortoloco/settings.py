@@ -116,7 +116,7 @@ ADMINS = [
     ('Admin', os.environ.get('JUNTAGRICO_ADMIN_EMAIL'))
 ]
 MANAGERS = ADMINS
-SERVER_EMAIL="noreply@ortoloco.ch"
+SERVER_EMAIL="it@ortoloco.ch"
 
 """
     Auth Settings
