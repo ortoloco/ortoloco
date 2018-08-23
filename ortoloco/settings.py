@@ -180,7 +180,7 @@ STATICFILES_FINDERS = (
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 MEDIA_ROOT = 'media'
-
+MEDIA_URL = '/media/'
 
 """
     TINYMCE Settings
