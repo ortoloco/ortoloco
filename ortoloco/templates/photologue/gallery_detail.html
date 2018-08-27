@@ -7,7 +7,7 @@
 <h3>{{ object.title }}</h3>
 <div class="galleryDate">Galerie vom {{ object.date_added|date:"d.m.Y" }}</div>
 {% if object.description %}<p>{{ object.description }}</p>{% endif %}
-<div class="thumbnails photo-gallery container">
+<div class="thumbnails photo-gallery">
    <div class="row">
     {% for photo in object.public %}
     <div class="gallery-photo col-md-4">
@@ -15,7 +15,7 @@
         	<img src="{{ photo.image.url }}" class="{% block gallery-photo-class %}{% endblock %}" alt="{{ photo.title }}"/>
         </a>
     </div>
-    {% if forloop.counter0|divisibleby:2 and forloop.counter0 > 0 and not forloop.last%}
+    {% if forloop.counter1|divisibleby:3 and forloop.counter0 > 0 and not forloop.last%}
 	</div>
 	<div class="row">
     {% endif %}
