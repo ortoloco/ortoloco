@@ -15,7 +15,7 @@
         	<img src="{{ photo.image.url }}" class="{% block gallery-photo-class %}{% endblock %}" alt="{{ photo.title }}"/>
         </a>
     </div>
-    {% if forloop.counter1|divisibleby:3 and forloop.counter0 > 0 and not forloop.last%}
+    {% if forloop.counter|divisibleby:3 and forloop.counter0 > 0 and not forloop.last%}
 	</div>
 	<div class="row">
     {% endif %}
