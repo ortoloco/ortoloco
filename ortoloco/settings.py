@@ -236,10 +236,23 @@ PHOTOLOGUE_GALLERY_SAMPLE_SIZE = 3
 """
     Juntagrico Settings
 """
-MEMBER_STRING = "Loco"
-MEMBERS_STRING = "Locos"
-ASSIGNMENT_STRING = "Böhnli"
-ASSIGNMENTS_STRING = "Böhnlis"
+VOCABULARY = {
+    'member': 'Loco',
+    'member_pl' : 'Locos',
+    'assignment' : 'Böhnli',
+    'assignment_pl' : 'Böhnlis',
+    'share' : 'Anteilschein',
+    'share_pl' : 'Anteilscheine',
+    'subscription' : 'Abo',
+    'subscription_pl' : 'Abos',
+    'co_member' : 'Mitabonnent',
+    'co_member_pl' : 'Mitabonnenten',
+    'price' : 'Betriebsbeitrag',
+    'member_type' : 'Mitglied',
+    'member_type_pl' : 'Mitglieder',
+    'depot' : 'Depot',
+    'depot_pl' : 'Depots'
+}
 ORGANISATION_NAME = "ortoloco"
 ORGANISATION_LONG_NAME = "Genossenschaft ortoloco – Die regionale Gartenkooperative"
 ORGANISATION_ADDRESS = {"name":"ortoloco",
