@@ -1,0 +1,8 @@
+.juntagrico_logo {
+    background: url(/static/img/myortoloco.png) 0 0px; 
+    background-repeat: no-repeat;
+    background-position: left center; 
+    display: inline-block;
+    width: 580px;
+    height: 161px;
+}

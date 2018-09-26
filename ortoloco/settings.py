@@ -4,15 +4,12 @@ import os
 """
     General Settings
 """
-DEBUG = os.environ.get("ORTOLOCO_DEBUG", "True") == "True"
+DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.herokuapp.com']
+ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.herokuapp.com', 'ortolocodev.juntagrico.science', 'ortoloco.juntagrico.science']
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = 3600
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
 ROOT_URLCONF = 'ortoloco.urls'
@@ -55,6 +52,7 @@ TEMPLATES = [
     },
 ]
 
+
 MIDDLEWARE=[
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -68,8 +66,10 @@ MIDDLEWARE=[
 
 INSTALLED_APPS = (
     'juntagrico',
+    'juntagrico_bookkeeping',
     'static_ortoloco',
     'photologue',
+    'sortedm2m',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -94,28 +94,29 @@ def whitelist_email_from_env(var_env_name):
     if email:
         WHITELIST_EMAILS.append(email.replace('@gmail.com', '(\+\S+)?@gmail.com'))
 
-whitelist_email_from_env("ORTOLOCO_EMAIL_USER")
+whitelist_email_from_env("JUNTAGRICO_EMAIL_USER")
 
 if DEBUG is True:
     for key in list(os.environ.keys()):
-        if key.startswith("ORTOLOCO_EMAIL_WHITELISTED"):
+        if key.startswith("JUNTAGRICO_EMAIL_WHITELISTED"):
             whitelist_email_from_env(key)
 
 
-EMAIL_HOST = os.environ.get('ORTOLOCO_EMAIL_HOST')
-EMAIL_HOST_USER = os.environ.get('ORTOLOCO_EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('ORTOLOCO_EMAIL_PASSWORD')
-EMAIL_PORT = os.environ.get('ORTOLOCO_EMAIL_PORT', 587)
-EMAIL_USE_TLS = os.environ.get('ORTOLOCO_EMAIL_TLS', True)
+
+EMAIL_HOST = os.environ.get('JUNTAGRICO_EMAIL_HOST')
+EMAIL_HOST_USER = os.environ.get('JUNTAGRICO_EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('JUNTAGRICO_EMAIL_PASSWORD')
+EMAIL_PORT = int(os.environ.get('JUNTAGRICO_EMAIL_PORT', '587' ))
+EMAIL_USE_TLS = os.environ.get('JUNTAGRICO_EMAIL_TLS', 'True')=='True'
 
 """
     Admin Settings
 """
-ADMINS = (
-    ('Admin', os.environ.get('ORTOLOCO_ADMIN_EMAIL')),
-)
+ADMINS = [
+    ('Admin', os.environ.get('JUNTAGRICO_ADMIN_EMAIL'))
+]
 MANAGERS = ADMINS
-SERVER_EMAIL="server@ortoloco.ch"
+SERVER_EMAIL="it@ortoloco.ch"
 
 """
     Auth Settings
@@ -130,12 +131,12 @@ AUTHENTICATION_BACKENDS = (
 """
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('ORTOLOCO_DATABASE_ENGINE'), # 'django.db.backends.postgresql_psycopg2', #'django.db.backends.sqlite3'
-        'NAME': os.environ.get('ORTOLOCO_DATABASE_NAME'), # 'db.sqlite',                      # Or path to database file if using sqlite3.
-        'USER': os.environ.get('ORTOLOCO_DATABASE_USER'), # The following settings are not used with sqlite3:
-        'PASSWORD': os.environ.get('ORTOLOCO_DATABASE_PASSWORD'),
-        'HOST': os.environ.get('ORTOLOCO_DATABASE_HOST'),# Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': os.environ.get('ORTOLOCO_DATABASE_PORT', False),  # Set to empty string for default.
+        'ENGINE': os.environ.get('JUNTAGRICO_DATABASE_ENGINE','django.db.backends.sqlite3'), 
+        'NAME': os.environ.get('JUNTAGRICO_DATABASE_NAME','ortoloco.db'), 
+        'USER': os.environ.get('JUNTAGRICO_DATABASE_USER'), #''junatagrico', # The following settings are not used with sqlite3:
+        'PASSWORD': os.environ.get('JUNTAGRICO_DATABASE_PASSWORD'), #''junatagrico',
+        'HOST': os.environ.get('JUNTAGRICO_DATABASE_HOST'), #'localhost', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': os.environ.get('JUNTAGRICO_DATABASE_PORT', False), #''', # Set to empty string for default.
     }
 }
 
@@ -188,22 +189,8 @@ STATICFILES_FINDERS = (
 """
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
-DEFAULT_FILE_STORAGE = 'ortoloco.utils.MediaS3BotoStorage'
-
-try:
-    AWS_ACCESS_KEY_ID = os.environ['ORTOLOCO_AWS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['ORTOLOCO_AWS_KEY']
-    AWS_STORAGE_BUCKET_NAME = os.environ['ORTOLOCO_AWS_BUCKET_NAME']
-except KeyError:
-    raise KeyError('Need to define AWS environment variables: ' +
-                   'ORTOLOCO_AWS_KEY_ID, ORTOLOCO_AWS_KEY, and ORTOLOCO_AWS_BUCKET_NAME')
-
-# Default Django Storage API behavior - don't overwrite files with same name
-AWS_S3_FILE_OVERWRITE = False
-
 MEDIA_ROOT = 'media'
-
-MEDIA_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = '/media/'
 
 """
     TINYMCE Settings
@@ -241,53 +228,16 @@ IMPERSONATE = {
 }
 
 """
-    Logging Settings
-"""
-# logging config - copied from here: http://stackoverflow.com/questions/18920428/django-logging-on-heroku
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': ('%(asctime)s [%(process)d] [%(levelname)s] ' +
-                       'pathname=%(pathname)s lineno=%(lineno)s ' +
-                       'funcname=%(funcName)s %(message)s'),
-            'datefmt': '%Y-%m-%d %H:%M:%S'
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        }
-    },
-    'handlers': {
-        'null': {
-            'level': 'INFO',
-            'class': 'logging.NullHandler',
-            },
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        }
-    },
-    'loggers': {
-        '': {
-            'handlers': ['console'],
-            'level': 'INFO',
-        }
-    }
-}
-
-"""
     Subdomain Settings
 """
 # A dictionary of urlconf module paths, keyed by their subdomain.
-SUBDOMAIN_URLCONFS = {
+'''SUBDOMAIN_URLCONFS = {
     None: 'ortoloco.urls', 
     'www': 'ortoloco.urls',
     'my': 'ortoloco.myurlsredirect',
     'ortoloco': 'fuckoff'
 }
-
+'''
 """
     Photologue Settings
 """
@@ -296,10 +246,23 @@ PHOTOLOGUE_GALLERY_SAMPLE_SIZE = 3
 """
     Juntagrico Settings
 """
-MEMBER_STRING = "Loco"
-MEMBERS_STRING = "Locos"
-ASSIGNMENT_STRING = "Böhnli"
-ASSIGNMENTS_STRING = "Böhnlis"
+VOCABULARY = {
+    'member': 'Loco',
+    'member_pl' : 'Locos',
+    'assignment' : 'Böhnli',
+    'assignment_pl' : 'Böhnlis',
+    'share' : 'Anteilschein',
+    'share_pl' : 'Anteilscheine',
+    'subscription' : 'Abo',
+    'subscription_pl' : 'Abos',
+    'co_member' : 'Mitabonnent',
+    'co_member_pl' : 'Mitabonnenten',
+    'price' : 'Betriebsbeitrag',
+    'member_type' : 'Mitglied',
+    'member_type_pl' : 'Mitglieder',
+    'depot' : 'Depot',
+    'depot_pl' : 'Depots'
+}
 ORGANISATION_NAME = "ortoloco"
 ORGANISATION_LONG_NAME = "Genossenschaft ortoloco – Die regionale Gartenkooperative"
 ORGANISATION_ADDRESS = {"name":"ortoloco",
@@ -320,8 +283,7 @@ ADMINPORTAL_SERVER_URL = "www.ortoloco.ch"
 BUSINESS_REGULATIONS = "/static/others/160910_-_Betriebsreglement_ortoloco.pdf"
 BYLAWS = "/static/others/160910_-_Statuten_ortoloco.pdf"
 MAIL_TEMPLATE = "mails/ooooemail.html"
-STYLE_SHEET = "/static/css/ortoloco.css"
-BOOTSTRAP = "/static/external/oooo/bootstrap-3.3.1/css/bootstrap.min.css"
+STYLE_SHEET = "/static/css/myortoloco.css"
 FAVICON = "/static/img/favicono.ico"
 FAQ_DOC = "/static/others/FAQ_ortoloco_juli_2017.pdf"
 EXTRA_SUB_INFO = "/static/others/Infoblatt_Zusatzabos.pdf"
@@ -345,6 +307,6 @@ IMAGES = {'status_100': '/static/img/erbse_voll.png',
             'single_core': '/static/img/erbse_voll_kernbereich.png',
             'core': '/static/img/erbse_voll_kernbereich.png'
 }
-GOOGLE_API_KEY = os.environ['ORTOLOCO_GOOGLE_API_KEY']
+GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
 
