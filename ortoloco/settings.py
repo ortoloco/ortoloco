@@ -140,6 +140,16 @@ DATABASES = {
 }
 
 """
+    Caching  Settings
+"""
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'oooo_cache_table',
+    }
+}
+
+"""
     Localization Settings
 """
 TIME_ZONE = 'Europe/Zurich'
