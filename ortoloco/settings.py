@@ -10,7 +10,7 @@ ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.h
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
-
+FILE_UPLOAD_PERMISSIONS = 0o444
 
 ROOT_URLCONF = 'ortoloco.urls'
 
