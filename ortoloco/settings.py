@@ -10,7 +10,7 @@ ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.h
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
-
+FILE_UPLOAD_PERMISSIONS = 0o444
 
 ROOT_URLCONF = 'ortoloco.urls'
 
@@ -107,7 +107,8 @@ EMAIL_HOST = os.environ.get('JUNTAGRICO_EMAIL_HOST')
 EMAIL_HOST_USER = os.environ.get('JUNTAGRICO_EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('JUNTAGRICO_EMAIL_PASSWORD')
 EMAIL_PORT = int(os.environ.get('JUNTAGRICO_EMAIL_PORT', '587' ))
-EMAIL_USE_TLS = os.environ.get('JUNTAGRICO_EMAIL_TLS', 'True')=='True'
+EMAIL_USE_TLS = os.environ.get('JUNTAGRICO_EMAIL_TLS', 'False')=='True'
+EMAIL_USE_SSL = os.environ.get('JUNTAGRICO_EMAIL_SSL', 'False')=='True'
 
 """
     Admin Settings
