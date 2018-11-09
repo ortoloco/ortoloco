@@ -1,6 +1,6 @@
 Pillow==4.3.0
 argparse==1.4.0
-django-tinymce==2.6.0
+django-tinymce==2.7.0
 gunicorn==19.6.0
 reportlab==3.3.0
 django-photologue==3.8.1
