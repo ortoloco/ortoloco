@@ -26,6 +26,8 @@ SECRET_KEY = 'd3w=vyfqpqmcj#&ge1d0$ch#ff7$qt#6z)lzqt=9pg8wg%d^%s'
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -54,6 +56,7 @@ TEMPLATES = [
 
 
 MIDDLEWARE=[
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     #'subdomains.middleware.SubdomainURLRoutingMiddleware',
@@ -81,7 +84,9 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'tinymce',
     'impersonate',
-    'storages'
+    'storages',
+    'oauth2_provider',
+    'corsheaders',
 )
 
 

@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^accounts/login/$',  LoginView.as_view()),
 
     url(r'^',include('juntagrico_bookkeeping.urls')),
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     
     #url('^test_filters/$', my_ortoloco.test_filters),
     #url('^test_filters_post/$', my_ortoloco.test_filters_post),
