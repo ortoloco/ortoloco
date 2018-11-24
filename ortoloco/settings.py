@@ -28,6 +28,12 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+OAUTH2_PROVIDER = {
+    'SCOPES': {
+        'politoloco': 'politoloco darf einmalig deine Email sowie deinen Namen abfragen um einen Account zu erstellen',
+    },
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
