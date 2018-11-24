@@ -7,6 +7,7 @@ admin.autodiscover()
 from django.contrib.auth.views import LoginView
 from django.views.generic import RedirectView
 from static_ortoloco import views as static_ortoloco
+from static_ortoloco import politoloco_views
 from .views import Custom500View, error
 import juntagrico
 
@@ -33,6 +34,8 @@ urlpatterns = [
     url('^links$', static_ortoloco.links),
     url('^dokumente$', static_ortoloco.documents),
     url('^kontakt$', static_ortoloco.contact),
+    
+    url(r'^politoloco/profile', politoloco_views.ApiEndpoint.as_view()),
     
 
     url(r'^', include('juntagrico.urls')),
