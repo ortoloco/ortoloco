@@ -35,7 +35,7 @@ urlpatterns = [
     url('^dokumente$', static_ortoloco.documents),
     url('^kontakt$', static_ortoloco.contact),
     
-    url(r'^politoloco/profile', politoloco_views.ApiEndpoint.as_view()),
+    url(r'^politoloco/profile$', politoloco_views.profile),
     
 
     url(r'^', include('juntagrico.urls')),
