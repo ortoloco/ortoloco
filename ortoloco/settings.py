@@ -129,7 +129,7 @@ ADMINS = [
     ('Admin', os.environ.get('JUNTAGRICO_ADMIN_EMAIL'))
 ]
 MANAGERS = ADMINS
-SERVER_EMAIL="noreply@ortoloco.ch"
+SERVER_EMAIL="it@ortoloco.ch"
 
 """
     Auth Settings
@@ -151,6 +151,17 @@ DATABASES = {
         'PASSWORD': os.environ.get('JUNTAGRICO_DATABASE_PASSWORD'), #''junatagrico',
         'HOST': os.environ.get('JUNTAGRICO_DATABASE_HOST'), #'localhost', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': os.environ.get('JUNTAGRICO_DATABASE_PORT', False), #''', # Set to empty string for default.
+    }
+}
+
+"""
+    Caching  Settings
+"""
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'oooo_cache_table',
+        'TIMEOUT': None,
     }
 }
 
@@ -287,8 +298,7 @@ ADMINPORTAL_SERVER_URL = "www.ortoloco.ch"
 BUSINESS_REGULATIONS = "/static/others/160910_-_Betriebsreglement_ortoloco.pdf"
 BYLAWS = "/static/others/160910_-_Statuten_ortoloco.pdf"
 MAIL_TEMPLATE = "mails/ooooemail.html"
-STYLE_SHEET = "/static/css/ortoloco.css"
-BOOTSTRAP = "/static/external/oooo/bootstrap-3.3.1/css/bootstrap.min.css"
+STYLE_SHEET = "/static/css/myortoloco.css"
 FAVICON = "/static/img/favicono.ico"
 FAQ_DOC = "/static/others/FAQ_ortoloco_juli_2017.pdf"
 EXTRA_SUB_INFO = "/static/others/Infoblatt_Zusatzabos.pdf"

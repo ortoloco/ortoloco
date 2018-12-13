@@ -7,15 +7,21 @@
 <h3>{{ object.title }}</h3>
 <div class="galleryDate">Galerie vom {{ object.date_added|date:"d.m.Y" }}</div>
 {% if object.description %}<p>{{ object.description }}</p>{% endif %}
-<ul class="thumbnails photo-gallery">
+<div class="thumbnails photo-gallery">
+   <div class="row">
     {% for photo in object.public %}
-    <li class="gallery-photo col-md-4">
+    <div class="gallery-photo col-md-4">
         <a class="thumbnail fancybox" rel="{{object.title_slug}}" href="{{ photo.image.url }}" title="{{photo.caption}}">
         	<img src="{{ photo.image.url }}" class="{% block gallery-photo-class %}{% endblock %}" alt="{{ photo.title }}"/>
         </a>
-    </li>
+    </div>
+    {% if forloop.counter|divisibleby:3 and forloop.counter0 > 0 and not forloop.last%}
+	</div>
+	<div class="row">
+    {% endif %}
     {% endfor %}
-</ul>
+   </div>
+</div>
 <br/>
 <div>
 	<a href="{% url 'photologue:gallery-list' %}">Zurück zu allen Galerien</a>
