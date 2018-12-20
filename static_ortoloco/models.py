@@ -13,7 +13,7 @@ class StaticContent(models.Model):
     content = tinymce_models.HTMLField("Html-Inhalt", max_length=10000, default="")
 
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s" % (self.name)
 
     class Meta:
@@ -30,7 +30,7 @@ class Media(models.Model):
     year = models.CharField("Jahr", max_length=4)
 
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s" % (self.name)
 
     class Meta:
@@ -46,7 +46,7 @@ class Download(models.Model):
     sort_order = models.FloatField("Nummer zum Sortieren", default=1.0)
 
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s" % (self.name)
 
     class Meta:
@@ -63,7 +63,7 @@ class Link(models.Model):
     description = models.CharField("Beschreibung", max_length=400)
     sort_order = models.FloatField("Nummer zum Sortieren", default=1.0)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s" % (self.titel)
 
     class Meta:
@@ -80,7 +80,7 @@ class Document(models.Model):
     description = models.CharField("Beschreibung", max_length=400)
     sort_order = models.FloatField("Nummer zum Sortieren", default=1.0)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s" % (self.title)
 
     class Meta:
