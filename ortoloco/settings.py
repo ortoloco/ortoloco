@@ -95,6 +95,7 @@ INSTALLED_APPS = (
     'storages',
     'oauth2_provider',
     'corsheaders',
+    'mailqueue',
 )
 
 
@@ -122,6 +123,9 @@ EMAIL_HOST_PASSWORD = os.environ.get('JUNTAGRICO_EMAIL_PASSWORD')
 EMAIL_PORT = int(os.environ.get('JUNTAGRICO_EMAIL_PORT', '587' ))
 EMAIL_USE_TLS = os.environ.get('JUNTAGRICO_EMAIL_TLS', 'False')=='True'
 EMAIL_USE_SSL = os.environ.get('JUNTAGRICO_EMAIL_SSL', 'False')=='True'
+
+MAILQUEUE_QUEUE_UP = True
+MAILQUEUE_LIMIT = 1
 
 """
     Admin Settings
@@ -324,5 +328,6 @@ IMAGES = {'status_100': '/static/img/erbse_voll.png',
             'core': '/static/img/erbse_voll_kernbereich.png'
 }
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
+DEFAULT_MAILER = 'ortoloco.mailer.Mailer'
 
 
