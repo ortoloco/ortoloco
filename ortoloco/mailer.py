@@ -13,7 +13,7 @@ class Mailer:
             new_message.content = msg.body
             if len(msg.alternatives) > 0:
                 new_message.html_content = msg.alternatives[0][0]
-            new_message.reply_to = msg.reply_to
+            new_message.reply_to =  next(iter(None or []),None)
             for a in msg.attachments:
                 with open(a[0], 'wb') as f:
                     f.write(a[1])
