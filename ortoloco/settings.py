@@ -78,6 +78,7 @@ MIDDLEWARE=[
 INSTALLED_APPS = (
     'juntagrico',
     'juntagrico_bookkeeping',
+    'juntagrico_webdav',
     'static_ortoloco',
     'photologue',
     'sortedm2m',
