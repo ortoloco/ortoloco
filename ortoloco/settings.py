@@ -176,7 +176,7 @@ CACHES = {
 """
 TIME_ZONE = 'Europe/Zurich'
 
-LANGUAGE_CODE = 'de_CH'
+LANGUAGE_CODE = 'de-ch'
 
 USE_I18N = True
 
