@@ -9,4 +9,3 @@ psycopg2==2.7.1
 django-oauth-toolkit==1.2.0 
 django-cors-middleware==1.3.1
 django-mail-queue==3.1.6
-juntagrico-webdav==0.1.0
