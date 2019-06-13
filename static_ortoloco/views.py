@@ -272,7 +272,7 @@ def mailcopy(request):
         pst =request.POST.get("pst", "")
         pcy =request.POST.get("pcy", "")
         logger.info(str(['python', '-m', 'manage', 'mailcopy', email, pst, pcy]))
-        proc = subprocess.run(['python', '-m', 'manage', 'mailcopy', email, pst, pcy], capture_output=True)
+        proc = subprocess.run(['python', '-m', 'manage', 'mailcopy', email, pst, pcy], stdout=subprocess.PIPE)
         logger.info(proc)
         return redirect('/mcw/' + str(proc.pid) + '/')
     return render(request, "mailcopy.html")
