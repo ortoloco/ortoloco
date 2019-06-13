@@ -1,4 +1,5 @@
 import subprocess
+import logging
 
 import psutil as psutil
 from django.http import JsonResponse
@@ -10,6 +11,7 @@ from static_ortoloco.models import *
 
 # Create your views here.
 
+logger = logging.getLogger(__name__)
 
 def getBaseDict(request):
     return {
@@ -269,8 +271,10 @@ def mailcopy(request):
         email =request.POST.get("email", "")
         pst =request.POST.get("pst", "")
         pcy =request.POST.get("pcy", "")
-        print(['python', '-m', 'manage', 'mailcopy', email, pst, pcy])
+        logger.info(str(['python', '-m', 'manage', 'mailcopy', email, pst, pcy]))
         proc = subprocess.Popen(['python', '-m', 'manage', 'mailcopy', email, pst, pcy])
+        logger.info(proc)
+        print(proc)
         return redirect('/mcw/' + str(proc.pid) + '/')
     return render(request, "mailcopy.html")
 
