@@ -6,7 +6,7 @@ from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
 
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger('django.server')
 
     def add_arguments(self, parser):
         parser.add_argument('email', nargs=1)

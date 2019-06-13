@@ -11,7 +11,7 @@ from static_ortoloco.models import *
 
 # Create your views here.
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('django.server')
 
 def getBaseDict(request):
     return {
