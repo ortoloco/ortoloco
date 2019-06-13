@@ -11,11 +11,14 @@ class Command(BaseCommand):
 
     # entry point used by manage.py
     def handle(self, *args, **options):
+        print('Start mailcopy')
         email = options['email'][0]
         pst = options['pst'][0]
         pcy = options['pcy'][0]
+        print('log on to servertown')
         st_con = imaplib.IMAP4_SSL('www12.servertown.ch', 993)
         st_con.login(email, pst)
+        print('log on to cyon')
         cy_con = imaplib.IMAP4_SSL('mail.cyon.ch', 993)
         cy_con.login(email, pcy)
         for box in st_con.list()[1]:
