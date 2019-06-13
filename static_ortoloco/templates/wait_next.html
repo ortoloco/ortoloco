@@ -1,0 +1,23 @@
+{% extends "sbase.html" %}
+
+{% block content %}
+    
+Schritt {{ step }}<p/>
+Das kann einen Moment dauern<p/>
+Prozess id {{ pid }}<p/>
+Hier etwas zum anschauen während du wartest<p/>
+<div class="progress" id="progress-div">
+  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" 
+       role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" 
+       style="width: 0%" id="progress"></div>
+</div>
+
+<a href="{{ next }}" class="btn btn-success disabled" id="next">weiter</a>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+        var pid = '{{ pid }}';
+</script>
+<script type="text/javascript" src="/static/external/require.min.js" data-main="/static/js/initwaitnext.js"></script>
+{% endblock %}

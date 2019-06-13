@@ -21,6 +21,8 @@ def politoloco_profile(request):
     return response
 
 
+
+
 @login_required
 def beipackzettel_profile(request):
     member = request.user.member

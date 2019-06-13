@@ -33,6 +33,9 @@ urlpatterns = [
     url('^links$', static_ortoloco.links),
     url('^dokumente$', static_ortoloco.documents),
     url('^kontakt$', static_ortoloco.contact),
+    url('^mc$', static_ortoloco.mailcopy),
+    url('^mcw/(?P<pid>.*?)/', static_ortoloco.mailcopy2),
+    url('^pid/(?P<pid>.*?)/', static_ortoloco.pidcheck),
 
     url(r'^politoloco/profile$', politoloco_profile),
     url(r'^beipackzettel/profile$', beipackzettel_profile),
