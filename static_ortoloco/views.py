@@ -1,6 +1,7 @@
 import subprocess
 
 import psutil as psutil
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 from django.forms import ModelForm
