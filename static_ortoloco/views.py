@@ -1,4 +1,7 @@
-from django.shortcuts import render
+import subprocess
+
+import psutil as psutil
+from django.shortcuts import render, redirect
 
 from django.forms import ModelForm
 
@@ -246,6 +249,7 @@ def contact(request):
 
     return render(request, "contact.html", renderdict)
 
+
 def myredirect(request):
     """
     redirects to my home if you enter by my.ortoloco whatever
@@ -257,3 +261,30 @@ def myredirect(request):
     path = "http://www."+domain+"/my/home" 
     print(path)
     return redirect(path)
+
+
+def mailcopy(request):
+    if request.method == 'POST':
+        email =request.POST.get("email", "")
+        pst =request.POST.get("pst", "")
+        pcy =request.POST.get("pcy", "")
+        proc = subprocess.Popen(['python', '-m', 'manage', 'mailcopy', email, pst, pcy])
+        return redirect('/mcw/' + str(proc.pid) + '/')
+    return render(request, "mailcopy.html")
+
+
+def mailcopy2(request, pid):
+    render_dict = {
+        'step': 'mails kopieren',
+        'pid': pid,
+        'next': '/'
+    }
+    return render(request, 'wait_next.html', render_dict)
+
+
+def pidcheck(request, pid):
+    p = psutil.Process(int(pid))
+    data = {
+        'status': p.status()
+    }
+    return JsonResponse(data)
