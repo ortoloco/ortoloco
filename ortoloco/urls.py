@@ -14,7 +14,7 @@ import juntagrico
 import django
 
 
-handler500 = Custom500View.as_view()
+#handler500 = Custom500View.as_view()
 
 urlpatterns = [
 	url('^500$', Custom500View.as_view()),    
