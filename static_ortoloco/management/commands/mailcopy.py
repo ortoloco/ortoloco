@@ -27,13 +27,14 @@ class Command(BaseCommand):
         cy_con.login(email, pcy)
         for box in st_con.list()[1]:
             box_str = str(box).split(' "." ')[1].replace('"', '').replace("'", '')
-            st_con.select(box_str, readonly=False)  # open box which will have its contents copied
+            st_con.select('"'+box_str+'"', readonly=False)  # open box which will have its contents copied
             self.logger.info('Fetching messages from \'%s\'...' % box_str)
             resp, items = st_con.search(None, 'ALL')  # get all messages in the box
             msg_nums = items[0].split()
             self.logger.info('%s messages to cyon' % len(msg_nums))
             if len(msg_nums) > 0:
-                cy_con.create(box_str)
+                cy_con.create('"'+box_str+'"')
+            self.logger.info('Created \'%s\'...' % box_str)
             for msg_num in msg_nums:
                 resp, data = st_con.fetch(msg_num, "(FLAGS INTERNALDATE BODY.PEEK[])")  # get email
                 message = data[0][1]
@@ -42,7 +43,10 @@ class Command(BaseCommand):
                 flag_str = " ".join(flags_str)
                 self.logger.info(flag_str)
                 date = imaplib.Time2Internaldate(imaplib.Internaldate2tuple(data[0][0]))  # get date
-                copy_result = cy_con.append(box_str, flag_str, date, message)  # copy to archive
-                self.logger.info(copy_result)
+                try:
+                    copy_result = cy_con.append('"'+box_str+'"', flag_str, date, message)  # copy to archive
+                    #self.logger.info(copy_result)
+                except imaplib.error as err:
+                    self.logger.error(err)
         st_con.logout()
         cy_con.logout()

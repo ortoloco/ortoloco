@@ -328,6 +328,6 @@ IMAGES = {'status_100': '/static/img/erbse_voll.png',
             'core': '/static/img/erbse_voll_kernbereich.png'
 }
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
-DEFAULT_MAILER = 'ortoloco.mailer.Mailer'
+#DEFAULT_MAILER = 'ortoloco.mailer.Mailer'
 
 
