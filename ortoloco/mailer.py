@@ -7,8 +7,8 @@ class Mailer:
     def send(msg):
         tos = msg.to + msg.bcc
         plain_msg = copy.copy(msg)
-        plain_msg.bcc = None
-        plain_msg.to = None
+        plain_msg.bcc = []
+        plain_msg.to = []
         msgs = []
         for to in tos:
             new_message = copy.copy(plain_msg)
