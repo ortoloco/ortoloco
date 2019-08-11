@@ -4,7 +4,7 @@ from django.core import mail
 
 
 class Mailer:
-    def send(self,msg):
+    def send(msg):
         tos = msg.to + msg.bcc
         plain_msg = copy.copy(msg)
         plain_msg.bcc = None
