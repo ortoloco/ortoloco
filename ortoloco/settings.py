@@ -95,7 +95,6 @@ INSTALLED_APPS = (
     'storages',
     'oauth2_provider',
     'corsheaders',
-    'mailqueue',
 )
 
 
