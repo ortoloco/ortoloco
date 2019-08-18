@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'juntagrico',
     'juntagrico_bookkeeping',
     'juntagrico_webdav',
+    'crispy_forms',
     'static_ortoloco',
     'photologue',
     'sortedm2m',
@@ -243,6 +244,10 @@ TINYMCE_DEFAULT_CONFIG = {
 IMPERSONATE = {
     'REDIRECT_URL': '/my/profile',
 }
+"""
+     Crispy Settings
+"""
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 """
     Subdomain Settings
