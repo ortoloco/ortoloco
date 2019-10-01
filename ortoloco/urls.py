@@ -9,6 +9,7 @@ from django.views.generic import RedirectView
 from static_ortoloco import views as static_ortoloco
 from .views import Custom500View, error, politoloco_profile, beipackzettel_profile
 import juntagrico
+from juntagrico.views import home as jhome
 
 
 import django
@@ -20,7 +21,7 @@ urlpatterns = [
 	url('^500$', Custom500View.as_view()),    
 	url('^500/test$',error),
     
-	url('^$', juntagrico.views.home),
+    url('^$', jhome),
 
     url(r'^politoloco/profile$', politoloco_profile),
     url(r'^beipackzettel/profile$', beipackzettel_profile),
