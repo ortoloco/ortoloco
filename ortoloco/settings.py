@@ -6,7 +6,7 @@ import os
 """
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.herokuapp.com', 'ortolocodev.juntagrico.science', 'ortoloco.juntagrico.science']
+ALLOWED_HOSTS = ['my.ortoloco.ch']
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'juntagrico',
     'juntagrico_bookkeeping',
     'juntagrico_webdav',
+    'crispy_forms',
     'static_ortoloco',
     'photologue',
     'sortedm2m',
@@ -95,7 +96,6 @@ INSTALLED_APPS = (
     'storages',
     'oauth2_provider',
     'corsheaders',
-    'mailqueue',
 )
 
 
@@ -124,8 +124,6 @@ EMAIL_PORT = int(os.environ.get('JUNTAGRICO_EMAIL_PORT', '587' ))
 EMAIL_USE_TLS = os.environ.get('JUNTAGRICO_EMAIL_TLS', 'False')=='True'
 EMAIL_USE_SSL = os.environ.get('JUNTAGRICO_EMAIL_SSL', 'False')=='True'
 
-MAILQUEUE_QUEUE_UP = True
-MAILQUEUE_LIMIT = 1
 
 """
     Admin Settings
@@ -246,6 +244,10 @@ TINYMCE_DEFAULT_CONFIG = {
 IMPERSONATE = {
     'REDIRECT_URL': '/my/profile',
 }
+"""
+     Crispy Settings
+"""
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 """
     Subdomain Settings

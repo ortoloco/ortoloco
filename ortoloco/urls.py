@@ -9,40 +9,24 @@ from django.views.generic import RedirectView
 from static_ortoloco import views as static_ortoloco
 from .views import Custom500View, error, politoloco_profile, beipackzettel_profile
 import juntagrico
+from juntagrico.views import home as jhome
 
 
 import django
 
 
-handler500 = Custom500View.as_view()
+#handler500 = Custom500View.as_view()
 
 urlpatterns = [
 	url('^500$', Custom500View.as_view()),    
 	url('^500/test$',error),
     
-	url('^$', static_ortoloco.home),
-	url('^aktuelles$', static_ortoloco.home),
-	url('^idee$', static_ortoloco.about),
-	url('^portrait$', static_ortoloco.portrait),
-	url('^hintergrund$', static_ortoloco.background),
-	url('^abo$', static_ortoloco.abo),
-	url('^faq$', static_ortoloco.faq),
-	url('^mitmachen$', static_ortoloco.join),
-	url('^galerie$', RedirectView.as_view(url='/photologue/gallerylist/')),
-    url('^medien$', static_ortoloco.media),
-    url('^links$', static_ortoloco.links),
-    url('^dokumente$', static_ortoloco.documents),
-    url('^kontakt$', static_ortoloco.contact),
-    url('^mc$', static_ortoloco.mailcopy),
-    url('^mcw/(?P<pid>.*?)/', static_ortoloco.mailcopy2),
-    url('^pid/(?P<pid>.*?)/', static_ortoloco.pidcheck),
+    url('^$', jhome),
 
     url(r'^politoloco/profile$', politoloco_profile),
     url(r'^beipackzettel/profile$', beipackzettel_profile),
-    
 
     url(r'^', include('juntagrico.urls')),
-        
     url(r'^impersonate/', include('impersonate.urls')), 
     url(r'^photologue/', include('photologue.urls')),
 
