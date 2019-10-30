@@ -77,6 +77,7 @@ MIDDLEWARE=[
 INSTALLED_APPS = (
     'juntagrico',
     'juntagrico_bookkeeping',
+    'juntagrico_pg',
     'juntagrico_webdav',
     'crispy_forms',
     'static_ortoloco',
