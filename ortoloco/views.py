@@ -26,8 +26,12 @@ def politoloco_profile(request):
 @login_required
 def beipackzettel_profile(request):
     member = request.user.member
-    response = JsonResponse({'identifier': member.email,
+    membergroups = request.user.groups.values_list('name',flat = True)
+    grouplist = list(membergroups)
+    response = JsonResponse({'id': member.id,
                              'email': member.email,
                              'firstName': member.first_name,
-                             'lastName': member.last_name})
+                             'lastName': member.last_name,
+                             'displayName': member.first_name + " " + member.last_name,
+                             'roles': grouplist})
     return response

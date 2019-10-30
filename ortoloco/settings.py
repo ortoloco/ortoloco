@@ -6,7 +6,7 @@ import os
 """
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ['.orto.xiala.net', '.ortoloco.ch', 'localhost', 'ortoloco-dev.herokuapp.com', 'ortolocodev.juntagrico.science', 'ortoloco.juntagrico.science']
+ALLOWED_HOSTS = ['my.ortoloco.ch']
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
@@ -302,15 +302,15 @@ ORGANISATION_BANK_CONNECTION = {"PC" : "85-199010-5",
 INFO_EMAIL = "info@ortoloco.ch"
 SERVER_URL = "www.ortoloco.ch"
 ADMINPORTAL_NAME = "my.ortoloco"
-ADMINPORTAL_SERVER_URL = "www.ortoloco.ch"
-BUSINESS_REGULATIONS = "/static/others/160910_-_Betriebsreglement_ortoloco.pdf"
-BYLAWS = "/static/others/160910_-_Statuten_ortoloco.pdf"
+ADMINPORTAL_SERVER_URL = "my.ortoloco.ch"
+BUSINESS_REGULATIONS = "https://www.ortoloco.ch/dokumente/ortoloco_Betriebsreglement.pdf"
+BYLAWS = "https://www.ortoloco.ch/dokumente/ortoloco_Statuten.pdf"
 MAIL_TEMPLATE = "mails/ooooemail.html"
 STYLE_SHEET = "/static/css/myortoloco.css"
 FAVICON = "/static/img/favicono.ico"
-FAQ_DOC = "/static/others/FAQ_ortoloco_juli_2017.pdf"
-EXTRA_SUB_INFO = "https://www.ortoloco.ch/media/documents/181125_Infoblatt_Zusatzabos_19.pdf"
-ACTIVITY_AREA_INFO = "/static/oters/Infoblatt_Taetigkeitsbereiche.pdf"
+FAQ_DOC = "https://www.ortoloco.ch/dokumente/ortoloco_FAQ.pdf"
+EXTRA_SUB_INFO = "https://www.ortoloco.ch/dokumente/ortoloco_Zusatzabos.pdf"
+ACTIVITY_AREA_INFO = "https://www.ortoloco.ch/dokumente/ortoloco_Taetigkeitsbereiche.pdf"
 SHARE_PRICE = "250"
 PROMOTED_JOB_TYPES = ["Aktionstag"]
 PROMOTED_JOBS_AMOUNT = 2
