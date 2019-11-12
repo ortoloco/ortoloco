@@ -7,11 +7,3 @@ git+https://github.com/nixnuex/juntagrico-webdav.git
 git+https://github.com/juntagrico/juntagrico-bookkeeping.git
 django-oauth-toolkit==1.2.0 
 juntagrico-pg==1.0.0
-
-#argparse==1.4.0
-#django-tinymce==2.7.0
-#reportlab==3.3.0
-#django-photologue==3.8.1
-#django-cors-middleware==1.3.1
-#psutil==5.4.8
-#django-storages

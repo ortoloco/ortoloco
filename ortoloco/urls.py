@@ -6,7 +6,6 @@ from django.conf import settings
 admin.autodiscover()
 from django.contrib.auth.views import LoginView
 from django.views.generic import RedirectView
-from static_ortoloco import views as static_ortoloco
 from .views import Custom500View, error, politoloco_profile, beipackzettel_profile
 import juntagrico
 from juntagrico.views import home as jhome
@@ -27,8 +26,7 @@ urlpatterns = [
     url(r'^beipackzettel/profile$', beipackzettel_profile),
 
     url(r'^', include('juntagrico.urls')),
-    url(r'^impersonate/', include('impersonate.urls')), 
-    url(r'^photologue/', include('photologue.urls')),
+    url(r'^impersonate/', include('impersonate.urls')),
 
     url(r'^accounts/login/$',  LoginView.as_view()),
 
@@ -46,14 +44,4 @@ urlpatterns = [
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', admin.site.urls),
-    #(r'^tinymce/', include('tinymce.urls')),
-    #url(r'^medias/(?P<path>.*)$', django.views.static.serve, {
-    #    'document_root': settings.MEDIA_ROOT,
-    #}),
-	#url(r'^downloads/(?P<param>.*)$', RedirectView.as_view(url='/medias/downloads/%(param)s')),
-    #url(r'^static/(?P<path>.*)$', django.views.static.serve, {
-    #   'document_root': settings.STATIC_ROOT,
-    #})
-    
-    
 ]
