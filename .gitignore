@@ -3,9 +3,10 @@ venv/*
 *.pyc
 static/*
 .idea
-static/medias/photologue/temp
 settings_local.py
 *.bak
 ssl/*
 my_settings_local.py
 /.project
+.DS_Store
+myenv.txt

@@ -26,8 +26,6 @@ SECRET_KEY = 'd3w=vyfqpqmcj#&ge1d0$ch#ff7$qt#6z)lzqt=9pg8wg%d^%s'
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
-CORS_ORIGIN_ALLOW_ALL = True
-
 OAUTH2_PROVIDER = {
     'SCOPES': {
         'politoloco': 'politoloco darf einmalig deine Email sowie deinen Namen abfragen um einen Account zu erstellen',
@@ -62,26 +60,19 @@ TEMPLATES = [
 
 
 MIDDLEWARE=[
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    #'subdomains.middleware.SubdomainURLRoutingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'oauth2_provider.middleware.OAuth2TokenMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'impersonate.middleware.ImpersonateMiddleware'
+    'impersonate.middleware.ImpersonateMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    #'subdomains.middleware.SubdomainURLRoutingMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
 ]
 
 INSTALLED_APPS = (
     'juntagrico',
-    'juntagrico_bookkeeping',
-    'juntagrico_webdav',
-    'crispy_forms',
-    'static_ortoloco',
-    'photologue',
-    'sortedm2m',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -89,13 +80,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'juntagrico_bookkeeping',
+    'juntagrico_pg',
+    'juntagrico_webdav',
+    'crispy_forms',
+    'impersonate',
+    'oauth2_provider',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'tinymce',
-    'impersonate',
-    'storages',
-    'oauth2_provider',
-    'corsheaders',
 )
 
 
@@ -114,7 +106,6 @@ if DEBUG is True:
     for key in list(os.environ.keys()):
         if key.startswith("JUNTAGRICO_EMAIL_WHITELISTED"):
             whitelist_email_from_env(key)
-
 
 
 EMAIL_HOST = os.environ.get('JUNTAGRICO_EMAIL_HOST')
@@ -139,8 +130,8 @@ SERVER_EMAIL="it@ortoloco.ch"
 """
 AUTHENTICATION_BACKENDS = (
     'juntagrico.util.auth.AuthenticateWithEmail',
+    'django.contrib.auth.backends.ModelBackend',
     'oauth2_provider.backends.OAuth2Backend',
-    'django.contrib.auth.backends.ModelBackend'
 )
 
 """
@@ -198,45 +189,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-
-"""
-    File & Storage Settings
-"""
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-
-MEDIA_ROOT = 'media'
-MEDIA_URL = '/media/'
-
-"""
-    TINYMCE Settings
-"""
-TINYMCE_JS_URL = '/static/external/tinymce/tinymce.min.js'
-
-TINYMCE_DEFAULT_CONFIG = {
-    'theme': "modern",
-    'plugins': 'link',
-    'relative_urls': False,
-    'valid_styles': {
-        '*': 'color,text-align,font-size,font-weight,font-style,text-decoration'
-    },
-    'menu': {
-        'edit': {
-            'title': 'Edit',
-            'items': 'undo redo | cut copy paste | selectall'
-        },
-        'insert': {
-            'title': 'Insert',
-            'items': 'link'
-        },
-        'format': {
-            'title': 'Format',
-            'items': 'bold italic underline strikethrough superscript subscript | formats | removeformat'
-        }
-    }
-}
 
 """
     Impersonate Settings
@@ -260,10 +213,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
     'ortoloco': 'fuckoff'
 }
 '''
-"""
-    Photologue Settings
-"""
-PHOTOLOGUE_GALLERY_SAMPLE_SIZE = 3
 
 """
     Juntagrico Settings
