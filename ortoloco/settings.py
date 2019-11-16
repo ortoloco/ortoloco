@@ -197,6 +197,15 @@ STATICFILES_FINDERS = (
 IMPERSONATE = {
     'REDIRECT_URL': '/my/profile',
 }
+
+"""
+    File & Storage Settings
+"""
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+MEDIA_ROOT = 'media'
+
+
 """
      Crispy Settings
 """
