@@ -80,7 +80,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'juntagrico_bookkeeping',
+    'juntagrico_billing',
     'juntagrico_pg',
     'juntagrico_webdav',
     'crispy_forms',
