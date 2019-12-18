@@ -120,7 +120,8 @@ EMAIL_USE_SSL = os.environ.get('JUNTAGRICO_EMAIL_SSL', 'False')=='True'
     Admin Settings
 """
 ADMINS = [
-    ('Admin', os.environ.get('JUNTAGRICO_ADMIN_EMAIL'))
+    ('Admin', os.environ.get('JUNTAGRICO_ADMIN_EMAIL')),
+    ('Juntagrico', os.environ.get('JUNTAGRICO_DS_EMAIL'))
 ]
 MANAGERS = ADMINS
 SERVER_EMAIL="it@ortoloco.ch"
@@ -164,7 +165,7 @@ CACHES = {
 """
 TIME_ZONE = 'Europe/Zurich'
 
-LANGUAGE_CODE = 'de-ch'
+LANGUAGE_CODE = 'de'
 
 USE_I18N = True
 
