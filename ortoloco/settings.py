@@ -18,6 +18,8 @@ SITE_ID = 1
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+LOGIN_REDIRECT_URL = "/my/home"
+
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'ortoloco.wsgi.application'
 
