@@ -23,8 +23,7 @@ LOGIN_REDIRECT_URL = "/my/home"
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'ortoloco.wsgi.application'
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'd3w=vyfqpqmcj#&ge1d0$ch#ff7$qt#6z)lzqt=9pg8wg%d^%s'
+SECRET_KEY = os.environ.get('JUNTAGRICO_SECRET_KEY')
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
