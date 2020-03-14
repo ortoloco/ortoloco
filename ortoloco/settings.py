@@ -83,6 +83,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'juntagrico_billing',
     'juntagrico_pg',
+    'juntagrico_polling',
     'juntagrico_webdav',
     'crispy_forms',
     'impersonate',
