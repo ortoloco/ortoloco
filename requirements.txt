@@ -7,3 +7,4 @@ git+https://github.com/juntagrico/juntagrico-webdav.git
 git+https://github.com/juntagrico/juntagrico-billing.git
 django-oauth-toolkit==1.2.0 
 git+https://github.com/juntagrico/juntagrico-pg.git
+git+https://github.com/nixnuex/juntagrico-polling.git
