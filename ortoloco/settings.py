@@ -84,7 +84,6 @@ INSTALLED_APPS = (
     'juntagrico_billing',
     'juntagrico_pg',
     'juntagrico_webdav',
-    'juntagrico_polling',
     'crispy_forms',
     'impersonate',
     'oauth2_provider',
