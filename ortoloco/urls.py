@@ -35,6 +35,8 @@ urlpatterns = [
 
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'^', include('juntagrico_webdav.urls')),
+	
+    url(r'^', include('juntagrico_polling.urls')),
     
     #url('^test_filters/$', my_ortoloco.test_filters),
     #url('^test_filters_post/$', my_ortoloco.test_filters_post),
