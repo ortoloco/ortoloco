@@ -39,6 +39,6 @@ def beipackzettel_profile(request):
     return response
 
 @login_required
-def openidInit(request):
+def openid_init(request):
     response = management.call_command("creatersakey")
     return response
