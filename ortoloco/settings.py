@@ -88,6 +88,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'impersonate',
     'oauth2_provider',
+    'oidc_provider',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -293,4 +294,5 @@ IMAGES = {'status_100': '/static/img/erbse_voll.png',
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 DEFAULT_MAILER = 'ortoloco.mailer.Mailer'
 
-
+# required by oidc_provider:
+LOGIN_URL = '/accounts/login/'

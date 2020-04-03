@@ -2,6 +2,8 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
 from django.shortcuts import render
+from django.core import management
+
 
 class Custom500View(View):
     def dispatch(self, request, *args, **kwargs):
@@ -34,4 +36,9 @@ def beipackzettel_profile(request):
                              'lastName': member.last_name,
                              'displayName': member.first_name + " " + member.last_name,
                              'roles': grouplist})
+    return response
+
+@login_required
+def openidInit(request):
+    response = management.call_command("creatersakey")
     return response
