@@ -34,14 +34,11 @@ urlpatterns = [
     url(r'^',include('juntagrico_pg.urls')),
 
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    #url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
+    url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
     url(r'^openidinit$', openid_init),
     url(r'^', include('juntagrico_webdav.urls')),
 	
     url(r'^', include('juntagrico_polling.urls')),
-    
-    #url('^test_filters/$', my_ortoloco.test_filters),
-    #url('^test_filters_post/$', my_ortoloco.test_filters_post),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls)),
