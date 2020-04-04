@@ -18,11 +18,12 @@ SITE_ID = 1
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+LOGIN_REDIRECT_URL = "/my/home"
+
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'ortoloco.wsgi.application'
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'd3w=vyfqpqmcj#&ge1d0$ch#ff7$qt#6z)lzqt=9pg8wg%d^%s'
+SECRET_KEY = os.environ.get('JUNTAGRICO_SECRET_KEY')
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
@@ -82,10 +83,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'juntagrico_billing',
     'juntagrico_pg',
+    'juntagrico_polling',
     'juntagrico_webdav',
     'crispy_forms',
     'impersonate',
     'oauth2_provider',
+    'oidc_provider',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -198,6 +201,15 @@ STATICFILES_FINDERS = (
 IMPERSONATE = {
     'REDIRECT_URL': '/my/profile',
 }
+
+"""
+    File & Storage Settings
+"""
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+MEDIA_ROOT = 'media'
+
+
 """
      Crispy Settings
 """
@@ -281,5 +293,3 @@ IMAGES = {'status_100': '/static/img/erbse_voll.png',
 }
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 DEFAULT_MAILER = 'ortoloco.mailer.Mailer'
-
-
