@@ -34,8 +34,8 @@ urlpatterns = [
     url(r'^',include('juntagrico_pg.urls')),
 
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    #url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
-    #url(r'^openidinit$', openid_init),
+    url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
+    url(r'^openidinit$', openid_init),
     url(r'^', include('juntagrico_webdav.urls')),
 	
     url(r'^', include('juntagrico_polling.urls')),

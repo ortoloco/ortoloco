@@ -88,7 +88,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'impersonate',
     'oauth2_provider',
-    #'oidc_provider',
+    'oidc_provider',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
