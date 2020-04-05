@@ -37,8 +37,3 @@ def beipackzettel_profile(request):
                              'displayName': member.first_name + " " + member.last_name,
                              'roles': grouplist})
     return response
-
-@login_required
-def openid_init(request):
-    response = management.call_command("creatersakey")
-    return response
