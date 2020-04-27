@@ -30,7 +30,7 @@ urlpatterns = [
 
     url(r'^accounts/login/$',  LoginView.as_view()),
 
-    url(r'^',include('juntagrico_billing.urls')),
+#    url(r'^',include('juntagrico_billing.urls')),
     url(r'^',include('juntagrico_pg.urls')),
 
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
