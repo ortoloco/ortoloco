@@ -296,5 +296,5 @@ DEFAULT_MAILER = 'ortoloco.mailer.Mailer'
 OIDC_USERINFO = 'ortoloco.oidc_provider_settings.userinfo'
 OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
 
-FROM_FILTER = {'filter_expression': '.*@ortoloco.ch',
+FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
                'replacement_from': 'info@ortoloco.ch'}
