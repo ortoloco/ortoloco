@@ -1,5 +1,5 @@
 gunicorn==20.0.4
-git+http://github.com/juntagrico/juntagrico.git@subtimestamp
+git+https://github.com/juntagrico/juntagrico.git
 psycopg2==2.8.4
 
 django-mail-queue==3.2.2
