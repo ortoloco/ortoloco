@@ -291,8 +291,10 @@ IMAGES = {'status_100': '/static/img/erbse_voll.png',
             'single_core': '/static/img/erbse_voll_kernbereich.png',
             'core': '/static/img/erbse_voll_kernbereich.png'
 }
-GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 DEFAULT_MAILER = 'ortoloco.mailer.Mailer'
 
 OIDC_USERINFO = 'ortoloco.oidc_provider_settings.userinfo'
 OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
+
+FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
+               'replacement_from': 'info@ortoloco.ch'}
