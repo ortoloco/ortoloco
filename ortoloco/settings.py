@@ -298,3 +298,4 @@ OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
 
 FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
                'replacement_from': 'info@ortoloco.ch'}
+

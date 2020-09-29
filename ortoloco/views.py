@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
 from django.shortcuts import render
 from django.core import management
+from django.utils import timezone
 
 
 class Custom500View(View):
@@ -12,6 +13,10 @@ class Custom500View(View):
 
 def error(request):
     asdf
+
+def date(request):
+    response = JsonResponse({'date': timezone.now().date()})
+    return response
 
 
 @login_required
@@ -36,4 +41,9 @@ def beipackzettel_profile(request):
                              'lastName': member.last_name,
                              'displayName': member.first_name + " " + member.last_name,
                              'roles': grouplist})
+    return response
+
+@login_required
+def openid_init(request):
+    response = management.call_command("creatersakey")
     return response
