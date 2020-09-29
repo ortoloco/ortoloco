@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.core import management
 from django.utils import timezone
 
+
 class Custom500View(View):
     def dispatch(self, request, *args, **kwargs):
         return render(request, '500.html', {}, status=500)
