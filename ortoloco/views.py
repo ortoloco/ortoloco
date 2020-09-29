@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
 from django.shortcuts import render
 from django.core import management
-
+from django.utils import timezone
 
 class Custom500View(View):
     def dispatch(self, request, *args, **kwargs):
@@ -12,6 +12,10 @@ class Custom500View(View):
 
 def error(request):
     asdf
+
+def date(request):
+    response = JsonResponse({'date': timezone.now().date()})
+    return response
 
 
 @login_required
