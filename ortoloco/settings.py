@@ -267,6 +267,9 @@ ADMINPORTAL_SERVER_URL = "my.ortoloco.ch"
 BUSINESS_REGULATIONS = "https://www.ortoloco.ch/dokumente/ortoloco_Betriebsreglement.pdf"
 BYLAWS = "https://www.ortoloco.ch/dokumente/ortoloco_Statuten.pdf"
 MAIL_TEMPLATE = "mails/ooooemail.html"
+EMAILS = {
+    's_created': 'mails/oooo_share_created.txt',
+}
 STYLE_SHEET = "/static/css/myortoloco.css"
 FAVICON = "/static/img/favicono.ico"
 FAQ_DOC = "https://www.ortoloco.ch/dokumente/ortoloco_FAQ.pdf"

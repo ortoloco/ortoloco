@@ -1,0 +1,35 @@
+{% extends "mails/email.txt" %}
+{% load i18n %}
+{% load config %}
+{% block content %}
+{% config "organisation_address" as c_addr %}
+{% config "organisation_bank_connection" as c_bank %}
+{% config "share_price" as c_share_price %}
+{% config "currency" as c_currency %}
+{% config "organisation_name" as c_organisation_name %}
+{% enriched_organisation "D" as v_d_enriched_organisation %}
+{% vocabulary "share" as v_share %}
+{% vocabulary "share_pl" as v_share_pl %}
+{% trans "Hallo" %}
+
+{% with sc=shares|length %}Du hast bei {{ v_d_enriched_organisation }} {{ sc }} {{ v_share_pl }} zu je {{ c_currency }} {{ c_share_price }} bestellt.
+
+Bitte überweise den Gesamtbetrag von {{ c_currency }} {% widthratio c_share_price 1 sc|add:"0" %} auf das folgende Konto:{% endwith %}
+
+    {{ c_addr.name }}
+    {% if c_addr.extra %}{{ c_addr.extra }}{% endif %}
+    {{ c_addr.street }} {{ c_addr.number }}
+    {{ c_addr.zip }} {{ c_addr.city }}
+
+    {{ c_bank.NAME }}
+    {% trans "Postkonto-Nummer" %}: {{ c_bank.PC }}
+    {% trans "IBAN" %}: {{ c_bank.IBAN }}
+    {% trans "BIC" %}: {{ c_bank.BIC }}
+
+Gib im Betreff bitte den Namen und die E-Mail-Adresse der Halterin oder des Halters der {{ v_share_pl }} an
+(dies ist vor allem wichtig, wenn du diese {{ v_share_pl }} für jemand anderen bezahlst).
+
+Bis bald und liebe Grüsse
+deine {{ c_organisation_name }}-Betriebsgruppe
+
+{% endblock %}
