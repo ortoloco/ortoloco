@@ -9,6 +9,7 @@ from django.views.generic import RedirectView
 from .views import Custom500View, error, politoloco_profile, beipackzettel_profile, openid_init, date
 import juntagrico
 from juntagrico.views import home as jhome
+from share_info.views import share_info
 
 
 import django
@@ -23,6 +24,8 @@ urlpatterns = [
     url('^$', jhome),
 
     url(r'^info/date$', date),
+
+    url(r'^oooosi/info$', share_info, name='cs-shares-info'),
 	
     url(r'^politoloco/profile$', politoloco_profile),
     url(r'^beipackzettel/profile$', beipackzettel_profile),

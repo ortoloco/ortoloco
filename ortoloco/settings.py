@@ -6,7 +6,7 @@ import os
 """
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ['my.ortoloco.ch']
+ALLOWED_HOSTS = ['my.ortoloco.ch', 'localhost']
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
@@ -89,6 +89,7 @@ INSTALLED_APPS = (
     'impersonate',
     'oauth2_provider',
     'oidc_provider',
+    'share_info'
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

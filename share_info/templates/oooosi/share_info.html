@@ -1,0 +1,19 @@
+{% extends "no_menu_base.html" %}
+{% load i18n %}
+{% load config %}
+{% block all_page_title %}
+    {% vocabulary "share_pl" as v_share_pl %}
+    <div class="page-title offset-md-2 col-md-8">
+        <h3>
+            {% blocktrans %}Information zum{{ v_share_pl }} erwerben{% endblocktrans %}
+        </h3>
+    </div>
+{% endblock %}
+{% block allcontent %}
+    Bei der angegebenen Anzahl von Anteilscheinen handelt es sich um ein Minimum pro Abo.<br>
+    Damit wir den Hof zu einem grossen Teil über Anteilscheine tragen können, beteiligen sich Haushalte, <br>
+    die das können, mit mehr - idealerweise mit 26 Anteilscheinen (CHF 6‘500) pro Abo.
+    <a href="{% url next_page %}" class="btn btn-success">
+                weiter
+    </a>
+{% endblock %}
