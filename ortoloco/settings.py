@@ -6,7 +6,7 @@ import os
 """
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ['my.ortoloco.ch', 'localhost']
+ALLOWED_HOSTS = ['my.ortoloco.ch']
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
@@ -302,5 +302,3 @@ OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
 
 FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
                'replacement_from': 'info@ortoloco.ch'}
-
-SHARES_EXTRA_INFO = 'Bei der angegebenen Anzahl von Anteilscheinen handelt es sich um ein Minimum pro Abo. Damit wir den Hof zu einem grossen Teil über Anteilscheine tragen können, beteiligen sich Haushalte, die das können, mit mehr - idealerweise mit 26 Anteilscheinen (CHF 6‘500) pro Abo.'
