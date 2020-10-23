@@ -89,7 +89,8 @@ INSTALLED_APPS = (
     'impersonate',
     'oauth2_provider',
     'oidc_provider',
-    'share_info'
+    'share_info',
+    'ortoloco',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -302,3 +303,6 @@ OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
 
 FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
                'replacement_from': 'info@ortoloco.ch'}
+
+GEN_LIST_OVERWRITE = os.environ.get('GEN_LIST_OVERWRITE', 'False') == 'True'
+SOLAWI_PREVIEW = os.environ.get('SOLAWI_PREVIEW', 'False') == 'True'
