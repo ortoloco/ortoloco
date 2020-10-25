@@ -13,6 +13,7 @@ from juntagrico.util.temporal import weekdays
 from juntagrico.util.subs import activate_future_depots
 from juntagrico.entity.extrasubs import ExtraSubscriptionType
 from juntagrico.entity.subtypes import SubscriptionType
+from juntagrico.entity.depot import Depot
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
@@ -93,9 +94,9 @@ class Command(BaseCommand):
                                     filter=Q(subscription_set__extra_subscription_set__type__in=eier_types),
                                     distinct=True))
 
-            days = DepotDao.all_depots_order_by_code().prefetch_related('subscription_set'). \
+            days = Depot.objects.all().prefetch_related('subscription_set'). \
                 filter(subscription_set__start_date__gte=preview_start). \
-                values('weekday'). \
+                values('weekday').order_by('weekday'). \
                 annotate(gmues=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=gmues_types), distinct=True)). \
                 annotate(obst=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=obst_types), distinct=True)). \
                 annotate(brot=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=brot_types), distinct=True)). \
@@ -148,9 +149,9 @@ class Command(BaseCommand):
                                         subscription_set__extra_subscription_set__deactivation_date__isnull=True),
                                     distinct=True))
 
-            days = DepotDao.all_depots_order_by_code().prefetch_related('subscription_set'). \
+            days = Depot.objects.all().prefetch_related('subscription_set'). \
                 filter(subscription_set__start_date__gte=preview_start). \
-                values('weekday'). \
+                values('weekday').order_by('weekday'). \
                 annotate(
                 gmues=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=gmues_types) & Q(
                     subscription_set__parts__activation_date__isnull=False) & Q(

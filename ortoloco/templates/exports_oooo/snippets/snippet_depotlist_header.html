@@ -13,7 +13,7 @@
     <tr>
         <th class="namecol"></th>
         {% for product in products %}
-            <th colspan="{{ product.sizes_for_depot_list|count }}" class="top-border {% if forloop.first %}left-border{% endif %} {% if category %}right-border{% endif %}">{{ product.name }}</th>
+            <th colspan="{{ product.sizes|count }}" class="top-border {% if forloop.first %}left-border{% endif %} right-border">{{ product.name }}</th>
         {% endfor %}
         <th colspan="2" class="top-border right-border"></th>
     </tr>
@@ -26,7 +26,7 @@
                 <td class="small bottom-border left-border"></td>
             {% endfor %}
         {% endfor %}
-        <td colspan="2" class="small bottom-border right-border"></td>
+        <td colspan="2" class="small bottom-border left-border right-border"></td>
     </tr>
     <tr class="horz-center">
         <td class="horz-left">{% trans "TOTAL" %}:</td>
