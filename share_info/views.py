@@ -33,7 +33,7 @@ def new_next_page(self):
         return 'cs-start'
     elif has_subs and not self.co_members_done:
         return 'cs-co-members'
-    elif not self.share_info_displayed:
+    elif not getattr(self, 'share_info_displayed', False):
         return 'cs-shares-info'
     elif not self.evaluate_ordered_shares():
         return 'cs-shares'
