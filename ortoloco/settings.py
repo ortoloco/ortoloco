@@ -251,13 +251,12 @@ VOCABULARY = {
     'depot_pl' : 'Depots'
 }
 ORGANISATION_NAME = "ortoloco"
-ORGANISATION_LONG_NAME = "Genossenschaft ortoloco – Die regionale Gartenkooperative"
+ORGANISATION_LONG_NAME = "Genossenschaft ortoloco - die Hofkooperative im Fondli"
 ORGANISATION_ADDRESS = {"name":"ortoloco",
-            "street" : "Geerenweg",
-            "number" : "2",
-            "zip" : "8048",
-            "city" : "Zürich",
-            "extra" : "c/o co_werk 5"}
+            "street" : "Spreitenbacherstrasse",
+            "number" : "35",
+            "zip" : "8953",
+            "city" : "Dietikon",}
 ORGANISATION_BANK_CONNECTION = {"PC" : "85-199010-5",
             "IBAN" : "CH72 0900 0000 8519 9010 5",
             "BIC" : "POFICHBEXXX",
