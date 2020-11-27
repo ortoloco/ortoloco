@@ -25,7 +25,7 @@
     {% for subscription in subscriptions %}
     {% if subscription.depot.pk == depot.pk %}
         <tr class="bottom-border">
-            <td class="namecol top-border left-border horz-left">{{ subscription.nickname_or_recipients_names }}</td>
+            <td class="namecol top-border left-border horz-left">{{ subscription.recipients_names }}</td>
             {% for product in products %}
                 {% for size in product.sizes %}
                     <td class="top-border left-border">{{ subscription|get_attr:size.key|default:'' }}</td>
