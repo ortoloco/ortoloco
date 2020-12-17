@@ -2,19 +2,13 @@ from django.conf.urls import include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-from django.conf import settings
 admin.autodiscover()
 from django.contrib.auth.views import LoginView
-from django.views.generic import RedirectView
-from .views import Custom500View, error, politoloco_profile, beipackzettel_profile, openid_init, date
-import juntagrico
+from .views import Custom500View, error, politoloco_profile, beipackzettel_profile, date
+from .views import depotlist_pre, depot_overview_pre, amount_overview_pre
 from juntagrico.views import home as jhome
+from share_info.views import share_info
 
-
-import django
-
-
-#handler500 = Custom500View.as_view()
 
 urlpatterns = [
 	url('^500$', Custom500View.as_view()),    
@@ -23,6 +17,8 @@ urlpatterns = [
     url('^$', jhome),
 
     url(r'^info/date$', date),
+
+    url(r'^oooosi/info$', share_info, name='cs-shares-info'),
 	
     url(r'^politoloco/profile$', politoloco_profile),
     url(r'^beipackzettel/profile$', beipackzettel_profile),
@@ -38,14 +34,14 @@ urlpatterns = [
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
 
-    url(r'^openidinit$', openid_init),
     url(r'^', include('juntagrico_webdav.urls')),
 	
     url(r'^', include('juntagrico_polling.urls')),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls)),
-
-    # Uncomment the next line to enable the admin:
     url(r'^admin/', admin.site.urls),
+
+    # preview lists
+    url('my/pdf/depotlist_pre', depotlist_pre),
+    url('my/pdf/depotoverview_pre', depot_overview_pre),
+    url('my/pdf/amountoverview_pre', amount_overview_pre),
 ]

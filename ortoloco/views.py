@@ -4,6 +4,9 @@ from django.views.generic.base import View
 from django.shortcuts import render
 from django.core import management
 from django.utils import timezone
+from django.contrib.auth.decorators import permission_required
+
+from juntagrico.util.pdf import return_pdf_http
 
 
 class Custom500View(View):
@@ -43,7 +46,17 @@ def beipackzettel_profile(request):
                              'roles': grouplist})
     return response
 
-@login_required
-def openid_init(request):
-    response = management.call_command("creatersakey")
-    return response
+
+@permission_required('juntagrico.is_operations_group')
+def depotlist_pre(request):
+    return return_pdf_http('depotlist_pre.pdf')
+
+
+@permission_required('juntagrico.is_operations_group')
+def depot_overview_pre(request):
+    return return_pdf_http('depot_overview_pre.pdf')
+
+
+@permission_required('juntagrico.is_operations_group')
+def amount_overview_pre(request):
+    return return_pdf_http('amount_overview_pre.pdf')
