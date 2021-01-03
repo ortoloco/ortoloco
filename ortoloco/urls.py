@@ -5,7 +5,6 @@ from django.contrib import admin
 admin.autodiscover()
 from django.contrib.auth.views import LoginView
 from .views import Custom500View, error, politoloco_profile, beipackzettel_profile, date
-from .views import depotlist_pre, depot_overview_pre, amount_overview_pre
 from juntagrico.views import home as jhome
 from share_info.views import share_info
 
@@ -39,9 +38,4 @@ urlpatterns = [
     url(r'^', include('juntagrico_polling.urls')),
 
     url(r'^admin/', admin.site.urls),
-
-    # preview lists
-    url('my/pdf/depotlist_pre', depotlist_pre),
-    url('my/pdf/depotoverview_pre', depot_overview_pre),
-    url('my/pdf/amountoverview_pre', amount_overview_pre),
 ]
