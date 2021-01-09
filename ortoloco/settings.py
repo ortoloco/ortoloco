@@ -55,13 +55,13 @@ TEMPLATES = [
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader'
             ],
-            'debug' : True
+            'debug': True
         },
     },
 ]
 
 
-MIDDLEWARE=[
+MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -101,10 +101,13 @@ INSTALLED_APPS = (
     Email Settings
 """
 WHITELIST_EMAILS = []
+
+
 def whitelist_email_from_env(var_env_name):
     email = os.environ.get(var_env_name)
     if email:
         WHITELIST_EMAILS.append(email.replace('@gmail.com', '(\+\S+)?@gmail.com'))
+
 
 whitelist_email_from_env("JUNTAGRICO_EMAIL_USER")
 
@@ -113,13 +116,12 @@ if DEBUG is True:
         if key.startswith("JUNTAGRICO_EMAIL_WHITELISTED"):
             whitelist_email_from_env(key)
 
-
 EMAIL_HOST = os.environ.get('JUNTAGRICO_EMAIL_HOST')
 EMAIL_HOST_USER = os.environ.get('JUNTAGRICO_EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('JUNTAGRICO_EMAIL_PASSWORD')
-EMAIL_PORT = int(os.environ.get('JUNTAGRICO_EMAIL_PORT', '587' ))
-EMAIL_USE_TLS = os.environ.get('JUNTAGRICO_EMAIL_TLS', 'False')=='True'
-EMAIL_USE_SSL = os.environ.get('JUNTAGRICO_EMAIL_SSL', 'False')=='True'
+EMAIL_PORT = int(os.environ.get('JUNTAGRICO_EMAIL_PORT', '587'))
+EMAIL_USE_TLS = os.environ.get('JUNTAGRICO_EMAIL_TLS', 'False') == 'True'
+EMAIL_USE_SSL = os.environ.get('JUNTAGRICO_EMAIL_SSL', 'False') == 'True'
 
 
 """
@@ -130,7 +132,7 @@ ADMINS = [
     ('Juntagrico', os.environ.get('JUNTAGRICO_DS_EMAIL'))
 ]
 MANAGERS = ADMINS
-SERVER_EMAIL="it@ortoloco.ch"
+SERVER_EMAIL = "it@ortoloco.ch"
 
 """
     Auth Settings
@@ -146,12 +148,12 @@ AUTHENTICATION_BACKENDS = (
 """
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('JUNTAGRICO_DATABASE_ENGINE','django.db.backends.sqlite3'), 
-        'NAME': os.environ.get('JUNTAGRICO_DATABASE_NAME','ortoloco.db'), 
-        'USER': os.environ.get('JUNTAGRICO_DATABASE_USER'), #''junatagrico', # The following settings are not used with sqlite3:
-        'PASSWORD': os.environ.get('JUNTAGRICO_DATABASE_PASSWORD'), #''junatagrico',
-        'HOST': os.environ.get('JUNTAGRICO_DATABASE_HOST'), #'localhost', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': os.environ.get('JUNTAGRICO_DATABASE_PORT', False), #''', # Set to empty string for default.
+        'ENGINE': os.environ.get('JUNTAGRICO_DATABASE_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.environ.get('JUNTAGRICO_DATABASE_NAME', 'ortoloco.db'),
+        'USER': os.environ.get('JUNTAGRICO_DATABASE_USER'),
+        'PASSWORD': os.environ.get('JUNTAGRICO_DATABASE_PASSWORD'),
+        'HOST': os.environ.get('JUNTAGRICO_DATABASE_HOST'),
+        'PORT': os.environ.get('JUNTAGRICO_DATABASE_PORT', False),
     }
 }
 
@@ -169,18 +171,17 @@ CACHES = {
 """
     Localization Settings
 """
-TIME_ZONE = 'Europe/Zurich'
-
-LANGUAGE_CODE = 'de'
-
+LANGUAGE_CODE = 'de-CH'
 USE_I18N = True
-
 USE_L10N = True
 
-DATE_INPUT_FORMATS =['%d.%m.%Y',]
-
 USE_TZ = True
+TIME_ZONE = 'Europe/Zurich'
 
+# Custom locale formats setting decimal point for de-CH
+FORMAT_MODULE_PATH = [
+     'ortoloco.formats',
+ ]
 
 """
     Static Settings
@@ -235,33 +236,32 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 """
 VOCABULARY = {
     'member': 'Loco',
-    'member_pl' : 'Locos',
-    'assignment' : 'Böhnli',
-    'assignment_pl' : 'Böhnlis',
-    'share' : 'Anteilschein',
-    'share_pl' : 'Anteilscheine',
-    'subscription' : 'Abo',
-    'subscription_pl' : 'Abos',
-    'co_member' : 'Mitabonnent',
-    'co_member_pl' : 'Mitabonnenten',
-    'price' : 'Betriebsbeitrag',
-    'member_type' : 'Mitglied',
-    'member_type_pl' : 'Mitglieder',
-    'depot' : 'Depot',
-    'depot_pl' : 'Depots'
+    'member_pl': 'Locos',
+    'assignment': 'Böhnli',
+    'assignment_pl': 'Böhnlis',
+    'share': 'Anteilschein',
+    'share_pl': 'Anteilscheine',
+    'subscription': 'Abo',
+    'subscription_pl': 'Abos',
+    'co_member': 'Mitabonnent',
+    'co_member_pl': 'Mitabonnenten',
+    'price': 'Betriebsbeitrag',
+    'member_type': 'Mitglied',
+    'member_type_pl': 'Mitglieder',
+    'depot': 'Depot',
+    'depot_pl': 'Depots'
 }
 ORGANISATION_NAME = "ortoloco"
 ORGANISATION_LONG_NAME = "Genossenschaft ortoloco - die Hofkooperative im Fondli"
-ORGANISATION_ADDRESS = {"name":"ortoloco",
-            "street" : "Spreitenbacherstrasse",
-            "number" : "35",
-            "zip" : "8953",
-            "city" : "Dietikon",}
-ORGANISATION_BANK_CONNECTION = {"PC" : "85-199010-5",
-            "IBAN" : "CH72 0900 0000 8519 9010 5",
-            "BIC" : "POFICHBEXXX",
-            "NAME" : "Postfinance",
-            "ESR" : "01-123-45"}
+ORGANISATION_ADDRESS = {"name": "ortoloco",
+                        "street": "Spreitenbacherstrasse",
+                        "number": "35",
+                        "zip": "8953",
+                        "city": "Dietikon", }
+ORGANISATION_BANK_CONNECTION = {"PC": "85-199010-5",
+                                "IBAN": "CH6109000000156196402",
+                                "BIC": "POFICHBEXXX",
+                                "NAME": "PostFinance"}
 INFO_EMAIL = "info@ortoloco.ch"
 SERVER_URL = "www.ortoloco.ch"
 ADMINPORTAL_NAME = "my.ortoloco"
@@ -282,20 +282,20 @@ PROMOTED_JOB_TYPES = ["Aktionstag"]
 PROMOTED_JOBS_AMOUNT = 2
 DEPOT_LIST_GENERATION_DAYS = [3]
 BILLS_USERMENU = True
-BUSINESS_YEAR_START = {"day":1, "month":1}
+BUSINESS_YEAR_START = {"day": 1, "month": 1}
 BUSINESS_YEAR_CANCELATION_MONTH = 9
 DEMO_USER = ''
 DEMO_PWD = ''
 IMAGES = {'status_100': '/static/img/erbse_voll.png',
-            'status_75': '/static/img/erbse_fast_voll.png',
-            'status_50': '/static/img/erbse_halb.png',
-            'status_25': '/static/img/erbse_fast_leer.png',
-            'status_0': '/static/img/erbse_leer.png',
-            'single_full': '/static/img/erbse_voll.png',
-            'single_empty': '/static/img/erbse_leer.png',
-            'single_core': '/static/img/erbse_voll_kernbereich.png',
-            'core': '/static/img/erbse_voll_kernbereich.png'
-}
+          'status_75': '/static/img/erbse_fast_voll.png',
+          'status_50': '/static/img/erbse_halb.png',
+          'status_25': '/static/img/erbse_fast_leer.png',
+          'status_0': '/static/img/erbse_leer.png',
+          'single_full': '/static/img/erbse_voll.png',
+          'single_empty': '/static/img/erbse_leer.png',
+          'single_core': '/static/img/erbse_voll_kernbereich.png',
+          'core': '/static/img/erbse_voll_kernbereich.png'
+          }
 DEFAULT_MAILER = 'ortoloco.mailer.Mailer'
 
 OIDC_USERINFO = 'ortoloco.oidc_provider_settings.userinfo'
