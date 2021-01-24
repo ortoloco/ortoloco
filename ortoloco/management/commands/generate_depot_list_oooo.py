@@ -55,8 +55,8 @@ class Command(BaseCommand):
                     {'name': 'Tofu', 'sizes': [{'name': '200g', 'key': 'tofu'}]}]
 
         gmues_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 18])
-        obst_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17])
-        brot_types = SubscriptionType.objects.filter(pk__in=[8, 9, 12, 13, 16, 17])
+        obst_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22])
+        brot_types = SubscriptionType.objects.filter(pk__in=[8, 9, 12, 13, 16, 17, 19, 20])
         tofu_types = ExtraSubscriptionType.objects.filter(pk__in=[11])
         eier_types = ExtraSubscriptionType.objects.filter(pk__in=[1])
 
