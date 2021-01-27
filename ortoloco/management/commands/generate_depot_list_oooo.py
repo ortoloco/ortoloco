@@ -143,6 +143,7 @@ class Command(BaseCommand):
                                     subscription_set__extra_subscription_set__deactivation_date__isnull=True) | Q(
                                     subscription_set__extra_subscription_set__deactivation_date__gte=now)),
                                 distinct=True))
+                     distinct=True))
 
         for day in days:
             day['name'] = weekdays[day['weekday']]
