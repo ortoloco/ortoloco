@@ -52,7 +52,7 @@ class Command(BaseCommand):
                     {'name': 'Obst', 'sizes': [{'name': 'Portion', 'key': 'obst'}]},
                     {'name': 'Brot', 'sizes': [{'name': '500g', 'key': 'brot'}]},
                     {'name': 'Eier', 'sizes': [{'name': '4er', 'key': 'eier'}]},
-                    {'name': 'Tofu', 'sizes': [{'name': '200g', 'key': 'tofu'}]}]
+                    {'name': 'Tofu', 'sizes': [{'name': 'Portion', 'key': 'tofu'}]}]
 
         gmues_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 18])
         obst_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22])
