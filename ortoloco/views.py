@@ -45,18 +45,3 @@ def beipackzettel_profile(request):
                              'displayName': member.first_name + " " + member.last_name,
                              'roles': grouplist})
     return response
-
-
-@permission_required('juntagrico.is_operations_group')
-def depotlist_pre(request):
-    return return_pdf_http('depotlist_pre.pdf')
-
-
-@permission_required('juntagrico.is_operations_group')
-def depot_overview_pre(request):
-    return return_pdf_http('depot_overview_pre.pdf')
-
-
-@permission_required('juntagrico.is_operations_group')
-def amount_overview_pre(request):
-    return return_pdf_http('amount_overview_pre.pdf')
