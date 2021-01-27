@@ -38,9 +38,4 @@ urlpatterns = [
     url(r'^', include('juntagrico_polling.urls')),
 
     url(r'^admin/', admin.site.urls),
-
-    # preview lists
-    url('my/pdf/depotlist_pre', depotlist_pre),
-    url('my/pdf/depotoverview_pre', depot_overview_pre),
-    url('my/pdf/amountoverview_pre', amount_overview_pre),
 ]
