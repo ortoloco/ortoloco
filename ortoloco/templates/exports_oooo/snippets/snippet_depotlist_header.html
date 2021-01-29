@@ -29,7 +29,7 @@
         <td colspan="2" class="small bottom-border left-border right-border"></td>
     </tr>
     <tr class="horz-center">
-        <td class="horz-left">{% trans "TOTAL" %}:</td>
+        <td class="horz-left">{% trans "Total" %}:</td>
         {% for product in products %}
             {% for size in product.sizes %}
                 <td>{{ depot|get_attr:size.key|default:'0' }}</td>

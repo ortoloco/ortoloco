@@ -10,3 +10,4 @@ my_settings_local.py
 /.project
 .DS_Store
 myenv.txt
+*.db
