@@ -88,6 +88,7 @@ INSTALLED_APPS = (
     'juntagrico_webdav',
     'crispy_forms',
     'impersonate',
+    'adminsortable2',
     'oauth2_provider',
     'oidc_provider',
     'share_info',
@@ -303,3 +304,8 @@ OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
 
 FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
                'replacement_from': 'info@ortoloco.ch'}
+
+SUB_OVERVIEW_FORMAT = {
+    'delimiter': ' + ',
+    'format': '{amount}x {product}:{size}:{type}'
+    }
