@@ -312,6 +312,11 @@ SUB_OVERVIEW_FORMAT = {
     'format': '{amount}x {product}:{size}:{type}'
     }
 
-INTERNAL_IPS = [
-    os.environ.get("DEBUG_IP"),
-]
+
+def show_toolbar(request):
+    return os.environ.get("DEBUG_TOOLBAR") == "True" and request.user and request.user.is_superuser
+
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': 'ortoloco.settings.show_toolbar',
+}
