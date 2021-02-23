@@ -71,6 +71,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     #'subdomains.middleware.SubdomainURLRoutingMiddleware',
     'oauth2_provider.middleware.OAuth2TokenMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 INSTALLED_APPS = (
@@ -93,6 +94,7 @@ INSTALLED_APPS = (
     'oidc_provider',
     'share_info',
     'ortoloco',
+    'debug_toolbar',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -277,7 +279,7 @@ STYLE_SHEET = "/static/css/myortoloco.css"
 FAVICON = "/static/img/favicono.ico"
 FAQ_DOC = "https://www.ortoloco.ch/dokumente/ortoloco_FAQ.pdf"
 EXTRA_SUB_INFO = "https://www.ortoloco.ch/dokumente/ortoloco_Zusatzabos.pdf"
-ACTIVITY_AREA_INFO = "https://www.ortoloco.ch/dokumente/ortoloco_Taetigkeitsbereiche.pdf"
+ACTIVITY_AREA_INFO = ""
 SHARE_PRICE = "250"
 PROMOTED_JOB_TYPES = ["Aktionstag"]
 PROMOTED_JOBS_AMOUNT = 2
@@ -309,3 +311,7 @@ SUB_OVERVIEW_FORMAT = {
     'delimiter': ' + ',
     'format': '{amount}x {product}:{size}:{type}'
     }
+
+INTERNAL_IPS = [
+    os.environ.get("DEBUG_IP"),
+]

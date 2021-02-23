@@ -12,3 +12,4 @@ git+https://github.com/juntagrico/juntagrico-pg.git
 git+https://github.com/nixnuex/juntagrico-polling.git
 
 django-admin-sortable2
+django-debug-toolbar==3.2
