@@ -1,5 +1,10 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ subject }}</title>
 <style>
 /* prevent long lines from breaking the Böhnli layout */
 p,pre {
@@ -11,25 +16,28 @@ p,pre {
 	white-space: -moz-pre-wrap; /* Mozilla */
 	white-space: -hp-pre-wrap;  /* HP Printers */
 	word-wrap: break-word;      /* IE 5+ */
-	width: 500px;
+	width: 100%;
 }
 </style>
 </head>
-<body>
-<table width="600px">
+
+<body style="margin: 0; padding: 0;">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
-        <td colspan="3" background="{{ serverurl }}/static/img/erbse_x.png" align="center" height="20" style="padding:0; margin:0; font-size:12px; height:20px;">&nbsp;</td>
+        <td colspan="3" background="{{ serverurl }}/static/img/erbse_x.png" align="center" height="20" style="padding: 0; margin: 0; font-size: 14px; height: 20px;">&nbsp;</td>
     </tr>
     <tr>
-        <td rowspan="2" background="{{ serverurl }}/static/img/erbse_y.png" width="20" style="padding:0; margin:0; font-size:12px; height:20px;">&nbsp;</td>
-        <td style="font-size:14px;font-family: 'Courier New', monospace; font-weight: bold;padding:20px;">{{ subject }}</td>
-        <td rowspan="2" background="{{ serverurl }}/static/img/erbse_y.png" width="20" style="padding:0; margin:0; font-size:12px; height:20px;">&nbsp;</td>
+        <td rowspan="2" background="{{ serverurl }}/static/img/erbse_y.png" width="20" style="padding: 0; margin: 0; font-size: 14px; height: 20px;">&nbsp;</td>
+        <td style="font-size: 16px; font-family: 'Courier New', monospace; padding: 5px;"><b>{{ subject }}</b></td>
+        <td rowspan="2" background="{{ serverurl }}/static/img/erbse_y.png" width="20" style="padding: 0; margin: 0; font-size: 14px; height: 20px;">&nbsp;</td>
     </tr>
     <tr>
-        <td style="font-size:14px;font-family: 'Courier New', monospace; padding:20px; */word-break: break-all;">{% block content %}{% endblock %}</td>
+        <td style="font-size: 16px; font-family: 'Courier New', monospace; padding: 5px; word-break: break-word;">
+        {% block content %}{% endblock %}
+        </td>
     </tr>
     <tr>
-        <td colspan="3" background="{{ serverurl }}/static/img/erbse_x.png" align="center" height="20" style="padding:0; margin:0; font-size:12px; height:20px;">&nbsp;</td>
+        <td colspan="3" background="{{ serverurl }}/static/img/erbse_x.png" align="center" height="20" style="padding:0; margin:0; font-size:14px; height:20px;">&nbsp;</td>
     </tr>
     <tr>
         <td colspan="3" style="padding-top:25px;">
