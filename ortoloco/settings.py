@@ -281,7 +281,6 @@ SHARE_PRICE = "250"
 PROMOTED_JOB_TYPES = ["Aktionstag"]
 PROMOTED_JOBS_AMOUNT = 2
 DEPOT_LIST_GENERATION_DAYS = [3]
-BILLS_USERMENU = True
 BUSINESS_YEAR_START = {"day": 1, "month": 1}
 BUSINESS_YEAR_CANCELATION_MONTH = 9
 DEMO_USER = ''
@@ -303,3 +302,9 @@ OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
 
 FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
                'replacement_from': 'info@ortoloco.ch'}
+
+"""
+    juntagrico-billing Settings
+"""
+DUEDATE_NOTICE_URL = "https://ortoloco.ch/dokumente/FäHi_2021.pdf"
+BILLS_USERMENU = True
