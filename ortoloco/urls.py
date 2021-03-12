@@ -7,7 +7,8 @@ from django.contrib.auth.views import LoginView
 from .views import Custom500View, error, politoloco_profile, beipackzettel_profile, date
 from juntagrico.views import home as jhome
 from share_info.views import share_info
-
+import debug_toolbar
+from django.urls import include, path
 
 urlpatterns = [
 	url('^500$', Custom500View.as_view()),    
@@ -38,4 +39,4 @@ urlpatterns = [
     url(r'^', include('juntagrico_polling.urls')),
 
     url(r'^admin/', admin.site.urls),
-]
+    path('__debug__/', include(debug_toolbar.urls)),

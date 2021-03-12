@@ -71,6 +71,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     #'subdomains.middleware.SubdomainURLRoutingMiddleware',
     'oauth2_provider.middleware.OAuth2TokenMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 INSTALLED_APPS = (
@@ -88,10 +89,12 @@ INSTALLED_APPS = (
     'juntagrico_webdav',
     'crispy_forms',
     'impersonate',
+    'adminsortable2',
     'oauth2_provider',
     'oidc_provider',
     'share_info',
     'ortoloco',
+    'debug_toolbar',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -276,7 +279,7 @@ STYLE_SHEET = "/static/css/myortoloco.css"
 FAVICON = "/static/img/favicono.ico"
 FAQ_DOC = "https://www.ortoloco.ch/dokumente/ortoloco_FAQ.pdf"
 EXTRA_SUB_INFO = "https://www.ortoloco.ch/dokumente/ortoloco_Zusatzabos.pdf"
-ACTIVITY_AREA_INFO = "https://www.ortoloco.ch/dokumente/ortoloco_Taetigkeitsbereiche.pdf"
+ACTIVITY_AREA_INFO = ""
 SHARE_PRICE = "250"
 PROMOTED_JOB_TYPES = ["Aktionstag"]
 PROMOTED_JOBS_AMOUNT = 2
@@ -303,8 +306,20 @@ OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
 FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
                'replacement_from': 'info@ortoloco.ch'}
 
+SUB_OVERVIEW_FORMAT = {
+    'delimiter': ' + ',
+    'format': '{amount}x {product}:{size}:{type}'
+    }
+
+def show_toolbar(request):
+    return os.environ.get("DEBUG_TOOLBAR") == "True" and request.user and request.user.is_superuser
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': 'ortoloco.settings.show_toolbar',
+}
+
 """
     juntagrico-billing Settings
 """
-DUEDATE_NOTICE_URL = "https://ortoloco.ch/dokumente/FäHi_2021.pdf"
+DUEDATE_NOTICE_URL = "https://ortoloco.ch/dokumente/ortoloco_Faelligkeitshinweis.pdf"
 BILLS_USERMENU = True

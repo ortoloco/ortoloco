@@ -10,3 +10,6 @@ pycryptodomex==3.9.7	# fix version of this oidc-provider dependency
 django-oidc-provider==0.7.0 
 git+https://github.com/juntagrico/juntagrico-pg.git
 git+https://github.com/nixnuex/juntagrico-polling.git
+
+django-admin-sortable2
+django-debug-toolbar==3.2
