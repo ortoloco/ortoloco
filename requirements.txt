@@ -4,7 +4,7 @@ psycopg2==2.8.4
 
 django-mail-queue==3.2.2
 git+https://github.com/juntagrico/juntagrico-webdav.git
-git+https://github.com/juntagrico/juntagrico-billing.git@7f10591
+git+https://github.com/juntagrico/juntagrico-billing.git
 django-oauth-toolkit==1.3.2
 pycryptodomex==3.9.7	# fix version of this oidc-provider dependency
 django-oidc-provider==0.7.0 
