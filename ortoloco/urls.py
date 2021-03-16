@@ -39,6 +39,5 @@ urlpatterns = [
     url(r'^', include('juntagrico_polling.urls')),
 
     url(r'^admin/', admin.site.urls),
-
     path('__debug__/', include(debug_toolbar.urls)),
 ]
