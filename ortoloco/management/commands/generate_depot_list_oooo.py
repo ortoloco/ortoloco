@@ -10,7 +10,6 @@ from juntagrico.dao.subscriptiondao import SubscriptionDao
 from juntagrico.util.pdf import render_to_pdf_storage
 from juntagrico.util.temporal import weekdays
 from juntagrico.util.subs import activate_future_depots
-from juntagrico.entity.extrasubs import ExtraSubscriptionType
 from juntagrico.entity.subtypes import SubscriptionType
 from juntagrico.entity.depot import Depot
 
@@ -57,8 +56,8 @@ class Command(BaseCommand):
         gmues_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 18])
         obst_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22])
         brot_types = SubscriptionType.objects.filter(pk__in=[8, 9, 12, 13, 16, 17, 19, 20])
-        tofu_types = ExtraSubscriptionType.objects.filter(pk__in=[11])
-        eier_types = ExtraSubscriptionType.objects.filter(pk__in=[1])
+        tofu_types = SubscriptionType.objects.filter(pk__in=[])  # TODO: fill pk of sub type "tofu" after migration
+        eier_types = SubscriptionType.objects.filter(pk__in=[])  # TODO: fill pk of sub type "eier" after migration
 
         now = dateformat.format(timezone.now(), 'Y-m-d')
 
@@ -76,16 +75,18 @@ class Command(BaseCommand):
                                 filter=Q(parts__type__in=brot_types) & Q(parts__activation_date__lte=now) & (Q(
                                     parts__deactivation_date__isnull=True) | Q(
                                     parts__deactivation_date__gte=now)), distinct=True)). \
-            annotate(tofu=Count('extra_subscription_set', filter=Q(extra_subscription_set__type__in=tofu_types) & Q(
-            extra_subscription_set__activation_date__lte=now) & (Q(
-            extra_subscription_set__deactivation_date__isnull=True) | Q(
-            extra_subscription_set__deactivation_date__gte=now)), distinct=True)). \
-            annotate(eier=Count('extra_subscription_set', filter=Q(extra_subscription_set__type__in=eier_types) & Q(
-            extra_subscription_set__activation_date__lte=now) & (Q(
-            extra_subscription_set__deactivation_date__isnull=True) | Q(
-            extra_subscription_set__deactivation_date__gte=now)), distinct=True))
+            annotate(tofu=Count('parts',
+                                 filter=Q(parts__type__in=tofu_types) & Q(
+                                     parts__activation_date__lte=now) & (Q(
+                                     parts__deactivation_date__isnull=True) | Q(parts__deactivation_date__gte=now)),
+                                 distinct=True)). \
+            annotate(eier=Count('parts',
+                                 filter=Q(parts__type__in=eier_types) & Q(
+                                     parts__activation_date__lte=now) & (Q(
+                                     parts__deactivation_date__isnull=True) | Q(parts__deactivation_date__gte=now)),
+                                 distinct=True))
 
-        depots = DepotDao.all_depots_order_by_code().prefetch_related('subscription_set'). \
+        depots = DepotDao.all_depots_ordered().prefetch_related('subscription_set'). \
             annotate(
             gmues=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=gmues_types) & Q(
                 subscription_set__parts__activation_date__lte=now) & (Q(
@@ -101,18 +102,16 @@ class Command(BaseCommand):
                 subscription_set__parts__activation_date__lte=now) & (Q(
                 subscription_set__parts__deactivation_date__isnull=True) | Q(
                 subscription_set__parts__deactivation_date__gte=now)), distinct=True)). \
-            annotate(tofu=Count('subscription_set__extra_subscription_set',
-                                filter=Q(subscription_set__extra_subscription_set__type__in=tofu_types) & Q(
-                                    subscription_set__extra_subscription_set__activation_date__lte=now) & (Q(
-                                    subscription_set__extra_subscription_set__deactivation_date__isnull=True) | Q(
-                                    subscription_set__extra_subscription_set__deactivation_date__gte=now)),
-                                distinct=True)). \
-            annotate(eier=Count('subscription_set__extra_subscription_set',
-                                filter=Q(subscription_set__extra_subscription_set__type__in=eier_types) & Q(
-                                    subscription_set__extra_subscription_set__activation_date__lte=now) & (Q(
-                                    subscription_set__extra_subscription_set__deactivation_date__isnull=True) | Q(
-                                    subscription_set__extra_subscription_set__deactivation_date__gte=now)),
-                                distinct=True))
+            annotate(
+            tofu=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=tofu_types) & Q(
+                subscription_set__parts__activation_date__lte=now) & (Q(
+                subscription_set__parts__deactivation_date__isnull=True) | Q(
+                subscription_set__parts__deactivation_date__gte=now)), distinct=True)). \
+            annotate(
+            eier=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=eier_types) & Q(
+                subscription_set__parts__activation_date__lte=now) & (Q(
+                subscription_set__parts__deactivation_date__isnull=True) | Q(
+                subscription_set__parts__deactivation_date__gte=now)), distinct=True))
 
         days = Depot.objects.all().prefetch_related('subscription_set'). \
             values('weekday').order_by('weekday'). \
@@ -131,18 +130,16 @@ class Command(BaseCommand):
                 subscription_set__parts__activation_date__lte=now) & (Q(
                 subscription_set__parts__deactivation_date__isnull=True) | Q(
                 subscription_set__parts__deactivation_date__gte=now)), distinct=True)). \
-            annotate(tofu=Count('subscription_set__extra_subscription_set',
-                                filter=Q(subscription_set__extra_subscription_set__type__in=tofu_types) & Q(
-                                    subscription_set__extra_subscription_set__activation_date__lte=now) & (Q(
-                                    subscription_set__extra_subscription_set__deactivation_date__isnull=True) | Q(
-                                    subscription_set__extra_subscription_set__deactivation_date__gte=now)),
-                                distinct=True)). \
-            annotate(eier=Count('subscription_set__extra_subscription_set',
-                                filter=Q(subscription_set__extra_subscription_set__type__in=eier_types) & Q(
-                                    subscription_set__extra_subscription_set__activation_date__lte=now) & (Q(
-                                    subscription_set__extra_subscription_set__deactivation_date__isnull=True) | Q(
-                                    subscription_set__extra_subscription_set__deactivation_date__gte=now)),
-                                distinct=True))
+            annotate(
+            tofu=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=tofu_types) & Q(
+                subscription_set__parts__activation_date__lte=now) & (Q(
+                subscription_set__parts__deactivation_date__isnull=True) | Q(
+                subscription_set__parts__deactivation_date__gte=now)), distinct=True)). \
+            annotate(
+            eier=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=eier_types) & Q(
+                subscription_set__parts__activation_date__lte=now) & (Q(
+                subscription_set__parts__deactivation_date__isnull=True) | Q(
+                subscription_set__parts__deactivation_date__gte=now)), distinct=True))
 
         for day in days:
             day['name'] = weekdays[day['weekday']]
