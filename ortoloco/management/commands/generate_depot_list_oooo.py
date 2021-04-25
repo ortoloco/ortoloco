@@ -56,8 +56,8 @@ class Command(BaseCommand):
         gmues_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 18])
         obst_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22])
         brot_types = SubscriptionType.objects.filter(pk__in=[8, 9, 12, 13, 16, 17, 19, 20])
-        tofu_types = SubscriptionType.objects.filter(pk__in=[])  # TODO: fill pk of sub type "tofu" after migration
-        eier_types = SubscriptionType.objects.filter(pk__in=[])  # TODO: fill pk of sub type "eier" after migration
+        tofu_types = SubscriptionType.objects.filter(pk__in=[30])  # TODO: fill pk of sub type "tofu" after migration
+        eier_types = SubscriptionType.objects.filter(pk__in=[23])  # TODO: fill pk of sub type "eier" after migration
 
         now = dateformat.format(timezone.now(), 'Y-m-d')
 
@@ -111,7 +111,7 @@ class Command(BaseCommand):
             eier=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=eier_types) & Q(
                 subscription_set__parts__activation_date__lte=now) & (Q(
                 subscription_set__parts__deactivation_date__isnull=True) | Q(
-                subscription_set__parts__deactivation_date__gte=now)), distinct=True))
+                subscription_set__parts__deactivation_date__gte=now)), distinct=True)). order_by('sort_order')
 
         days = Depot.objects.all().prefetch_related('subscription_set'). \
             values('weekday').order_by('weekday'). \
@@ -139,7 +139,7 @@ class Command(BaseCommand):
             eier=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=eier_types) & Q(
                 subscription_set__parts__activation_date__lte=now) & (Q(
                 subscription_set__parts__deactivation_date__isnull=True) | Q(
-                subscription_set__parts__deactivation_date__gte=now)), distinct=True))
+                subscription_set__parts__deactivation_date__gte=now)), distinct=True)).order_by('sort_order')
 
         for day in days:
             day['name'] = weekdays[day['weekday']]
