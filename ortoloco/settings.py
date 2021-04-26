@@ -309,7 +309,7 @@ FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
 
 SUB_OVERVIEW_FORMAT = {
     'delimiter': ' + ',
-    'format': '{amount}x {product}:{size}:{type}'
+    'format': '{amount}x {type}'
     }
 
 
