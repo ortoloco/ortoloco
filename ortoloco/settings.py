@@ -6,7 +6,7 @@ import os
 """
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ['my.ortoloco.ch', 'tmp.ortoloco.ch']
+ALLOWED_HOSTS = ['my.ortoloco.ch']
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 

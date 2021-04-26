@@ -11,7 +11,7 @@ from juntagrico.util.pdf import render_to_pdf_storage
 from juntagrico.util.temporal import weekdays
 from juntagrico.util.subs import activate_future_depots
 from juntagrico.entity.subtypes import SubscriptionType
-from juntagrico.entity.depot import Depot
+from juntagrico.mailer import adminnotification
 
 
 class Command(BaseCommand):
@@ -86,7 +86,7 @@ class Command(BaseCommand):
                                      parts__deactivation_date__isnull=True) | Q(parts__deactivation_date__gte=now)),
                                  distinct=True))
 
-        depots = DepotDao.all_depots_ordered().prefetch_related('subscription_set'). \
+        depots = DepotDao.all_depots_for_list().order_by('sort_order').prefetch_related('subscription_set'). \
             annotate(
             gmues=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=gmues_types) & Q(
                 subscription_set__parts__activation_date__lte=now) & (Q(
@@ -111,9 +111,9 @@ class Command(BaseCommand):
             eier=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=eier_types) & Q(
                 subscription_set__parts__activation_date__lte=now) & (Q(
                 subscription_set__parts__deactivation_date__isnull=True) | Q(
-                subscription_set__parts__deactivation_date__gte=now)), distinct=True)).order_by('sort_order')
+                subscription_set__parts__deactivation_date__gte=now)), distinct=True))
 
-        days = Depot.objects.all().prefetch_related('subscription_set'). \
+        days = DepotDao.all_depots_for_list().prefetch_related('subscription_set'). \
             values('weekday').order_by('weekday'). \
             annotate(
             gmues=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=gmues_types) & Q(
@@ -165,6 +165,8 @@ class Command(BaseCommand):
                               depot_dict, 'depot_overview.pdf')
         render_to_pdf_storage('exports_oooo/amount_overview.html',
                               depot_dict, 'amount_overview.pdf')
+
+        adminnotification.depot_list_generated()
 
         # cleanup files from preview runs
         legacy_files = ['depotlist_pre.pdf', 'depot_overview_pre.pdf', 'amount_overview_pre.pdf']
