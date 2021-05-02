@@ -286,6 +286,7 @@ PROMOTED_JOBS_AMOUNT = 2
 DEPOT_LIST_GENERATION_DAYS = [3]
 DEFAULT_DEPOTLIST_GENERATORS = ['ortoloco.util.depot_list.depot_list_generation']
 BILLS_USERMENU = True
+
 BUSINESS_YEAR_START = {"day": 1, "month": 1}
 BUSINESS_YEAR_CANCELATION_MONTH = 9
 DEMO_USER = ''
@@ -313,11 +314,15 @@ SUB_OVERVIEW_FORMAT = {
     'format': '{amount}x {type}'
     }
 
-
 def show_toolbar(request):
     return os.environ.get("DEBUG_TOOLBAR") == "True" and request.user and request.user.is_superuser
-
 
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': 'ortoloco.settings.show_toolbar',
 }
+
+"""
+    juntagrico-billing Settings
+"""
+DUEDATE_NOTICE_URL = "https://ortoloco.ch/dokumente/ortoloco_Faelligkeitshinweis.pdf"
+BILLS_USERMENU = True
