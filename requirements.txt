@@ -1,11 +1,11 @@
 gunicorn==20.0.4
-git+https://github.com/juntagrico/juntagrico@release_1.4
+git+https://github.com/juntagrico/juntagrico
 psycopg2==2.8.4
 
 django-mail-queue==3.2.2
-git+https://github.com/juntagrico/juntagrico-webdav@remove_menudict
+git+https://github.com/juntagrico/juntagrico-webdav
 git+https://github.com/juntagrico/juntagrico-billing@release_1_4
-git+https://github.com/juntagrico/juntagrico-pg@remove_menudict
+git+https://github.com/juntagrico/juntagrico-pg
 git+https://github.com/nixnuex/juntagrico-polling@remove_menudict
 django-oauth-toolkit==1.3.2
 pycryptodomex==3.9.7	# fix version of this oidc-provider dependency
