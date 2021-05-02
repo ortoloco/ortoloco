@@ -284,6 +284,9 @@ SHARE_PRICE = "250"
 PROMOTED_JOB_TYPES = ["Aktionstag"]
 PROMOTED_JOBS_AMOUNT = 2
 DEPOT_LIST_GENERATION_DAYS = [3]
+DEFAULT_DEPOTLIST_GENERATORS = ['ortoloco.util.depot_list.depot_list_generation']
+BILLS_USERMENU = True
+
 BUSINESS_YEAR_START = {"day": 1, "month": 1}
 BUSINESS_YEAR_CANCELATION_MONTH = 9
 DEMO_USER = ''
@@ -308,7 +311,7 @@ FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
 
 SUB_OVERVIEW_FORMAT = {
     'delimiter': ' + ',
-    'format': '{amount}x {product}:{size}:{type}'
+    'format': '{amount}x {type}'
     }
 
 def show_toolbar(request):
