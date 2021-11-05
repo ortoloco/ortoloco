@@ -4,7 +4,7 @@ psycopg2==2.8.4
 
 django-mail-queue==3.2.2
 git+https://github.com/juntagrico/juntagrico-webdav
-git+https://github.com/juntagrico/juntagrico-billing@release_1_4
+git+https://github.com/juntagrico/juntagrico-billing
 git+https://github.com/juntagrico/juntagrico-pg
 git+https://github.com/nixnuex/juntagrico-polling@remove_menudict
 django-oauth-toolkit==1.3.2
