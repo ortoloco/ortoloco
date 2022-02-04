@@ -324,7 +324,6 @@ DEBUG_TOOLBAR_CONFIG = {
 """
     juntagrico-billing Settings
 """
-DUEDATE_NOTICE_URL = "https://ortoloco.ch/dokumente/ortoloco_Faelligkeitshinweis.pdf"
 BILLS_USERMENU = True
 
 DEFAULT_FROM_EMAIL = INFO_EMAIL
