@@ -12,4 +12,4 @@ django-oauth-toolkit==1.7.0
 #django-oidc-provider==0.7.0
 git+https://github.com/dkdndes/django-oidc-provider@6db384846801564b98ca4a2435187f9ff50ec254
 
-django-debug-toolbar==3.2
+django-debug-toolbar==3.2.1
