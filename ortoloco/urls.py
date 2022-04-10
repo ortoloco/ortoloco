@@ -4,7 +4,7 @@ from django.urls import include, re_path
 from django.contrib import admin
 admin.autodiscover()
 from django.contrib.auth.views import LoginView
-from .views import Custom500View, error, politoloco_profile, beipackzettel_profile, date
+from .views import Custom500View, error, date
 from juntagrico.views import home as jhome
 from share_info.views import share_info
 import debug_toolbar
@@ -18,9 +18,6 @@ urlpatterns = [
     re_path(r'^info/date$', date),
 
     re_path(r'^oooosi/info$', share_info, name='cs-shares-info'),
-	
-    re_path(r'^politoloco/profile$', politoloco_profile),
-    re_path(r'^beipackzettel/profile$', beipackzettel_profile),
 
     re_path(r'^', include('juntagrico.urls')),
     re_path(r'^impersonate/', include('impersonate.urls')),

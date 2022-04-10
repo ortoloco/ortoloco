@@ -23,17 +23,6 @@ def date(request):
 
 
 @login_required
-def politoloco_profile(request):
-    member = request.user.member
-    response = JsonResponse({'email': member.email,
-                             'first_name': member.first_name,
-                             'last_name': member.last_name})
-    return response
-
-
-
-
-@login_required
 def beipackzettel_profile(request):
     member = request.user.member
     membergroups = request.user.groups.values_list('name',flat = True)
