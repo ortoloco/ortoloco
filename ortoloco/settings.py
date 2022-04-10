@@ -72,6 +72,7 @@ MIDDLEWARE = [
     #'subdomains.middleware.SubdomainURLRoutingMiddleware',
     'oauth2_provider.middleware.OAuth2TokenMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
 ]
 
 INSTALLED_APPS = (
@@ -83,6 +84,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'polymorphic',
     'juntagrico_billing',
     'juntagrico_pg',
     'juntagrico_polling',
@@ -192,6 +194,7 @@ FORMAT_MODULE_PATH = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 STATICFILES_DIRS = ( 
     os.path.join(BASE_DIR, 'static_general'),
@@ -267,15 +270,13 @@ ORGANISATION_BANK_CONNECTION = {"PC": "85-199010-5",
                                 "NAME": "PostFinance"}
 INFO_EMAIL = "info@ortoloco.ch"
 SERVER_URL = "www.ortoloco.ch"
-ADMINPORTAL_NAME = "my.ortoloco"
-ADMINPORTAL_SERVER_URL = "my.ortoloco.ch"
 BUSINESS_REGULATIONS = "https://www.ortoloco.ch/dokumente/ortoloco_Betriebsreglement.pdf"
 BYLAWS = "https://www.ortoloco.ch/dokumente/ortoloco_Statuten.pdf"
 MAIL_TEMPLATE = "mails/ooooemail.html"
 EMAILS = {
     's_created': 'mails/oooo_share_created.txt',
 }
-STYLE_SHEET = "/static/css/myortoloco.css"
+STYLES = {'static': ['myortoloco.css']}
 FAVICON = "/static/img/favicono.ico"
 FAQ_DOC = "https://www.ortoloco.ch/dokumente/ortoloco_FAQ.pdf"
 EXTRA_SUB_INFO = "https://www.ortoloco.ch/dokumente/ortoloco_Zusatzabos.pdf"
