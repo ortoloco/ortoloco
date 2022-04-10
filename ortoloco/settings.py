@@ -276,7 +276,7 @@ MAIL_TEMPLATE = "mails/ooooemail.html"
 EMAILS = {
     's_created': 'mails/oooo_share_created.txt',
 }
-STYLES = {'static': ['myortoloco.css']}
+STYLES = {'static': ['css/myortoloco.css']}
 FAVICON = "/static/img/favicono.ico"
 FAQ_DOC = "https://www.ortoloco.ch/dokumente/ortoloco_FAQ.pdf"
 EXTRA_SUB_INFO = "https://www.ortoloco.ch/dokumente/ortoloco_Zusatzabos.pdf"
