@@ -5,8 +5,7 @@ psycopg2==2.8.4
 django-mail-queue==3.2.2
 juntagrico-webdav~=1.5.0
 juntagrico-pg~=1.5.0
-#git+https://github.com/juntagrico/juntagrico-billing
-git+https://github.com/nixnuex/juntagrico-billing@fix_domain_1.5
+git+https://github.com/juntagrico/juntagrico-billing
 git+https://github.com/nixnuex/juntagrico-polling@remove_menudict
 django-oauth-toolkit==1.7.0
 #django-oidc-provider==0.7.0
