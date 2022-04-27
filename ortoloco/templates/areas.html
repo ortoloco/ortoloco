@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 {% load juntagrico.config %}
 {% block page_title %}
     <h3>
@@ -10,14 +11,18 @@
     {% enriched_organisation "D" as v_d_enriched_organisation %}
     <div class="row">
         <div class="col-md-12">
-            Bei ortoloco können alle in allen Bereichen mitarbeiten.
-            Jedoch wählt jede*r zwei Tätigkeitsbereiche, in denen sie/*/er schwerpunktmässig
-            dabei ist und Verantwortung übernimmt. Einer der beiden Bereiche muss ein
-            Kernbereich sein (Ernten, Abpacken, Verteilen).
+            Bei ortoloco können alle in allen Bereichen mitarbeiten. Jedoch wählt jede*r zwei Tätigkeitsbereiche, in denen sie/*/er schwerpunktmässig dabei ist und Verantwortung übernimmt. Einer der beiden Bereiche muss ein Kernbereich sein (Ernten, Abpacken, Verteilen).
+            <br />
+            Wenn es in deinem gewählten Tätigkeitsbereich offene Jobs gibt, bekommst du eine entsprechende Mail-Info und du wirst gebeten, die Lücke zu füllen, wenn's dir geht.            <br />
+            {% config "activity_area_info" as activity_area_info %}
+            {% if activity_area_info.strip %}
+                {% trans "Infos zu den Tätigkeitsbereichen erhältst du im" %}
+                <a target="_blank" href="{{ activity_area_info }}">
+                    {% trans "Infoblatt" %}
+                </a>
+                .
+            {% endif %}
             <br/>
-            Wenn es in deinem gewählten Tätigkeitsbereich offene Jobs gibt,
-            bekommst du eine entsprechende Mail-Info und du
-            wirst gebeten, die Lücke zu füllen, wenn's dir geht.
 
     <div class="row">
         <div class="col-md-12 activity-area-list">
@@ -36,7 +41,7 @@
                             {% endif %}
                         </div>
                         <div class="col-md-8">
-                            {% trans "Koordiniert von" %}:
+                            {% trans "Kontaktperson" %}:
                         </div>
                     </div>
                     <div class="row separator">
@@ -54,17 +59,9 @@
                         <a href="{% url 'area' area.id %}">{{ area.name }}</a>
                     </div>
                     <div class="col-md-8">
-                        {{ area.coordinator.first_name }} {{ area.coordinator.last_name }}
-                        <br/>
-                        {% if area.email is not None %}
-                            <a href="mailto:{{ area.email }}">
-                                {{ area.email }}
-                            </a>
-                        {% else %}
-                            <a href="mailto:{{ area.coordinator.email }}">
-                                {{ area.coordinator.email }}
-                            </a>
-                        {% endif %}
+                        {% for contact in area.contacts %}
+                            {{ contact.to_html }}
+                        {% endfor %}
                     </div>
                 </div>
             {% endfor %}
@@ -72,6 +69,6 @@
     </div>
 {% endblock %}
 {% block scripts %}
-    <script type="text/javascript" src="/static/juntagrico/external/require.min.js" data-main="/static/juntagrico/js/initParticipation.js">
+    <script type="text/javascript" src="{% static 'juntagrico/external/require.min.js' %}" data-main="{% static 'juntagrico/js/initParticipation.js' %}">
     </script>
 {% endblock %}
