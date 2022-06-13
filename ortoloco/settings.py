@@ -328,3 +328,11 @@ DEBUG_TOOLBAR_CONFIG = {
 BILLS_USERMENU = True
 
 DEFAULT_FROM_EMAIL = INFO_EMAIL
+
+MAILER_RICHTEXT_OPTIONS = {
+    'valid_styles': {
+        '*': 'color,text-align,font-size,font-weight,font-style,font-family,text-decoration'
+    },
+    'toolbar': "undo redo | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | "
+               "bullist numlist | link | fontselect fontsizeselect",
+}
