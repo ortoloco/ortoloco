@@ -1,5 +1,6 @@
 gunicorn==20.0.4
-juntagrico~=1.5.0
+#juntagrico~=1.5.0
+git+https://github.com/nixnuex/juntagrico@feat_membership_notice_period # fix membership cancellation date
 psycopg2==2.8.4
 
 django-mail-queue==3.2.2
