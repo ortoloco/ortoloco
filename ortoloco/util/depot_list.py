@@ -32,7 +32,7 @@ def depot_list_generation(*args, **options):
                 {'name': 'Tofu', 'sizes': [{'name': 'Portion', 'key': 'tofu'}]}]
 
     gmues_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 18])
-    obst_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22])
+    obst_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22, 31])
     brot_types = SubscriptionType.objects.filter(pk__in=[8, 9, 12, 13, 16, 17, 19, 20])
     tofu_types = SubscriptionType.objects.filter(pk__in=[30])
     eier_types = SubscriptionType.objects.filter(pk__in=[23])
