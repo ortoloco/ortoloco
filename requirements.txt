@@ -8,8 +8,7 @@ juntagrico-pg~=1.5.0
 git+https://github.com/juntagrico/juntagrico-billing
 git+https://github.com/nixnuex/juntagrico-polling@remove_menudict
 django-oauth-toolkit==1.7.0
-#django-oidc-provider==0.7.0
-git+https://github.com/dkdndes/django-oidc-provider@6db384846801564b98ca4a2435187f9ff50ec254
+git+https://github.com/juanifioren/django-oidc-provider@develop
 
 django-debug-toolbar==3.2.1
 
