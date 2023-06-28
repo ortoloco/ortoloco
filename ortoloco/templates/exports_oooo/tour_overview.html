@@ -11,14 +11,14 @@
     <style>{% include "./snippets/snippet_depotlist_style.css" %}</style>
 </head>
 <body>
-{% for day in weekdays %}
+{% for tour in tours %}
 <div id="header_content" class="gendate">
     Erstellt am: {% now "d.m.Y H:i" %}
 </div>
 <div id="footer_content">
     <div class="messageb">Diese Liste bitte immer zurück ans Klemmbrett heften! Danke.</div>
 </div>
-    <h2 style="font-size: 18px;">{{ day.name }}</h2>
+    <h2 style="font-size: 18px;">{{ tour.name }}</h2>
 <table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
     <tr>
         <td></td>
@@ -35,7 +35,7 @@
         {% endfor %}
         {% resetcycle %}
     </tr>
-    {% for depot in depots|by_weekday:day.weekday %}
+    {% for depot in depots|by_tour:tour.id %}
         <tr>
             <td style="width:360px;">{{ depot.name }}</td>
             {% for product in products %}
@@ -50,7 +50,7 @@
         <td><b>{% trans "Total" %}</b></td>
         {% for product in products %}
             {% for size in product.sizes %}
-                <td class="{% cycle '' 'bg-grey' %}"><b>{{ day|get_attr:size.key|default:'0' }}</b></td>
+                <td class="{% cycle '' 'bg-grey' %}"><b>{{ tour|get_attr:size.key|default:'0' }}</b></td>
             {% endfor %}
         {% endfor %}
         {% resetcycle %}

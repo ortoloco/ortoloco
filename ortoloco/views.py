@@ -45,3 +45,7 @@ def beipackzettel_profile(request):
                              'displayName': member.first_name + " " + member.last_name,
                              'roles': grouplist})
     return response
+
+@permission_required('juntagrico.can_view_lists')
+def tour_overview(request):
+    return return_pdf_http('tour_overview.pdf')

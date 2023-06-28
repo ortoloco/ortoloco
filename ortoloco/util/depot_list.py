@@ -122,6 +122,32 @@ def depot_list_generation(*args, **options):
     for day in days:
         day['name'] = weekdays[day['weekday']]
 
+    tours = [{'id': 0, 'name': 'DIENSTAG - Fondli'},
+             {'id': 1, 'name': 'DIENSTAG - kleines Auto'},
+             {'id': 2, 'name': 'DIENSTAG - grosses Auto'},
+             {'id': 3, 'name': 'DONNERSTAG - Fondli'},
+             {'id': 4, 'name': 'DONNERSTAG - kleines Auto'},
+             {'id': 5, 'name': 'DONNERSTAG - grosses Auto'}]
+
+    # quick and dirty assignment of depot_ids to tours, defined here and in ortoloco_commons.py
+    tour_depots = [[6],
+                   [20, 13, 14, 3],
+                   [8, 12, 11, 2, 16],
+                   [17],
+                   [7, 15, 9, 10],
+                   [5, 18, 19]]
+
+    # calc totals for tours
+    for tour in tours:
+        depot_ids = tour_depots[tour['id']]
+        for product in products:
+            for size in product['sizes']:
+                total = 0
+                for depot in depots:
+                    if depot.id in depot_ids:
+                        total += getattr(depot,size['key'])
+                tour[size['key']] = total
+
     for product in products:
         for size in product['sizes']:
             total = 0
@@ -131,6 +157,7 @@ def depot_list_generation(*args, **options):
 
     depot_dict = {
         'weekdays': days,
+        'tours': tours,
         'depots': depots,
         'products': products,
         'subscriptions': subs,
@@ -143,6 +170,8 @@ def depot_list_generation(*args, **options):
                           depot_dict, 'depot_overview.pdf')
     render_to_pdf_storage('exports_oooo/amount_overview.html',
                           depot_dict, 'amount_overview.pdf')
+    render_to_pdf_storage('exports_oooo/tour_overview.html',
+                          depot_dict, 'tour_overview.pdf')
 
     adminnotification.depot_list_generated()
 
