@@ -123,11 +123,11 @@ def depot_list_generation(*args, **options):
         day['name'] = weekdays[day['weekday']]
 
     tours = [{'id': 0, 'name': 'DIENSTAG - Fondli'},
-             {'id': 1, 'name': 'DIENSTAG - kleines Auto'},
-             {'id': 2, 'name': 'DIENSTAG - grosses Auto'},
+             {'id': 1, 'name': 'DIENSTAG - kleines Auto (Renault)'},
+             {'id': 2, 'name': 'DIENSTAG - grosses Auto (Opel)'},
              {'id': 3, 'name': 'DONNERSTAG - Fondli'},
-             {'id': 4, 'name': 'DONNERSTAG - kleines Auto'},
-             {'id': 5, 'name': 'DONNERSTAG - grosses Auto'}]
+             {'id': 4, 'name': 'DONNERSTAG - kleines Auto (Renault)'},
+             {'id': 5, 'name': 'DONNERSTAG - grosses Auto (Opel)'}]
 
     # quick and dirty assignment of depot_ids to tours, defined here and in ortoloco_commons.py
     tour_depots = [[6],
