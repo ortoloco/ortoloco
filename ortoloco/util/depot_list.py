@@ -134,7 +134,7 @@ def depot_list_generation(*args, **options):
                    [20, 13, 14, 3],
                    [8, 12, 11, 2, 16],
                    [17],
-                   [7, 15, 9, 10],
+                   [7, 10, 9, 15],
                    [5, 18, 19]]
 
     # calc totals for tours
