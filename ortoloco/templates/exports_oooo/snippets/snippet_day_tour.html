@@ -1,35 +1,17 @@
-{% load ortoloco_common %}
 {% load juntagrico.depot_extras %}
-
 {% load i18n %}
+{% load ortoloco_common %}
 {% load juntagrico.config %}
-{% vocabulary "depot" as v_depot %}
-<html>
-<head>
-    <title>{% blocktrans %}{{ v_depot }} Übersicht{% endblocktrans %}</title>
-    <meta charset="utf-8">
-    <style>{% include "./snippets/snippet_depotlist_style.css" %}</style>
-</head>
-<body>
-{% for day in weekdays %}
-<div id="header_content" class="gendate">
-    Erstellt am: {% now "d.m.Y H:i" %}
-</div>
-<div id="footer_content">
-    <div class="messageb">Diese Liste bitte immer zurück ans Klemmbrett heften! Danke.</div>
-</div>
-    <h2 style="font-size: 18px;">{{ day.name }}</h2>
+<h2 style="font-size: 18px;">{{ tour_name }} {% trans "Übersicht" %}: {{ day.name }}</h2>
 <table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
     <tr>
-        <td style="width:230px"></td>
-        <td style="width:170px"></td>
+        <td></td>
         {% for product in products %}
             <th colspan="{{ product.sizes|count }}" class="top-border {% if forloop.first %}left-border{% endif %} right-border">{{ product.name }}<br/></th>
         {% endfor %}
     </tr>
     <tr>
-        <td style="small bottom-border right-border"></td>
-        <td class="small bottom-border right-border">{% trans "Tour" %}</td>
+        <td></td>
         {% for product in products %}
             {% for size in product.sizes %}
                 <td class="small bottom-border {% if forloop.first %}left-border{% endif %} {% cycle '' 'bg-grey' %}">{{ size.name }}</td>
@@ -37,22 +19,25 @@
         {% endfor %}
         {% resetcycle %}
     </tr>
-    {% for depot in depots|by_weekday:day.weekday %}
+    {% for day_tour in day_tours %}
+    {% if day_tour.day.weekday == day.weekday %}
         <tr>
-            <td>{{ depot.name }}</td>
-            <td>{% for tour in tours|tours_by_depot:depot %}{% if not tour.local %}{{tour.name}}{% endif %}{% endfor %}</td>
-            
+            <td style="width:360px;" {% if day_tour.tour == tour_name %}class="bg-grey"{% endif %}>{{ day_tour.tour }}</td>
             {% for product in products %}
                 {% for size in product.sizes %}
-                    <td class="{% cycle '' 'bg-grey' %}">{{ depot|get_attr:size.key|default:'0' }}</td>
+                    <td class="{% cycle '' 'bg-grey' %}">
+                        {% if day_tour.tour == tour_name %}<b>{% endif %}
+                            {{ day_tour|get_attr:size.key|default:'0' }}
+                        {% if day_tour.tour == tour_name %}</b>{% endif %}
+                    </td>
                 {% endfor %}
             {% endfor %}
-        </tr>
+            </tr>
         {% resetcycle %}
+    {% endif %}
     {% endfor %}
     <tr>
         <td><b>{% trans "Total" %}</b></td>
-        <td></td>
         {% for product in products %}
             {% for size in product.sizes %}
                 <td class="{% cycle '' 'bg-grey' %}"><b>{{ day|get_attr:size.key|default:'0' }}</b></td>
@@ -61,7 +46,3 @@
         {% resetcycle %}
     </tr>
 </table>
-<div class="page-break"></div>
-{% endfor %}
-</body>
-</html>
