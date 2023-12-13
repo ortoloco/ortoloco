@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.utils import timezone, dateformat
 from django.db.models import Count, Q
 from django.core.files.storage import default_storage
@@ -9,7 +10,7 @@ from juntagrico.dao.subscriptiondao import SubscriptionDao
 from juntagrico.util.pdf import render_to_pdf_storage
 from juntagrico.util.temporal import weekdays
 from juntagrico.util.subs import activate_future_depots
-from juntagrico.entity.subtypes import SubscriptionType
+from juntagrico.entity.subtypes import SubscriptionType, SubscriptionProduct, SubscriptionSize
 from juntagrico.mailer import adminnotification
 
 
@@ -25,143 +26,91 @@ def depot_list_generation(*args, **options):
     if options['force'] and not options['future']:
         print('future depots ignored, use --future to override')
 
-    products = [{'name': 'Gemüse', 'sizes': [{'name': 'Tasche', 'key': 'gmues'}]},
-                {'name': 'Obst', 'sizes': [{'name': 'Portion', 'key': 'obst'}]},
-                {'name': 'Brot', 'sizes': [{'name': '500g', 'key': 'brot'}]},
-                {'name': 'Eier', 'sizes': [{'name': 'Schachtel', 'key': 'eier'}]},
-                {'name': 'Tofu', 'sizes': [{'name': 'Portion', 'key': 'tofu'}]}]
+    subscription_type_product_map = getattr(settings, "ORTOLOCO_TYPE_SUBSCRIPTIONS")
+    ortoloco_tours = getattr(settings, "ORTOLOCO_TOURS")
+    products = getattr(settings, "ORTOLOCO_PRODUCTS")
 
-    gmues_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 18])
-    obst_types = SubscriptionType.objects.filter(pk__in=[6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22, 31])
-    brot_types = SubscriptionType.objects.filter(pk__in=[8, 9, 12, 13, 16, 17, 19, 20])
-    tofu_types = SubscriptionType.objects.filter(pk__in=[30])
-    eier_types = SubscriptionType.objects.filter(pk__in=[23])
+    # finding subscription types for product keys
+    prod_type_map = {
+        key: SubscriptionType.objects.filter(pk__in=sub_type_ids)
+        for key, sub_type_ids in subscription_type_product_map.items()
+    }
 
     now = dateformat.format(timezone.now(), 'Y-m-d')
 
+    # annotate all subscriptions with the count of product keys
     subs = SubscriptionDao.all_active_subscritions(). \
-        annotate(gmues=Count('parts',
-                             filter=Q(parts__type__in=gmues_types) & Q(
-                                 parts__activation_date__lte=now) & (Q(
-                                 parts__deactivation_date__isnull=True) | Q(parts__deactivation_date__gt=now)),
-                             distinct=True)). \
-        annotate(obst=Count('parts',
-                            filter=Q(parts__type__in=obst_types) & Q(parts__activation_date__lte=now) & (Q(
-                                parts__deactivation_date__isnull=True) | Q(parts__deactivation_date__gt=now)),
-                            distinct=True)). \
-        annotate(brot=Count('parts',
-                            filter=Q(parts__type__in=brot_types) & Q(parts__activation_date__lte=now) & (Q(
-                                parts__deactivation_date__isnull=True) | Q(
-                                parts__deactivation_date__gt=now)), distinct=True)). \
-        annotate(tofu=Count('parts',
-                            filter=Q(parts__type__in=tofu_types) & Q(
-                                parts__activation_date__lte=now) & (Q(
-                                parts__deactivation_date__isnull=True) | Q(parts__deactivation_date__gt=now)),
-                            distinct=True)). \
-        annotate(eier=Count('parts',
-                            filter=Q(parts__type__in=eier_types) & Q(
-                                parts__activation_date__lte=now) & (Q(
-                                parts__deactivation_date__isnull=True) | Q(parts__deactivation_date__gt=now)),
-                            distinct=True))
+        annotate(
+            **{key: Count('parts',
+                        filter=Q(parts__type__in=sub_type_ids) & Q(
+                            parts__activation_date__lte=now) & (Q(
+                            parts__deactivation_date__isnull=True) | Q(parts__deactivation_date__gt=now)),
+                        distinct=True)
+            for key, sub_type_ids in prod_type_map.items()
+            })
 
+    # annotate all depots with the count of product keys
     depots = DepotDao.all_depots_for_list().order_by('sort_order').prefetch_related('subscription_set'). \
         annotate(
-        gmues=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=gmues_types) & Q(
-            subscription_set__parts__activation_date__lte=now) & (Q(
-            subscription_set__parts__deactivation_date__isnull=True) | Q(
-            subscription_set__parts__deactivation_date__gt=now)), distinct=True)). \
-        annotate(
-        obst=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=obst_types) & Q(
-            subscription_set__parts__activation_date__lte=now) & (Q(
-            subscription_set__parts__deactivation_date__isnull=True) | Q(
-            subscription_set__parts__deactivation_date__gt=now)), distinct=True)). \
-        annotate(
-        brot=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=brot_types) & Q(
-            subscription_set__parts__activation_date__lte=now) & (Q(
-            subscription_set__parts__deactivation_date__isnull=True) | Q(
-            subscription_set__parts__deactivation_date__gt=now)), distinct=True)). \
-        annotate(
-        tofu=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=tofu_types) & Q(
-            subscription_set__parts__activation_date__lte=now) & (Q(
-            subscription_set__parts__deactivation_date__isnull=True) | Q(
-            subscription_set__parts__deactivation_date__gt=now)), distinct=True)). \
-        annotate(
-        eier=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=eier_types) & Q(
-            subscription_set__parts__activation_date__lte=now) & (Q(
-            subscription_set__parts__deactivation_date__isnull=True) | Q(
-            subscription_set__parts__deactivation_date__gt=now)), distinct=True))
+            **{key: Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=key_types) & Q(
+                subscription_set__parts__activation_date__lte=now) & (Q(
+                subscription_set__parts__deactivation_date__isnull=True) | Q(
+                subscription_set__parts__deactivation_date__gt=now)), distinct=True)
+            for key, key_types in prod_type_map.items()
+            })
 
+    # annotate the days with the counts of product keys
     days = DepotDao.all_depots_for_list().prefetch_related('subscription_set'). \
         values('weekday').order_by('weekday'). \
         annotate(
-        gmues=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=gmues_types) & Q(
-            subscription_set__parts__activation_date__lte=now) & (Q(
-            subscription_set__parts__deactivation_date__isnull=True) | Q(
-            subscription_set__parts__deactivation_date__gt=now)), distinct=True)). \
-        annotate(
-        obst=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=obst_types) & Q(
-            subscription_set__parts__activation_date__lte=now) & (Q(
-            subscription_set__parts__deactivation_date__isnull=True) | Q(
-            subscription_set__parts__deactivation_date__gt=now)), distinct=True)). \
-        annotate(
-        brot=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=brot_types) & Q(
-            subscription_set__parts__activation_date__lte=now) & (Q(
-            subscription_set__parts__deactivation_date__isnull=True) | Q(
-            subscription_set__parts__deactivation_date__gt=now)), distinct=True)). \
-        annotate(
-        tofu=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=tofu_types) & Q(
-            subscription_set__parts__activation_date__lte=now) & (Q(
-            subscription_set__parts__deactivation_date__isnull=True) | Q(
-            subscription_set__parts__deactivation_date__gt=now)), distinct=True)). \
-        annotate(
-        eier=Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=eier_types) & Q(
-            subscription_set__parts__activation_date__lte=now) & (Q(
-            subscription_set__parts__deactivation_date__isnull=True) | Q(
-            subscription_set__parts__deactivation_date__gt=now)), distinct=True))
+            **{key: Count('subscription_set__parts', filter=Q(subscription_set__parts__type__in=key_types) & Q(
+                subscription_set__parts__activation_date__lte=now) & (Q(
+                subscription_set__parts__deactivation_date__isnull=True) | Q(
+                subscription_set__parts__deactivation_date__gt=now)), distinct=True)
+            for key, key_types in prod_type_map.items()
+            })
 
     for day in days:
         day['name'] = weekdays[day['weekday']]
 
-    tours = [{'id': 0, 'name': 'DIENSTAG - Fondli'},
-             {'id': 1, 'name': 'DIENSTAG - kleines Auto (Renault)'},
-             {'id': 2, 'name': 'DIENSTAG - grosses Auto (Opel)'},
-             {'id': 3, 'name': 'DONNERSTAG - Fondli'},
-             {'id': 4, 'name': 'DONNERSTAG - kleines Auto (Renault)'},
-             {'id': 5, 'name': 'DONNERSTAG - grosses Auto (Opel)'}]
-
-    # quick and dirty assignment of depot_ids to tours, defined here and in ortoloco_commons.py
-    tour_depots = [[6],
-                   [20, 13, 14, 3],
-                   [8, 12, 11, 2, 16],
-                   [17],
-                   [7, 10, 9, 15],
-                   [5, 18, 19]]
+    # daily tours (as opposed to the logical tours - ortoloco_tours)
+    day_tours = [
+        {
+            # 'id': len(ortoloco_tours)*day_index + index,
+            'tour': tour['name'],
+            'name': '{} - {}'.format(day['name'], tour['name']),
+            'day': day,
+            'local': tour['local'],
+            'depots': day_tour_depots}
+        for day_index, day in enumerate(days)
+        for index, tour in enumerate(ortoloco_tours)
+        for day_tour_depots in [depots.filter(pk__in=tour['depot_ids'], weekday=day['weekday'])]
+        if day_tour_depots
+    ]
 
     # calc totals for tours
-    for tour in tours:
-        depot_ids = tour_depots[tour['id']]
-        for product in products:
-            for size in product['sizes']:
-                total = 0
-                for depot in depots:
-                    if depot.id in depot_ids:
-                        total += getattr(depot,size['key'])
-                tour[size['key']] = total
+    for day_tour in day_tours:
+        day_tour.update({
+            size['key']: sum(getattr(depot, size['key']) for depot in day_tour['depots'])
+            for product in products
+            for size in product['sizes']
+        })
 
     for product in products:
         for size in product['sizes']:
-            total = 0
-            for day in days:
-                total += day[size['key']]
-            size['total'] = total
+            size['total'] = sum(day[size['key']] for day in days)
 
     depot_dict = {
-        'weekdays': days,
-        'tours': tours,
-        'depots': depots,
-        'products': products,
         'subscriptions': subs,
+        'products': products,
+        'depots': depots,
+
+        'weekdays': days,
         'messages': ListMessageDao.all_active(),
+
+        # ortoloco specific
+        'day_tours': day_tours,
+        'tours': ortoloco_tours
     }
 
     render_to_pdf_storage('exports_oooo/depotlist.html',
@@ -172,6 +121,8 @@ def depot_list_generation(*args, **options):
                           depot_dict, 'amount_overview.pdf')
     render_to_pdf_storage('exports_oooo/tour_overview.html',
                           depot_dict, 'tour_overview.pdf')
+    render_to_pdf_storage('exports_oooo/tour_list.html',
+                          depot_dict, 'tour_list.pdf')
 
     adminnotification.depot_list_generated()
 

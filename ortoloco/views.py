@@ -49,3 +49,7 @@ def beipackzettel_profile(request):
 @permission_required('juntagrico.can_view_lists')
 def tour_overview(request):
     return return_pdf_http('tour_overview.pdf')
+
+@permission_required('juntagrico.can_view_lists')
+def tour_list(request):
+    return return_pdf_http('tour_list.pdf')

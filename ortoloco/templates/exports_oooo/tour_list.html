@@ -11,15 +11,17 @@
     <style>{% include "./snippets/snippet_depotlist_style.css" %}</style>
 </head>
 <body>
-{% for day_tour in day_tours %}
-{% if not day_tour.local %}
+
+{% for day in weekdays %}
 <div id="header_content" class="gendate">
     Erstellt am: {% now "d.m.Y H:i" %}
 </div>
 <div id="footer_content">
-    <div class="messageb">Diese Liste bleibt auf dem Hof! Bitte zurück an die Klemmbretter heften. Danke.</div>
+    <div class="messageb">Diese Liste Nimmt ihr mit!</div>
 </div>
-    <h2 style="font-size: 18px;">Auto-Pack-Liste: {{ day_tour.name }}</h2>
+{% for tour in tours  %}
+{% if not tour.local %}
+    <h2 style="font-size: 18px;">{{ tour.name }} Übersicht: {{ day.name }}</h2>
 <table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
     <tr>
         <td></td>
@@ -36,22 +38,28 @@
         {% endfor %}
         {% resetcycle %}
     </tr>
-    {% for depot in day_tour.depots %}
+    {% for day_tour in day_tours %}
+    {% if day_tour.day.weekday == day.weekday %}
         <tr>
-            <td style="width:360px;">{{ depot.name }}</td>
+            <td style="width:360px;" {% if day_tour.tour == tour.name %}class="bg-grey"{% endif %}>{{ day_tour.tour }}</td>
             {% for product in products %}
                 {% for size in product.sizes %}
-                    <td class="{% cycle '' 'bg-grey' %}">{{ depot|get_attr:size.key|default:'0' }}</td>
+                    <td class="{% cycle '' 'bg-grey' %}">
+                        {% if day_tour.tour == tour.name %}<b>{% endif %}
+                            {{ day_tour|get_attr:size.key|default:'0' }}
+                        {% if day_tour.tour == tour.name %}</b>{% endif %}
+                    </td>
                 {% endfor %}
             {% endfor %}
-        </tr>
+            </tr>
         {% resetcycle %}
+    {% endif %}
     {% endfor %}
     <tr>
         <td><b>{% trans "Total" %}</b></td>
         {% for product in products %}
             {% for size in product.sizes %}
-                <td class="{% cycle '' 'bg-grey' %}"><b>{{ day_tour|get_attr:size.key|default:'0' }}</b></td>
+                <td class="{% cycle '' 'bg-grey' %}"><b>{{ day|get_attr:size.key|default:'0' }}</b></td>
             {% endfor %}
         {% endfor %}
         {% resetcycle %}
@@ -60,5 +68,7 @@
 <div class="page-break"></div>
 {% endif %}
 {% endfor %}
+{% endfor %}
+
 </body>
 </html>

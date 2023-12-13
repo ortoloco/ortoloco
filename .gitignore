@@ -11,3 +11,6 @@ my_settings_local.py
 .DS_Store
 myenv.txt
 *.db
+/.env
+/*.code-workspace
+/media
