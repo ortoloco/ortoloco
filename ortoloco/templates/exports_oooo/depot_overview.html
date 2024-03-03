@@ -21,36 +21,36 @@
     <h2 style="font-size: 18px;">{{ day.name }}</h2>
 <table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
     <tr>
-        <td style="width:230px"></td>
+        <td style="width:360px"></td>
         <td style="width:170px"></td>
-        {% for product in products %}
+        {% comment %} {% for product in products %}
             <th colspan="{{ product.sizes|count }}" class="top-border {% if forloop.first %}left-border{% endif %} right-border">{{ product.name }}<br/></th>
-        {% endfor %}
+        {% endfor %} {% endcomment %}
     </tr>
     <tr>
-        <td style="small bottom-border right-border"></td>
+        <td style="small bottom-border right-border">{% trans "Depot" %}</td>
         <td class="small bottom-border right-border">{% trans "Tour" %}</td>
-        {% for product in products %}
+        {% comment %} {% for product in products %}
             {% for size in product.sizes %}
                 <td class="small bottom-border {% if forloop.first %}left-border{% endif %} {% cycle '' 'bg-grey' %}">{{ size.name }}</td>
             {% endfor %}
         {% endfor %}
-        {% resetcycle %}
+        {% resetcycle %} {% endcomment %}
     </tr>
     {% for depot in depots|by_weekday:day.weekday %}
         <tr>
             <td>{{ depot.name }}</td>
             <td>{% for tour in tours|tours_by_depot:depot %}{% if not tour.local %}{{tour.name}}{% endif %}{% endfor %}</td>
             
-            {% for product in products %}
+            {% comment %} {% for product in products %}
                 {% for size in product.sizes %}
                     <td class="{% cycle '' 'bg-grey' %}">{{ depot|get_attr:size.key|default:'0' }}</td>
                 {% endfor %}
-            {% endfor %}
+            {% endfor %} {% endcomment %}
         </tr>
-        {% resetcycle %}
+        {% comment %} {% resetcycle %} {% endcomment %}
     {% endfor %}
-    <tr>
+    {% comment %} <tr>
         <td><b>{% trans "Total" %}</b></td>
         <td></td>
         {% for product in products %}
@@ -59,7 +59,7 @@
             {% endfor %}
         {% endfor %}
         {% resetcycle %}
-    </tr>
+    </tr> {% endcomment %}
 </table>
 <div class="page-break"></div>
 {% endfor %}
