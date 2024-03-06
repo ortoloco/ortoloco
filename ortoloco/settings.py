@@ -372,7 +372,15 @@ ORTOLOCO_TOURS = [
 
 # # test version
 # ORTOLOCO_TOURS = [
-#     {"name": "Fondli", "depot_ids": [1, 11], "local": True},
-#     {"name": "kleines Auto (Renault)", "depot_ids": [2, 3, 4, 5, 12, 13, 14], "local": False},
-#     {"name": "grosses Auto (Opel)", "depot_ids": [6, 7, 8, 9, 10, 15, 16, 17], "local": False}
+#     {"name": "Fondli", "depot_ids": [1, 12], "local": True},
+#     {
+#         "name": "kleines Auto (Renault)",
+#         "depot_ids": [2, 3, 4, 5, 11, 13, 14],
+#         "local": False,
+#     },
+#     {
+#         "name": "grosses Auto (Opel)",
+#         "depot_ids": [6, 7, 8, 9, 10, 15, 16, 17],
+#         "local": False,
+#     },
 # ]

@@ -1,17 +1,16 @@
 from django.conf import settings
-from django.utils import timezone, dateformat
-from django.db.models import Count, Q
 from django.core.files.storage import default_storage
-
+from django.db.models import Count, Q
+from django.utils import dateformat, timezone
 from juntagrico.config import Config
 from juntagrico.dao.depotdao import DepotDao
 from juntagrico.dao.listmessagedao import ListMessageDao
 from juntagrico.dao.subscriptiondao import SubscriptionDao
-from juntagrico.util.pdf import render_to_pdf_storage
-from juntagrico.util.temporal import weekdays
-from juntagrico.util.subs import activate_future_depots
-from juntagrico.entity.subtypes import SubscriptionType, SubscriptionProduct, SubscriptionSize
+from juntagrico.entity.subtypes import SubscriptionType
 from juntagrico.mailer import adminnotification
+from juntagrico.util.pdf import render_to_pdf_storage
+from juntagrico.util.subs import activate_future_depots
+from juntagrico.util.temporal import weekdays
 
 
 def depot_list_generation(*args, **options):
@@ -37,6 +36,7 @@ def depot_list_generation(*args, **options):
     }
 
     now = dateformat.format(timezone.now(), 'Y-m-d')
+    list_week_date = timezone.localdate() + timezone.timedelta(days=7-timezone.localdate().weekday())
 
     # annotate all subscriptions with the count of product keys
     subs = SubscriptionDao.all_active_subscritions(). \
@@ -72,6 +72,7 @@ def depot_list_generation(*args, **options):
 
     for day in days:
         day['name'] = weekdays[day['weekday']]
+        day['date'] = list_week_date + timezone.timedelta(days=day['weekday'])
 
     # daily tours (as opposed to the logical tours - ortoloco_tours)
     day_tours = [

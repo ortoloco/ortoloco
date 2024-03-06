@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load ortoloco_common %}
 {% load juntagrico.config %}
-<h2 style="font-size: 18px;">{{ tour_name }} {% trans "Übersicht" %}: {{ day.name }}</h2>
+<h2 style="font-size: 18px;">{{ tour_name }} {% trans "Übersicht" %}: {{ day.name }} - {{ day.weekday|get_date:weekdays }}</h2>
 <table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
     <tr>
         <td></td>

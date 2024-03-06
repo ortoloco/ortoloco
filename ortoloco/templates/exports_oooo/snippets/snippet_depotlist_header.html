@@ -4,20 +4,22 @@
 {% load juntagrico.config %}
 <table cellpadding="2" cellspacing="0" repeat="5">
     <tr>
-        <th colspan="3" class="horz-left">{% comment "#TODO: get number of columns from data. workaround: there will be at least 3 columns" %}{% endcomment %}
-            <h2 class="depot">Depotliste: {{ depot.weekday_name }} / {{ depot.name }}</h2>
-            <h3 class="depotaddr">{{ depot.addr_street }}, {{ depot.addr_zipcode }} {{ depot.addr_location }} ({% trans "Kontakt" %}: {{ depot.contact.first_name }} {{ depot.contact.last_name }})
-                {% for depot_tour in tours|tours_by_depot:depot %}
-                {% if not depot_tour.local %}
-                    , {% trans "Tour" %}: {{ depot_tour.name }}
-                {% endif %}
-                {% endfor %}
+        <th colspan="5" class="horz-left">{% comment "#TODO: get number of columns from data. workaround: there will be at least 3 columns" %}{% endcomment %}
+            <h2 class="depot">Depotliste: {{ depot.weekday_name }} {{ depot.weekday|get_date:weekdays }}<br>
+            {{ depot.name }}</h2>
+            <h3 class="depotaddr">{{ depot.location.addr_street }}, {{ depot.location.addr_zipcode }} {{ depot.location.addr_location }} ({% trans "Kontakt" %}: {{ depot.contact.first_name }} {{ depot.contact.last_name }})
             </h3>
             <br />
         </th>
     </tr>
     <tr>
-        <th class="namecol"></th>
+        <th class="namecol horz-left">
+            {% for depot_tour in tours|tours_by_depot:depot %}
+            {% if not depot_tour.local %}
+                {% trans "Tour" %}: {{ depot_tour.name }} #{{ depot|depot_index:day_tours }}
+            {% endif %}
+            {% endfor %}
+        </th>
         {% for product in products %}
             <th colspan="{{ product.sizes|count }}" class="top-border {% if forloop.first %}left-border{% endif %} right-border">{{ product.name }}</th>
         {% endfor %}
