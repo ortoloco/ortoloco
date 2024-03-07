@@ -8,6 +8,9 @@ DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ['my.ortoloco.ch']
 
+# test version
+# ALLOWED_HOSTS = ['localhost']
+
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
 FILE_UPLOAD_PERMISSIONS = 0o444
@@ -338,3 +341,57 @@ MAILER_RICHTEXT_OPTIONS = {
     'toolbar': "undo redo | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | "
                "bullist numlist | link | fontselect fontsizeselect",
 }
+
+# hack to allow multiple products(sizes) on a subscription type
+ORTOLOCO_PRODUCTS = [{'name': 'Gemüse', 'sizes': [{'name': 'Tasche', 'key': 'gmues'}]},
+                {'name': 'Obst', 'sizes': [{'name': 'Portion', 'key': 'obst'}]},
+                {'name': 'Brot', 'sizes': [{'name': '500g', 'key': 'brot'}]},
+                {'name': 'Eier', 'sizes': [{'name': 'Schachtel', 'key': 'eier'}]},
+                {'name': 'Tofu', 'sizes': [{'name': 'Portion', 'key': 'tofu'}]}]
+
+ORTOLOCO_TYPE_SUBSCRIPTIONS = {
+    "gmues": [6, 7, 8, 9, 10, 11, 12, 13, 18],
+    "obst": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22, 31],
+    "brot": [8, 9, 12, 13, 16, 17, 19, 20],
+    "tofu": [30],
+    "eier": [23]
+}
+
+# test version
+# ORTOLOCO_TYPE_SUBSCRIPTIONS = {
+#     "gmues": [1],
+#     "obst": [2],
+#     "brot": [3],
+#     "tofu": [4],
+#     "eier": [5]
+# }
+
+# hack to allow tours
+ORTOLOCO_TOURS = [
+    {"name": "Fondli", "depot_ids": [6, 17], "local": True},
+    {"name": "kleines Auto (Renault)", "depot_ids": [20, 13, 14, 3, 7, 10, 9, 15], "local": False},
+    {"name": "grosses Auto (Opel)", "depot_ids": [8, 12, 11, 2, 16, 5, 18, 19], "local": False}
+]
+
+# test version
+# ORTOLOCO_TOURS = [
+#     {"name": "Fondli", "depot_ids": [1, 12], "local": True},
+#     {
+#         "name": "kleines Auto (Renault)",
+#         "depot_ids": [2, 3, 4, 5, 11, 13, 14],
+#         "local": False,
+#     },
+#     {
+#         "name": "grosses Auto (Opel)",
+#         "depot_ids": [6, 7, 8, 9, 10, 15, 16, 17],
+#         "local": False,
+#     },
+# ]
+
+ORTOLOCO_RECURRING_MESSAGES = [
+    {
+        "message": "OHNE TOFU"
+        ,"year": 2024
+        ,"weeks": list(range(1, 50, 2))
+    }
+]

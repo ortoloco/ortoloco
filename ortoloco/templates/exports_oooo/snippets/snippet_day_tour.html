@@ -1,0 +1,48 @@
+{% load juntagrico.depot_extras %}
+{% load i18n %}
+{% load ortoloco_common %}
+{% load juntagrico.config %}
+<h2 style="font-size: 18px;">{{ tour_name }} {% trans "Übersicht" %}: {{ day.name }} - {{ day.weekday|get_date:weekdays }}</h2>
+<table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
+    <tr>
+        <td></td>
+        {% for product in products %}
+            <th colspan="{{ product.sizes|count }}" class="top-border {% if forloop.first %}left-border{% endif %} right-border">{{ product.name }}<br/></th>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td></td>
+        {% for product in products %}
+            {% for size in product.sizes %}
+                <td class="small bottom-border {% if forloop.first %}left-border{% endif %} {% cycle '' 'bg-grey' %}">{{ size.name }}</td>
+            {% endfor %}
+        {% endfor %}
+        {% resetcycle %}
+    </tr>
+    {% for day_tour in day_tours %}
+    {% if day_tour.day.weekday == day.weekday %}
+        <tr>
+            <td style="width:360px;" {% if day_tour.tour == tour_name %}class="bg-grey"{% endif %}>{{ day_tour.tour }}</td>
+            {% for product in products %}
+                {% for size in product.sizes %}
+                    <td class="{% cycle '' 'bg-grey' %}">
+                        {% if day_tour.tour == tour_name %}<b>{% endif %}
+                            {{ day_tour|get_attr:size.key|default:'0' }}
+                        {% if day_tour.tour == tour_name %}</b>{% endif %}
+                    </td>
+                {% endfor %}
+            {% endfor %}
+            </tr>
+        {% resetcycle %}
+    {% endif %}
+    {% endfor %}
+    <tr>
+        <td><b>{% trans "Total" %}</b></td>
+        {% for product in products %}
+            {% for size in product.sizes %}
+                <td class="{% cycle '' 'bg-grey' %}"><b>{{ day|get_attr:size.key|default:'0' }}</b></td>
+            {% endfor %}
+        {% endfor %}
+        {% resetcycle %}
+    </tr>
+</table>

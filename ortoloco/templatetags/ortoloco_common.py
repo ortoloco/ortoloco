@@ -7,18 +7,27 @@ register = template.Library()
 def get_attr(value, arg):
     if hasattr(value, str(arg)):
         return getattr(value, arg)
-    elif hasattr(value, 'get'):
+    if hasattr(value, 'get'):
         return value.get(arg)
-    else:
-        ''
+    return ''
+
 @register.filter
-def by_tour(queryset_depots, tour_id):
-    # quick and dirty assignment depot_ids to tours, defined here and in depot_list.py
-    tour_depots = [[6],
-                   [20, 13, 14, 3],
-                   [8, 12, 11, 2, 16],
-                   [17],
-                   [7, 15, 9, 10],
-                   [5, 18, 19]]
-    depot_ids = tour_depots[tour_id]
-    return queryset_depots.filter(id__in=depot_ids)
+def tours_by_depot(tours, depot):
+    return [tour for tour in tours if depot.id in tour["depot_ids"]]
+
+@register.filter
+def depots_by_tour(depots, tour):
+    return [depot for depot in depots if depot.id in tour["depot_ids"]]
+
+@register.filter
+def depot_index(depot, day_tours):
+    for day_tour in day_tours:
+        if day_tour["day"]["weekday"] == depot.weekday:
+            for depot_index, day_tour_depot in enumerate(day_tour['depots']):
+                if depot == day_tour_depot:
+                    return depot_index + 1
+    return 0
+
+@register.filter
+def get_date(weekday, days):
+    return [day["date"] for day in days if day['weekday'] == weekday][0]

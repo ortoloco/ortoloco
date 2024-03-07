@@ -11,6 +11,7 @@
 {{ v_depot }}-{% trans "Übersicht" %}: {{ serverurl }}{% url 'lists-depot-overview' %}
 {% trans "Mengen-Übersicht" %}: {{ serverurl }}{% url 'lists-depot-amountoverview' %}
 {% trans "Tour-Übersicht" %}: {{ serverurl }}{% url 'lists-depot-touroverview' %}
+{% trans "Tour-Totals" %}: {{ serverurl }}{% url 'lists-depot-tourlist' %}
 
 {% blocktrans %}Liebe Grüsse und einen schönen Tag noch
 Dein Server{% endblocktrans %}

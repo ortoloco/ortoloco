@@ -1,0 +1,32 @@
+{% load ortoloco_common %}
+{% load juntagrico.depot_extras %}
+
+{% load i18n %}
+{% load juntagrico.config %}
+{% vocabulary "depot" as v_depot %}
+<html>
+<head>
+    <title>{% blocktrans %}{{ v_depot }} Übersicht{% endblocktrans %}</title>
+    <meta charset="utf-8">
+    <style>{% include "./snippets/snippet_depotlist_style.css" %}</style>
+</head>
+<body>
+
+    <div id="header_content" class="gendate">
+        Erstellt am: {% now "d.m.Y H:i" %}
+    </div>
+    <div id="footer_content">
+        <div class="messageb">Diese Liste Nimmt ihr mit!</div>
+    </div>
+
+{% for day in weekdays %}
+{% for tour in tours  %}
+{% if not tour.local %}
+{% include "./snippets/snippet_day_tour.html" with tour_name=tour.name %}
+<div class="page-break"></div>
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+</body>
+</html>

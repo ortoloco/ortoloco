@@ -11,50 +11,36 @@
     <style>{% include "./snippets/snippet_depotlist_style.css" %}</style>
 </head>
 <body>
-{% for tour in tours %}
+{% for day in weekdays %}
 <div id="header_content" class="gendate">
     Erstellt am: {% now "d.m.Y H:i" %}
 </div>
 <div id="footer_content">
-    <div class="messageb">Diese Liste bleibt auf dem Hof! Bitte zurück an die Klemmbretter heften. Danke.</div>
+    <div class="messageb">Diese Liste bitte immer zurück ans Klemmbrett heften! Danke.</div>
 </div>
-    <h2 style="font-size: 18px;">Auto-Pack-Liste: {{ tour.name }}</h2>
-<table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
+    <h2 style="font-size: 18px;">{{ day.name }}</h2>
+<table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px; border-collapse: collapse;" class="bottom-border">
     <tr>
-        <td></td>
-        {% for product in products %}
-            <th colspan="{{ product.sizes|count }}" class="top-border {% if forloop.first %}left-border{% endif %} right-border">{{ product.name }}<br/></th>
-        {% endfor %}
+        <th style="small bottom-border right-border">{% trans "Tour" %}</th>
+        <th style="small bottom-border right-border">{% trans "Reihe" %}</th>
+        <th class="small bottom-border right-border">{% trans "Depot" %}</th>
     </tr>
-    <tr>
-        <td></td>
-        {% for product in products %}
-            {% for size in product.sizes %}
-                <td class="small bottom-border {% if forloop.first %}left-border{% endif %} {% cycle '' 'bg-grey' %}">{{ size.name }}</td>
-            {% endfor %}
+    {% for tour in tours %}
+        {% for depot in depots|by_weekday:day.weekday|depots_by_tour:tour %}
+            <tr>
+                {% if not tour.local %}
+                    <td>{{tour.name}}</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+                <td>#{{ depot|depot_index:day_tours }}</td>
+                <td>{{ depot.name }}</td>
+            </tr>
         {% endfor %}
-        {% resetcycle %}
-    </tr>
-    {% for depot in depots|by_tour:tour.id %}
         <tr>
-            <td style="width:360px;">{{ depot.name }}</td>
-            {% for product in products %}
-                {% for size in product.sizes %}
-                    <td class="{% cycle '' 'bg-grey' %}">{{ depot|get_attr:size.key|default:'0' }}</td>
-                {% endfor %}
-            {% endfor %}
+            <td colspan="3"></td>
         </tr>
-        {% resetcycle %}
     {% endfor %}
-    <tr>
-        <td><b>{% trans "Total" %}</b></td>
-        {% for product in products %}
-            {% for size in product.sizes %}
-                <td class="{% cycle '' 'bg-grey' %}"><b>{{ tour|get_attr:size.key|default:'0' }}</b></td>
-            {% endfor %}
-        {% endfor %}
-        {% resetcycle %}
-    </tr>
 </table>
 <div class="page-break"></div>
 {% endfor %}
