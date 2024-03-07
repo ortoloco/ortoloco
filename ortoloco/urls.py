@@ -44,4 +44,5 @@ urlpatterns = [
     re_path('__debug__/', include(debug_toolbar.urls)),
 
     path('my/pdf/touroverview', ortoloco.tour_overview, name='lists-depot-touroverview'),
+    path('my/pdf/tourlist', ortoloco.tour_list, name='lists-depot-tourlist'),
 ]
