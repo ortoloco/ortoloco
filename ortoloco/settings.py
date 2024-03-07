@@ -8,6 +8,9 @@ DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ['my.ortoloco.ch']
 
+# test version
+# ALLOWED_HOSTS = ['localhost']
+
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
 FILE_UPLOAD_PERMISSIONS = 0o444
@@ -354,7 +357,7 @@ ORTOLOCO_TYPE_SUBSCRIPTIONS = {
     "eier": [23]
 }
 
-# #test version
+# test version
 # ORTOLOCO_TYPE_SUBSCRIPTIONS = {
 #     "gmues": [1],
 #     "obst": [2],
@@ -370,7 +373,7 @@ ORTOLOCO_TOURS = [
     {"name": "grosses Auto (Opel)", "depot_ids": [8, 12, 11, 2, 16, 5, 18, 19], "local": False}
 ]
 
-# # test version
+# test version
 # ORTOLOCO_TOURS = [
 #     {"name": "Fondli", "depot_ids": [1, 12], "local": True},
 #     {
@@ -384,3 +387,11 @@ ORTOLOCO_TOURS = [
 #         "local": False,
 #     },
 # ]
+
+ORTOLOCO_RECURRING_MESSAGES = [
+    {
+        "message": "OHNE TOFU"
+        ,"year": 2024
+        ,"weeks": list(range(1, 50, 2))
+    }
+]

@@ -7,6 +7,7 @@ from juntagrico.dao.depotdao import DepotDao
 from juntagrico.dao.listmessagedao import ListMessageDao
 from juntagrico.dao.subscriptiondao import SubscriptionDao
 from juntagrico.entity.subtypes import SubscriptionType
+from juntagrico.entity.listmessage import ListMessage
 from juntagrico.mailer import adminnotification
 from juntagrico.util.pdf import render_to_pdf_storage
 from juntagrico.util.subs import activate_future_depots
@@ -28,6 +29,7 @@ def depot_list_generation(*args, **options):
     subscription_type_product_map = getattr(settings, "ORTOLOCO_TYPE_SUBSCRIPTIONS")
     ortoloco_tours = getattr(settings, "ORTOLOCO_TOURS")
     products = getattr(settings, "ORTOLOCO_PRODUCTS")
+    recurring_message_config = getattr(settings, "ORTOLOCO_RECURRING_MESSAGES")
 
     # finding subscription types for product keys
     prod_type_map = {
@@ -100,6 +102,20 @@ def depot_list_generation(*args, **options):
     for product in products:
         for size in product['sizes']:
             size['total'] = sum(day[size['key']] for day in days)
+
+    # update recurring messages
+    actual_config_messages = [
+        message_config
+        for message_config in recurring_message_config
+        if not message_config.get('year') or message_config['year'] == list_week_date.year
+    ]
+    delivery_calender_week = list_week_date.isocalendar().week
+    for message_config in actual_config_messages:
+        is_active = delivery_calender_week in message_config['weeks']
+        for message in ListMessage.objects.filter(message=message_config['message']):
+            if message.active != is_active:
+                message.active = is_active
+                message.save()
 
     depot_dict = {
         'subscriptions': subs,
