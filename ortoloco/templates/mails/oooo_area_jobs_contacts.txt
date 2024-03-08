@@ -1,0 +1,22 @@
+{% extends "mails/email.txt" %}
+{% load i18n %}
+{% block content %}
+{{ area.name }} - {{ job_weekday }} {{ job_date }}
+
+Emails:
+{% for member in members %}{{ member.first_name }} {{ member.last_name }} <{{member.email}}>,
+{% endfor %}
+
+Erfahrung:
+{% for member in members %}{% if member.job_count %}{{ member.first_name }} {{ member.last_name }} ({{member.job_count}})
+{% endif %}{% endfor %}
+
+Eure Kontaktdaten:
+
+{% for job in jobs %}{{ job.type.name }}
+{% for member in job.participants %}    {{ member.first_name }}: {{ member.phone }}
+{% empty %}    Noch niemand :-\
+{% endfor %}{% endfor %}
+
+
+{% endblock %}
