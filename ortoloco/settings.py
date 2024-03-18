@@ -289,7 +289,7 @@ SHARE_PRICE = "250"
 PROMOTED_JOB_TYPES = ["Aktionstag"]
 PROMOTED_JOBS_AMOUNT = 2
 DEPOT_LIST_GENERATION_DAYS = [3]
-DEFAULT_DEPOTLIST_GENERATORS = ['ortoloco.util.depot_list.depot_list_generation', 'ortoloco.util.area_admin_notify.notify_upcoming_jobs']
+DEFAULT_DEPOTLIST_GENERATORS = ['ortoloco.util.depot_list.depot_list_generation']
 BILLS_USERMENU = True
 
 BUSINESS_YEAR_START = {"day": 1, "month": 1}
@@ -398,5 +398,5 @@ ORTOLOCO_RECURRING_MESSAGES = [
 ]
 
 ORTOLOCO_AREA_NOTIFY = {
-    "Verteilen": 3
+    "Verteilen": 2
 }
