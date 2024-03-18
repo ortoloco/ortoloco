@@ -278,6 +278,7 @@ BYLAWS = "https://www.ortoloco.ch/dokumente/ortoloco_Statuten.pdf"
 MAIL_TEMPLATE = "mails/ooooemail.html"
 EMAILS = {
     's_created': 'mails/oooo_share_created.txt',
+    'j_notify': 'mails/oooo_area_jobs_contacts.txt',
 }
 STYLES = {'static': ['css/myortoloco.css']}
 FAVICON = "/static/img/favicono.ico"
@@ -395,3 +396,7 @@ ORTOLOCO_RECURRING_MESSAGES = [
         ,"weeks": list(range(1, 50, 2))
     }
 ]
+
+ORTOLOCO_AREA_NOTIFY = {
+    "Verteilen": 2
+}
