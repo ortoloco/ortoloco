@@ -38,7 +38,7 @@ def depot_list_generation(*args, **options):
     }
 
     now = dateformat.format(timezone.now(), 'Y-m-d')
-    list_week_date = timezone.localdate() + timezone.timedelta(days=7-timezone.localdate().weekday()-1)
+    list_week_date = timezone.localdate() + timezone.timedelta(days=7-timezone.localdate().weekday())
 
     # annotate all subscriptions with the count of product keys
     subs = SubscriptionDao.all_active_subscritions(). \
@@ -74,7 +74,7 @@ def depot_list_generation(*args, **options):
 
     for day in days:
         day['name'] = weekdays[day['weekday']]
-        day['date'] = list_week_date + timezone.timedelta(days=day['weekday'])
+        day['date'] = list_week_date + timezone.timedelta(days=day['weekday']-1)
 
     # daily tours (as opposed to the logical tours - ortoloco_tours)
     day_tours = [
