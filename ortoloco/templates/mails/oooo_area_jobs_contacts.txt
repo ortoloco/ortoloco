@@ -14,7 +14,7 @@ Erfahrung:
 Eure Kontaktdaten:
 
 {% for job in jobs %}{{ job.type.name }}
-{% for member in job.participants %}    {{ member.first_name }}: {{ member.phone }}
+{% for member in job.participants %}    {{ member.first_name }}: {{ member.get_phone }}
 {% empty %}    Noch niemand :-\
 {% endfor %}{% endfor %}
 
