@@ -34,7 +34,7 @@ def politoloco_profile(request):
 
 
 @login_required
-def beipackzettel_profile(request):
+def nextcloud_profile(request):
     member = request.user.member
     membergroups = request.user.groups.values_list('name',flat = True)
     grouplist = list(membergroups)

@@ -6,7 +6,7 @@ import os
 """
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ['my.ortoloco.ch']
+ALLOWED_HOSTS = ['my.ortoloco.ch', '127.0.0.1']
 
 # test version
 # ALLOWED_HOSTS = ['localhost']
@@ -21,7 +21,7 @@ SITE_ID = 1
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-LOGIN_REDIRECT_URL = "/my/home"
+LOGIN_REDIRECT_URL = "/"
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'ortoloco.wsgi.application'
@@ -32,8 +32,7 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 OAUTH2_PROVIDER = {
     'SCOPES': {
-        'politoloco': 'politoloco darf einmalig deine Email sowie deinen Namen abfragen um einen Account zu erstellen',
-        'beipackzettel': 'beipackzettel darf einmalig deine Email sowie deinen Namen abfragen um einen Account zu erstellen',
+        'cloud': 'cloud darf einmalig deine Email sowie deinen Namen abfragen um einen Account zu erstellen',
     },
 }
 
@@ -79,7 +78,6 @@ MIDDLEWARE = [
 ]
 
 INSTALLED_APPS = (
-    'juntagrico',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -87,19 +85,22 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'polymorphic',
+    'ortoloco',
+    'share_info',
     'juntagrico_billing',
     'juntagrico_pg',
     'juntagrico_polling',
     'juntagrico_webdav',
-    'crispy_forms',
+    'juntagrico',
+    'fontawesomefree',
+    'import_export',
     'impersonate',
+    'crispy_forms',
     'adminsortable2',
+    'polymorphic',
+    'debug_toolbar',
     'oauth2_provider',
     'oidc_provider',
-    'share_info',
-    'ortoloco',
-    'debug_toolbar',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -197,7 +198,15 @@ FORMAT_MODULE_PATH = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+    },
+}
 
 STATICFILES_DIRS = ( 
     os.path.join(BASE_DIR, 'static_general'),
@@ -271,10 +280,20 @@ ORGANISATION_BANK_CONNECTION = {"PC": "85-199010-5",
                                 "IBAN": "CH6109000000156196402",
                                 "BIC": "POFICHBEXXX",
                                 "NAME": "PostFinance"}
-INFO_EMAIL = "info@ortoloco.ch"
-SERVER_URL = "www.ortoloco.ch"
+CONTACTS = {
+    'general': "info@ortoloco.ch",
+    'for_members': "info@ortoloco.ch",
+    'for_subscriptions': "info@ortoloco.ch",
+    'for_shares': "info@ortoloco.ch",
+    'technical': "it@ortoloco.ch",
+}
+ORGANISATION_WEBSITE = {
+    'name': "www.ortoloco.ch",
+    'url': "https://www.ortoloco.ch/"
+}
 BUSINESS_REGULATIONS = "https://www.ortoloco.ch/dokumente/ortoloco_Betriebsreglement.pdf"
 BYLAWS = "https://www.ortoloco.ch/dokumente/ortoloco_Statuten.pdf"
+FAQ_DOC = "https://ortoloco.ch/dokumente/ortoloco_FAQ.pdf"
 MAIL_TEMPLATE = "mails/ooooemail.html"
 EMAILS = {
     's_created': 'mails/oooo_share_created.txt',
@@ -285,19 +304,17 @@ FAVICON = "/static/img/favicono.ico"
 FAQ_DOC = "https://www.ortoloco.ch/dokumente/ortoloco_FAQ.pdf"
 EXTRA_SUB_INFO = "https://www.ortoloco.ch/dokumente/ortoloco_Zusatzabos.pdf"
 ACTIVITY_AREA_INFO = ""
+ENABLE_SHARES = True
 SHARE_PRICE = "250"
 PROMOTED_JOB_TYPES = ["Aktionstag"]
 PROMOTED_JOBS_AMOUNT = 2
 DEPOT_LIST_GENERATION_DAYS = [3]
 DEFAULT_DEPOTLIST_GENERATORS = ['ortoloco.util.depot_list.depot_list_generation']
-BILLS_USERMENU = True
 
 BUSINESS_YEAR_START = {"day": 1, "month": 1}
 BUSINESS_YEAR_CANCELATION_MONTH = 9
 MEMBERSHIP_END_MONTH = 6
 MEMBERSHIP_END_NOTICE_PERIOD = 9
-DEMO_USER = ''
-DEMO_PWD = ''
 IMAGES = {'status_100': '/static/img/erbse_voll.png',
           'status_75': '/static/img/erbse_fast_voll.png',
           'status_50': '/static/img/erbse_halb.png',
@@ -333,14 +350,12 @@ DEBUG_TOOLBAR_CONFIG = {
 """
 BILLS_USERMENU = True
 
-DEFAULT_FROM_EMAIL = INFO_EMAIL
-
 MAILER_RICHTEXT_OPTIONS = {
     'valid_styles': {
-        '*': 'color,text-align,font-size,font-weight,font-style,font-family,text-decoration'
+        '*': ''
     },
-    'toolbar': "undo redo | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | "
-               "bullist numlist | link | fontselect fontsizeselect",
+    'toolbar': "undo redo | bold italic | h1 h2 h3 | alignleft aligncenter | outdent indent | "
+               "bullist numlist | link",
 }
 
 # hack to allow multiple products(sizes) on a subscription type
@@ -389,6 +404,7 @@ ORTOLOCO_TOURS = [
 #     },
 # ]
 
+# depot list recurring messages
 ORTOLOCO_RECURRING_MESSAGES = [
     {
         "message": "OHNE TOFU"
@@ -397,6 +413,10 @@ ORTOLOCO_RECURRING_MESSAGES = [
     }
 ]
 
+# days in advance for area admin notification about job participants
 ORTOLOCO_AREA_NOTIFY = {
     "Verteilen": 2
 }
+
+# juntagrico export permission level
+IMPORT_EXPORT_EXPORT_PERMISSION_CODE = 'view'
