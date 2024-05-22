@@ -1,4 +1,5 @@
 from django import template
+from juntagrico.entity.subs import Subscription
 
 register = template.Library()
 
@@ -31,3 +32,13 @@ def depot_index(depot, day_tours):
 @register.filter
 def get_date(weekday, days):
     return [day["date"] for day in days if day['weekday'] == weekday][0]
+
+@register.filter
+def by_weekday(queryset_or_sub, weekday_id):
+    # case 1: single subscription object is passed
+    if isinstance(queryset_or_sub, Subscription):
+        return queryset_or_sub if queryset_or_sub.depot.weekday == weekday_id else None
+    # case 2: queryset of subscriptions or depots is passed
+    if queryset_or_sub.model == Subscription:
+        return queryset_or_sub.filter(depot__weekday=weekday_id)
+    return queryset_or_sub.filter(weekday=weekday_id)
