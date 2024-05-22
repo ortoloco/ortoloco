@@ -231,17 +231,6 @@ MEDIA_ROOT = 'media'
 """
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-"""
-    Subdomain Settings
-"""
-# A dictionary of urlconf module paths, keyed by their subdomain.
-'''SUBDOMAIN_URLCONFS = {
-    None: 'ortoloco.urls', 
-    'www': 'ortoloco.urls',
-    'my': 'ortoloco.myurlsredirect',
-    'ortoloco': 'fuckoff'
-}
-'''
 
 """
     Juntagrico Settings
