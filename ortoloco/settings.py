@@ -28,9 +28,7 @@ SECRET_KEY = os.environ.get('JUNTAGRICO_SECRET_KEY')
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 OAUTH2_PROVIDER = {
-    'SCOPES': {
-        'nextcloud': 'nextcloud darf einmalig deine Email sowie deinen Namen abfragen um einen Account zu erstellen',
-    },
+    "PKCE_REQUIRED": False
 }
 
 TEMPLATES = [
@@ -195,15 +193,6 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
     },
 }
-
-STATICFILES_DIRS = ( 
-    os.path.join(BASE_DIR, 'static_general'),
-)
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
 
 """
     Impersonate Settings
