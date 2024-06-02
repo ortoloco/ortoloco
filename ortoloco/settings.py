@@ -8,9 +8,6 @@ DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ['my.ortoloco.ch']
 
-# test version
-# ALLOWED_HOSTS = ['localhost']
-
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
 FILE_UPLOAD_PERMISSIONS = 0o444
@@ -32,7 +29,7 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 OAUTH2_PROVIDER = {
     'SCOPES': {
-        'cloud': 'cloud darf einmalig deine Email sowie deinen Namen abfragen um einen Account zu erstellen',
+        'nextcloud': 'nextcloud darf einmalig deine Email sowie deinen Namen abfragen um einen Account zu erstellen',
     },
 }
 
@@ -65,7 +62,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'impersonate.middleware.ImpersonateMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    #'subdomains.middleware.SubdomainURLRoutingMiddleware',
     'oauth2_provider.middleware.OAuth2TokenMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
@@ -95,8 +91,6 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'oauth2_provider',
     'oidc_provider',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
 )
 
 
