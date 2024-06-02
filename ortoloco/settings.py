@@ -28,8 +28,11 @@ SECRET_KEY = os.environ.get('JUNTAGRICO_SECRET_KEY')
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 OAUTH2_PROVIDER = {
-    "PKCE_REQUIRED": False
-}
+     'SCOPES': {
+         'nextcloud': 'nextcloud darf einmalig deine Email sowie deinen Namen abfragen um einen Account zu erstellen',
+     },
+    'PKCE_REQUIRED': False
+ }
 
 TEMPLATES = [
     {
