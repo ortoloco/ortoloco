@@ -6,7 +6,7 @@ import os
 """
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ['my.ortoloco.ch']
+ALLOWED_HOSTS = ['my.ortoloco.ch', '127.0.0.1']
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
@@ -339,8 +339,8 @@ ORTOLOCO_PRODUCTS = [{'name': 'Gemüse', 'sizes': [{'name': 'Tasche', 'key': 'gm
                 {'name': 'Tofu', 'sizes': [{'name': 'Portion', 'key': 'tofu'}]}]
 
 ORTOLOCO_TYPE_SUBSCRIPTIONS = {
-    "gmues": [6, 7, 8, 9, 10, 11, 12, 13, 18],
-    "obst": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22, 31],
+    "gmues": [6, 7, 8, 9, 10, 33, 11, 12, 13, 18],
+    "obst": [6, 7, 8, 9, 10, 33, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22, 31],
     "brot": [8, 9, 12, 13, 16, 17, 19, 20],
     "tofu": [30],
     "eier": [23]
