@@ -14,6 +14,8 @@
 
 {% with sc=shares|length %}Du hast bei {{ v_d_enriched_organisation }} {{ sc }} {{ v_share_pl }} zu je {{ c_currency }} {{ c_share_price }} bestellt.
 
+*Falls du ein Schnupperabo gelöst hast, kannst du dieses Email ignorieren.*
+
 Bitte überweise den Gesamtbetrag von {{ c_currency }} {% widthratio c_share_price 1 sc|add:"0" %} auf das folgende Konto:{% endwith %}
 
     {{ c_addr.name }}
