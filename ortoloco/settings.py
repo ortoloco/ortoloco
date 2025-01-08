@@ -381,7 +381,7 @@ ORTOLOCO_TOURS = [
 ORTOLOCO_RECURRING_MESSAGES = [
     {
         "message": "OHNE TOFU"
-        ,"year": 2024
+        ,"year": 2025
         ,"weeks": list(range(1, 50, 2))
     }
 ]
