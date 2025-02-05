@@ -264,9 +264,9 @@ ORGANISATION_WEBSITE = {
     'name': "www.ortoloco.ch",
     'url': "https://www.ortoloco.ch/"
 }
-BUSINESS_REGULATIONS = "https://www.ortoloco.ch/dokumente/ortoloco_Betriebsreglement.pdf"
-BYLAWS = "https://www.ortoloco.ch/dokumente/ortoloco_Statuten.pdf"
-FAQ_DOC = "https://ortoloco.ch/dokumente/ortoloco_FAQ.pdf"
+BUSINESS_REGULATIONS = "https://static.ortoloco.ch/documents/ortoloco_Betriebsreglement.pdf"
+BYLAWS = "https://static.ortoloco.ch/documents/ortoloco_Statuten.pdf"
+FAQ_DOC = "https://ortoloco.ch/faq"
 MAIL_TEMPLATE = "mails/ooooemail.html"
 EMAILS = {
     's_created': 'mails/oooo_share_created.txt',
@@ -274,8 +274,7 @@ EMAILS = {
 }
 STYLES = {'static': ['css/myortoloco.css']}
 FAVICON = "/static/img/favicono.ico"
-FAQ_DOC = "https://www.ortoloco.ch/dokumente/ortoloco_FAQ.pdf"
-EXTRA_SUB_INFO = "https://www.ortoloco.ch/dokumente/ortoloco_Zusatzabos.pdf"
+EXTRA_SUB_INFO = "https://ortoloco.ch/dokumente/zusatzabos"
 ACTIVITY_AREA_INFO = ""
 ENABLE_SHARES = True
 SHARE_PRICE = "250"
