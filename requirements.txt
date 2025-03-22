@@ -1,4 +1,4 @@
-gunicorn==22.0.0
+gunicorn==23.0.0
 juntagrico~=1.6.0
 psycopg>=3.1.8
 
