@@ -10,7 +10,7 @@ from juntagrico.entity.subtypes import SubscriptionType
 from juntagrico.entity.listmessage import ListMessage
 from juntagrico.mailer import adminnotification
 from juntagrico.util.pdf import render_to_pdf_storage
-from juntagrico.util.subs import activate_future_depots
+from juntagrico.entity.subs import Subscription
 from juntagrico.util.temporal import weekdays
 
 
@@ -21,7 +21,7 @@ def depot_list_generation(*args, **options):
         return
 
     if options['future'] or timezone.now().weekday() in Config.depot_list_generation_days():
-        activate_future_depots()
+        Subscription.objects.activate_future_depots()
 
     if options['force'] and not options['future']:
         print('future depots ignored, use --future to override')

@@ -1,6 +1,6 @@
 @font-face {
     font-family: Symbola, "Symbola";
-    src: url(/code/static/fonts/Symbola.ttf);
+    src: url(/code/static/juntagrico/fonts/Symbola.ttf);
 }
 
 @page {
@@ -103,13 +103,6 @@ td {
     font-size: 18pt;
 }
 
-.messageb {
-    width: 100%;
-    text-align: center;
-    font-size: 18pt;
-    font-weight: bold;
-}
-
 .depot {
     font-size: 24px;
     margin: 0px;
@@ -122,6 +115,10 @@ td {
 
 .fontsmall {
     font-size:11px
+}
+
+.pickup-details {
+    font-weight: normal;
 }
 
 .gendate {
@@ -139,4 +136,11 @@ table {
 
 .bg-grey {
     background-color: #D3D3D3;
+}
+
+.messageb {
+    width: 100%;
+    text-align: center;
+    font-size: 18pt;
+    font-weight: bold;
 }

@@ -1,94 +1,27 @@
-{% extends "no_menu_base.html" %}
-{% load i18n %}
-{% load juntagrico.config %}
-{% load crispy_forms_tags %}
-{% block all_page_title %}
-    {% vocabulary "member_type" as v_member_type %}
-    <div class="page-title col-md-12">
-        <h3>
-            Persönliche Daten {# OVERWRITE DEFAULT TEXT: {% blocktrans %}{{ v_member_type }} werden{% endblocktrans %} #}
-        </h3>
-    </div>
+{% extends "signup.html" %}
+{% block title %}
+    Persönliche Daten
 {% endblock %}
-{% block allcontent %}
-    <div class="col-md-12">
-        {% config "enable_shares" as c_enable_shares %}
-        {% config "bylaws" as c_bylaws %}
-        {% config "business_regulations" as c_business_regulations %}
-        {% config "gdpr_info" as c_gdpr_info %}
-        {% config "share_price" as c_share_price %}
-        {% enriched_organisation "D" as v_d_enriched_organisation %}
-        {% vocabulary "share" as v_share %}
-        {% vocabulary "share_pl" as v_share_pl %}
-        {% vocabulary "subscription" as v_subscription %}
-        {% vocabulary "member_type" as v_member_type %}
-        {% vocabulary "member_type_pl" as v_member_type_pl %}
-        <div class="row mb-3">
-            <div class="col-md-12">
+{% block intro %}
+                <div class="col-md-12">
                     <h4>Schnupperabo:</h4>
                     Für ein Schnupperabo kannst du hier deine Daten einfügen, welche für die Anmeldung
                     notwendig sind. Wir werden dir keine Anteilscheine in Rechnung stellen, benötigen jedoch
                     trotzdem gewisse Informationen.
 
                     <h4>Regulärer Beitritt:</h4>
-
-                    Interessiert an ortoloco?
-            </div>
-        </div>
-        {% if c_enable_shares %}
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    Die Mitgliedschaft bei ortoloco ist geknüpft an den Erwerb von Anteilscheinen in der
-                    Höhe von CHF 250 pro Anteilschein. Die Anteilscheine bilden das Investitionskapital,
-                    das zur Finanzierung der Infrastruktur verwendet wird. Jeder Haushalt, der ein Abo bezieht,
-                    zeichnet im Minimum 4 Anteilscheine (CHF 1'000). Damit wir den Hof zu einem grossen Teil
-                    über Anteilscheine tragen können, beteiligen sich Haushalte, die das können, mit mehr -
-                    idealerweise mit 26 Anteilscheinen pro Abo. Beim Austritt werden die Anteilscheine
-                    rückerstattet.
-                </div>
-            </div>
-        {% endif %}
-        <div class="row mb-3">
-            <div class="col-md-12">
-                {% blocktrans trimmed %}
-                Die {{ v_member_type_pl }} tragen im Rahmen ihrer Motivationen, Prioritäten und Möglichkeiten
-                gemeinsam zum Gelingen des Betriebes bei.
-                Wer bei {{ v_d_enriched_organisation }} {{ v_member_type }} ist, verpflichtet sich zur
-                Mitarbeit. Zusätzliches wie auch spontanes Engagement ist jederzeit willkommen.
-                {% endblocktrans %}
-            </div>
-        </div>
-        {% if c_bylaws.strip or c_business_regulations.strip %}
-        <div class="row mb-4">
-            <div class="col-md-12">
-                {% blocktrans trimmed %}
-                Bevor du dich als {{ v_member_type }} anmeldest, lies bitte folgendes durch
-                {% endblocktrans %}:
-                <ul>
-                    {% if c_bylaws.strip %}
-                        <li>
-                            <a target="_blank" href="{{ c_bylaws|safe }}">
-                                {% trans "Statuten" %}
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% if c_business_regulations.strip %}
-                        <li>
-                            <a target="_blank" href="{{ c_business_regulations|safe }}">
-                                {% trans "Betriebsreglement" %}
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-        {% endif %}
-        <div class="row">
-            <div class="offset-md-2 col-md-8">
-                <form action="" method="post">
-                    {% crispy form %}
-                </form>
-            </div>
-        </div>
-    </div>
+    {{ block.super }}
+{% endblock %}
+{% block intro_with_shares %}
+    <p>
+    Die Mitgliedschaft bei ortoloco ist geknüpft an den
+    Erwerb von Anteilscheinen in der Höhe von CHF 250 pro
+    Anteilschein. Die Anteilscheine bilden das Investitionskapital,
+    das zur Finanzierung der Infrastruktur verwendet wird. Jeder
+    Haushalt, der ein Abo bezieht, zeichnet im Minimum 4 Anteilscheine
+    (CHF 1'000). Damit wir den Hof zu einem grossen Teil über
+    Anteilscheine tragen können, beteiligen sich Haushalte, die das
+    können, mit mehr - idealerweise mit 26 Anteilscheinen pro Abo.
+    Beim Austritt werden die Anteilscheine rückerstattet.
+    </p>
 {% endblock %}

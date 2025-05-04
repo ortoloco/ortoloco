@@ -1,15 +1,15 @@
-gunicorn==22.0.0
-juntagrico~=1.6.0
+gunicorn==23.0.0
+juntagrico~=1.7.0
 psycopg>=3.1.8
 
 juntagrico-webdav~=1.6.0
-juntagrico-pg~=1.6.0
-juntagrico-billing~=1.6.0
+juntagrico-pg~=1.7.0
+juntagrico-billing~=1.7.0
 git+https://github.com/nixnuex/juntagrico-polling@remove_menudict
 
 django-oauth-toolkit~=2.2.0
 git+https://github.com/juanifioren/django-oidc-provider@develop
-django-debug-toolbar~=4.3.0
+django-debug-toolbar~=5.2.0
 
 # get around url parsing bug in regex-2022.3.15
 regex==2022.3.2

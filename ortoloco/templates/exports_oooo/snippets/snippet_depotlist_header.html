@@ -5,7 +5,7 @@
 <table cellpadding="2" cellspacing="0" repeat="5">
     <tr>
         <th colspan="5" class="horz-left">{% comment "#TODO: get number of columns from data. workaround: there will be at least 3 columns" %}{% endcomment %}
-            <h2 class="depot">Depotliste: {{ depot.weekday_name }} {{ depot.weekday|get_date:weekdays }}<br>
+            <h2 class="depot">Depotliste: {{ depot.get_weekday_display }} {{ depot.weekday|get_date:weekdays }}<br>
             {{ depot.name }}</h2>
             <h3 class="depotaddr">{{ depot.location.addr_street }}, {{ depot.location.addr_zipcode }} {{ depot.location.addr_location }} ({% trans "Kontakt" %}: {{ depot.contact.first_name }} {{ depot.contact.last_name }})
             </h3>

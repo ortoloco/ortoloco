@@ -22,13 +22,15 @@
 
 {% for depot in depots %}
     {% include "./snippets/snippet_depotlist_header.html" with first=True %}
-    {% for subscription in subscriptions %}
-    {% if subscription.depot.pk == depot.pk %}
+    {% for sub in subscriptions %}
+    {% if sub.depot.pk == depot.pk %}
         <tr class="bottom-border">
-            <td class="namecol top-border left-border horz-left">{{ subscription.recipients_names }}</td>
+            <td class="namecol top-border left-border horz-left">
+                {% include "juntagrico/snippets/subscription/recipients.html" with subscription=sub %}
+            </td>
             {% for product in products %}
                 {% for size in product.sizes %}
-                    <td class="top-border left-border">{{ subscription|get_attr:size.key|default:'' }}</td>
+                    <td class="top-border left-border">{{ sub|get_attr:size.key|default:'' }}</td>
                 {% empty %}
                     <td class="top-border left-border"></td>
                 {% endfor %}

@@ -48,6 +48,7 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
+                'juntagrico.context_processors.vocabulary',
             ],
             'debug': True
         },
@@ -277,9 +278,11 @@ FAVICON = "/static/img/favicono.ico"
 EXTRA_SUB_INFO = "https://ortoloco.ch/dokumente/zusatzabos"
 ACTIVITY_AREA_INFO = ""
 ENABLE_SHARES = True
+REQUIRED_SHARES = 1
 SHARE_PRICE = "250"
 PROMOTED_JOB_TYPES = ["Aktionstag"]
 PROMOTED_JOBS_AMOUNT = 2
+ALLOW_JOB_UNSUBSCRIBE = False
 DEPOT_LIST_GENERATION_DAYS = [3]
 DEFAULT_DEPOTLIST_GENERATORS = ['ortoloco.util.depot_list.depot_list_generation']
 
