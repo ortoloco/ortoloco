@@ -207,7 +207,9 @@ STATICFILES_DIRS = [
 """
 IMPERSONATE = {
     'REDIRECT_URL': '/my/profile',
+    'URI_EXCLUSIONS': [], # enable /admin impersonation
 }
+
 
 """
     File & Storage Settings
