@@ -326,6 +326,7 @@ DEBUG_TOOLBAR_CONFIG = {
     juntagrico-billing Settings
 """
 BILLS_USERMENU = True
+BEXIO_EXPORT = True
 
 MAILER_RICHTEXT_OPTIONS = {
     'valid_styles': {
