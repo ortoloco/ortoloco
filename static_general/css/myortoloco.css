@@ -6,3 +6,7 @@
     width: 580px;
     height: 161px;
 }
+
+html, body {
+    background: #fefffa url(/static/img/test.png) 0 0;
+}
