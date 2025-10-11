@@ -79,6 +79,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'ortoloco',
     'share_info',
+    'juntagrico_contribution',
     'juntagrico_billing',
     'juntagrico_pg',
     'juntagrico_polling',
