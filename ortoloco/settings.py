@@ -399,3 +399,25 @@ ORTOLOCO_AREA_NOTIFY = {
 
 # juntagrico export permission level
 IMPORT_EXPORT_EXPORT_PERMISSION_CODE = 'view'
+
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {'format': '[%(asctime)s] %(levelname)s %(message)s'}
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+        },
+    },
+}
