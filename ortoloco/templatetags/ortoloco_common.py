@@ -1,5 +1,7 @@
 from django import template
 from juntagrico.entity.subs import Subscription
+from ortoloco.util.news import get_news_posts
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -42,3 +44,7 @@ def by_weekday(queryset_or_sub, weekday_id):
     if queryset_or_sub.model == Subscription:
         return queryset_or_sub.filter(depot__weekday=weekday_id)
     return queryset_or_sub.filter(weekday=weekday_id)
+
+@register.simple_tag
+def newstb():
+    return mark_safe(get_news_posts(11))

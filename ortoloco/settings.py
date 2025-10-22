@@ -398,3 +398,7 @@ ORTOLOCO_AREA_NOTIFY = {
 
 # juntagrico export permission level
 IMPORT_EXPORT_EXPORT_PERMISSION_CODE = 'view'
+
+# wordpress content integration into my.ortoloco
+WP_USER = os.environ.get('WP_USER')
+WP_PASSWORD = os.environ.get('WP_PASSWORD')
