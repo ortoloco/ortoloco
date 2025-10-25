@@ -15,7 +15,7 @@ def get_news_posts(wpcategory = 10):
     if response:
         html = ''
         for post in response.json():
-            html += '<h2 class="wp-title">' + post['title']['rendered'] + "</h2>"
+            html += '<h1 class="wp-title">' + post['title']['rendered'] + "</h1>"
             html += post['content']['rendered']
         return html
-    return '<i>Fehler: Die News von news.ortoloco.ch konnten nicht geladen werden.</i>'
+    return '<i>Fehler: Die Inhalte von news.ortoloco.ch konnten nicht geladen werden.</i>'
