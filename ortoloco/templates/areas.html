@@ -1,0 +1,21 @@
+{% extends "areas.html" %}
+{% load ortoloco_common %}
+
+{% block page_title %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+        <div class="row mb-4">
+            <div class="col-md-12">
+                {% newstb %}
+            </div>
+        </div>
+
+    <h1>Tätigkeitsbereiche</h1>
+    {{ block.super }}
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+{% endblock %}
