@@ -36,6 +36,9 @@ urlpatterns = [
     # juntagrico-polling
     path('', include('juntagrico_polling.urls')),
 
+    # juntagrico-contribution
+    path('jcr/', include('juntagrico_contribution.urls')),
+
     # ortoloco custom error page
     path('500', Custom500View.as_view()),
 

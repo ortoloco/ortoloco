@@ -79,6 +79,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'ortoloco',
     'share_info',
+    'juntagrico_contribution',
     'juntagrico_billing',
     'juntagrico_pg',
     'juntagrico_polling',
@@ -402,3 +403,30 @@ IMPORT_EXPORT_EXPORT_PERMISSION_CODE = 'view'
 # wordpress content integration into my.ortoloco
 WP_USER = os.environ.get('WP_USER')
 WP_PASSWORD = os.environ.get('WP_PASSWORD')
+
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {'format': '[%(asctime)s] %(levelname)s %(message)s'}
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+        },
+    },
+}
+
+# Staging
+if os.environ.get('JUNTAGRICO_STAGING') == '1':
+    ALLOWED_HOSTS.append('ortoloco-staging.juntagrico.science')
+    STYLES['static'].append('css/staging.css')
