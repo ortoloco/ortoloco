@@ -6,7 +6,7 @@ import os
 """
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ['my.ortoloco.ch', '127.0.0.1', 'ortoloco-staging.juntagrico.science']
+ALLOWED_HOSTS = ['my.ortoloco.ch', '127.0.0.1']
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
@@ -425,3 +425,8 @@ LOGGING = {
         },
     },
 }
+
+# Staging
+if os.environ.get('JUNTAGRICO_STAGING') == '1':
+    ALLOWED_HOSTS.append('ortoloco-staging.juntagrico.science')
+    STYLES['static'].append('css/staging.css')
