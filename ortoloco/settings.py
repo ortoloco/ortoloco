@@ -385,11 +385,9 @@ ORTOLOCO_TOURS = [
 
 # depot list recurring messages
 ORTOLOCO_RECURRING_MESSAGES = [
-    {
-        "message": "OHNE TOFU"
-        ,"year": 2025
-        ,"weeks": list(range(1, 50, 2))
-    }
+    {"message": "OHNE TOFU", "year": 2025, "weeks": list(range(1, 50, 2))},
+    {"message": "OHNE TOFU", "year": 2026, "weeks": list(range(1, 50, 2))},
+    {"message": "OHNE TOFU", "year": 2027, "weeks": list(range(2, 51, 2))},
 ]
 
 # days in advance for area admin notification about job participants
