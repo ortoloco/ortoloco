@@ -1,6 +1,5 @@
-{% load ortoloco_common %}
+{% load juntagrico.common %}
 {% load juntagrico.depot_extras %}
-
 {% load i18n %}
 {% load juntagrico.config %}
 {% vocabulary "depot" as v_depot %}
@@ -10,53 +9,56 @@
     <meta charset="utf-8">
     <style>{% include "./snippets/snippet_depotlist_style.css" %}</style>
 </head>
+
 <body>
-{% for day in weekdays %}
-<div id="header_content" class="gendate">
-    Erstellt am: {% now "d.m.Y H:i" %}
-</div>
-<div id="footer_content">
-    <div class="messageb">Diese Liste bitte immer zurück ans Klemmbrett heften! Danke.</div>
-</div>
-    <h2 style="font-size: 18px;">{{ day.name }}</h2>
-<table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
-    <tr>
-        <td></td>
-        {% for product in products %}
-            <th colspan="{{ product.sizes|count }}" class="top-border {% if forloop.first %}left-border{% endif %} right-border">{{ product.name }}<br/></th>
-        {% endfor %}
-    </tr>
-    <tr>
-        <td></td>
-        {% for product in products %}
-            {% for size in product.sizes %}
-                <td class="small bottom-border {% if forloop.first %}left-border{% endif %} {% cycle '' 'bg-grey' %}">{{ size.name }}</td>
-            {% endfor %}
-        {% endfor %}
-        {% resetcycle %}
-    </tr>
-    {% for depot in depots|by_weekday:day.weekday %}
+{% for tour in tours %}
+    <div id="header_content" style="text-align:right">
+        {% trans "Erstellt am" %} {% now "d.m.Y H:i" %},
+        {% trans "Stichtag" %} {{ date|date:"d.m.Y" }}
+    </div>
+    <div id="footer_content">
+        <div class="messageb">Diese Liste bitte immer zurück ans Klemmbrett heften! Danke.</div>
+    </div>
+        <h2 style="font-size: 18px;">{{ tour.name }}</h2>
+    <table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
         <tr>
-            <td style="width:360px;">{{ depot.name }}</td>
+            <td></td>
             {% for product in products %}
-                {% for size in product.sizes %}
-                    <td class="{% cycle '' 'bg-grey' %}">{{ depot|get_attr:size.key|default:'0' }}</td>
-                {% endfor %}
+                <th colspan="{{ product.sizes.on_depot_list.count }}" class="top-border {% if forloop.first %}left-border{% endif %} right-border">{{ product.name }}<br/><span
+                        style="font-size:11px">{{ product.description|safe }}</span></th>
             {% endfor %}
         </tr>
-        {% resetcycle %}
-    {% endfor %}
-    <tr>
-        <td><b>{% trans "Total" %}</b></td>
-        {% for product in products %}
-            {% for size in product.sizes %}
-                <td class="{% cycle '' 'bg-grey' %}"><b>{{ day|get_attr:size.key|default:'0' }}</b></td>
+        <tr>
+            <td></td>
+            {% for product in products %}
+                {% for size in product.sizes.on_depot_list.sorted %}
+                    <td class="small bottom-border {% if forloop.first %}left-border{% endif %} {% cycle '' 'bg-grey' %}">{{ size.name }}</td>
+                {% endfor %}
             {% endfor %}
+            {% resetcycle %}
+        </tr>
+        {% for depot in tour.depots.all %}
+            <tr>
+                <td style="width:360px;">{{ depot.name }}</td>
+                {% for product in products %}
+                    {% for size in product.sizes.on_depot_list.sorted %}
+                        <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_depot:depot|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                    {% endfor %}
+                {% endfor %}
+            </tr>
+            {% resetcycle %}
         {% endfor %}
-        {% resetcycle %}
-    </tr>
-</table>
-<div class="page-break"></div>
+        <tr>
+            <td>{% trans "Total" %}</td>
+            {% for product in products %}
+                {% for size in product.sizes.on_depot_list.sorted %}
+                    <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_tour:tour|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                {% endfor %}
+            {% endfor %}
+            {% resetcycle %}
+        </tr>
+    </table>
+    <div class="page-break"></div>
 {% endfor %}
 </body>
 </html>
