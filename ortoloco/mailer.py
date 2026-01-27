@@ -5,11 +5,11 @@ import threading
 from django.dispatch import Signal
 from juntagrico.config import Config
 from juntagrico.backends.email import BaseEmailBackend
-
+from django.core.mail.backends import smtp
 
 batch_mail_sent = Signal()
 
-class IndividualToEmailBackend(BaseEmailBackend):
+class IndividualToEmailBackend(BaseEmailBackend, smtp.EmailBackend):
     def send_messages(self, email_messages):
         email_messages = self.clean_messages(email_messages)
         for email_message in email_messages:

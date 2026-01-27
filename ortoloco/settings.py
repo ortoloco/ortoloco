@@ -101,9 +101,7 @@ INSTALLED_APPS = (
 """
     Email Settings
 """
-#EMAIL_BACKEND='ortoloco.mailer.IndividualToEmailBackend'
-EMAIL_BACKEND='ortoloco.mailer.BaseBatchEmailBackend'
-#EMAIL_BACKEND='juntagrico.backends.email.BatchEmailBackend'
+EMAIL_BACKEND='ortoloco.mailer.IndividualToEmailBackend'
 BATCH_MAILER = {
     'batch_size': 500,
     'wait_time': 0
@@ -252,15 +250,19 @@ VOCABULARY = {
     'member_type': 'Mitglied',
     'member_type_pl': 'Mitglieder',
     'depot': 'Depot',
-    'depot_pl': 'Depots'
+    'depot_pl': 'Depots',
+    'package': 'Tasche',
+    'from': '{} von {}',
 }
+
 ORGANISATION_NAME = "ortoloco"
 ORGANISATION_LONG_NAME = "Genossenschaft ortoloco - die Hofkooperative im Fondli"
-ORGANISATION_ADDRESS = {"name": "ortoloco",
+ORGANISATION_ADDRESS = {"name": "Genossenschaft ortoloco",
                         "street": "Spreitenbacherstrasse",
                         "number": "35",
                         "zip": "8953",
-                        "city": "Dietikon", }
+                        "city": "Dietikon",
+                        "extra": "Biohof Fondli"}
 ORGANISATION_BANK_CONNECTION = {"PC": "85-199010-5",
                                 "IBAN": "CH6109000000156196402",
                                 "BIC": "POFICHBEXXX",
@@ -292,6 +294,9 @@ ENABLE_SHARES = True
 REQUIRED_SHARES = 0
 SHARE_PRICE = "250"
 JOBS_FRONTPAGE = {
+    'days': 14,
+    'min': 3,
+    'max': 10,
     'promoted_types': ["Aktionstag"],
     'promoted_count': 2
 }
@@ -383,10 +388,15 @@ OIDC_USERINFO = 'ortoloco.oidc_provider_settings.userinfo'
 OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
 
 
+#SUB_OVERVIEW_FORMAT = {
+#    'delimiter': ' + ',
+#    'format': '{amount}x {type}'
+#    }
 SUB_OVERVIEW_FORMAT = {
-    'delimiter': ' + ',
-    'format': '{amount}x {type}'
-    }
+    'delimiter': '|',
+    'format': '{category}:{bundle}:{type}={amount}',
+    'part_format': '{bundle}'
+}
 
 def show_toolbar(request):
     return os.environ.get("DEBUG_TOOLBAR") == "True" and request.user and request.user.is_superuser
