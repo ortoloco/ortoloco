@@ -108,6 +108,7 @@ BATCH_MAILER = {
 }
 FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
                'replacement_from': 'info@ortoloco.ch'}
+ENFORCE_MAIL_CONFIRMATION = True
 
 EMAIL_HOST = os.environ.get('JUNTAGRICO_EMAIL_HOST')
 EMAIL_HOST_USER = os.environ.get('JUNTAGRICO_EMAIL_USER')
@@ -281,6 +282,7 @@ ORGANISATION_WEBSITE = {
 BUSINESS_REGULATIONS = "https://static.ortoloco.ch/documents/ortoloco_Betriebsreglement.pdf"
 BYLAWS = "https://static.ortoloco.ch/documents/ortoloco_Statuten.pdf"
 FAQ_DOC = "https://ortoloco.ch/faq"
+GDPR_INFO = "https://www.ortoloco.ch/datenschutz"
 MAIL_TEMPLATE = "mails/ooooemail.html"
 EMAILS = {
     's_created': 'mails/oooo_share_created.txt',
@@ -293,6 +295,11 @@ ACTIVITY_AREA_INFO = ""
 ENABLE_SHARES = True
 REQUIRED_SHARES = 0
 SHARE_PRICE = "250"
+
+# Enable external signup API for signup through ortoloco.ch
+ENABLE_EXTERNAL_SIGNUP = True
+
+# Frontpage upcoming jobs overview configuration
 JOBS_FRONTPAGE = {
     'days': 14,
     'min': 3,
@@ -305,17 +312,15 @@ ALLOW_JOB_UNSUBSCRIBE = False
 '''
 Depot list generation costumization
 '''
-def extra_context():
+def extra_context(context):
     from django.conf import settings
     from juntagrico.util.temporal import weekdays
     from django.utils import timezone
     from juntagrico.dao.depotdao import DepotDao
-    from juntagrico.entity.depot import Tour
-    from django.db.models import Case, When, Value, IntegerField
     from juntagrico.entity.listmessage import ListMessage
 
+    # update recurring messages, set active flag before depot list generation
     list_week_date = timezone.localdate() + timezone.timedelta(days=7-timezone.localdate().weekday())
-    # update recurring messages
     recurring_message_config = settings.ORTOLOCO_RECURRING_MESSAGES
     actual_config_messages = [
         message_config
@@ -330,43 +335,32 @@ def extra_context():
                 message.active = is_active
                 message.save()
 
-    # annotate tours with weekdays for our use case
-    tours = Tour.objects.filter(visible_on_list=True).annotate(
-        weekday=Case(
-            When(id__lte=3, then=Value(2)),
-            When(id__gte=4, then=Value(4)),
-            output_field=IntegerField())).annotate(
-        local=Case(
-            When(id=1, then=Value(1)),
-            When(id=4, then=Value(1)),
-            default=0,
-            output_field=IntegerField()))
     days = DepotDao.all_depots_for_list().prefetch_related('subscription_set'). \
         values('weekday').order_by('weekday').distinct()
     for day in days:
         day['name'] = weekdays[day['weekday']]
         day['date'] = list_week_date + timezone.timedelta(days=day['weekday']-1)
-    return dict(tours=tours, days=days)
+    return dict(days=days)
 
 DEPOT_LIST_GENERATION_DAYS = [3]
 DEPOT_LISTS = {
-        'depotlist': 'exports_oooo/depotlist.html',
-        'depot_overview': 'exports_oooo/depot_overview.html',
+       'depotlist': 'exports_oooo/depotlist.html',
+       'depot_overview': 'exports_oooo/depot_overview.html',
         'amount_overview': {
             'name': 'Mengen-Übersicht',
             'template': 'exports_oooo/amount_overview.html',
             'extra_context': extra_context,
         },
-        'tour_overview': {
-            'name': 'Tour-Übersicht',
-            'template': 'exports_oooo/tour_overview.html',
-            'extra_context': extra_context,
-            },
-        'tour_list': {
-            'name': 'Tour-Liste',
-            'template': 'exports_oooo/tour_list.html',
-            'extra_context': extra_context,
-            },
+       'tour_overview': {
+           'name': 'Tour-Übersicht',
+           'template': 'exports_oooo/tour_overview.html',
+           'extra_context': extra_context,
+           },
+       'tour_list': {
+           'name': 'Tour-Liste',
+           'template': 'exports_oooo/tour_list.html',
+           'extra_context': extra_context,
+           },
     }
 
 BUSINESS_YEAR_START = {"day": 1, "month": 1}
@@ -388,15 +382,10 @@ OIDC_USERINFO = 'ortoloco.oidc_provider_settings.userinfo'
 OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
 
 
-#SUB_OVERVIEW_FORMAT = {
-#    'delimiter': ' + ',
-#    'format': '{amount}x {type}'
-#    }
 SUB_OVERVIEW_FORMAT = {
-    'delimiter': '|',
-    'format': '{category}:{bundle}:{type}={amount}',
-    'part_format': '{bundle}'
-}
+   'delimiter': ' + ',
+   'format': '{amount}x{type}'
+   }
 
 def show_toolbar(request):
     return os.environ.get("DEBUG_TOOLBAR") == "True" and request.user and request.user.is_superuser
