@@ -459,4 +459,5 @@ LOGGING = {
 # Staging
 if os.environ.get('JUNTAGRICO_STAGING') == '1':
     ALLOWED_HOSTS.append('ortoloco-staging.juntagrico.science')
+    EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
     STYLES['static'].append('css/staging.css')
