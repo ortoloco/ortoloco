@@ -83,7 +83,6 @@ INSTALLED_APPS = (
     'juntagrico_polling',
     'juntagrico_webdav',
     'juntagrico',
-    'fontawesomefree',
     'import_export',
     'impersonate',
     'crispy_forms',
@@ -263,7 +262,7 @@ ORGANISATION_ADDRESS = {"name": "Genossenschaft ortoloco",
                         "number": "35",
                         "zip": "8953",
                         "city": "Dietikon",
-                        "extra": "Biohof Fondli"}
+                        "extra": "c/o Biohof Fondli"}
 ORGANISATION_BANK_CONNECTION = {"PC": "85-199010-5",
                                 "IBAN": "CH6109000000156196402",
                                 "BIC": "POFICHBEXXX",

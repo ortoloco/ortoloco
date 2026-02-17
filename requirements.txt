@@ -1,13 +1,14 @@
-gunicorn==23.0.0
-juntagrico~=2.0.0a
+gunicorn~=25.1.0
+juntagrico~=2.0.0b1
 psycopg>=3.1.8
 
 juntagrico-webdav~=1.6.0
 juntagrico-pg~=1.7.0
-juntagrico-billing~=1.7.0
+#juntagrico-billing~=2.0.0
+git+https://github.com/juntagrico/juntagrico-billing@releases/2.0
 git+https://github.com/nixnuex/juntagrico-polling@remove_menudict
 
-django-oauth-toolkit~=2.2.0
+django-oauth-toolkit~=3.2.0
 git+https://github.com/juanifioren/django-oidc-provider@develop
 django-debug-toolbar~=5.2.0
 

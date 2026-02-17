@@ -4,7 +4,7 @@ import itertools
 from django.conf import settings
 from django.utils import timezone
 from juntagrico.dao.activityareadao import ActivityAreaDao
-from juntagrico.dao.jobtypedao import JobTypeDao
+from juntagrico.entity.jobs  import JobType
 from juntagrico.entity.jobs import Assignment, RecuringJob
 from juntagrico.mailer import (
     EmailSender,
@@ -35,11 +35,11 @@ def notify_upcoming_jobs_for_area(area_name, days):
     job__max_date = job__min_date + timezone.timedelta(days=1)
     job_stats_min_date = now - timezone.timedelta(days=365)
 
-    for area in ActivityAreaDao.all_visible_areas().filter(name=area_name):
+    for area in ActivityAreaDao.all_visible_areas_ordered().filter(name=area_name):
 
         job_type_ids = [
             job_type.pk
-            for job_type in JobTypeDao.types_by_area(area.pk)
+            for job_type in JobType.objects.all().filter(activityarea_id = area.pk)
             ]
 
         # find the jobs for the area in the given day
@@ -74,5 +74,5 @@ def notify_upcoming_jobs_for_area(area_name, days):
             EmailSender.get_sender(
                 organisation_subject("{area.name} - {job_weekday} {job_date}".format(**d)),
                 get_email_content('j_notify', base_dict(d)),
-                to=[area.coordinator.email]
+                to=area.get_emails()
             ).send()

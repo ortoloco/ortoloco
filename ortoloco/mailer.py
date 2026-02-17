@@ -14,7 +14,6 @@ class IndividualToEmailBackend(BaseEmailBackend, smtp.EmailBackend):
         email_messages = self.clean_messages(email_messages)
         for email_message in email_messages:
             # open daemon thread that sends the emails in the background
-            print('Sending mail "{}"'.format(email_message.subject))
             t = threading.Thread(
                 target=self._send_batches,
                 args=[email_message, Config.batch_mailer('batch_size'), Config.batch_mailer('wait_time')],
@@ -24,6 +23,7 @@ class IndividualToEmailBackend(BaseEmailBackend, smtp.EmailBackend):
         return len(email_messages)  # pretend that all will go well
 
     def _send_batches(self, msg, batch_size, wait_time):
+        print('Sending mail "{}"'.format(msg.subject))
         starttime = time.time()
         tos = msg.to + msg.bcc
         plain_msg = copy.copy(msg)
