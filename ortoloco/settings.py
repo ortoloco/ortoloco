@@ -342,24 +342,25 @@ def extra_context(context):
     return dict(days=days)
 
 DEPOT_LIST_GENERATION_DAYS = [3]
+# the names of the lists define the url and need to stay constant for the printing script on the Gartenlaptop to work
 DEPOT_LISTS = {
     'depotlist': 'exports_oooo/depotlist.html',
-    'depot_overview': {
+    'depotoverview': {
         'name': 'Depot-Übersicht',
         'template': 'exports_oooo/depot_overview.html',
         'extra_context': extra_context,
     },
-    'amount_overview': {
+    'amountoverview': {
         'name': 'Mengen-Übersicht',
         'template': 'exports_oooo/amount_overview.html',
         'extra_context': extra_context,
     },
-    'tour_overview': {
+    'touroverview': {
         'name': 'Tour-Übersicht',
         'template': 'exports_oooo/tour_overview.html',
         'extra_context': extra_context,
     },
-    'tour_list': {
+    'tourlist': {
         'name': 'Tour-Liste',
         'template': 'exports_oooo/tour_list.html',
         'extra_context': extra_context,
