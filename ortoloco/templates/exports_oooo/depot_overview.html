@@ -1,4 +1,5 @@
 {% load juntagrico.common %}
+{% load ortoloco_common %}
 {% load juntagrico.depot_extras %}
 {% load i18n %}
 {% load juntagrico.config %}
@@ -11,7 +12,7 @@
 </head>
 
 <body>
-{% for tour in tours %}
+{% for day in days %}
     <div id="header_content" style="text-align:right">
         {% trans "Erstellt am" %} {% now "d.m.Y H:i" %},
         {% trans "Stichtag" %} {{ date|date:"d.m.Y" }}
@@ -19,7 +20,7 @@
     <div id="footer_content">
         <div class="messageb">Diese Liste bitte immer zurück ans Klemmbrett heften! Danke.</div>
     </div>
-        <h2 style="font-size: 18px;">{{ tour.name }}</h2>
+        <h2 style="font-size: 18px;">{{ day.name }}</h2>
     <table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
         <tr>
             <td></td>
@@ -37,6 +38,8 @@
             {% endfor %}
             {% resetcycle %}
         </tr>
+        {% for tour in tours %}
+        {% if tour.weekday == day.weekday %}
         {% for depot in tour.depots.all %}
             <tr>
                 <td style="width:360px;">{{ depot.name }}</td>
@@ -48,11 +51,13 @@
             </tr>
             {% resetcycle %}
         {% endfor %}
+        {% endif %}
+        {% endfor %}
         <tr>
             <td>{% trans "Total" %}</td>
             {% for product in products %}
                 {% for size in product.sizes.on_depot_list.sorted %}
-                    <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_tour:tour|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                    <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_weekday:day.weekday|parts_by_size:size|active_on:date|count|floatformat }}</td>
                 {% endfor %}
             {% endfor %}
             {% resetcycle %}

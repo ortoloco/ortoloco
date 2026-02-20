@@ -22,7 +22,7 @@
 
 {% for day in days %}
     {% for tour in tours|by_weekday:day.weekday %}
-        {% if not tour.local %}
+        {% if not 'Fondli' in tour.name %}
             {% include "./snippets/snippet_day_tour.html" with tour_name=tour.name %}
             <div class="page-break"></div>
         {% endif %}

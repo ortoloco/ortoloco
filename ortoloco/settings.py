@@ -262,7 +262,7 @@ ORGANISATION_ADDRESS = {"name": "Genossenschaft ortoloco",
                         "number": "35",
                         "zip": "8953",
                         "city": "Dietikon",
-                        "extra": "c/o Biohof Fondli"}
+                        "extra": "Biohof Fondli"}
 ORGANISATION_BANK_CONNECTION = {"PC": "85-199010-5",
                                 "IBAN": "CH6109000000156196402",
                                 "BIC": "POFICHBEXXX",
@@ -343,24 +343,28 @@ def extra_context(context):
 
 DEPOT_LIST_GENERATION_DAYS = [3]
 DEPOT_LISTS = {
-       'depotlist': 'exports_oooo/depotlist.html',
-       'depot_overview': 'exports_oooo/depot_overview.html',
-        'amount_overview': {
-            'name': 'Mengen-Übersicht',
-            'template': 'exports_oooo/amount_overview.html',
-            'extra_context': extra_context,
-        },
-       'tour_overview': {
-           'name': 'Tour-Übersicht',
-           'template': 'exports_oooo/tour_overview.html',
-           'extra_context': extra_context,
-           },
-       'tour_list': {
-           'name': 'Tour-Liste',
-           'template': 'exports_oooo/tour_list.html',
-           'extra_context': extra_context,
-           },
-    }
+    'depotlist': 'exports_oooo/depotlist.html',
+    'depot_overview': {
+        'name': 'Depot-Übersicht',
+        'template': 'exports_oooo/depot_overview.html',
+        'extra_context': extra_context,
+    },
+    'amount_overview': {
+        'name': 'Mengen-Übersicht',
+        'template': 'exports_oooo/amount_overview.html',
+        'extra_context': extra_context,
+    },
+    'tour_overview': {
+        'name': 'Tour-Übersicht',
+        'template': 'exports_oooo/tour_overview.html',
+        'extra_context': extra_context,
+    },
+    'tour_list': {
+        'name': 'Tour-Liste',
+        'template': 'exports_oooo/tour_list.html',
+        'extra_context': extra_context,
+    },
+}
 
 BUSINESS_YEAR_START = {"day": 1, "month": 1}
 BUSINESS_YEAR_CANCELATION_MONTH = 9
