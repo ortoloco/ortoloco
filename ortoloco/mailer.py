@@ -16,8 +16,7 @@ class IndividualToEmailBackend(BaseEmailBackend, smtp.EmailBackend):
             # open daemon thread that sends the emails in the background
             t = threading.Thread(
                 target=self._send_batches,
-                args=[email_message, Config.batch_mailer('batch_size'), Config.batch_mailer('wait_time')],
-                daemon=True
+                args=[email_message, Config.batch_mailer('batch_size'), Config.batch_mailer('wait_time')]
             )
             t.start()
         return len(email_messages)  # pretend that all will go well
