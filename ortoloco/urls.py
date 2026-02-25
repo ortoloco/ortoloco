@@ -32,9 +32,6 @@ urlpatterns = [
     # juntagrico-webdav
     path('', include('juntagrico_webdav.urls')),
 
-    # juntagrico-polling
-    path('', include('juntagrico_polling.urls')),
-
     # juntagrico-contribution
     path('jcr/', include('juntagrico_contribution.urls')),
 
