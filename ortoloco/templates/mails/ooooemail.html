@@ -1,3 +1,7 @@
+{% load juntagrico.config %}
+{% load static %}
+{% spaceless %}
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -101,11 +105,13 @@
                             <img src="https://static.ortoloco.ch/ortoloco_green.png" alt="Logo ortoloco" width="200" style="max-width: 100%;">
                         </td>
                     </tr>
+                    {% block all_content %}
                     <tr>
                         <td class="content">
-                            {% block content %}{% endblock %}
+                            {% block content %}{{ content }}{% endblock %}
                         </td>
                     </tr>
+                    {% endblock %}
                     <tr>
                         <td class="footer">
                             <p>Genossenschaft ortoloco | c/o Fondlihof | Spreitenbacherstrasse 35 | 8953 Dietikon | info@ortoloco.ch</p>
@@ -118,3 +124,5 @@
     </table>
 </body>
 </html>
+
+{% endspaceless %}
