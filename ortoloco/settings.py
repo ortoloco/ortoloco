@@ -1,5 +1,6 @@
 # Django settings for ortoloco project.
 import os
+from juntagrico import defaults
 
 """
     General Settings
@@ -24,8 +25,6 @@ LOGIN_REDIRECT_URL = "/"
 WSGI_APPLICATION = 'ortoloco.wsgi.application'
 
 SECRET_KEY = os.environ.get('JUNTAGRICO_SECRET_KEY')
-
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 OAUTH2_PROVIDER = {
      'SCOPES': {
@@ -76,20 +75,20 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
     'ortoloco',
-    'share_info',
+    'juntagrico.apps.JuntagricoAdminConfig',
     'juntagrico_contribution',
     'juntagrico_billing',
     'juntagrico_pg',
-    'juntagrico_polling',
     'juntagrico_webdav',
     'juntagrico',
-    'fontawesomefree',
     'import_export',
     'impersonate',
     'crispy_forms',
+    'crispy_bootstrap4',
     'adminsortable2',
+    'django_select2',
+    'djrichtextfield',
     'polymorphic',
     'debug_toolbar',
     'oauth2_provider',
@@ -100,21 +99,14 @@ INSTALLED_APPS = (
 """
     Email Settings
 """
-WHITELIST_EMAILS = []
-
-
-def whitelist_email_from_env(var_env_name):
-    email = os.environ.get(var_env_name)
-    if email:
-        WHITELIST_EMAILS.append(email.replace('@gmail.com', '(\+\S+)?@gmail.com'))
-
-
-whitelist_email_from_env("JUNTAGRICO_EMAIL_USER")
-
-if DEBUG is True:
-    for key in list(os.environ.keys()):
-        if key.startswith("JUNTAGRICO_EMAIL_WHITELISTED"):
-            whitelist_email_from_env(key)
+EMAIL_BACKEND='ortoloco.mailer.IndividualToEmailBackend'
+BATCH_MAILER = {
+    'batch_size': 500,
+    'wait_time': 0
+}
+FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
+               'replacement_from': 'info@ortoloco.ch'}
+ENFORCE_MAIL_CONFIRMATION = True
 
 EMAIL_HOST = os.environ.get('JUNTAGRICO_EMAIL_HOST')
 EMAIL_HOST_USER = os.environ.get('JUNTAGRICO_EMAIL_USER')
@@ -123,6 +115,19 @@ EMAIL_PORT = int(os.environ.get('JUNTAGRICO_EMAIL_PORT', '587'))
 EMAIL_USE_TLS = os.environ.get('JUNTAGRICO_EMAIL_TLS', 'False') == 'True'
 EMAIL_USE_SSL = os.environ.get('JUNTAGRICO_EMAIL_SSL', 'False') == 'True'
 
+WHITELIST_EMAILS = []
+
+def whitelist_email_from_env(var_env_name):
+    email = os.environ.get(var_env_name)
+    if email:
+        WHITELIST_EMAILS.append(email.replace('@gmail.com', '(\+\S+)?@gmail.com'))
+
+whitelist_email_from_env("JUNTAGRICO_EMAIL_USER")
+
+if DEBUG is True:
+    for key in list(os.environ.keys()):
+        if key.startswith("JUNTAGRICO_EMAIL_WHITELISTED"):
+            whitelist_email_from_env(key)
 
 """
     Admin Settings
@@ -244,15 +249,19 @@ VOCABULARY = {
     'member_type': 'Mitglied',
     'member_type_pl': 'Mitglieder',
     'depot': 'Depot',
-    'depot_pl': 'Depots'
+    'depot_pl': 'Depots',
+    'package': 'Tasche',
+    'from': '{} von {}',
 }
+
 ORGANISATION_NAME = "ortoloco"
 ORGANISATION_LONG_NAME = "Genossenschaft ortoloco - die Hofkooperative im Fondli"
-ORGANISATION_ADDRESS = {"name": "ortoloco",
+ORGANISATION_ADDRESS = {"name": "Genossenschaft ortoloco",
                         "street": "Spreitenbacherstrasse",
                         "number": "35",
                         "zip": "8953",
-                        "city": "Dietikon", }
+                        "city": "Dietikon",
+                        "extra": "Biohof Fondli"}
 ORGANISATION_BANK_CONNECTION = {"PC": "85-199010-5",
                                 "IBAN": "CH6109000000156196402",
                                 "BIC": "POFICHBEXXX",
@@ -271,6 +280,7 @@ ORGANISATION_WEBSITE = {
 BUSINESS_REGULATIONS = "https://static.ortoloco.ch/documents/ortoloco_Betriebsreglement.pdf"
 BYLAWS = "https://static.ortoloco.ch/documents/ortoloco_Statuten.pdf"
 FAQ_DOC = "https://ortoloco.ch/faq"
+GDPR_INFO = "https://www.ortoloco.ch/datenschutz"
 MAIL_TEMPLATE = "mails/ooooemail.html"
 EMAILS = {
     's_created': 'mails/oooo_share_created.txt',
@@ -283,11 +293,78 @@ ACTIVITY_AREA_INFO = ""
 ENABLE_SHARES = True
 REQUIRED_SHARES = 0
 SHARE_PRICE = "250"
-PROMOTED_JOB_TYPES = ["Aktionstag"]
-PROMOTED_JOBS_AMOUNT = 2
+
+# Enable external signup API for signup through ortoloco.ch
+ENABLE_EXTERNAL_SIGNUP = True
+
+# Frontpage upcoming jobs overview configuration
+JOBS_FRONTPAGE = {
+    'days': 14,
+    'min': 3,
+    'max': 10,
+    'promoted_types': ["Aktionstag"],
+    'promoted_count': 2
+}
 ALLOW_JOB_UNSUBSCRIBE = False
+
+'''
+Depot list generation costumization
+'''
+def extra_context(context):
+    from django.conf import settings
+    from juntagrico.util.temporal import weekdays
+    from django.utils import timezone
+    from juntagrico.dao.depotdao import DepotDao
+    from juntagrico.entity.listmessage import ListMessage
+
+    # update recurring messages, set active flag before depot list generation
+    list_week_date = timezone.localdate() + timezone.timedelta(days=7-timezone.localdate().weekday())
+    recurring_message_config = settings.ORTOLOCO_RECURRING_MESSAGES
+    actual_config_messages = [
+        message_config
+        for message_config in recurring_message_config
+        if not message_config.get('year') or message_config['year'] == list_week_date.year
+    ]
+    delivery_calender_week = list_week_date.isocalendar().week
+    for message_config in actual_config_messages:
+        is_active = delivery_calender_week in message_config['weeks']
+        for message in ListMessage.objects.filter(message=message_config['message']):
+            if message.active != is_active:
+                message.active = is_active
+                message.save()
+
+    days = DepotDao.all_depots_for_list().prefetch_related('subscription_set'). \
+        values('weekday').order_by('weekday').distinct()
+    for day in days:
+        day['name'] = weekdays[day['weekday']]
+        day['date'] = list_week_date + timezone.timedelta(days=day['weekday']-1)
+    return dict(days=days)
+
 DEPOT_LIST_GENERATION_DAYS = [3]
-DEFAULT_DEPOTLIST_GENERATORS = ['ortoloco.util.depot_list.depot_list_generation']
+# the names of the lists define the url and need to stay constant for the printing script on the Gartenlaptop to work
+DEPOT_LISTS = {
+    'depotlist': 'exports_oooo/depotlist.html',
+    'depotoverview': {
+        'name': 'Depot-Übersicht',
+        'template': 'exports_oooo/depot_overview.html',
+        'extra_context': extra_context,
+    },
+    'amountoverview': {
+        'name': 'Mengen-Übersicht',
+        'template': 'exports_oooo/amount_overview.html',
+        'extra_context': extra_context,
+    },
+    'touroverview': {
+        'name': 'Tour-Übersicht',
+        'template': 'exports_oooo/tour_overview.html',
+        'extra_context': extra_context,
+    },
+    'tourlist': {
+        'name': 'Tour-Liste',
+        'template': 'exports_oooo/tour_list.html',
+        'extra_context': extra_context,
+    },
+}
 
 BUSINESS_YEAR_START = {"day": 1, "month": 1}
 BUSINESS_YEAR_CANCELATION_MONTH = 9
@@ -303,18 +380,15 @@ IMAGES = {'status_100': '/static/img/erbse_voll.png',
           'single_core': '/static/img/erbse_voll_kernbereich.png',
           'core': '/static/img/erbse_voll_kernbereich.png'
           }
-DEFAULT_MAILER = 'ortoloco.mailer.Mailer'
 
 OIDC_USERINFO = 'ortoloco.oidc_provider_settings.userinfo'
 OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
 
-FROM_FILTER = {'filter_expression': '.*@ortoloco\.ch',
-               'replacement_from': 'info@ortoloco.ch'}
 
 SUB_OVERVIEW_FORMAT = {
-    'delimiter': ' + ',
-    'format': '{amount}x {type}'
-    }
+   'delimiter': ' + ',
+   'format': '{amount}x{type}'
+   }
 
 def show_toolbar(request):
     return os.environ.get("DEBUG_TOOLBAR") == "True" and request.user and request.user.is_superuser
@@ -329,59 +403,19 @@ DEBUG_TOOLBAR_CONFIG = {
 BILLS_USERMENU = True
 BEXIO_EXPORT = True
 
-MAILER_RICHTEXT_OPTIONS = {
-    'valid_styles': {
-        '*': ''
-    },
-    'toolbar': "undo redo | bold italic | h1 h2 h3 | alignleft aligncenter | outdent indent | "
-               "bullist numlist | link",
-}
-
-# hack to allow multiple products(sizes) on a subscription type
-ORTOLOCO_PRODUCTS = [{'name': 'Gemüse', 'sizes': [{'name': 'Tasche', 'key': 'gmues'}]},
-                {'name': 'Obst', 'sizes': [{'name': 'Portion', 'key': 'obst'}]},
-                {'name': 'Brot', 'sizes': [{'name': '500g', 'key': 'brot'}]},
-                {'name': 'Eier', 'sizes': [{'name': 'Schachtel', 'key': 'eier'}]},
-                {'name': 'Tofu', 'sizes': [{'name': 'Portion', 'key': 'tofu'}]}]
-
-ORTOLOCO_TYPE_SUBSCRIPTIONS = {
-    "gmues": [6, 7, 8, 9, 10, 33, 11, 12, 13, 18],
-    "obst": [6, 7, 8, 9, 10, 33, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22, 31],
-    "brot": [8, 9, 12, 13, 16, 17, 19, 20],
-    "tofu": [30],
-    "eier": [23]
-}
-
-# test version
-# ORTOLOCO_TYPE_SUBSCRIPTIONS = {
-#     "gmues": [1],
-#     "obst": [2],
-#     "brot": [3],
-#     "tofu": [4],
-#     "eier": [5]
-# }
-
-# hack to allow tours
-ORTOLOCO_TOURS = [
-    {"name": "Fondli", "depot_ids": [6, 17], "local": True},
-    {"name": "kleines Auto (Renault)", "depot_ids": [20, 13, 14, 3, 7, 10, 9, 15], "local": False},
-    {"name": "grosses Auto (Opel)", "depot_ids": [8, 12, 11, 2, 16, 5, 18, 19], "local": False}
-]
-
-# test version
-# ORTOLOCO_TOURS = [
-#     {"name": "Fondli", "depot_ids": [1, 12], "local": True},
-#     {
-#         "name": "kleines Auto (Renault)",
-#         "depot_ids": [2, 3, 4, 5, 11, 13, 14],
-#         "local": False,
-#     },
-#     {
-#         "name": "grosses Auto (Opel)",
-#         "depot_ids": [6, 7, 8, 9, 10, 15, 16, 17],
-#         "local": False,
-#     },
-# ]
+"""
+    juntagrico rich text editor options
+"""
+DJRICHTEXTFIELD_CONFIG = defaults.richtextfield_config(
+    LANGUAGE_CODE,
+    mailer = {
+            'valid_styles': {
+                '*': ''
+            },
+            'toolbar': "undo redo | bold italic | h1 h2 h3 | alignleft aligncenter | outdent indent | "
+                       "bullist numlist | link",
+    }
+)
 
 # depot list recurring messages
 ORTOLOCO_RECURRING_MESSAGES = [
@@ -403,7 +437,6 @@ IMPORT_EXPORT_EXPORT_PERMISSION_CODE = 'view'
 # wordpress content integration into my.ortoloco
 WP_USER = os.environ.get('WP_USER')
 WP_PASSWORD = os.environ.get('WP_PASSWORD')
-
 
 # Logging
 LOGGING = {
@@ -429,4 +462,5 @@ LOGGING = {
 # Staging
 if os.environ.get('JUNTAGRICO_STAGING') == '1':
     ALLOWED_HOSTS.append('ortoloco-staging.juntagrico.science')
+    EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
     STYLES['static'].append('css/staging.css')

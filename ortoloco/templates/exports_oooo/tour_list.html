@@ -13,19 +13,20 @@
 <body>
 
     <div id="header_content" class="gendate">
-        Erstellt am: {% now "d.m.Y H:i" %}
+        {% trans "Erstellt am" %} {% now "d.m.Y H:i" %},
+        {% trans "Stichtag" %} {{ date|date:"d.m.Y" }}
     </div>
     <div id="footer_content">
         <div class="messageb">Diese Liste nehmt ihr mit!</div>
     </div>
 
-{% for day in weekdays %}
-{% for tour in tours  %}
-{% if not tour.local %}
-{% include "./snippets/snippet_day_tour.html" with tour_name=tour.name %}
-<div class="page-break"></div>
-{% endif %}
-{% endfor %}
+{% for day in days %}
+    {% for tour in tours|by_weekday:day.weekday %}
+        {% if not 'Fondli' in tour.name %}
+            {% include "./snippets/snippet_day_tour.html" with tour_name=tour.name %}
+            <div class="page-break"></div>
+        {% endif %}
+    {% endfor %}
 {% endfor %}
 
 </body>

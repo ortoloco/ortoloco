@@ -26,10 +26,10 @@ def depot_list_generation(*args, **options):
     if options['force'] and not options['future']:
         print('future depots ignored, use --future to override')
 
-    subscription_type_product_map = getattr(settings, "ORTOLOCO_TYPE_SUBSCRIPTIONS")
-    ortoloco_tours = getattr(settings, "ORTOLOCO_TOURS")
-    products = getattr(settings, "ORTOLOCO_PRODUCTS")
-    recurring_message_config = getattr(settings, "ORTOLOCO_RECURRING_MESSAGES")
+    subscription_type_product_map = settings.ORTOLOCO_TYPE_SUBSCRIPTIONS
+    ortoloco_tours = settings.ORTOLOCO_TOURS
+    products = settings.ORTOLOCO_PRODUCTS
+    recurring_message_config = settings.ORTOLOCO_RECURRING_MESSAGES
 
     # finding subscription types for product keys
     prod_type_map = {

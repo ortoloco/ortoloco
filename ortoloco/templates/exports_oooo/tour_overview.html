@@ -11,9 +11,10 @@
     <style>{% include "./snippets/snippet_depotlist_style.css" %}</style>
 </head>
 <body>
-{% for day in weekdays %}
+{% for day in days %}
 <div id="header_content" class="gendate">
-    Erstellt am: {% now "d.m.Y H:i" %}
+    {% trans "Erstellt am" %} {% now "d.m.Y H:i" %},
+    {% trans "Stichtag" %} {{ date|date:"d.m.Y" }}
 </div>
 <div id="footer_content">
     <div class="messageb">Diese Liste bitte immer zurück ans Klemmbrett heften! Danke.</div>
@@ -25,15 +26,15 @@
         <th style="small bottom-border right-border">{% trans "Reihe" %}</th>
         <th class="small bottom-border right-border">{% trans "Depot" %}</th>
     </tr>
-    {% for tour in tours %}
-        {% for depot in depots|by_weekday:day.weekday|depots_by_tour:tour %}
+    {% for tour in tours|by_weekday:day.weekday %}
+        {% for depot in depots|depots_by_tour:tour %}
             <tr>
                 {% if not tour.local %}
                     <td>{{tour.name}}</td>
                 {% else %}
                     <td></td>
                 {% endif %}
-                <td>#{{ depot|depot_index:day_tours }}</td>
+                <td>#{{ forloop.counter }}</td>
                 <td>{{ depot.name }}</td>
             </tr>
         {% endfor %}

@@ -1,6 +1,6 @@
+{% load juntagrico.common %}
 {% load ortoloco_common %}
 {% load juntagrico.depot_extras %}
-
 {% load i18n %}
 {% load juntagrico.config %}
 <html>
@@ -12,7 +12,8 @@
 
 <body>
 <div id="header_content" class="gendate">
-    Erstellt am: {% now "d.m.Y H:i" %}
+    {% trans "Erstellt am" %} {% now "d.m.Y H:i" %},
+    {% trans "Stichtag" %} {{ date|date:"d.m.Y" }}
 </div>
 <div id="footer_content">
     {% for message in messages %}
@@ -21,55 +22,111 @@
 </div>
 
 <h2 style="font-size: 18px;">{% trans "Mengen-Übersicht" %}</h2>
-
 <div>
     <table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
         <tr>
             <td style="width:200px"></td>
             <td style="width:200px"></td>
             {% for product in products %}
-                <th colspan="{{ product.sizes|count }}" class="top-border {% if forloop.first %}left-border{% endif %} right-border">{{ product.name }}</th>
+                <th colspan="{{ product.sizes.on_depot_list.count }}" class="top-border {% if forloop.first %}left-border{% endif %} right-border">{{ product.name }} <span
+                        style="font-size:11px">{{ product.description|safe }}</span></th>
             {% endfor %}
         </tr>
         <tr>
-            <td class="small bottom-border right-border"></td>
-            <td class="small bottom-border right-border">{% trans "Abos" %}</td>
+            <td class="small bottom-border left-border right-border">{% trans "Ausfahrt" %}</td>
+            <td class="small bottom-border  right-border">{% trans "Abos" %}</td>
             {% for product in products %}
-                {% for size in product.sizes %}
+                {% for size in product.sizes.on_depot_list.sorted %}
                     <td class="small bottom-border {% if forloop.first %}left-border{% endif %} {% cycle '' 'bg-grey' %}">{{ size.name }}</td>
                 {% endfor %}
             {% endfor %}
             {% resetcycle %}
         </tr>
-        {% for day in weekdays %}
+        {% for day in days %}
             <tr>
                 <td>{{ day.name }}</td>
-                <td>{{ subscriptions|by_weekday:day.weekday|count }}</td>
+                <td style="text-align:center">{{ subscriptions|by_weekday:day.weekday|count }}</td>
                 {% for product in products %}
-                    {% for size in product.sizes %}
-                        <td class="{% cycle '' 'bg-grey' %}">{{ day|get_attr:size.key|default:'0' }}</td>
+                    {% for size in product.sizes.on_depot_list.sorted %}
+                        <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_weekday:day.weekday|parts_by_size:size|active_on:date|count|floatformat }}</td>
                     {% endfor %}
                 {% endfor %}
                 {% resetcycle %}
             </tr>
         {% endfor %}
         <tr>
-            <td><b>{% trans "Total" %}</b></td>
-            <td>{{ subscriptions|count }}</td>
+            <td><b>{% trans "Gesamt" %}</b></td>
+            <td style="text-align:center">{{ subscriptions|count }}</td>
             {% for product in products %}
-                {% for size in product.sizes %}
-                    <td class="{% cycle '' 'bg-grey' %}"><b>{{ size.total }}</b></td>
+                {% for size in product.sizes.on_depot_list.sorted %}
+                    <td class="{% cycle '' 'bg-grey' %}"  style="text-align:center">{{ subscriptions|parts_by_size:size|active_on:date|count|floatformat }}</td>
                 {% endfor %}
             {% endfor %}
             {% resetcycle %}
         </tr>
     </table>
-    <br>
-    {% for day in weekdays %}
-    {% include "./snippets/snippet_day_tour.html" with tour_name="" %}
-    <br>
-    {% endfor %}
-    
 </div>
+<br>
+
+{% for day in days %}
+    <h2 style="font-size: 18px;">Übersicht: {{ day.name }} - {{ day.weekday|get_date }}</h2>
+    <div>
+        <table cellpadding="5" cellspacing="0" style="width:100%; margin-bottom:5px;" class="bottom-border">
+            <tr>
+                <td style="width:200px"></td>
+                <td style="width:200px"></td>
+                {% for product in products %}
+                    <th colspan="{{ product.sizes.on_depot_list.count }}" class="top-border {% if forloop.first %}left-border{% endif %} right-border">{{ product.name }} <span
+                            style="font-size:11px">{{ product.description|safe }}</span></th>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td class="small bottom-border left-border right-border">{% trans "Ausfahrt" %}</td>
+                <td class="small bottom-border  right-border">{% trans "Abos" %}</td>
+                {% for product in products %}
+                    {% for size in product.sizes.on_depot_list.sorted %}
+                        <td class="small bottom-border {% if forloop.first %}left-border{% endif %} {% cycle '' 'bg-grey' %}">{{ size.name }}</td>
+                    {% endfor %}
+                {% endfor %}
+                {% resetcycle %}
+            </tr>
+            {% for tour in tours|by_weekday:day.weekday %}
+                <tr>
+                    <td>{{ tour.name }}</td>
+                    <td style="text-align:center">{{ subscriptions|by_tour:tour|count }}</td>
+                    {% for product in products %}
+                        {% for size in product.sizes.on_depot_list.sorted %}
+                            <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_tour:tour|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                        {% endfor %}
+                    {% endfor %}
+                    {% resetcycle %}
+                </tr>
+            {% endfor %}
+            {% if subscriptions|by_tour:None|count_units:date %}
+                <tr>
+                    <td>{% trans "Keine" %}</td>
+                    <td style="text-align:center">{{ subscriptions|by_tour:None|count_units:date|floatformat }}</td>
+                    {% for product in products %}
+                        {% for size in product.sizes.on_depot_list.sorted %}
+                            <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_tour:None|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                        {% endfor %}
+                    {% endfor %}
+                    {% resetcycle %}
+                </tr>
+            {% endif %}
+            <tr>
+                <td><b>{% trans "Gesamt" %}</b></td>
+                <td style="text-align:center">{{ subscriptions|by_weekday:day.weekday|count }}</td>
+                {% for product in products %}
+                    {% for size in product.sizes.on_depot_list.sorted %}
+                        <td class="{% cycle '' 'bg-grey' %}"  style="text-align:center">{{ subscriptions|by_weekday:day.weekday|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                    {% endfor %}
+                {% endfor %}
+                {% resetcycle %}
+            </tr>
+        </table>
+    </div>
+    <br>
+{% endfor %}
 </body>
 </html>

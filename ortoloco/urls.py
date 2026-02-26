@@ -2,7 +2,6 @@ from django.urls import include, path
 from django.contrib import admin
 import debug_toolbar
 from .views import Custom500View, nextcloud_profile
-from share_info.views import share_info
 from ortoloco import views as ortoloco
 
 
@@ -33,17 +32,11 @@ urlpatterns = [
     # juntagrico-webdav
     path('', include('juntagrico_webdav.urls')),
 
-    # juntagrico-polling
-    path('', include('juntagrico_polling.urls')),
-
     # juntagrico-contribution
     path('jcr/', include('juntagrico_contribution.urls')),
 
     # ortoloco custom error page
     path('500', Custom500View.as_view()),
-
-    # ortoloco registration process overwrite
-    path('oooosi/info', share_info, name='cs-shares-info'),
 
     # ortoloco tour list downloads
     path('my/pdf/touroverview', ortoloco.tour_overview, name='lists-depot-touroverview'),
