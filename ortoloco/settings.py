@@ -318,7 +318,8 @@ def extra_context(context):
     from juntagrico.entity.listmessage import ListMessage
 
     # update recurring messages, set active flag before depot list generation
-    list_week_date = timezone.localdate() + timezone.timedelta(days=7-timezone.localdate().weekday())
+    gendate = context['date']
+    list_week_date = gendate + timezone.timedelta(days=7-gendate.weekday())
     recurring_message_config = settings.ORTOLOCO_RECURRING_MESSAGES
     actual_config_messages = [
         message_config
@@ -342,7 +343,18 @@ def extra_context(context):
 
 DEPOT_LIST_GENERATION_DAYS = [3]
 # the names of the lists define the url and need to stay constant for the printing script on the Gartenlaptop to work
+# generate touroverview with extra_context first to ensure activation of depot list messages
 DEPOT_LISTS = {
+    'touroverview': {
+        'name': 'Tour-Übersicht',
+        'template': 'exports_oooo/tour_overview.html',
+        'extra_context': extra_context,
+    },
+    'tourlist': {
+        'name': 'Tour-Liste',
+        'template': 'exports_oooo/tour_list.html',
+        'extra_context': extra_context,
+    },
     'depotlist': 'exports_oooo/depotlist.html',
     'depotoverview': {
         'name': 'Depot-Übersicht',
@@ -352,16 +364,6 @@ DEPOT_LISTS = {
     'amountoverview': {
         'name': 'Mengen-Übersicht',
         'template': 'exports_oooo/amount_overview.html',
-        'extra_context': extra_context,
-    },
-    'touroverview': {
-        'name': 'Tour-Übersicht',
-        'template': 'exports_oooo/tour_overview.html',
-        'extra_context': extra_context,
-    },
-    'tourlist': {
-        'name': 'Tour-Liste',
-        'template': 'exports_oooo/tour_list.html',
         'extra_context': extra_context,
     },
 }
