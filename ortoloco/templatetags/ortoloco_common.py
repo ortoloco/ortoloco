@@ -20,6 +20,14 @@ def depots_by_tour(depots, tour):
     return [depot for depot in depots if depot.tour_id == tour.id]
 
 @register.filter
+def depot_index(depot, depots):
+    tour_depots = depots_by_tour(depots, depot.tour)
+    for depot_index, day_tour_depot in enumerate(tour_depots):
+        if depot == day_tour_depot:
+            return depot_index + 1
+    return 0
+
+@register.filter
 def get_date(weekday):
     # weekday: Monday is 1 and Sunday is 7
     # datetime.weekday(): Monday is 0 and Sunday is 6
