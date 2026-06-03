@@ -301,7 +301,7 @@ ENABLE_EXTERNAL_SIGNUP = True
 JOBS_FRONTPAGE = {
     'days': 14,
     'min': 3,
-    'max': 20,
+    'max': 30,
     'promoted_types': ["Aktionstag"],
     'promoted_count': 2
 }
