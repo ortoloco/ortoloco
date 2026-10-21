@@ -1,6 +1,7 @@
 # Django settings for ortoloco project.
 import os
 from juntagrico import defaults
+from datetime import timedelta
 
 """
     General Settings
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     'oauth2_provider.middleware.OAuth2TokenMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 INSTALLED_APPS = (
@@ -93,8 +95,18 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'oauth2_provider',
     'oidc_provider',
+    'axes',
 )
 
+"""
+    Brute Force Auth Protection
+"""
+AXES_FAILURE_LIMIT = 10
+AXES_COOLOFF_TIME = timedelta(minutes=30)
+AXES_IPWARE_META_PRECEDENCE_ORDER = [
+    'HTTP_X_FORWARDED_FOR',
+    'REMOTE_ADDR',
+    ]
 
 """
     Email Settings
@@ -143,6 +155,7 @@ SERVER_EMAIL = "it@ortoloco.ch"
     Auth Settings
 """
 AUTHENTICATION_BACKENDS = (
+    'axes.backends.AxesStandaloneBackend',
     'juntagrico.util.auth.AuthenticateWithEmail',
     'django.contrib.auth.backends.ModelBackend',
     'oauth2_provider.backends.OAuth2Backend',
