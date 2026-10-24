@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 from juntagrico.entity.subs import Subscription
 from ortoloco.util.news import get_news_posts
 from django.utils.safestring import mark_safe
@@ -47,3 +48,7 @@ def by_weekday(queryset_or_sub, weekday_id):
 @register.simple_tag
 def newstb():
     return mark_safe(get_news_posts(11))
+
+@register.simple_tag
+def velo_code():
+    return settings.VELO_CODE
