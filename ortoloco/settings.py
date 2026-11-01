@@ -70,6 +70,9 @@ MIDDLEWARE = [
     'axes.middleware.AxesMiddleware',
 ]
 
+# set referer header for SecurityMiddleware to prevent OSM tile loading from failing
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
