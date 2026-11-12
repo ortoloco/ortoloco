@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'juntagrico.middleware.RequirePasswordChangeMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'impersonate.middleware.ImpersonateMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -444,6 +445,21 @@ ORTOLOCO_RECURRING_MESSAGES = [
 # days in advance for area admin notification about job participants
 ORTOLOCO_AREA_NOTIFY = {
     "Verteilen": 2
+}
+
+# password policy for
+AUTH_PASSWORD_VALIDATORS = [{
+    'NAME': 'juntagrico.password_validation.StaffOnlyPasswordValidator',
+    'OPTIONS': {
+        'validators': defaults.password_validators,
+    }
+}]
+
+# limit impersonation
+allow_impersonate = defaults.allow_group('impersonators')
+IMPERSONATE = {
+    'CUSTOM_ALLOW': 'ortoloco.settings.allow_impersonate',
+    'CUSTOM_USER_QUERYSET': 'juntagrico.defaults.unprivileged_only',
 }
 
 # juntagrico export permission level
