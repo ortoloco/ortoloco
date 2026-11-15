@@ -157,7 +157,7 @@ SERVER_EMAIL = "it@ortoloco.ch"
 """
 AUTHENTICATION_BACKENDS = (
     'axes.backends.AxesStandaloneBackend',
-    'juntagrico.util.auth.AuthenticateWithEmail',
+    'ortoloco.auth.SafeAuthenticateWithEmail',
     'django.contrib.auth.backends.ModelBackend',
     'oauth2_provider.backends.OAuth2Backend',
 )
