@@ -1,19 +1,5 @@
-{% extends "signup.html" %}
-{% block title %}
-    Persönliche Daten
-{% endblock %}
-{% block intro %}
-                <div class="col-md-12">
-                    <h4>Schnupperabo:</h4>
-                    Für ein Schnupperabo kannst du hier deine Daten einfügen, welche für die Anmeldung
-                    notwendig sind. Wir werden dir keine Anteilscheine in Rechnung stellen, benötigen jedoch
-                    trotzdem gewisse Informationen.
-
-                    <h4>Regulärer Beitritt:</h4>
-    {{ block.super }}
-{% endblock %}
-{% block intro_with_shares %}
-    <p>
+{% extends "juntagrico/my/share/snippets/intro.html" %}
+{% block all %}
     Die Mitgliedschaft bei ortoloco ist geknüpft an den
     Erwerb von Anteilscheinen in der Höhe von CHF 250 pro
     Anteilschein. Die Anteilscheine bilden das Investitionskapital,
@@ -23,5 +9,4 @@
     Anteilscheine tragen können, beteiligen sich Haushalte, die das
     können, mit mehr - idealerweise mit 26 Anteilscheinen pro Abo.
     Beim Austritt werden die Anteilscheine rückerstattet.
-    </p>
 {% endblock %}

@@ -248,25 +248,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 """
     Juntagrico Settings
 """
-VOCABULARY = {
-    'member': 'Loco',
-    'member_pl': 'Locos',
-    'assignment': 'Böhnli',
-    'assignment_pl': 'Böhnlis',
-    'share': 'Anteilschein',
-    'share_pl': 'Anteilscheine',
-    'subscription': 'Abo',
-    'subscription_pl': 'Abos',
-    'co_member': 'Mitabonnent',
-    'co_member_pl': 'Mitabonnenten',
-    'price': 'Betriebsbeitrag',
-    'member_type': 'Mitglied',
-    'member_type_pl': 'Mitglieder',
-    'depot': 'Depot',
-    'depot_pl': 'Depots',
-    'package': 'Tasche',
-    'from': '{} von {}',
-}
+VOCABULARY = defaults.german(
+    member_type=('Loco', 'Locos', 'f'),
+    assignment=('Böhnli', 'Böhnli', 'n'),
+)
 
 ORGANISATION_NAME = "ortoloco"
 ORGANISATION_LONG_NAME = "Genossenschaft ortoloco - die Hofkooperative im Fondli"
@@ -295,6 +280,8 @@ BUSINESS_REGULATIONS = "https://static.ortoloco.ch/documents/ortoloco_Betriebsre
 BYLAWS = "https://static.ortoloco.ch/documents/ortoloco_Statuten.pdf"
 FAQ_DOC = "https://ortoloco.ch/faq"
 GDPR_INFO = "https://www.ortoloco.ch/datenschutz"
+EXTRA_SUB_INFO = "https://ortoloco.ch/dokumente/zusatzabos"
+ACTIVITY_AREA_INFO = ""
 MAIL_TEMPLATE = "mails/ooooemail.html"
 EMAILS = {
     's_created': 'mails/oooo_share_created.txt',
@@ -302,11 +289,10 @@ EMAILS = {
 }
 STYLES = {'static': ['css/myortoloco.css']}
 FAVICON = "/static/img/favicono.ico"
-EXTRA_SUB_INFO = "https://ortoloco.ch/dokumente/zusatzabos"
-ACTIVITY_AREA_INFO = ""
 ENABLE_SHARES = True
 REQUIRED_SHARES = 0
 SHARE_PRICE = "250"
+CURRENCY = "CHF {}"
 
 # Enable external signup API for signup through ortoloco.ch
 ENABLE_EXTERNAL_SIGNUP = True
@@ -386,6 +372,12 @@ BUSINESS_YEAR_START = {"day": 1, "month": 1}
 BUSINESS_YEAR_CANCELATION_MONTH = 9
 MEMBERSHIP_END_MONTH = 6
 MEMBERSHIP_END_NOTICE_PERIOD = 9
+
+# automatic membership in paid shares
+MEMBERSHIP = {
+    'sync_shares': True,
+}
+
 IMAGES = {'status_100': '/static/img/erbse_voll.png',
           'status_75': '/static/img/erbse_fast_voll.png',
           'status_50': '/static/img/erbse_halb.png',
@@ -399,7 +391,6 @@ IMAGES = {'status_100': '/static/img/erbse_voll.png',
 
 OIDC_USERINFO = 'ortoloco.oidc_provider_settings.userinfo'
 OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
-
 
 SUB_OVERVIEW_FORMAT = {
    'delimiter': ' + ',
