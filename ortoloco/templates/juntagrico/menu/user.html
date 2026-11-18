@@ -1,7 +1,14 @@
 {% extends "juntagrico/menu/user.html" %}
+{% load ortoloco_common %}
 {% block extend %}
     {{ block.super }}
         <li class="nav-item">
             <a class="nav-link" href="https://forum.ortoloco.ch/">Forum</a>
         </li>
+        {% velo_code as v_velo_code %}
+        {% if v_velo_code and request.user.member.subscription_current %}
+            <li class="nav-item main-menu-small text-muted mt-1">
+                Velo Code: {{ v_velo_code }}
+            </li>
+        {% endif %}
 {% endblock %}
