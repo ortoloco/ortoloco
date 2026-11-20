@@ -48,7 +48,7 @@
                 <td style="text-align:center">{{ subscriptions|by_weekday:day.weekday|count }}</td>
                 {% for product in products %}
                     {% for size in product.sizes.on_depot_list.sorted %}
-                        <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_weekday:day.weekday|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                        <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_weekday:day.weekday|parts_by_size:size|served_on:date|count|floatformat }}</td>
                     {% endfor %}
                 {% endfor %}
                 {% resetcycle %}
@@ -59,7 +59,7 @@
             <td style="text-align:center">{{ subscriptions|count }}</td>
             {% for product in products %}
                 {% for size in product.sizes.on_depot_list.sorted %}
-                    <td class="{% cycle '' 'bg-grey' %}"  style="text-align:center">{{ subscriptions|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                    <td class="{% cycle '' 'bg-grey' %}"  style="text-align:center">{{ subscriptions|parts_by_size:size|served_on:date|count|floatformat }}</td>
                 {% endfor %}
             {% endfor %}
             {% resetcycle %}
@@ -96,7 +96,7 @@
                     <td style="text-align:center">{{ subscriptions|by_tour:tour|count }}</td>
                     {% for product in products %}
                         {% for size in product.sizes.on_depot_list.sorted %}
-                            <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_tour:tour|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                            <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_tour:tour|parts_by_size:size|served_on:date|count|floatformat }}</td>
                         {% endfor %}
                     {% endfor %}
                     {% resetcycle %}
@@ -108,7 +108,7 @@
                     <td style="text-align:center">{{ subscriptions|by_tour:None|count_units:date|floatformat }}</td>
                     {% for product in products %}
                         {% for size in product.sizes.on_depot_list.sorted %}
-                            <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_tour:None|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                            <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_tour:None|parts_by_size:size|served_on:date|count|floatformat }}</td>
                         {% endfor %}
                     {% endfor %}
                     {% resetcycle %}
@@ -119,7 +119,7 @@
                 <td style="text-align:center">{{ subscriptions|by_weekday:day.weekday|count }}</td>
                 {% for product in products %}
                     {% for size in product.sizes.on_depot_list.sorted %}
-                        <td class="{% cycle '' 'bg-grey' %}"  style="text-align:center">{{ subscriptions|by_weekday:day.weekday|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                        <td class="{% cycle '' 'bg-grey' %}"  style="text-align:center">{{ subscriptions|by_weekday:day.weekday|parts_by_size:size|served_on:date|count|floatformat }}</td>
                     {% endfor %}
                 {% endfor %}
                 {% resetcycle %}

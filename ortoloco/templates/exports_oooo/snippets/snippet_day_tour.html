@@ -27,7 +27,7 @@
                 {% for size in product.sizes.on_depot_list.sorted %}
                     <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">
                         {% if tour.name == tour_name %}<b>{% endif %}
-                            {{ subscriptions|by_tour:tour|parts_by_size:size|active_on:date|count|floatformat }}
+                            {{ subscriptions|by_tour:tour|parts_by_size:size|served_on:date|count|floatformat }}
                         {% if tour.name == tour_name %}</b>{% endif %}
                     </td>
                 {% endfor %}
@@ -39,7 +39,7 @@
         <td><b>{% trans "Total" %}</b></td>
         {% for product in products %}
             {% for size in product.sizes.on_depot_list.sorted %}
-                <td class="{% cycle '' 'bg-grey' %}"><b>{{ subscriptions|by_weekday:day.weekday|parts_by_size:size|active_on:date|count|floatformat }}</b></td>
+                <td class="{% cycle '' 'bg-grey' %}"><b>{{ subscriptions|by_weekday:day.weekday|parts_by_size:size|served_on:date|count|floatformat }}</b></td>
             {% endfor %}
         {% endfor %}
         {% resetcycle %}

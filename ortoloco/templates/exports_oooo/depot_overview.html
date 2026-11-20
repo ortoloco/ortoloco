@@ -45,7 +45,7 @@
                 <td style="width:360px;">{{ depot.name }}</td>
                 {% for product in products %}
                     {% for size in product.sizes.on_depot_list.sorted %}
-                        <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_depot:depot|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                        <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_depot:depot|parts_by_size:size|served_on:date|count|floatformat }}</td>
                     {% endfor %}
                 {% endfor %}
             </tr>
@@ -57,7 +57,7 @@
             <td>{% trans "Total" %}</td>
             {% for product in products %}
                 {% for size in product.sizes.on_depot_list.sorted %}
-                    <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_weekday:day.weekday|parts_by_size:size|active_on:date|count|floatformat }}</td>
+                    <td class="{% cycle '' 'bg-grey' %}" style="text-align:center">{{ subscriptions|by_weekday:day.weekday|parts_by_size:size|served_on:date|count|floatformat }}</td>
                 {% endfor %}
             {% endfor %}
             {% resetcycle %}
