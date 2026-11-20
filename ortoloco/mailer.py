@@ -29,18 +29,21 @@ class IndividualToEmailBackend(BaseEmailBackend, smtp.EmailBackend):
         plain_msg.bcc = []
         plain_msg.to = []
 
+        # use an own connection: since juntagrico 2.1 the caller shares and closes
+        # this backend (with get_connection() as connection) while we are still sending
+        connection = smtp.EmailBackend()
+
         batches = 0
         sent = 0
         msgs = []
         for idx, to in enumerate(tos):
             new_message = copy.copy(plain_msg)
             new_message.to = [to]
-            new_message.connection = self
+            new_message.connection = connection
             msgs.append(new_message)
             if (idx + 1) % batch_size == 0 or idx == len(tos) - 1:
-                self.open()
-                self.send_cleaned_messages(msgs)
-                self.close()
+                with connection:
+                    connection.send_messages(msgs)
                 batches += 1
                 sent += len(msgs)
                 msgs = []
