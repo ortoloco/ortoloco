@@ -2,6 +2,7 @@ name: tests
 
 on:
   push:
+    branches: [live, staging]
   pull_request:
   # weekly run against the development version of juntagrico, to notice breaking changes before a release
   schedule:
