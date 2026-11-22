@@ -20,13 +20,13 @@ def notify_upcoming_jobs(*args, **options):
     if options.get("area") is not None:
         return notify_upcoming_jobs_for_area(options["area"], options["days"])
         
-    ortoloco_area_notify_setting = getattr(settings, "ORTOLOCO_AREA_NOTIFY")
+    ortoloco_area_notify_setting = settings.ORTOLOCO_AREA_NOTIFY
     for area_name, days in ortoloco_area_notify_setting.items():
         notify_upcoming_jobs_for_area(area_name, days)
 
 
 def notify_upcoming_jobs_for_area(area_name, days):
-    def job_date(job):
+    def get_job_date(job):
         return job.time.date()
         
     now = timezone.now()
@@ -46,8 +46,8 @@ def notify_upcoming_jobs_for_area(area_name, days):
         for job_date, job_list in itertools.groupby(
             sorted(
                 RecuringJob.objects.filter(type__id__in=job_type_ids, time__lte=job__max_date, time__gte=job__min_date),
-                key=job_date),
-            key=job_date):
+                key=get_job_date),
+            key=get_job_date):
 
             job_list = list(job_list)
             members = [

@@ -18,6 +18,9 @@ ROOT_URLCONF = 'ortoloco.urls'
 
 SITE_ID = 1
 
+# keep the implicit primary key type of apps without default_auto_field
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 LOGIN_REDIRECT_URL = "/"
@@ -192,7 +195,6 @@ CACHES = {
 """
 LANGUAGE_CODE = 'de-CH'
 USE_I18N = True
-USE_L10N = True
 
 USE_TZ = True
 TIME_ZONE = 'Europe/Zurich'
@@ -223,19 +225,8 @@ STATICFILES_DIRS = [
 ]
 
 """
-    Impersonate Settings
-"""
-IMPERSONATE = {
-    'REDIRECT_URL': '/my/profile',
-    'URI_EXCLUSIONS': [], # enable /admin impersonation
-}
-
-
-"""
     File & Storage Settings
 """
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-
 MEDIA_ROOT = 'media'
 
 
@@ -426,7 +417,6 @@ DJRICHTEXTFIELD_CONFIG = defaults.richtextfield_config(
 
 # depot list recurring messages
 ORTOLOCO_RECURRING_MESSAGES = [
-    {"message": "OHNE TOFU", "year": 2025, "weeks": list(range(1, 50, 2))},
     {"message": "OHNE TOFU", "year": 2026, "weeks": set(range(1, 50, 2))},
     {"message": "MIT TOFU", "year": 2026, "weeks": set(range(1,53)) - set(range(1, 50, 2))},
     {"message": "OHNE TOFU", "year": 2027, "weeks": set(range(2, 51, 2))},
@@ -449,6 +439,7 @@ AUTH_PASSWORD_VALIDATORS = [{
 # limit impersonation
 allow_impersonate = defaults.allow_group('impersonators')
 IMPERSONATE = {
+    'REDIRECT_URL': '/my/profile',
     'CUSTOM_ALLOW': 'ortoloco.settings.allow_impersonate',
     'CUSTOM_USER_QUERYSET': 'juntagrico.defaults.unprivileged_only',
 }

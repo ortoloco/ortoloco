@@ -2,7 +2,6 @@ from django.urls import include, path
 from django.contrib import admin
 import debug_toolbar
 from .views import Custom500View, nextcloud_profile
-from ortoloco import views as ortoloco
 
 
 urlpatterns = [
@@ -37,8 +36,4 @@ urlpatterns = [
 
     # ortoloco custom error page
     path('500', Custom500View.as_view()),
-
-    # ortoloco tour list downloads
-    path('my/pdf/touroverview', ortoloco.tour_overview, name='lists-depot-touroverview'),
-    path('my/pdf/tourlist', ortoloco.tour_list, name='lists-depot-tourlist'),
 ]

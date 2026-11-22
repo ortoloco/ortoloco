@@ -1,0 +1,2101 @@
+[
+  {
+    "model": "juntagrico.subscriptioncategory",
+    "pk": 1,
+    "fields": {
+      "name": "Schnupperabo",
+      "description": "Komm ein 1/4-Jahr schnuppern! Du bekommst die Gemüsetasche, Obst, Öl und Getreide und bezahlst dafür 610 CHF und leistest 3 Einsätze.\r\n\r\nInhalt:\r\n- Gemüse (10x 1 Tasche/Woche)\r\n- Obst-Anteil\r\n- Sonnenblumenöl-Anteil\r\n- Getreide-Anteil",
+      "sort_order": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptioncategory",
+    "pk": 3,
+    "fields": {
+      "name": "Vollabo",
+      "description": "Vollabo mit Gemüse, Fleisch, Obst, Öl und Getreide. Das Getreide kann flexibel in Form von Mehl, Körnern oder Flocken bezogen werden. Bitte wähle unter den Varianten, ob du einen Teil des Getreides in verarbeiteter Form von Pasta und/oder Brot beziehen möchtest.\r\n\r\nInhalt:\r\n- Gemüse (1 Tasche/Woche)\r\n- Obst (1 Portion/Woche)\r\n- Sonnenblumenöl (je nach Ertrag)\r\n- Fleisch (2x7.5 kg/Jahr)\r\n- Getreide (ca. 32 kg/Jahr)",
+      "sort_order": 3
+    }
+  },
+  {
+    "model": "juntagrico.subscriptioncategory",
+    "pk": 4,
+    "fields": {
+      "name": "Vegiabo",
+      "description": "Vegiabo mit Gemüse, Obst, Öl und Getreide. Das Getreide kann flexibel in Form von Mehl, Körnern oder Flocken bezogen werden. Bitte wähle unter den Varianten, ob du einen Teil des Getreides in verarbeiteter Form von Pasta und/oder Brot beziehen möchtest.\r\n\r\nInhalt:\r\n- Gemüse (1 Tasche/Woche)\r\n- Obst (1 Portion/Woche)\r\n- Sonnenblumenöl (je nach Ertrag)\r\n- Getreide (ca. 32 kg/Jahr)",
+      "sort_order": 4
+    }
+  },
+  {
+    "model": "juntagrico.subscriptioncategory",
+    "pk": 5,
+    "fields": {
+      "name": "Hofabo",
+      "description": "Hofabo mit Fleisch, Obst, Öl und Getreide. Das Getreide kann flexibel in Form von Mehl, Körnern oder Flocken bezogen werden. Bitte wähle unter den Varianten, ob du einen Teil des Getreides in verarbeiteter Form von Pasta und/oder Brot beziehen möchtest.\r\n\r\nInhalt:\r\n- Obst (1 Portion/Woche)\r\n- Sonnenblumenöl (je nach Ertrag)\r\n- Fleisch (2x7.5 kg/Jahr)\r\n- Getreide (ca. 32 kg/Jahr)",
+      "sort_order": 5
+    }
+  },
+  {
+    "model": "juntagrico.subscriptioncategory",
+    "pk": 7,
+    "fields": {
+      "name": "Hofabo vegi",
+      "description": "Hofabo mit Obst, Öl und Getreide. Das Getreide kann flexibel in Form von Mehl, Körnern oder Flocken bezogen werden. Bitte wähle unter den Varianten, ob du einen Teil des Getreides in verarbeiteter Form von Pasta und/oder Brot beziehen möchtest.\r\n\r\nInhalt:\r\n- Obst (1 Portion/Woche)\r\n- Sonnenblumenöl (je nach Ertrag)\r\n- Getreide (ca. 32 kg/Jahr)",
+      "sort_order": 7
+    }
+  },
+  {
+    "model": "juntagrico.subscriptioncategory",
+    "pk": 9,
+    "fields": {
+      "name": "Tofu",
+      "description": "Tofu aus der befreundeten Tofurei Engel in Widen",
+      "sort_order": 9
+    }
+  },
+  {
+    "model": "juntagrico.subscriptioncategory",
+    "pk": 10,
+    "fields": {
+      "name": "Eier",
+      "description": "Eier von unseren Legehennen, zusätzlich ein Suppenhuhn im Herbst",
+      "sort_order": 10
+    }
+  },
+  {
+    "model": "juntagrico.subscriptioncategory",
+    "pk": 11,
+    "fields": {
+      "name": "Extraportion Obst",
+      "description": "Zusätzlich nochmals die gleiche Menge Obst wie im Abo",
+      "sort_order": 11
+    }
+  },
+  {
+    "model": "juntagrico.subscriptioncategory",
+    "pk": 12,
+    "fields": {
+      "name": "Extraportion Fleisch",
+      "description": "Ein zusätzliches Mischpaket à 7,5kg/Jahr",
+      "sort_order": 12
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 9,
+    "fields": {
+      "long_name": "Gemüseabo",
+      "description": "Für bisherige ortoloco-Mitglieder bieten wir unser Retro-Abo mit nur Gemüse weiterhin an.",
+      "category": null,
+      "sort_order": 8
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 30,
+    "fields": {
+      "long_name": "Vollabo mit Getreide",
+      "description": "",
+      "category": 3,
+      "sort_order": 30
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 31,
+    "fields": {
+      "long_name": "Vollabo mit Pasta & Getreide",
+      "description": "",
+      "category": 3,
+      "sort_order": 31
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 32,
+    "fields": {
+      "long_name": "Vollabo mit Brot & Getreide",
+      "description": "",
+      "category": 3,
+      "sort_order": 32
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 33,
+    "fields": {
+      "long_name": "Vollabo mit Pasta & Brot & Getreide",
+      "description": "",
+      "category": 3,
+      "sort_order": 33
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 40,
+    "fields": {
+      "long_name": "Vegiabo mit Getreide",
+      "description": "",
+      "category": 4,
+      "sort_order": 40
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 41,
+    "fields": {
+      "long_name": "Vegiabo mit Pasta & Getreide",
+      "description": "",
+      "category": 4,
+      "sort_order": 41
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 42,
+    "fields": {
+      "long_name": "Vegiabo mit Brot & Getreide",
+      "description": "",
+      "category": 4,
+      "sort_order": 42
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 43,
+    "fields": {
+      "long_name": "Vegiabo mit Pasta & Brot & Getreide",
+      "description": "",
+      "category": 4,
+      "sort_order": 43
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 50,
+    "fields": {
+      "long_name": "Hofabo mit Getreide",
+      "description": "",
+      "category": 5,
+      "sort_order": 50
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 51,
+    "fields": {
+      "long_name": "Hofabo mit Pasta & Getreide",
+      "description": "",
+      "category": 5,
+      "sort_order": 51
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 52,
+    "fields": {
+      "long_name": "Hofabo mit Brot & Getreide",
+      "description": "",
+      "category": 5,
+      "sort_order": 52
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 53,
+    "fields": {
+      "long_name": "Hofabo mit Pasta & Brot & Getreide",
+      "description": "",
+      "category": 5,
+      "sort_order": 53
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 70,
+    "fields": {
+      "long_name": "Hofabo Vegi mit Getreide",
+      "description": "",
+      "category": 7,
+      "sort_order": 70
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 71,
+    "fields": {
+      "long_name": "Hofabo Vegi mit Pasta & Getreide",
+      "description": "",
+      "category": 7,
+      "sort_order": 71
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 72,
+    "fields": {
+      "long_name": "Hofabo Vegi mit Brot & Getreide",
+      "description": "",
+      "category": 7,
+      "sort_order": 72
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 73,
+    "fields": {
+      "long_name": "Hofabo Vegi mit Pasta & Brot & Getreide",
+      "description": "",
+      "category": 7,
+      "sort_order": 73
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 90,
+    "fields": {
+      "long_name": "Tofu Zusatz",
+      "description": "",
+      "category": 9,
+      "sort_order": 90
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 91,
+    "fields": {
+      "long_name": "Eier Zusatz",
+      "description": "",
+      "category": 10,
+      "sort_order": 91
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 92,
+    "fields": {
+      "long_name": "Obst Extraportion",
+      "description": "",
+      "category": 11,
+      "sort_order": 92
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 93,
+    "fields": {
+      "long_name": "Fleisch Extraportion",
+      "description": "",
+      "category": 12,
+      "sort_order": 93
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundle",
+    "pk": 100,
+    "fields": {
+      "long_name": "Schnupperabo",
+      "description": "",
+      "category": 1,
+      "sort_order": 100
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionproduct",
+    "pk": 1,
+    "fields": {
+      "name": "Gemüse",
+      "description": "",
+      "sort_order": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionproduct",
+    "pk": 2,
+    "fields": {
+      "name": "Obst",
+      "description": "",
+      "sort_order": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionproduct",
+    "pk": 3,
+    "fields": {
+      "name": "Brot",
+      "description": "",
+      "sort_order": 3
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionproduct",
+    "pk": 4,
+    "fields": {
+      "name": "Eier",
+      "description": "",
+      "sort_order": 4
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionproduct",
+    "pk": 5,
+    "fields": {
+      "name": "Tofu",
+      "description": "",
+      "sort_order": 5
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionproduct",
+    "pk": 6,
+    "fields": {
+      "name": "Fleisch",
+      "description": "",
+      "sort_order": 6
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionproduct",
+    "pk": 7,
+    "fields": {
+      "name": "Getreide",
+      "description": "",
+      "sort_order": 7
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionproduct",
+    "pk": 8,
+    "fields": {
+      "name": "Pasta",
+      "description": "",
+      "sort_order": 8
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 1,
+    "fields": {
+      "name": "Tasche",
+      "units": 1.0,
+      "show_on_depot_list": true,
+      "product": 1,
+      "sort_order": 1
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 2,
+    "fields": {
+      "name": "Portion",
+      "units": 1.0,
+      "show_on_depot_list": true,
+      "product": 2,
+      "sort_order": 2
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 3,
+    "fields": {
+      "name": "500 g",
+      "units": 1.0,
+      "show_on_depot_list": true,
+      "product": 3,
+      "sort_order": 3
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 4,
+    "fields": {
+      "name": "Schachtel",
+      "units": 1.0,
+      "show_on_depot_list": true,
+      "product": 4,
+      "sort_order": 4
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 5,
+    "fields": {
+      "name": "Portion",
+      "units": 1.0,
+      "show_on_depot_list": true,
+      "product": 5,
+      "sort_order": 5
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 6,
+    "fields": {
+      "name": "2x 7.5 kg pro Jahr",
+      "units": 2.0,
+      "show_on_depot_list": false,
+      "product": 6,
+      "sort_order": 6
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 7,
+    "fields": {
+      "name": "1x 7.5 kg pro Jahr",
+      "units": 1.0,
+      "show_on_depot_list": false,
+      "product": 6,
+      "sort_order": 7
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 12,
+    "fields": {
+      "name": "32 kg pro Jahr",
+      "units": 32.0,
+      "show_on_depot_list": false,
+      "product": 7,
+      "sort_order": 12
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 13,
+    "fields": {
+      "name": "28 kg pro Jahr",
+      "units": 28.0,
+      "show_on_depot_list": false,
+      "product": 7,
+      "sort_order": 13
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 14,
+    "fields": {
+      "name": "12 kg pro Jahr",
+      "units": 12.0,
+      "show_on_depot_list": false,
+      "product": 7,
+      "sort_order": 14
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 15,
+    "fields": {
+      "name": "8 kg pro Jahr",
+      "units": 8.0,
+      "show_on_depot_list": false,
+      "product": 7,
+      "sort_order": 15
+    }
+  },
+  {
+    "model": "juntagrico.productsize",
+    "pk": 16,
+    "fields": {
+      "name": "5 kg pro Jahr",
+      "units": 5.0,
+      "show_on_depot_list": false,
+      "product": 8,
+      "sort_order": 16
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 9,
+    "fields": {
+      "bundle": 9,
+      "product_size": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 10,
+    "fields": {
+      "bundle": 30,
+      "product_size": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 11,
+    "fields": {
+      "bundle": 30,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 12,
+    "fields": {
+      "bundle": 30,
+      "product_size": 6
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 13,
+    "fields": {
+      "bundle": 30,
+      "product_size": 12
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 14,
+    "fields": {
+      "bundle": 31,
+      "product_size": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 15,
+    "fields": {
+      "bundle": 31,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 16,
+    "fields": {
+      "bundle": 31,
+      "product_size": 6
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 17,
+    "fields": {
+      "bundle": 31,
+      "product_size": 13
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 18,
+    "fields": {
+      "bundle": 31,
+      "product_size": 16
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 19,
+    "fields": {
+      "bundle": 32,
+      "product_size": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 20,
+    "fields": {
+      "bundle": 32,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 21,
+    "fields": {
+      "bundle": 32,
+      "product_size": 6
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 22,
+    "fields": {
+      "bundle": 32,
+      "product_size": 14
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 23,
+    "fields": {
+      "bundle": 32,
+      "product_size": 3
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 24,
+    "fields": {
+      "bundle": 33,
+      "product_size": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 25,
+    "fields": {
+      "bundle": 33,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 26,
+    "fields": {
+      "bundle": 33,
+      "product_size": 6
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 27,
+    "fields": {
+      "bundle": 33,
+      "product_size": 15
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 28,
+    "fields": {
+      "bundle": 33,
+      "product_size": 3
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 29,
+    "fields": {
+      "bundle": 33,
+      "product_size": 16
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 30,
+    "fields": {
+      "bundle": 40,
+      "product_size": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 31,
+    "fields": {
+      "bundle": 40,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 32,
+    "fields": {
+      "bundle": 40,
+      "product_size": 12
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 33,
+    "fields": {
+      "bundle": 41,
+      "product_size": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 34,
+    "fields": {
+      "bundle": 41,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 35,
+    "fields": {
+      "bundle": 41,
+      "product_size": 13
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 36,
+    "fields": {
+      "bundle": 41,
+      "product_size": 16
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 37,
+    "fields": {
+      "bundle": 42,
+      "product_size": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 38,
+    "fields": {
+      "bundle": 42,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 39,
+    "fields": {
+      "bundle": 42,
+      "product_size": 14
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 40,
+    "fields": {
+      "bundle": 42,
+      "product_size": 3
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 41,
+    "fields": {
+      "bundle": 43,
+      "product_size": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 42,
+    "fields": {
+      "bundle": 43,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 43,
+    "fields": {
+      "bundle": 43,
+      "product_size": 15
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 44,
+    "fields": {
+      "bundle": 43,
+      "product_size": 3
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 45,
+    "fields": {
+      "bundle": 43,
+      "product_size": 16
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 46,
+    "fields": {
+      "bundle": 50,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 47,
+    "fields": {
+      "bundle": 50,
+      "product_size": 6
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 48,
+    "fields": {
+      "bundle": 50,
+      "product_size": 12
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 49,
+    "fields": {
+      "bundle": 51,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 50,
+    "fields": {
+      "bundle": 51,
+      "product_size": 6
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 51,
+    "fields": {
+      "bundle": 51,
+      "product_size": 13
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 52,
+    "fields": {
+      "bundle": 51,
+      "product_size": 16
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 53,
+    "fields": {
+      "bundle": 52,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 54,
+    "fields": {
+      "bundle": 52,
+      "product_size": 6
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 55,
+    "fields": {
+      "bundle": 52,
+      "product_size": 14
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 56,
+    "fields": {
+      "bundle": 52,
+      "product_size": 3
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 57,
+    "fields": {
+      "bundle": 53,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 58,
+    "fields": {
+      "bundle": 53,
+      "product_size": 6
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 59,
+    "fields": {
+      "bundle": 53,
+      "product_size": 15
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 60,
+    "fields": {
+      "bundle": 53,
+      "product_size": 3
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 61,
+    "fields": {
+      "bundle": 53,
+      "product_size": 16
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 62,
+    "fields": {
+      "bundle": 70,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 63,
+    "fields": {
+      "bundle": 70,
+      "product_size": 12
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 64,
+    "fields": {
+      "bundle": 71,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 65,
+    "fields": {
+      "bundle": 71,
+      "product_size": 13
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 66,
+    "fields": {
+      "bundle": 71,
+      "product_size": 16
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 67,
+    "fields": {
+      "bundle": 72,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 68,
+    "fields": {
+      "bundle": 72,
+      "product_size": 14
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 69,
+    "fields": {
+      "bundle": 72,
+      "product_size": 3
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 70,
+    "fields": {
+      "bundle": 73,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 71,
+    "fields": {
+      "bundle": 73,
+      "product_size": 15
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 72,
+    "fields": {
+      "bundle": 73,
+      "product_size": 3
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 73,
+    "fields": {
+      "bundle": 73,
+      "product_size": 16
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 74,
+    "fields": {
+      "bundle": 100,
+      "product_size": 1
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 75,
+    "fields": {
+      "bundle": 100,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 76,
+    "fields": {
+      "bundle": 100,
+      "product_size": 12
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 77,
+    "fields": {
+      "bundle": 90,
+      "product_size": 5
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 78,
+    "fields": {
+      "bundle": 91,
+      "product_size": 4
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 79,
+    "fields": {
+      "bundle": 92,
+      "product_size": 2
+    }
+  },
+  {
+    "model": "juntagrico.subscriptionbundleproductsize",
+    "pk": 80,
+    "fields": {
+      "bundle": 93,
+      "product_size": 7
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 6,
+    "fields": {
+      "name": "Vollabo Getreide",
+      "long_name": "Vollabo mit Getreide nur in Form von Mehl/Körnern/Flocken",
+      "bundle": 30,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 14.0,
+      "required_core_assignments": 5.0,
+      "price": "3000.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 6,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 7,
+    "fields": {
+      "name": "Vollabo Pasta",
+      "long_name": "Vollabo mit Pasta (5kg/Jahr) und Getreide (Mehl/Körner/Flocken: 28kg/Jahr)",
+      "bundle": 31,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 14.0,
+      "required_core_assignments": 5.0,
+      "price": "3055.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 7,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 8,
+    "fields": {
+      "name": "Vollabo Brot",
+      "long_name": "Vollabo mit Brot (ca 450 g/Woche) und Getreide (Mehl/Körner/Flocken: 12kg/Jahr)",
+      "bundle": 32,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 14.0,
+      "required_core_assignments": 5.0,
+      "price": "3180.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 8,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 9,
+    "fields": {
+      "name": "Vollabo Pasta Brot",
+      "long_name": "Vollabo mit Pasta (5kg/Jahr) und Brot (ca 450 g/Woche) und Getreide (Mehl/Körner/Flocken: 8kg/Jahr)",
+      "bundle": 33,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 14.0,
+      "required_core_assignments": 5.0,
+      "price": "3235.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 9,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 10,
+    "fields": {
+      "name": "Vegiabo Getreide",
+      "long_name": "Vegiabo mit Getreide nur in Form von Mehl/Körnern/Flocken",
+      "bundle": 40,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 14.0,
+      "required_core_assignments": 5.0,
+      "price": "2440.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 10,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 11,
+    "fields": {
+      "name": "Vegiabo Pasta",
+      "long_name": "Vegiabo mit Pasta (5kg/Jahr) und Getreide (Mehl/Körner/Flocken: 28kg/Jahr)",
+      "bundle": 41,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 14.0,
+      "required_core_assignments": 5.0,
+      "price": "2495.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 11,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 12,
+    "fields": {
+      "name": "Vegiabo Brot",
+      "long_name": "Vegiabo mit Brot (ca 450 g/Woche) und Getreide (Mehl/Körner/Flocken: 12kg/Jahr)",
+      "bundle": 42,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 14.0,
+      "required_core_assignments": 5.0,
+      "price": "2620.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 12,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 13,
+    "fields": {
+      "name": "Vegiabo Pasta Brot",
+      "long_name": "Vegiabo mit Pasta (5kg/Jahr) und Brot (ca 450 g/Woche) und Getreide (Mehl/Körner/Flocken: 8kg/Jahr)",
+      "bundle": 43,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 14.0,
+      "required_core_assignments": 5.0,
+      "price": "2675.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 13,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 14,
+    "fields": {
+      "name": "Hof-Abo Getreide",
+      "long_name": "Hofabo mit Getreide nur in Form von Mehl/Körnern/Flocken",
+      "bundle": 50,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 4.0,
+      "required_core_assignments": 1.0,
+      "price": "1680.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 14,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 15,
+    "fields": {
+      "name": "Hof-Abo Pasta",
+      "long_name": "Hofabo mit Pasta (5kg/Jahr) und Getreide (Mehl/Körner/Flocken: 28kg/Jahr)",
+      "bundle": 51,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 4.0,
+      "required_core_assignments": 1.0,
+      "price": "1735.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 15,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 16,
+    "fields": {
+      "name": "Hof-Abo Brot",
+      "long_name": "Hofabo mit Brot (ca 450 g/Woche) und Getreide (Mehl/Körner/Flocken: 12kg/Jahr)",
+      "bundle": 52,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 4.0,
+      "required_core_assignments": 1.0,
+      "price": "1860.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 16,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 17,
+    "fields": {
+      "name": "Hof-Abo Pasta Brot",
+      "long_name": "Hofabo mit Pasta (5kg/Jahr) und Brot (ca 450 g/Woche) und Getreide (Mehl/Körner/Flocken: 8kg/Jahr)",
+      "bundle": 53,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 4.0,
+      "required_core_assignments": 1.0,
+      "price": "1915.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 17,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 18,
+    "fields": {
+      "name": "Gemüseabo",
+      "long_name": "Gemüseabo",
+      "bundle": 9,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 10.0,
+      "required_core_assignments": 4.0,
+      "price": "1320.00",
+      "visible": false,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 18,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 19,
+    "fields": {
+      "name": "Hofabo vegi Pasta Brot",
+      "long_name": "Hofabo vegi mit Pasta (5kg/Jahr) Brot (ca 450 g/Woche) und Getreide (Mehl/Körner/Flocken: 8kg/Jahr)",
+      "bundle": 73,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 4.0,
+      "required_core_assignments": 1.0,
+      "price": "1355.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 22,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 20,
+    "fields": {
+      "name": "Hofabo vegi Brot",
+      "long_name": "Hofabo vegi Brot (ca 450 g/Woche) und Getreide (Mehl/Körner/Flocken: 12kg/Jahr)",
+      "bundle": 72,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 4.0,
+      "required_core_assignments": 1.0,
+      "price": "1300.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 21,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 21,
+    "fields": {
+      "name": "Hofabo vegi Pasta",
+      "long_name": "Hofabo vegi mit Pasta (5kg/Jahr) und Getreide (Mehl/Körner/Flocken: 28kg/Jahr)",
+      "bundle": 71,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 4.0,
+      "required_core_assignments": 1.0,
+      "price": "1175.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 20,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 22,
+    "fields": {
+      "name": "Hofabo vegi Getreide",
+      "long_name": "Hofabo vegi mit Getreide nur in Form von Mehl/Körnern/Flocken",
+      "bundle": 70,
+      "requires_membership": true,
+      "shares": 4,
+      "required_assignments": 4.0,
+      "required_core_assignments": 1.0,
+      "price": "1120.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 19,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 23,
+    "fields": {
+      "name": "Eier",
+      "long_name": "Eier (4er-Pack pro Woche)",
+      "bundle": 91,
+      "requires_membership": true,
+      "shares": 0,
+      "required_assignments": 0.0,
+      "required_core_assignments": 0.0,
+      "price": "210.00",
+      "visible": true,
+      "is_extra": true,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 23,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 30,
+    "fields": {
+      "name": "Tofu",
+      "long_name": "Tofu (200g pro Woche)",
+      "bundle": 90,
+      "requires_membership": true,
+      "shares": 0,
+      "required_assignments": 0.0,
+      "required_core_assignments": 0.0,
+      "price": "240.00",
+      "visible": true,
+      "is_extra": true,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 24,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 31,
+    "fields": {
+      "name": "Extraportion Obst",
+      "long_name": "Obst (1 Portion pro Woche)",
+      "bundle": 92,
+      "requires_membership": true,
+      "shares": 0,
+      "required_assignments": 1.0,
+      "required_core_assignments": 0.0,
+      "price": "685.00",
+      "visible": true,
+      "is_extra": true,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 25,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 32,
+    "fields": {
+      "name": "Extraportion Fleisch",
+      "long_name": "Fleisch (Mischpaket à 7.5 kg pro Jahr)",
+      "bundle": 93,
+      "requires_membership": true,
+      "shares": 0,
+      "required_assignments": 1.0,
+      "required_core_assignments": 0.0,
+      "price": "280.00",
+      "visible": true,
+      "is_extra": true,
+      "trial": false,
+      "trial_days": 0,
+      "description": "",
+      "sort_order": 26,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.subscriptiontype",
+    "pk": 33,
+    "fields": {
+      "name": "Schnupperabo (Vegi)",
+      "long_name": "Schnupperabo (Vegi)",
+      "bundle": 100,
+      "requires_membership": false,
+      "shares": 0,
+      "required_assignments": 3.0,
+      "required_core_assignments": 1.0,
+      "price": "610.00",
+      "visible": true,
+      "is_extra": false,
+      "trial": false,
+      "trial_days": 92,
+      "description": "",
+      "sort_order": 5,
+      "interval": 1,
+      "offset": 0
+    }
+  },
+  {
+    "model": "juntagrico.tour",
+    "pk": 1,
+    "fields": {
+      "name": "Di Fondli",
+      "description": "",
+      "weekday": 2,
+      "visible_on_list": true,
+      "sort_order": 1
+    }
+  },
+  {
+    "model": "juntagrico.tour",
+    "pk": 2,
+    "fields": {
+      "name": "Di kleines Auto (Renault)",
+      "description": "",
+      "weekday": 2,
+      "visible_on_list": true,
+      "sort_order": 2
+    }
+  },
+  {
+    "model": "juntagrico.tour",
+    "pk": 3,
+    "fields": {
+      "name": "Di grosses Auto (Opel)",
+      "description": "",
+      "weekday": 2,
+      "visible_on_list": true,
+      "sort_order": 3
+    }
+  },
+  {
+    "model": "juntagrico.tour",
+    "pk": 4,
+    "fields": {
+      "name": "Do Fondli",
+      "description": "",
+      "weekday": 4,
+      "visible_on_list": true,
+      "sort_order": 4
+    }
+  },
+  {
+    "model": "juntagrico.tour",
+    "pk": 5,
+    "fields": {
+      "name": "Do kleines Auto (Renault)",
+      "description": "",
+      "weekday": 4,
+      "visible_on_list": true,
+      "sort_order": 5
+    }
+  },
+  {
+    "model": "juntagrico.tour",
+    "pk": 6,
+    "fields": {
+      "name": "Do grosses Auto (Opel)",
+      "description": "",
+      "weekday": 4,
+      "visible_on_list": true,
+      "sort_order": 6
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 50,
+    "fields": {
+      "name": "Depot Fondli (Di)",
+      "latitude": "47.409905",
+      "longitude": "8.382359",
+      "addr_street": "Spreitenbacherstr. 35",
+      "addr_zipcode": "8953",
+      "addr_location": "Dietikon",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 51,
+    "fields": {
+      "name": "Depot Höngg",
+      "latitude": "47.413077",
+      "longitude": "8.484145",
+      "addr_street": "Regensdorferstr. 190/194",
+      "addr_zipcode": "8049",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 52,
+    "fields": {
+      "name": "Depot Hunzikerareal",
+      "latitude": "47.414477",
+      "longitude": "8.560597",
+      "addr_street": "Hagenholzstrasse 106b",
+      "addr_zipcode": "8050",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 53,
+    "fields": {
+      "name": "Depot GZ Oerlikon",
+      "latitude": "47.407817",
+      "longitude": "8.545613",
+      "addr_street": "GZ Oerlikon",
+      "addr_zipcode": "8050",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 54,
+    "fields": {
+      "name": "Depot GZ Buchegg",
+      "latitude": "47.398735",
+      "longitude": "8.535151",
+      "addr_street": "Bucheggstrasse 93",
+      "addr_zipcode": "8057",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 55,
+    "fields": {
+      "name": "Depot Schaffhauserstr. 10",
+      "latitude": "47.388711",
+      "longitude": "8.539263",
+      "addr_street": "Schaffhauserstr. 10",
+      "addr_zipcode": "8006",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 56,
+    "fields": {
+      "name": "Depot Hafnerstr. 39",
+      "latitude": "47.381919",
+      "longitude": "8.535923",
+      "addr_street": "Hafnerstr. 39",
+      "addr_zipcode": "8005",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 57,
+    "fields": {
+      "name": "Depot Zollhaus",
+      "latitude": "47.381695",
+      "longitude": "8.529446",
+      "addr_street": "Zollstrasse 121",
+      "addr_zipcode": "8005",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 58,
+    "fields": {
+      "name": "Depot GZ Wipkingen",
+      "latitude": "47.393319",
+      "longitude": "8.519586",
+      "addr_street": "Ampèrestr. 6",
+      "addr_zipcode": "8037",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 59,
+    "fields": {
+      "name": "Depot Kraftwerk1",
+      "latitude": "47.392914",
+      "longitude": "8.507903",
+      "addr_street": "Hardturmstr. 269",
+      "addr_zipcode": "8005",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 60,
+    "fields": {
+      "name": "Depot Fondli (Do)",
+      "latitude": "47.409905",
+      "longitude": "8.382359",
+      "addr_street": "Spreitenbacherstr. 35",
+      "addr_zipcode": "8953",
+      "addr_location": "Dietikon",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 61,
+    "fields": {
+      "name": "Depot Glanzenberg",
+      "latitude": "47.397308",
+      "longitude": "8.415320",
+      "addr_street": "Urdorferstr. 32",
+      "addr_zipcode": "8953",
+      "addr_location": "Dietikon",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 62,
+    "fields": {
+      "name": "Depot ABZ Herrlig",
+      "latitude": "47.390538",
+      "longitude": "8.483700",
+      "addr_street": "Robert-Seidel-Hof 11",
+      "addr_zipcode": "8048",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 63,
+    "fields": {
+      "name": "Depot Stadtgärtnerei (ex-Zirkusareal)",
+      "latitude": "47.374633",
+      "longitude": "8.499572",
+      "addr_street": "Fellenbergstrasse 198",
+      "addr_zipcode": "8047",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 65,
+    "fields": {
+      "name": "Depot Kalkbreite",
+      "latitude": "47.374378",
+      "longitude": "8.519846",
+      "addr_street": "Kalkbreitestrasse 6",
+      "addr_zipcode": "8003",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 66,
+    "fields": {
+      "name": "Depot Selnau",
+      "latitude": "47.370210",
+      "longitude": "8.531421",
+      "addr_street": "Sihlamtstr. 8",
+      "addr_zipcode": "8001",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 67,
+    "fields": {
+      "name": "Depot Enge",
+      "latitude": "47.359434",
+      "longitude": "8.529505",
+      "addr_street": "Gablerstr. 20",
+      "addr_zipcode": "8002",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.location",
+    "pk": 68,
+    "fields": {
+      "name": "Depot Wollishofen GZ (Albisstr.)",
+      "latitude": "47.344077",
+      "longitude": "8.532102",
+      "addr_street": "Albisstrasse 25",
+      "addr_zipcode": "8038",
+      "addr_location": "Zürich",
+      "visible": true
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 2,
+    "fields": {
+      "name": "Zollhaus",
+      "tour": 3,
+      "weekday": 2,
+      "location": 57,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 9
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 3,
+    "fields": {
+      "name": "Kraftwerk1",
+      "tour": 2,
+      "weekday": 2,
+      "location": 59,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 5
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 5,
+    "fields": {
+      "name": "ABZ Herrlig",
+      "tour": 6,
+      "weekday": 4,
+      "location": 62,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 16
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 6,
+    "fields": {
+      "name": "Fondli (Di)",
+      "tour": 1,
+      "weekday": 2,
+      "location": 50,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 1
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 7,
+    "fields": {
+      "name": "Glanzenberg",
+      "tour": 5,
+      "weekday": 4,
+      "location": 61,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 12
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 8,
+    "fields": {
+      "name": "Höngg",
+      "tour": 3,
+      "weekday": 2,
+      "location": 51,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 6
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 9,
+    "fields": {
+      "name": "Enge",
+      "tour": 5,
+      "weekday": 4,
+      "location": 67,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 14
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 10,
+    "fields": {
+      "name": "Wollishofen GZ (Albisstr.)",
+      "tour": 5,
+      "weekday": 4,
+      "location": 68,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 13
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 11,
+    "fields": {
+      "name": "Hafnerstr. 39",
+      "tour": 3,
+      "weekday": 2,
+      "location": 56,
+      "depot_list": true,
+      "visible": false,
+      "sort_order": 8
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 12,
+    "fields": {
+      "name": "Schaffhauserstr. 10",
+      "tour": 3,
+      "weekday": 2,
+      "location": 55,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 7
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 13,
+    "fields": {
+      "name": "GZ Oerlikon",
+      "tour": 2,
+      "weekday": 2,
+      "location": 53,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 3
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 14,
+    "fields": {
+      "name": "GZ Buchegg",
+      "tour": 2,
+      "weekday": 2,
+      "location": 54,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 4
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 15,
+    "fields": {
+      "name": "Selnau",
+      "tour": 5,
+      "weekday": 4,
+      "location": 66,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 15
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 16,
+    "fields": {
+      "name": "GZ Wipkingen",
+      "tour": 3,
+      "weekday": 2,
+      "location": 58,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 10
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 17,
+    "fields": {
+      "name": "Fondli (Do)",
+      "tour": 4,
+      "weekday": 4,
+      "location": 60,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 11
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 18,
+    "fields": {
+      "name": "Stadtgärtnerei (ex-Zirkusareal)",
+      "tour": 6,
+      "weekday": 4,
+      "location": 63,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 17
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 19,
+    "fields": {
+      "name": "Kalkbreite",
+      "tour": 6,
+      "weekday": 4,
+      "location": 65,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 18
+    }
+  },
+  {
+    "model": "juntagrico.depot",
+    "pk": 20,
+    "fields": {
+      "name": "Hunzikerareal",
+      "tour": 2,
+      "weekday": 2,
+      "location": 52,
+      "depot_list": true,
+      "visible": true,
+      "sort_order": 2
+    }
+  }
+]

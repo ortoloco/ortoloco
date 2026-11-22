@@ -1,6 +1,6 @@
 import requests
 
-from ortoloco import settings
+from django.conf import settings
 
 
 def get_news_posts(wpcategory = 10):
@@ -8,7 +8,6 @@ def get_news_posts(wpcategory = 10):
     method = base + "posts?_fields=content.rendered,title&categories=" + str(wpcategory)
     response = None
     try:
-        print(settings.WP_PASSWORD)
         response = requests.get(method, auth=(settings.WP_USER, settings.WP_PASSWORD), timeout=3)
     except Exception:
         pass
