@@ -105,8 +105,14 @@ INSTALLED_APPS = (
 """
     Brute Force Auth Protection
 """
-AXES_FAILURE_LIMIT = 10
+AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = timedelta(minutes=30)
+# lock the combination of user and ip: guessing one account is blocked,
+# other users behind the same ip (e.g. the farm) can still log in
+AXES_LOCKOUT_PARAMETERS = [['username', 'ip_address']]
+# record failed attempts only (needed for the lockout): no access log of successful logins and logouts
+AXES_DISABLE_ACCESS_LOG = True
+AXES_VERBOSE = False
 AXES_IPWARE_META_PRECEDENCE_ORDER = [
     'HTTP_X_FORWARDED_FOR',
     'REMOTE_ADDR',
