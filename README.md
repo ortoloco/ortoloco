@@ -32,12 +32,17 @@ Environment variables
 
 Scheduled jobs
 --------------
-Run by cron on the server (check the schedule there):
+Crontab on the server (2026-11):
 
-- `python manage.py generate_depot_list`: creates the depot lists on the days of `DEPOT_LIST_GENERATION_DAYS`
-  (`[3]`: Thursday, for the deliveries of the next week) and notifies the admins. On other days it does nothing.
-- `python manage.py upcoming_jobs`: emails the jobs and participants in N days to the coordinators of the areas in
-  `ORTOLOCO_AREA_NOTIFY` (`Verteilen`: 2 days).
+    45 23 * * * docker exec ortoloco python -m manage generate_depot_list
+    */10 * * * * docker exec ortoloco python manage.py remind_members
+    0 8 * * *  docker exec ortoloco python manage.py upcoming_jobs
+
+- `generate_depot_list` (juntagrico): runs every night, but creates the depot lists only on the days of
+  `DEPOT_LIST_GENERATION_DAYS` (`[3]`: Thursday, for the deliveries of the next week) and notifies the admins.
+- `remind_members` (juntagrico): reminds members of their jobs in the next 48 hours, each reminder only once.
+- `upcoming_jobs` (ortoloco): emails the jobs and participants in N days to the coordinators of the areas in
+  `ORTOLOCO_AREA_NOTIFY` (`Verteilen`: 2 days). Every call sends the emails again, so run it only once a day.
 
 Deployment
 ----------
