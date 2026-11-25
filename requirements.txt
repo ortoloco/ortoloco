@@ -2,8 +2,7 @@ juntagrico~=2.1.0
 
 juntagrico-webdav~=2.0.0
 juntagrico-pg~=2.0.0
-#juntagrico-billing~=2.0.0
-git+https://github.com/juntagrico/juntagrico-billing@releases/2.1
+juntagrico-billing~=2.0.0
 #juntagrico-contribution~=0.3.0
 git+https://github.com/juntagrico/juntagrico-contribution@releases/1.0
 
