@@ -30,12 +30,30 @@ WSGI_APPLICATION = 'ortoloco.wsgi.application'
 
 SECRET_KEY = os.environ.get('JUNTAGRICO_SECRET_KEY')
 
+# signs the id tokens of OpenID Connect, PEM with \n instead of line breaks. OpenID Connect is disabled without it.
+OIDC_RSA_PRIVATE_KEY = os.environ.get('ORTOLOCO_OIDC_RSA_PRIVATE_KEY', '').replace('\\n', '\n')
+
 OAUTH2_PROVIDER = {
-     'SCOPES': {
-         'nextcloud': 'nextcloud darf einmalig deine Email sowie deinen Namen abfragen um einen Account zu erstellen',
-     },
-    'PKCE_REQUIRED': False
- }
+    'SCOPES': {
+        # texts of the consent page
+        'openid': 'Anmeldung mit deinem Konto',
+        'profile': 'Vorname und Nachname',
+        'email': 'E-Mail-Adresse',
+        'groups': 'Gruppen',
+        'member_id': 'Mitgliedernummer',
+        # legacy, only for /nextcloud/profile/
+        'nextcloud': 'Name, E-Mail-Adresse, Gruppen und Mitgliedernummer für Nextcloud',
+    },
+    # for clients that request no scope. The default are all scopes: openid fails without algorithm, like for nextcloud
+    'DEFAULT_SCOPES': ['nextcloud'],
+    'PKCE_REQUIRED': False,
+    'OAUTH2_VALIDATOR_CLASS': 'ortoloco.oauth_validator.OrtolocoOAuth2Validator',
+    'OIDC_ENABLED': bool(OIDC_RSA_PRIVATE_KEY),
+    'OIDC_RSA_PRIVATE_KEY': OIDC_RSA_PRIVATE_KEY,
+    'OIDC_RP_INITIATED_LOGOUT_ENABLED': True,
+    # log out directly, like the end-session endpoint of django-oidc-provider
+    'OIDC_RP_INITIATED_LOGOUT_ALWAYS_PROMPT': False,
+}
 
 TEMPLATES = [
     {
@@ -68,7 +86,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'ortoloco.middleware.AdminImpersonateMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'oauth2_provider.middleware.OAuth2TokenMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'axes.middleware.AxesMiddleware',
@@ -168,7 +185,6 @@ AUTHENTICATION_BACKENDS = (
     'axes.backends.AxesStandaloneBackend',
     'juntagrico.util.auth.AuthenticateWithEmail',
     'django.contrib.auth.backends.ModelBackend',
-    'oauth2_provider.backends.OAuth2Backend',
 )
 
 """

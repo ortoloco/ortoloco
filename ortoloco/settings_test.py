@@ -3,10 +3,20 @@ Settings for the tests: python manage.py test --settings=ortoloco.settings_test
 """
 import os
 
+from jwcrypto import jwk
+
 from ortoloco.settings import *  # noqa: F401,F403
+from ortoloco.settings import OAUTH2_PROVIDER
 
 DEBUG = False
 SECRET_KEY = 'test-only-secret-key'
+
+# OpenID Connect with a throwaway key
+OAUTH2_PROVIDER = {
+    **OAUTH2_PROVIDER,
+    'OIDC_ENABLED': True,
+    'OIDC_RSA_PRIVATE_KEY': jwk.JWK.generate(kty='RSA', size=2048).export_to_pem(True, None).decode(),
+}
 
 # no collectstatic needed
 STORAGES = {
