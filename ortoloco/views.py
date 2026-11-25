@@ -1,7 +1,7 @@
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
 from django.shortcuts import render
+from oauth2_provider.decorators import protected_resource
 
 
 class Custom500View(View):
@@ -9,10 +9,11 @@ class Custom500View(View):
         return render(request, '500.html', {}, status=500)
 
 
-@login_required
+@protected_resource(scopes=['nextcloud'])
 def nextcloud_profile(request):
-    member = request.user.member
-    membergroups = request.user.groups.values_list('name',flat = True)
+    user = request.resource_owner
+    member = user.member
+    membergroups = user.groups.values_list('name',flat = True)
     grouplist = list(membergroups)
     response = JsonResponse({'id': member.id,
                              'email': member.email,

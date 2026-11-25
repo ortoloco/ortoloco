@@ -27,6 +27,7 @@ Environment variables
 | `JUNTAGRICO_ADMIN_EMAIL`, `JUNTAGRICO_DS_EMAIL` | receive error reports (`ADMINS`) |
 | `JUNTAGRICO_STAGING` | `1` on the staging instance: no emails, staging styles |
 | `DEBUG_TOOLBAR` | `True` shows the django-debug-toolbar to superusers |
+| `ORTOLOCO_OIDC_RSA_PRIVATE_KEY` | signs the logins of WordPress (OpenID Connect), see [docs/login-clients.md](docs/login-clients.md). Without it, OpenID Connect under `/o/` is disabled |
 | `ORTOLOCO_VELO_CODE` | bike lock code shown in the user menu to members with an active subscription |
 | `WP_USER`, `WP_PASSWORD` | access to news.ortoloco.ch (news embedding, currently disabled) |
 

@@ -2,14 +2,16 @@
 Login of other services with my.ortoloco, replayed as the services do it. See docs/login-clients.md.
 
 - Nextcloud (cloud.ortoloco.ch): OAuth2 with django-oauth-toolkit, profile and groups from /nextcloud/profile/
-- WordPress instances: OpenID Connect with django-oidc-provider and the plugin "OpenID Connect Client"
+- WordPress instances: OpenID Connect with the plugin "OpenID Connect Client", with django-oauth-toolkit (/o/) or with
+  django-oidc-provider (/openid/) until all instances are moved
 """
 import json
+from io import StringIO
 from urllib.parse import parse_qs, urlparse
 
 import jwt
 from django.conf import settings
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.core.management import call_command
 from django.test import Client as TestClient
 from oauth2_provider.models import get_application_model
@@ -52,6 +54,7 @@ class NextcloudLoginTests(LoginClientTestCase):
     """
     redirect_uri = 'https://cloud.ortoloco.ch/apps/sociallogin/custom_oauth2/my.ortoloco'
     client_secret = 'nextcloud-test-secret'
+    scope = 'nextcloud'
 
     @classmethod
     def setUpTestData(cls):
@@ -75,7 +78,8 @@ class NextcloudLoginTests(LoginClientTestCase):
         # without PKCE (code_challenge), like Social Login
         response = self.client.get('/o/authorize/', {
             'response_type': 'code', 'client_id': self.application.client_id,
-            'redirect_uri': self.redirect_uri, 'scope': 'nextcloud', 'state': 'nextcloud-state',
+            'redirect_uri': self.redirect_uri, 'state': 'nextcloud-state',
+            **({'scope': self.scope} if self.scope else {}),
         })
         self.assertEqual(response.status_code, 302)
         self.assertTrue(response.url.startswith(self.redirect_uri), response.url)
@@ -103,6 +107,13 @@ class NextcloudLoginTests(LoginClientTestCase):
         # Nextcloud maps the groups from "roles"
         self.assertEqual(profile['roles'], ['Betriebsgruppe'])
 
+    def test_login_without_scope(self):
+        self.scope = None
+        token = self.get_token(self.authorize())
+        self.assertEqual(token['scope'], 'nextcloud')
+        response = self.client.get('/nextcloud/profile/', HTTP_AUTHORIZATION=f'Bearer {token["access_token"]}')
+        self.assertEqual(response.status_code, 200)
+
     def test_pkce_not_required(self):
         # Social Login does not send a code_challenge: PKCE_REQUIRED (default True) must stay False
         self.assertIs(settings.OAUTH2_PROVIDER['PKCE_REQUIRED'], False)
@@ -115,6 +126,45 @@ class NextcloudLoginTests(LoginClientTestCase):
             'client_id': self.application.client_id, 'client_secret': 'wrong',
         })
         self.assertEqual(response.status_code, 401)
+
+    def test_userinfo_instead_of_profile(self):
+        # possible replacement of /nextcloud/profile/: same account ids, as Social Login (OAuth2) uses "id" before "sub"
+        self.application.algorithm = self.application.RS256_ALGORITHM
+        self.application.save()
+        self.scope = 'openid profile email groups member_id'
+        # member id and user id must differ to notice a mix-up
+        User.objects.create_user('without_member')
+        member = self.create_member('other@example.org')
+        member.user.groups.add(Group.objects.get(name='Betriebsgruppe'))
+        self.assertNotEqual(member.pk, member.user.pk)
+        self.client.force_login(member.user)
+
+        token = self.get_token(self.authorize())
+        header = {'HTTP_AUTHORIZATION': f'Bearer {token["access_token"]}'}
+        # scope nextcloud is only needed for the profile
+        self.assertEqual(self.client.get('/nextcloud/profile/', **header).status_code, 403)
+        userinfo = self.client.get('/o/userinfo/', **header).json()
+        self.assertEqual(userinfo['id'], member.pk)
+        self.assertEqual(userinfo['sub'], str(member.user.pk))
+        self.assertEqual(userinfo['email'], member.email)
+        self.assertEqual(userinfo['name'], f'{member.first_name} {member.last_name}')
+        self.assertEqual(userinfo['groups'], ['Betriebsgruppe'])
+
+    def test_token_for_profile_only(self):
+        # an access token must not log in on other pages: services could act as their users
+        token = self.get_token(self.authorize())
+        header = {'HTTP_AUTHORIZATION': f'Bearer {token["access_token"]}'}
+        self.assertEqual(self.client.get('/nextcloud/profile/', **header).status_code, 200)
+        self.assertEqual(self.client.get('/my/profile', **header).status_code, 302)
+        self.assertEqual(self.client.get('/admin/', **header).status_code, 302)
+        self.client.post('/accounts/login/', {'username': 'x', 'password': 'x'}, **header)
+        self.assertNotIn('_auth_user_id', self.client.session)
+
+    def test_invalid_token(self):
+        self.client.logout()
+        self.assertEqual(
+            self.client.get('/nextcloud/profile/', HTTP_AUTHORIZATION='Bearer invalid').status_code, 403)
+        self.assertEqual(self.client.get('/nextcloud/profile/').status_code, 403)
 
     def test_unknown_redirect_uri(self):
         response = self.client.get('/o/authorize/', {
@@ -233,3 +283,142 @@ class WordPressOpenIDConnectTests(LoginClientTestCase):
         # therefore WordPress must use /openid/end-session as end session endpoint
         self.assertEqual(self.client.get('/logout/').status_code, 405)
         self.assertIn('_auth_user_id', self.client.session)
+
+
+class WordPressOAuthToolkitTests(LoginClientTestCase):
+    """
+    WordPress plugin "OpenID Connect Client" with django-oauth-toolkit.
+    Application in the admin as in docs/login-clients.md.
+    """
+    redirect_uri = WordPressOpenIDConnectTests.redirect_uri
+    client_id = 'wordpress-test-client'
+    client_secret = 'wordpress-test-secret'
+    post_logout_redirect_uri = 'https://wptest.ortoloco.ch/'
+
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        # same client in django-oidc-provider, to compare
+        call_command('creatersakey', stdout=StringIO())
+        cls.oidc_client = Client.objects.create(
+            name='wptest', client_id=cls.client_id, client_secret=cls.client_secret,
+            client_type='confidential', jwt_alg='RS256', require_consent=False, reuse_consent=True,
+            _redirect_uris=cls.redirect_uri, _post_logout_redirect_uris=cls.post_logout_redirect_uri,
+        )
+        cls.oidc_client.response_types.add(ResponseType.objects.get(value='code'))
+        Application = get_application_model()
+        application = Application(
+            name='wptest', client_id=cls.client_id, client_secret=cls.client_secret, hash_client_secret=True,
+            redirect_uris=cls.redirect_uri, post_logout_redirect_uris=cls.post_logout_redirect_uri,
+            client_type=Application.CLIENT_CONFIDENTIAL,
+            authorization_grant_type=Application.GRANT_AUTHORIZATION_CODE,
+            skip_authorization=True, algorithm=Application.RS256_ALGORITHM,
+        )
+        application.full_clean()
+        application.save()
+
+    def login(self, scope='openid email profile', **params):
+        response = self.client.get('/o/authorize/', {
+            'response_type': 'code', 'client_id': self.client_id, 'redirect_uri': self.redirect_uri,
+            'scope': scope, 'state': 'wp-state', **params,
+        })
+        # no consent page, directly back to WordPress
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response['Location'].startswith(self.redirect_uri), response['Location'])
+        params = query(response['Location'])
+        self.assertEqual(params['state'], 'wp-state')
+        self.client.logout()  # the token request comes from the WordPress server
+        response = self.token(params['code'])
+        self.assertEqual(response.status_code, 200, response.content)
+        return response.json()
+
+    def token(self, code, secret=None):
+        return self.client.post('/o/token/', {
+            'grant_type': 'authorization_code', 'code': code, 'redirect_uri': self.redirect_uri,
+            'client_id': self.client_id, 'client_secret': secret or self.client_secret,
+        })
+
+    def userinfo(self, tokens, url='/o/userinfo/'):
+        response = self.client.get(url, HTTP_AUTHORIZATION=f'Bearer {tokens["access_token"]}')
+        self.assertEqual(response.status_code, 200)
+        return json.loads(response.content)
+
+    def test_discovery(self):
+        config = self.client.get('/o/.well-known/openid-configuration').json()
+        self.assertEqual(config['issuer'], f'{SITE}/o')
+        self.assertEqual(config['authorization_endpoint'], f'{SITE}/o/authorize/')
+        self.assertEqual(config['token_endpoint'], f'{SITE}/o/token/')
+        self.assertEqual(config['userinfo_endpoint'], f'{SITE}/o/userinfo/')
+        self.assertEqual(config['jwks_uri'], f'{SITE}/o/.well-known/jwks.json')
+        self.assertEqual(config['end_session_endpoint'], f'{SITE}/o/logout/')
+
+    def test_login(self):
+        tokens = self.login(nonce='wp-nonce')
+        jwks = jwt.PyJWKSet.from_json(self.client.get('/o/.well-known/jwks.json').content.decode())
+        header = jwt.get_unverified_header(tokens['id_token'])
+        self.assertEqual(header['alg'], 'RS256')
+        key = next(key for key in jwks.keys if key.key_id == header['kid'])
+        id_token = jwt.decode(
+            tokens['id_token'], key=key, algorithms=['RS256'], audience=self.client_id, issuer=f'{SITE}/o',
+        )
+        self.assertEqual(id_token['nonce'], 'wp-nonce')
+        self.assertEqual(id_token['sub'], str(self.member.user.id))
+        self.assertEqual(id_token['email'], self.member.email)
+        # only with the scopes "groups" and "member_id"
+        self.assertNotIn('groups', id_token)
+        self.assertNotIn('id', id_token)
+
+    def test_same_userinfo_as_oidc_provider(self):
+        # WordPress recognizes existing accounts by these values, they must not change when moving an instance
+        scope = 'openid email profile groups'
+        new = self.userinfo(self.login(scope))
+        self.client.force_login(self.member.user)
+        response = self.client.get('/openid/authorize', {
+            'response_type': 'code', 'client_id': self.client_id, 'redirect_uri': self.redirect_uri, 'scope': scope,
+        })
+        response = self.client.post('/openid/token', {
+            'grant_type': 'authorization_code', 'code': query(response['Location'])['code'],
+            'redirect_uri': self.redirect_uri, 'client_id': self.client_id, 'client_secret': self.client_secret,
+        })
+        self.client.logout()
+        old = self.userinfo(json.loads(response.content), '/openid/userinfo')
+        del old['nickname']  # not used
+        self.assertEqual(new, old)
+        self.assertEqual(new['groups'], ['Betriebsgruppe'])
+
+    def test_groups_in_id_token(self):
+        # Nextcloud Social Login reads the groups of OpenID Connect providers from the id token
+        tokens = self.login('openid email profile groups')
+        id_token = jwt.decode(tokens['id_token'], options={'verify_signature': False})
+        self.assertEqual(id_token['groups'], ['Betriebsgruppe'])
+
+    def test_token_is_no_login(self):
+        tokens = self.login()
+        header = {'HTTP_AUTHORIZATION': f'Bearer {tokens["access_token"]}'}
+        for url, code in (('/my/profile', 302), ('/admin/', 302), ('/nextcloud/profile/', 403)):
+            with self.subTest(url=url):
+                self.assertEqual(self.client.get(url, **header).status_code, code)
+
+    def test_wrong_secret(self):
+        response = self.client.get('/o/authorize/', {
+            'response_type': 'code', 'client_id': self.client_id, 'redirect_uri': self.redirect_uri, 'scope': 'openid',
+        })
+        self.client.logout()
+        self.assertEqual(self.token(query(response['Location'])['code'], 'wrong').status_code, 401)
+
+    def test_logout(self):
+        tokens = self.login()
+        self.client.force_login(self.member.user)
+        response = self.client.get('/o/logout/', {
+            'id_token_hint': tokens['id_token'], 'post_logout_redirect_uri': self.post_logout_redirect_uri,
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], self.post_logout_redirect_uri)
+        self.assertNotIn('_auth_user_id', self.client.session)
+
+    def test_logout_unknown_redirect(self):
+        tokens = self.login()
+        response = self.client.get('/o/logout/', {
+            'id_token_hint': tokens['id_token'], 'post_logout_redirect_uri': 'https://evil.example.org/',
+        })
+        self.assertEqual(response.status_code, 400)

@@ -59,7 +59,7 @@ class NextcloudProfileTests(OrtolocoTestCase):
         self.assertEqual(self.get_profile().status_code, 200)
 
     def test_invalid_token(self):
-        self.assertEqual(self.get_profile('invalid').status_code, 302)
+        self.assertEqual(self.get_profile('invalid').status_code, 403)
 
 
 class OpenIDConnectTests(OrtolocoTestCase):
