@@ -1,21 +1,14 @@
-{% extends "areas.html" %}
+{% extends "juntagrico/my/area/list.html" %}
 {% load ortoloco_common %}
 
-{% block page_title %}
-    {{ block.super }}
-{% endblock %}
-
 {% block content %}
+    {% comment %}
+        news.ortoloco.ch posts on top of the areas page, not in use yet (calls WordPress on every page view)
         <div class="row mb-4">
             <div class="col-md-12">
                 {% newstb %}
             </div>
         </div>
-
-    <h1>Tätigkeitsbereiche</h1>
-    {{ block.super }}
-{% endblock %}
-
-{% block scripts %}
+    {% endcomment %}
     {{ block.super }}
 {% endblock %}

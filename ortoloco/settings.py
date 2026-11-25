@@ -18,6 +18,9 @@ ROOT_URLCONF = 'ortoloco.urls'
 
 SITE_ID = 1
 
+# keep the implicit primary key type of apps without default_auto_field
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 LOGIN_REDIRECT_URL = "/"
@@ -63,7 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'juntagrico.middleware.RequirePasswordChangeMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'impersonate.middleware.ImpersonateMiddleware',
+    'ortoloco.middleware.AdminImpersonateMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'oauth2_provider.middleware.OAuth2TokenMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -102,8 +105,14 @@ INSTALLED_APPS = (
 """
     Brute Force Auth Protection
 """
-AXES_FAILURE_LIMIT = 10
+AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = timedelta(minutes=30)
+# lock the combination of user and ip: guessing one account is blocked,
+# other users behind the same ip (e.g. the farm) can still log in
+AXES_LOCKOUT_PARAMETERS = [['username', 'ip_address']]
+# record failed attempts only (needed for the lockout): no access log of successful logins and logouts
+AXES_DISABLE_ACCESS_LOG = True
+AXES_VERBOSE = False
 AXES_IPWARE_META_PRECEDENCE_ORDER = [
     'HTTP_X_FORWARDED_FOR',
     'REMOTE_ADDR',
@@ -157,7 +166,7 @@ SERVER_EMAIL = "it@ortoloco.ch"
 """
 AUTHENTICATION_BACKENDS = (
     'axes.backends.AxesStandaloneBackend',
-    'ortoloco.auth.SafeAuthenticateWithEmail',
+    'juntagrico.util.auth.AuthenticateWithEmail',
     'django.contrib.auth.backends.ModelBackend',
     'oauth2_provider.backends.OAuth2Backend',
 )
@@ -192,7 +201,6 @@ CACHES = {
 """
 LANGUAGE_CODE = 'de-CH'
 USE_I18N = True
-USE_L10N = True
 
 USE_TZ = True
 TIME_ZONE = 'Europe/Zurich'
@@ -223,19 +231,8 @@ STATICFILES_DIRS = [
 ]
 
 """
-    Impersonate Settings
-"""
-IMPERSONATE = {
-    'REDIRECT_URL': '/my/profile',
-    'URI_EXCLUSIONS': [], # enable /admin impersonation
-}
-
-
-"""
     File & Storage Settings
 """
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-
 MEDIA_ROOT = 'media'
 
 
@@ -426,7 +423,6 @@ DJRICHTEXTFIELD_CONFIG = defaults.richtextfield_config(
 
 # depot list recurring messages
 ORTOLOCO_RECURRING_MESSAGES = [
-    {"message": "OHNE TOFU", "year": 2025, "weeks": list(range(1, 50, 2))},
     {"message": "OHNE TOFU", "year": 2026, "weeks": set(range(1, 50, 2))},
     {"message": "MIT TOFU", "year": 2026, "weeks": set(range(1,53)) - set(range(1, 50, 2))},
     {"message": "OHNE TOFU", "year": 2027, "weeks": set(range(2, 51, 2))},
@@ -449,6 +445,7 @@ AUTH_PASSWORD_VALIDATORS = [{
 # limit impersonation
 allow_impersonate = defaults.allow_group('impersonators')
 IMPERSONATE = {
+    'REDIRECT_URL': '/my/profile',
     'CUSTOM_ALLOW': 'ortoloco.settings.allow_impersonate',
     'CUSTOM_USER_QUERYSET': 'juntagrico.defaults.unprivileged_only',
 }

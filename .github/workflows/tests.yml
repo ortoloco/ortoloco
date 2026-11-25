@@ -1,0 +1,55 @@
+name: tests
+
+on:
+  push:
+    branches: [live, staging]
+  pull_request:
+  # weekly run against the development version of juntagrico, to notice breaking changes before a release
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        juntagrico: ['requirements', 'main']
+    # the development version may break before ortoloco is adapted: report, but do not block
+    continue-on-error: ${{ matrix.juntagrico == 'main' }}
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ortoloco
+        ports: ['5432:5432']
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      # test against PostgreSQL like production, locally the tests use sqlite
+      ORTOLOCO_TEST_DATABASE: env
+      JUNTAGRICO_DATABASE_ENGINE: django.db.backends.postgresql
+      JUNTAGRICO_DATABASE_NAME: ortoloco
+      JUNTAGRICO_DATABASE_USER: postgres
+      JUNTAGRICO_DATABASE_PASSWORD: postgres
+      JUNTAGRICO_DATABASE_HOST: localhost
+      JUNTAGRICO_DATABASE_PORT: '5432'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt ruff
+      - name: Install juntagrico main
+        if: matrix.juntagrico == 'main'
+        run: pip install --upgrade "juntagrico @ git+https://github.com/juntagrico/juntagrico@main"
+      - name: Lint
+        run: ruff check ortoloco
+      - name: Check
+        run: python manage.py check --settings=ortoloco.settings_test
+      - name: Tests
+        run: python manage.py test ortoloco --settings=ortoloco.settings_test
