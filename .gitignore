@@ -14,4 +14,5 @@ myenv.txt
 /.env
 /*.code-workspace
 /media
+*.xlsx
 /internal_files

@@ -54,8 +54,8 @@ Nextcloud uses the app *Social Login* with a custom OAuth2 provider `my.ortoloco
 - `OAUTH2_PROVIDER['PKCE_REQUIRED'] = False`: Social Login sends no PKCE `code_challenge`. Since
   django-oauth-toolkit 2.0 PKCE is required by default, without this setting nobody can log in to Nextcloud.
 - `oauth2_provider.middleware.OAuth2TokenMiddleware` and `oauth2_provider.backends.OAuth2Backend` authenticate the
-  profile request with the access token. `ortoloco.auth.SafeAuthenticateWithEmail` keeps this working with users
-  without member (production error 2026-11, fixed in juntagrico 2.1.1).
+  profile request with the access token. This needs juntagrico >= 2.1.1: older versions fail if there are users
+  without member (production error 2026-11).
 
 Note: `/nextcloud/profile/` accepts any valid access token or browser session, it does not check the scope.
 
