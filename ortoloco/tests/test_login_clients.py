@@ -7,10 +7,10 @@ Login of other services with my.ortoloco, replayed as the services do it. See do
 import json
 from urllib.parse import parse_qs, urlparse
 
-import jwt
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.test import Client as TestClient
+from jwcrypto import jwk, jwt
 from oauth2_provider.models import get_application_model
 
 from ortoloco.tests import OrtolocoTestCase
@@ -220,6 +220,16 @@ class WordPressOpenIDConnectTests(LoginClientTestCase):
         self.assertEqual(response.status_code, 200)
         return json.loads(response.content)
 
+    def verified_id_token(self, tokens):
+        # as WordPress: signature with the key from the jwks endpoint, issuer and audience
+        keys = jwk.JWKSet.from_json(self.client.get('/o/.well-known/jwks.json').content.decode())
+        id_token = jwt.JWT(
+            jwt=tokens['id_token'], key=keys, algs=['RS256'], expected_type='JWS',
+            check_claims={'iss': f'{SITE}/o', 'aud': self.client_id, 'exp': None},
+        )
+        self.assertEqual(id_token.token.jose_header['alg'], 'RS256')
+        return json.loads(id_token.claims)
+
     def test_discovery(self):
         config = self.client.get('/o/.well-known/openid-configuration').json()
         self.assertEqual(config['issuer'], f'{SITE}/o')
@@ -230,14 +240,7 @@ class WordPressOpenIDConnectTests(LoginClientTestCase):
         self.assertEqual(config['end_session_endpoint'], f'{SITE}/o/logout/')
 
     def test_login(self):
-        tokens = self.login(nonce='wp-nonce')
-        jwks = jwt.PyJWKSet.from_json(self.client.get('/o/.well-known/jwks.json').content.decode())
-        header = jwt.get_unverified_header(tokens['id_token'])
-        self.assertEqual(header['alg'], 'RS256')
-        key = next(key for key in jwks.keys if key.key_id == header['kid'])
-        id_token = jwt.decode(
-            tokens['id_token'], key=key, algorithms=['RS256'], audience=self.client_id, issuer=f'{SITE}/o',
-        )
+        id_token = self.verified_id_token(self.login(nonce='wp-nonce'))
         self.assertEqual(id_token['nonce'], 'wp-nonce')
         self.assertEqual(id_token['sub'], str(self.member.user.id))
         self.assertEqual(id_token['email'], self.member.email)
@@ -258,8 +261,7 @@ class WordPressOpenIDConnectTests(LoginClientTestCase):
 
     def test_groups_in_id_token(self):
         # Nextcloud Social Login reads the groups of OpenID Connect providers from the id token
-        tokens = self.login('openid email profile groups')
-        id_token = jwt.decode(tokens['id_token'], options={'verify_signature': False})
+        id_token = self.verified_id_token(self.login('openid email profile groups'))
         self.assertEqual(id_token['groups'], ['Betriebsgruppe'])
 
     def test_token_is_no_login(self):
