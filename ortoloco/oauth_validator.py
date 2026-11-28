@@ -4,7 +4,6 @@ from oauth2_provider.oauth2_validators import OAuth2Validator
 class OrtolocoOAuth2Validator(OAuth2Validator):
     """
     Adds the member data to the OpenID Connect claims, by default there is only `sub` (user id).
-    Same values as ortoloco.oidc_provider_settings for django-oidc-provider, except for the unused nickname.
     """
     # id: Nextcloud identifies accounts by the member id, not by the user id in `sub`
     oidc_claim_scope = OAuth2Validator.oidc_claim_scope | {'groups': 'groups', 'id': 'member_id'}
