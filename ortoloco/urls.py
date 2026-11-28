@@ -15,9 +15,6 @@ urlpatterns = [
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('nextcloud/profile/', nextcloud_profile),
 
-    # django-oidc-provider
-    path('openid/', include('oidc_provider.urls', namespace='oidc_provider')),
-
     # juntagrico
     path('', include('juntagrico.urls')),
     path('impersonate/', include('impersonate.urls')),

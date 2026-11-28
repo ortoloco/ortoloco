@@ -2,20 +2,16 @@
 Login of other services with my.ortoloco, replayed as the services do it. See docs/login-clients.md.
 
 - Nextcloud (cloud.ortoloco.ch): OAuth2 with django-oauth-toolkit, profile and groups from /nextcloud/profile/
-- WordPress instances: OpenID Connect with the plugin "OpenID Connect Client", with django-oauth-toolkit (/o/) or with
-  django-oidc-provider (/openid/) until all instances are moved
+- WordPress instances: OpenID Connect with the plugin "OpenID Connect Generic Client" and django-oauth-toolkit (/o/)
 """
 import json
-from io import StringIO
 from urllib.parse import parse_qs, urlparse
 
 import jwt
 from django.conf import settings
 from django.contrib.auth.models import Group, User
-from django.core.management import call_command
 from django.test import Client as TestClient
 from oauth2_provider.models import get_application_model
-from oidc_provider.models import Client, ResponseType
 
 from ortoloco.tests import OrtolocoTestCase
 
@@ -176,121 +172,10 @@ class NextcloudLoginTests(LoginClientTestCase):
 
 class WordPressOpenIDConnectTests(LoginClientTestCase):
     """
-    WordPress plugin "OpenID Connect Client" (daggerhart-openid-connect-generic).
-    Client in the admin as in docs/login-clients.md.
-    """
-    redirect_uri = 'https://wptest.ortoloco.ch/wp-admin/admin-ajax.php?action=openid-connect-authorize'
-    client_secret = 'wordpress-test-secret'
-    post_logout_redirect_uri = 'https://wptest.ortoloco.ch/'
-    scope = 'openid email profile'  # setting of the plugin
-
-    @classmethod
-    def setUpTestData(cls):
-        super().setUpTestData()
-        call_command('creatersakey')  # done once on the server
-        cls.oidc_client = Client.objects.create(
-            name='wptest', client_id='wordpress-test-client', client_secret=cls.client_secret,
-            client_type='confidential', jwt_alg='RS256', require_consent=False, reuse_consent=True,
-            _redirect_uris=cls.redirect_uri, _post_logout_redirect_uris=cls.post_logout_redirect_uri,
-        )
-        cls.oidc_client.response_types.add(ResponseType.objects.get(value='code'))
-
-    def test_discovery(self):
-        # endpoints configured in the plugin
-        response = self.client.get('/openid/.well-known/openid-configuration')
-        self.assertEqual(response.status_code, 200)
-        config = json.loads(response.content)
-        self.assertEqual(config['issuer'], f'{SITE}/openid')
-        self.assertEqual(config['authorization_endpoint'], f'{SITE}/openid/authorize')
-        self.assertEqual(config['token_endpoint'], f'{SITE}/openid/token')
-        self.assertEqual(config['userinfo_endpoint'], f'{SITE}/openid/userinfo')
-        self.assertEqual(config['jwks_uri'], f'{SITE}/openid/jwks')
-
-    def authorize(self):
-        response = self.client.get('/openid/authorize', {
-            'response_type': 'code', 'client_id': self.oidc_client.client_id,
-            'redirect_uri': self.redirect_uri, 'scope': self.scope, 'state': 'wp-state',
-        })
-        # require_consent=False: no consent page, directly back to WordPress
-        self.assertEqual(response.status_code, 302)
-        location = response['Location']
-        self.assertTrue(location.startswith(self.redirect_uri.split('?')[0]), location)
-        params = query(location)
-        self.assertEqual(params['state'], 'wp-state')
-        return params['code']
-
-    def get_tokens(self, code):
-        self.client.logout()  # the token request comes from the WordPress server
-        response = self.client.post('/openid/token', {
-            'grant_type': 'authorization_code', 'code': code, 'redirect_uri': self.redirect_uri,
-            'client_id': self.oidc_client.client_id, 'client_secret': self.client_secret,
-        })
-        self.assertEqual(response.status_code, 200, response.content)
-        return json.loads(response.content)
-
-    def test_login(self):
-        tokens = self.get_tokens(self.authorize())
-
-        # id token signed with RS256, verifiable with the keys of the jwks endpoint
-        jwks = jwt.PyJWKSet.from_json(self.client.get('/openid/jwks').content.decode())
-        header = jwt.get_unverified_header(tokens['id_token'])
-        self.assertEqual(header['alg'], 'RS256')
-        key = next(key for key in jwks.keys if key.key_id == header['kid'])
-        id_token = jwt.decode(
-            tokens['id_token'], key=key, algorithms=['RS256'], audience=self.oidc_client.client_id, issuer=f'{SITE}/openid',
-        )
-        self.assertEqual(id_token['sub'], str(self.member.user.id))
-
-        # user info of the plugin scopes
-        response = self.client.get('/openid/userinfo', HTTP_AUTHORIZATION=f'Bearer {tokens["access_token"]}')
-        self.assertEqual(response.status_code, 200)
-        userinfo = json.loads(response.content)
-        self.assertEqual(userinfo['sub'], id_token['sub'])
-        self.assertEqual(userinfo['email'], self.member.email)
-        self.assertEqual(userinfo['given_name'], self.member.first_name)
-        self.assertEqual(userinfo['family_name'], self.member.last_name)
-        self.assertEqual(userinfo['name'], f'{self.member.first_name} {self.member.last_name}')
-
-    def test_groups_scope(self):
-        # groups are only sent if a client requests the scope "groups"
-        self.scope = 'openid email profile groups'
-        tokens = self.get_tokens(self.authorize())
-        response = self.client.get('/openid/userinfo', HTTP_AUTHORIZATION=f'Bearer {tokens["access_token"]}')
-        self.assertEqual(json.loads(response.content)['groups'], ['Betriebsgruppe'])
-
-    def test_wrong_secret(self):
-        code = self.authorize()
-        self.client.logout()
-        response = self.client.post('/openid/token', {
-            'grant_type': 'authorization_code', 'code': code, 'redirect_uri': self.redirect_uri,
-            'client_id': self.oidc_client.client_id, 'client_secret': 'wrong',
-        })
-        self.assertEqual(response.status_code, 400)
-
-    def test_end_session(self):
-        # logout in WordPress also logs out of my.ortoloco and returns to WordPress
-        tokens = self.get_tokens(self.authorize())
-        self.client.force_login(self.member.user)
-        response = self.client.get('/openid/end-session', {
-            'id_token_hint': tokens['id_token'], 'post_logout_redirect_uri': self.post_logout_redirect_uri,
-        })
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['Location'], self.post_logout_redirect_uri)
-        self.assertNotIn('_auth_user_id', self.client.session)
-
-    def test_logout_page_needs_post(self):
-        # /logout/ of juntagrico (django) only logs out with POST: a link or redirect to it fails with 405,
-        # therefore WordPress must use /openid/end-session as end session endpoint
-        self.assertEqual(self.client.get('/logout/').status_code, 405)
-        self.assertIn('_auth_user_id', self.client.session)
-
-
-class WordPressOAuthToolkitTests(LoginClientTestCase):
-    """
-    WordPress plugin "OpenID Connect Client" with django-oauth-toolkit.
+    WordPress plugin "OpenID Connect Generic Client" (daggerhart-openid-connect-generic) with django-oauth-toolkit.
     Application in the admin as in docs/login-clients.md.
     """
-    redirect_uri = WordPressOpenIDConnectTests.redirect_uri
+    redirect_uri = 'https://wptest.ortoloco.ch/wp-admin/admin-ajax.php?action=openid-connect-authorize'
     client_id = 'wordpress-test-client'
     client_secret = 'wordpress-test-secret'
     post_logout_redirect_uri = 'https://wptest.ortoloco.ch/'
@@ -298,14 +183,6 @@ class WordPressOAuthToolkitTests(LoginClientTestCase):
     @classmethod
     def setUpTestData(cls):
         super().setUpTestData()
-        # same client in django-oidc-provider, to compare
-        call_command('creatersakey', stdout=StringIO())
-        cls.oidc_client = Client.objects.create(
-            name='wptest', client_id=cls.client_id, client_secret=cls.client_secret,
-            client_type='confidential', jwt_alg='RS256', require_consent=False, reuse_consent=True,
-            _redirect_uris=cls.redirect_uri, _post_logout_redirect_uris=cls.post_logout_redirect_uri,
-        )
-        cls.oidc_client.response_types.add(ResponseType.objects.get(value='code'))
         Application = get_application_model()
         application = Application(
             name='wptest', client_id=cls.client_id, client_secret=cls.client_secret, hash_client_secret=True,
@@ -368,23 +245,16 @@ class WordPressOAuthToolkitTests(LoginClientTestCase):
         self.assertNotIn('groups', id_token)
         self.assertNotIn('id', id_token)
 
-    def test_same_userinfo_as_oidc_provider(self):
-        # WordPress recognizes existing accounts by these values, they must not change when moving an instance
-        scope = 'openid email profile groups'
-        new = self.userinfo(self.login(scope))
-        self.client.force_login(self.member.user)
-        response = self.client.get('/openid/authorize', {
-            'response_type': 'code', 'client_id': self.client_id, 'redirect_uri': self.redirect_uri, 'scope': scope,
+    def test_userinfo(self):
+        # WordPress recognizes accounts by sub (user id) and fills in the user with these claims
+        self.assertEqual(self.userinfo(self.login('openid email profile groups')), {
+            'sub': str(self.member.user.id),
+            'name': f'{self.member.first_name} {self.member.last_name}',
+            'given_name': self.member.first_name,
+            'family_name': self.member.last_name,
+            'email': self.member.email,
+            'groups': ['Betriebsgruppe'],
         })
-        response = self.client.post('/openid/token', {
-            'grant_type': 'authorization_code', 'code': query(response['Location'])['code'],
-            'redirect_uri': self.redirect_uri, 'client_id': self.client_id, 'client_secret': self.client_secret,
-        })
-        self.client.logout()
-        old = self.userinfo(json.loads(response.content), '/openid/userinfo')
-        del old['nickname']  # not used
-        self.assertEqual(new, old)
-        self.assertEqual(new['groups'], ['Betriebsgruppe'])
 
     def test_groups_in_id_token(self):
         # Nextcloud Social Login reads the groups of OpenID Connect providers from the id token
@@ -422,3 +292,9 @@ class WordPressOAuthToolkitTests(LoginClientTestCase):
             'id_token_hint': tokens['id_token'], 'post_logout_redirect_uri': 'https://evil.example.org/',
         })
         self.assertEqual(response.status_code, 400)
+
+    def test_logout_page_needs_post(self):
+        # /logout/ of juntagrico (django) only logs out with POST: a link or redirect to it fails with 405,
+        # therefore WordPress must use /o/logout/ as end session endpoint
+        self.assertEqual(self.client.get('/logout/').status_code, 405)
+        self.assertIn('_auth_user_id', self.client.session)

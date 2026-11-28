@@ -2,7 +2,7 @@
 Interfaces used by other systems: changes here break them without notice in my.ortoloco.
 
 - cloud.ortoloco.ch (Nextcloud) logs in with OAuth2 and reads /nextcloud/profile/
-- other services log in with OpenID Connect and read /openid/userinfo
+- other services log in with OpenID Connect and read /o/userinfo/ (tests in test_login_clients.py)
 - the signup form on www.ortoloco.ch reads and posts /signup/external
 """
 import datetime
@@ -12,7 +12,6 @@ from django.contrib.auth.models import Group, User
 from django.urls import reverse
 from django.utils import timezone
 from oauth2_provider.models import get_access_token_model, get_application_model
-from oidc_provider.models import Client, Token
 
 from juntagrico.entity.member import Member
 
@@ -60,41 +59,6 @@ class NextcloudProfileTests(OrtolocoTestCase):
 
     def test_invalid_token(self):
         self.assertEqual(self.get_profile('invalid').status_code, 403)
-
-
-class OpenIDConnectTests(OrtolocoTestCase):
-    url = '/openid/userinfo'
-
-    @classmethod
-    def setUpTestData(cls):
-        super().setUpTestData()
-        cls.member.user.groups.add(Group.objects.create(name='Betriebsgruppe'))
-        client = Client.objects.create(name='service', client_id='service-client', client_secret='secret')
-        Token.objects.create(
-            user=cls.member.user, client=client, access_token='oidc-test-token', refresh_token='oidc-refresh',
-            expires_at=timezone.now() + datetime.timedelta(hours=1), _scope='openid profile email groups',
-            _id_token=json.dumps({'sub': str(cls.member.user.id)}),  # issued with the token on login
-        )
-
-    def test_userinfo(self):
-        response = self.client.get(self.url, HTTP_AUTHORIZATION='Bearer oidc-test-token')
-        self.assertEqual(response.status_code, 200)
-        userinfo = json.loads(response.content)
-        expected = {
-            # ortoloco.oidc_provider_settings.userinfo
-            'name': f'{self.member.first_name} {self.member.last_name}',
-            'given_name': self.member.first_name,
-            'family_name': self.member.last_name,
-            'email': self.member.email,
-            # ortoloco.oidc_provider_settings.CustomScopeClaims
-            'groups': ['Betriebsgruppe'],
-        }
-        self.assertEqual({key: userinfo.get(key) for key in expected}, expected)
-        self.assertEqual(userinfo['sub'], str(self.member.user.id))
-
-    def test_invalid_token(self):
-        response = self.client.get(self.url, HTTP_AUTHORIZATION='Bearer invalid')
-        self.assertEqual(response.status_code, 401)
 
 
 class ExternalSignupTests(OrtolocoTestCase):

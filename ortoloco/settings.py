@@ -51,7 +51,7 @@ OAUTH2_PROVIDER = {
     'OIDC_ENABLED': bool(OIDC_RSA_PRIVATE_KEY),
     'OIDC_RSA_PRIVATE_KEY': OIDC_RSA_PRIVATE_KEY,
     'OIDC_RP_INITIATED_LOGOUT_ENABLED': True,
-    # log out directly, like the end-session endpoint of django-oidc-provider
+    # log out directly, without a confirmation page
     'OIDC_RP_INITIATED_LOGOUT_ALWAYS_PROMPT': False,
 }
 
@@ -115,7 +115,6 @@ INSTALLED_APPS = (
     'polymorphic',
     'debug_toolbar',
     'oauth2_provider',
-    'oidc_provider',
     'axes',
 )
 
@@ -402,8 +401,6 @@ IMAGES = {'status_100': '/static/img/erbse_voll.png',
           'core': '/static/img/erbse_voll_kernbereich.png'
           }
 
-OIDC_USERINFO = 'ortoloco.oidc_provider_settings.userinfo'
-OIDC_EXTRA_SCOPE_CLAIMS = 'ortoloco.oidc_provider_settings.CustomScopeClaims'
 
 SUB_OVERVIEW_FORMAT = {
    'delimiter': ' + ',

@@ -52,7 +52,7 @@ Deployment
 3. `python manage.py migrate`
 4. `python manage.py collectstatic`
 
-Once per server: `python manage.py creatersakey` (signing key for OpenID Connect).
+Once per server: the signing key for OpenID Connect, see [docs/login-clients.md](docs/login-clients.md).
 
 Yearly maintenance
 ------------------
